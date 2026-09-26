@@ -40,8 +40,8 @@ assert_redirect() {
   location="$(curl --silent --output /dev/null --dump-header - "$@" "${BASE_URL}/" |
     awk 'BEGIN{IGNORECASE=1} /^location:/ {gsub("\r", ""); print $2}')"
 
-  if [[ "${location}" != "${BASE_URL}${expected_path}" ]]; then
-    echo "Expected redirect to ${BASE_URL}${expected_path}, got ${location:-<none>}"
+  if [[ "${location}" != "${expected_path}" && "${location}" != "${BASE_URL}${expected_path}" ]]; then
+    echo "Expected redirect to ${expected_path} (relative or absolute), got ${location:-<none>}"
     exit 1
   fi
 }
