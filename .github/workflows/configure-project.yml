@@ -1,0 +1,23 @@
+name: Configure Sports Data Visualizer project
+on:
+  push:
+    paths:
+      - scripts/configure_project.py
+      - .github/workflows/configure-project.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: configure-sports-data-visualizer-project
+  cancel-in-progress: false
+jobs:
+  configure:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Copy project structure
+        env:
+          GH_TOKEN: ${{ secrets.PROJECT_TOKEN }}
+        run: |
+          test -n "$GH_TOKEN"
+          python3 scripts/configure_project.py
