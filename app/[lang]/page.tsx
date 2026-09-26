@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 
-import { isLocale } from "@/lib/i18n/config";
+import { localeFromRoute } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 
 type PlaygroundPageProps = {
@@ -11,12 +11,13 @@ export default async function PlaygroundPage({
   params,
 }: PlaygroundPageProps) {
   const { lang } = await params;
+  const locale = localeFromRoute(lang);
 
-  if (!isLocale(lang)) {
+  if (!locale) {
     notFound();
   }
 
-  const dictionary = await getDictionary(lang);
+  const dictionary = await getDictionary(locale);
 
   return (
     <main className="playground">
