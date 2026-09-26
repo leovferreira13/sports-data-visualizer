@@ -47,13 +47,14 @@ assert_redirect() {
 }
 
 assert_status "/en" "200"
-assert_status "/pt-BR" "200"
+assert_status "/br" "200"
+assert_status "/pt-BR" "404"
 assert_status "/fr" "404"
 
-assert_redirect "/pt-BR" --header "Accept-Language: pt-BR,pt;q=0.9,en;q=0.5"
+assert_redirect "/br" --header "Accept-Language: pt-BR,pt;q=0.9,en;q=0.5"
 assert_redirect "/en" --header "Accept-Language: de-DE,de;q=0.9"
 assert_redirect "/en"   --header "Accept-Language: pt-BR,pt;q=0.9"   --header "Cookie: football-visualized-locale=en"
-assert_redirect "/pt-BR"   --header "Accept-Language: en-US,en;q=0.9"   --header "Cookie: football-visualized-locale=pt-BR"
-assert_redirect "/pt-BR"   --header "Accept-Language: pt-BR,pt;q=0.9"   --header "Cookie: football-visualized-locale=invalid"
+assert_redirect "/br"   --header "Accept-Language: en-US,en;q=0.9"   --header "Cookie: football-visualized-locale=pt-BR"
+assert_redirect "/br"   --header "Accept-Language: pt-BR,pt;q=0.9"   --header "Cookie: football-visualized-locale=invalid"
 
 echo "Localization smoke checks passed."
