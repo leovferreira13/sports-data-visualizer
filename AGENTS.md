@@ -37,4 +37,10 @@ Architecture is a proposal until implemented. Update it as actual boundaries bec
 - Keep the v0.1 small: no accounts, database, unrelated statistics, or generic platform infrastructure.
 - Make drag usable with mouse and touch and offer a keyboard or equivalent accessible control.
 
+## Documentation language
+
+- Write every repository Markdown file in English, including Issues-derived plans copied into Markdown, ADRs, README, prompts, and PR templates. Do not add Portuguese prose to any `.md` file.
+- Keep the bilingual product interface in locale resources (`pt-BR` and `en`); the English-only Markdown rule does not restrict translations shown to users.
+- Before publishing a PR, run `python3 scripts/check_markdown_language.py` and review short passages manually. CI runs the same check on pushes and PRs.
+
 Never commit credentials or private user data.
