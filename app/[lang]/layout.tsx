@@ -3,7 +3,10 @@ import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 
 import { LanguageSwitcher } from "@/components/language-switcher";
-import { isLocale, locales } from "@/lib/i18n/config";
+import {
+  localeFromRoute,
+  localeRoutes,
+} from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 
 import "./globals.css";
@@ -16,19 +19,20 @@ type LocaleLayoutProps = {
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return locales.map((lang) => ({ lang }));
+  return localeRoutes.map((lang) => ({ lang }));
 }
 
 export async function generateMetadata({
   params,
 }: Omit<LocaleLayoutProps, "children">): Promise<Metadata> {
   const { lang } = await params;
+  const locale = localeFromRoute(lang);
 
-  if (!isLocale(lang)) {
+  if (!locale) {
     return {};
   }
 
-  const dictionary = await getDictionary(lang);
+  const dictionary = await getDictionary(locale);
 
   return {
     title: dictionary.meta.title,
@@ -41,15 +45,16 @@ export default async function LocaleLayout({
   params,
 }: LocaleLayoutProps) {
   const { lang } = await params;
+  const locale = localeFromRoute(lang);
 
-  if (!isLocale(lang)) {
+  if (!locale) {
     notFound();
   }
 
-  const dictionary = await getDictionary(lang);
+  const dictionary = await getDictionary(locale);
 
   return (
-    <html lang={lang}>
+    <html lang={locale}>
       <body>
         <div className="site-shell">
           <header className="site-header">
@@ -59,7 +64,7 @@ export default async function LocaleLayout({
             </div>
 
             <LanguageSwitcher
-              currentLocale={lang}
+              currentLocale={locale}
               label={dictionary.language.label}
               englishLabel={dictionary.language.english}
               portugueseLabel={dictionary.language.portuguese}
