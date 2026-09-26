@@ -16,14 +16,11 @@ jobs:
       - name: Install dependencies
         run: npm install --no-audit --no-fund
 
-      - name: Lint
-        run: npm run lint
+      - name: Run pre-commit checks
+        run: npm run check:precommit
 
       - name: Build
         run: npm run build
 
       - name: Check localized routes
         run: npm run check:localization
-
-      - name: Check Markdown language
-        run: python3 scripts/check_markdown_language.py
