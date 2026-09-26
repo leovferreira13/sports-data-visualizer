@@ -1,9 +1,5 @@
 name: Configure Sports Data Visualizer project
 on:
-  push:
-    paths:
-      - scripts/configure_project.py
-      - .github/workflows/configure-project.yml
   workflow_dispatch:
 permissions:
   contents: read
