@@ -7,6 +7,7 @@ import {
   isLocale,
   localeCookieMaxAge,
   localeCookieName,
+  routeFromLocale,
   type Locale,
 } from "@/lib/i18n/config";
 
@@ -40,7 +41,7 @@ export function LanguageSwitcher({
     ].join("; ");
 
     const segments = window.location.pathname.split("/");
-    segments[1] = nextLocale;
+    segments[1] = routeFromLocale(nextLocale);
 
     const target =
       segments.join("/") + window.location.search + window.location.hash;
@@ -52,8 +53,8 @@ export function LanguageSwitcher({
     <label className="language-switcher">
       <span>{label}</span>
       <select value={currentLocale} onChange={changeLocale}>
-        <option value="en">{englishLabel}</option>
-        <option value="pt-BR">{portugueseLabel}</option>
+        <option value="en">🇺🇸 {englishLabel}</option>
+        <option value="pt-BR">🇧🇷 {portugueseLabel}</option>
       </select>
     </label>
   );
