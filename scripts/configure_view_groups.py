@@ -16,8 +16,10 @@ def rest_create(name, layout, group_by, vertical_group_by):
     result = subprocess.run(
         ["gh", "api", "-X", "POST", "-H", "X-GitHub-Api-Version: 2026-03-10",
          f"users/{USER_ID}/projectsV2/{TARGET}/views", "--input", "-"],
-        input=json.dumps(payload), text=True, capture_output=True, check=True,
+        input=json.dumps(payload), text=True, capture_output=True,
     )
+    if result.returncode:
+        raise RuntimeError(f"GitHub view API rejected request: {result.stderr[:1000]}")
     return json.loads(result.stdout)
 
 
