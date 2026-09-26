@@ -25,7 +25,7 @@ xG until that proof is complete. A build-time Python script may train/export a
 model, but is not a runtime dependency. There is no planned authentication,
 database, or inference API for v0.1.
 
-Locale routes /br and /en are implemented under app/[lang] with /br mapped to the
+Locale routes /br and /en are implemented under app/[locale] with /br mapped to the
 pt-BR locale and matching server-loaded dictionaries. The root route chooses the saved cookie preference,
 then browser language, then en. The manual selector persists its choice and
 retains the rest of the URL; preservation of future scenario state across a
