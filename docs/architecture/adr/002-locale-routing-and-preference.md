@@ -10,7 +10,7 @@ The first release must support Brazilian Portuguese and English from entry. Dire
 
 ## Decision
 
-Use explicit `/en` and `/br` App Router routes under `app/[lang]`. The public route `br` maps to the semantic locale `pt-BR`; dictionaries, HTML language metadata, cookies, and browser negotiation keep using `pt-BR`. The bare `/` is the only route handled by `proxy.ts`; it resolves a valid locale cookie first, then `Accept-Language`, then falls back to English.
+Use explicit `/en` and `/br` App Router routes under `app/[locale]`. The public route `br` maps to the semantic locale `pt-BR`; dictionaries, HTML language metadata, cookies, and browser negotiation keep using `pt-BR`. The bare `/` is the only route handled by `proxy.ts`; it resolves a valid locale cookie first, then `Accept-Language`, then falls back to English.
 
 A manual selector writes the same non-sensitive, site-wide cookie and replaces only the locale path segment while retaining the remaining URL. Translations live in matching locale dictionaries and are loaded by Server Components. Stable application state must remain language-independent.
 
