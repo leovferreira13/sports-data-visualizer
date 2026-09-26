@@ -1,0 +1,26 @@
+name: Application checks
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  application:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Run pre-commit checks
+        run: npm run check:precommit
+
+      - name: Build
+        run: npm run build
+
+      - name: Check localized routes
+        run: npm run check:localization

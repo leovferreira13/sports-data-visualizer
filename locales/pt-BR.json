@@ -1,0 +1,21 @@
+{
+  "meta": {
+    "title": "Futebol, Explicado",
+    "description": "Um playground interativo para entender situações de finalização no futebol."
+  },
+  "brand": {
+    "name": "Futebol, Explicado",
+    "tagline": "Mova os jogadores. Entenda o que muda uma chance de gol."
+  },
+  "language": {
+    "label": "Idioma",
+    "english": "English",
+    "portuguese": "Português (Brasil)"
+  },
+  "playground": {
+    "eyebrow": "Playground",
+    "title": "Monte a chance.",
+    "description": "O campo interativo é o próximo passo. Esta primeira versão estabelece a base bilíngue da aplicação.",
+    "status": "A interação com o campo e o xG não fazem parte deste primeiro scaffold."
+  }
+}

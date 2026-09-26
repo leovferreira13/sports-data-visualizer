@@ -1,0 +1,21 @@
+{
+  "meta": {
+    "title": "Football, Visualized",
+    "description": "An interactive playground for understanding football shot situations."
+  },
+  "brand": {
+    "name": "Football, Visualized",
+    "tagline": "Move the players. Understand what changes a goal-scoring chance."
+  },
+  "language": {
+    "label": "Language",
+    "english": "English",
+    "portuguese": "Português (Brasil)"
+  },
+  "playground": {
+    "eyebrow": "Playground",
+    "title": "Build the chance.",
+    "description": "The interactive pitch is the next step. This first version establishes the bilingual application shell.",
+    "status": "Pitch interaction and xG are intentionally not part of this scaffold."
+  }
+}
