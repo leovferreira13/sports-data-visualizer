@@ -18,11 +18,12 @@ Open `http://localhost:3000`. The root route chooses a saved language preference
 Quality checks:
 
 ```bash
-npm run lint
+npm run check:precommit
 npm run build
 npm run check:localization
-python3 scripts/check_markdown_language.py
 ```
+
+`npm install` also configures the repository's `.githooks/pre-commit` hook. Every commit runs `npm run check:precommit`, which covers lint, TypeScript, Markdown language, and lightweight shell-script validation. Build and route smoke checks remain CI-level integration checks.
 
 ## Project documents
 
