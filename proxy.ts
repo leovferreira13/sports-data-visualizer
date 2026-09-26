@@ -1,7 +1,7 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
-import { localeCookieName } from "@/lib/i18n/config";
+import { localeCookieName, routeFromLocale } from "@/lib/i18n/config";
 import { resolveLocale } from "@/lib/i18n/resolve-locale";
 
 export function proxy(request: NextRequest) {
@@ -12,7 +12,7 @@ export function proxy(request: NextRequest) {
   );
 
   const target = request.nextUrl.clone();
-  target.pathname = `/${locale}`;
+  target.pathname = `/${routeFromLocale(locale)}`;
 
   return NextResponse.redirect(target);
 }
