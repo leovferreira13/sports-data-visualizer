@@ -2,7 +2,7 @@
 
 **Status:** implemented application shell in Issue #1; future scenario-state preservation remains to be proven by the playable pitch.
 
-The App Router root layout lives at `app/[lang]/layout.tsx`, producing explicit `/en` and `/br` routes. The URL segment `br` maps to the standards-based internal locale `pt-BR`, so document language, dictionaries, and browser-language matching continue to use `pt-BR` while the public route stays concise. `lib/i18n/config.ts` owns this mapping.
+The App Router root layout lives at `app/[locale]/layout.tsx`, producing explicit `/en` and `/br` routes. The URL segment `br` maps to the standards-based internal locale `pt-BR`, so document language, dictionaries, and browser-language matching continue to use `pt-BR` while the public route stays concise. `lib/i18n/config.ts` owns this mapping.
 
 `lib/i18n/dictionaries.ts` loads matching `locales/en.json` and `locales/pt-BR.json` resources on the server. The bare root is the only path matched by `proxy.ts`. Locale resolution uses a valid `football-visualized-locale` cookie first, then standards-aware `Accept-Language` negotiation, then `en`. Unsupported route locales, including `/pt-BR`, return the normal not-found response.
 
