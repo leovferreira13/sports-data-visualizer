@@ -1,0 +1,29 @@
+name: Inspect view configuration
+on:
+  push:
+    paths:
+      - .github/workflows/inspect-views.yml
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Read source and target views
+        env:
+          GH_TOKEN: ${{ secrets.PROJECT_TOKEN }}
+        run: |
+          gh api graphql -f query='query {
+            user(login:"leovferreira13") {
+              source:projectV2(number:2) { views(first:20) { nodes {
+                name layout filter
+                groupBy(first:5) { nodes { name } }
+                verticalGroupBy(first:5) { nodes { name } }
+              } } }
+              target:projectV2(number:3) { views(first:20) { nodes {
+                name layout filter
+                groupBy(first:5) { nodes { name } }
+                verticalGroupBy(first:5) { nodes { name } }
+              } } }
+            }
+          }' --jq '.data.user'
