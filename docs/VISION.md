@@ -1,62 +1,62 @@
-# Football, Visualized — visão do produto
+# Football, Visualized — product vision
 
-**Status:** direção inicial · **Módulo inicial:** Expected Goals (xG) · **Atualizado:** 26/09/2026
+**Status:** initial direction · **First module:** Expected Goals (xG) · **Updated:** 2026-09-26
 
-## Ideia em uma frase
+## One-sentence concept
 
-Um campo de futebol interativo em que qualquer pessoa move o chutador, o goleiro e os defensores para explorar como a situação de um chute altera sua probabilidade estimada de virar gol.
+An interactive football pitch where anyone can move the shooter, goalkeeper, and defenders to explore how a shot situation changes its estimated chance of becoming a goal.
 
-## Problema e público
+## Problem and audience
 
-O xG aparece em transmissões e análises como um número pronto. Para quem acompanha futebol, é difícil enxergar quais características da chance influenciaram a estimativa e por que duas chances aparentemente parecidas recebem valores diferentes. Comentadores e criadores de conteúdo também precisam montar um lance e explicá-lo rapidamente ao público.
+xG often appears in broadcasts and analysis as a finished number. Fans struggle to see which characteristics of a chance influenced the estimate and why two seemingly similar chances receive different values. Analysts, journalists, and commentators also need to recreate a play and explain it quickly to an audience.
 
-O primeiro público é o fã curioso de futebol; o segundo é o analista, jornalista ou comentarista que quer **demonstrar** uma situação de jogo. A experiência deve funcionar sem conhecimento estatístico, cadastro ou leitura prévia.
+The primary audience is the curious football fan; the secondary audience is the analyst or creator who wants to **demonstrate** a game situation. The experience should require no statistical background, account, or preparatory reading.
 
-## Proposta
+## Proposition
 
-**Playground é a tela inicial.** A pessoa encontra um lance já montado, o valor de xG em destaque e uma instrução curta: “Arraste os jogadores para testar outra situação”. Pode trocar de cenário, mover os elementos e entender quais fatores observáveis mudaram. Um controle discreto abre **Aprender**, que conduz uma explicação interativa usando o mesmo campo, sem sair para uma página teórica.
+**Playground is the default screen.** Visitors find a prepared chance, a prominent xG estimate, and a short prompt: “Drag the players to try another situation.” They can change presets, move pieces, and see which observable factors changed. An unobtrusive **Learn** control opens an interactive explanation on the same pitch rather than sending them to a theory page.
 
-Nome de trabalho: **Football, Visualized**. Mensagem de produto: **Move os jogadores. Entenda o que muda uma chance de gol.** O nome não pressupõe a construção de um portal na primeira versão.
+Working name: **Football, Visualized**. Product message: **Move the players. Understand what changes a goal-scoring chance.** The name does not require building a broader portal in the first release.
 
-## Experiência principal
+## Core experience
 
-1. Abrir o site no idioma sugerido pelo navegador: português do Brasil ou inglês. O seletor no topo permite trocar a qualquer momento.
-2. Ver uma jogada inicial com chutador, goleiro, dois defensores, gol, valor estimado e uma frase de contexto.
-3. Arrastar um jogador; o campo, os indicadores e a estimativa respondem durante ou logo após o movimento.
-4. Escolher um preset — **Pênalti, Cara a cara, Ângulo fechado, Chute de longe, Área congestionada** — e modificar sua configuração.
-5. Alternar para **Aprender** para seguir pequenos desafios, como afastar um defensor da linha do chute e observar o que mudou.
-6. Copiar o link da situação para mostrar a outra pessoa, se essa capacidade passar no orçamento da primeira entrega; no mínimo, os presets devem ser reproduzíveis.
+1. Open the site in a language suggested by the browser: Brazilian Portuguese or English. A top-level selector can change it at any time.
+2. See an initial scene with a shooter, goalkeeper, two defenders, goal, estimate, and brief contextual sentence.
+3. Drag a player; the pitch, measurements, and estimate respond during or immediately after movement.
+4. Choose and edit a preset: **Penalty, One-on-one, Tight angle, Long shot, Crowded box**.
+5. Switch to **Learn** for small experiments, such as moving a defender out of the shooting lane and seeing what changed.
+6. Copy a scenario link for someone else if sharing fits the first release; at minimum, presets must be reproducible.
 
-O painel mostra **distância**, **ângulo de finalização** e **posição dos adversários/goleiro**. Sua explicação deve distinguir observações geométricas (“um defensor está no cone do chute”) de efeitos calculados pelo modelo (“nesta estimativa, retirá-lo elevou o valor em 0,04”). Nunca apresentar o movimento como causa garantida de um gol.
+The panel shows **distance**, **shooting angle**, and **opponent/goalkeeper positioning**. Its explanation must distinguish geometric observations (“a defender is inside the shooting cone”) from model effects (“removing this defender raised this model's estimate by 0.04”). Never imply that a movement guarantees a goal.
 
-## Dois modos, uma única simulação
+## Two modes, one simulation
 
-| Modo | Objetivo | Comportamento |
+| Mode | Purpose | Behavior |
 | --- | --- | --- |
-| **Playground — padrão** | Montar e demonstrar lances livremente | Campo editável, presets, estimativa, indicadores e explicações curtas. |
-| **Aprender** | Entender xG na prática | Passos opcionais e curtos que propõem uma mudança no campo, mostram o antes/depois e devolvem o controle livre. |
+| **Playground — default** | Build and demonstrate chances freely | Editable pitch, presets, estimate, measurements, and concise explanations. |
+| **Learn** | Understand xG by experimenting | Short optional steps suggest a pitch change, show before/after values, then return free control. |
 
-O modo Aprender usa as mesmas regras, o mesmo cálculo e os mesmos controles do Playground; a pessoa pode abandoná-lo sem perder a situação que montou.
+Learn uses the same rules, calculation, and controls as Playground. Visitors can leave without losing the scene they built.
 
-## Princípios de produto
+## Product principles
 
-- **Mostrar antes de explicar:** o campo utilizável aparece sem onboarding obrigatório.
-- **Número com contexto:** indicar qual modelo gera o xG, o que ele usa e o que deixa de fora. “0,20 xG” significa aproximadamente 20 gols em 100 chutes comparáveis segundo aquele modelo, não a probabilidade de um jogador específico marcar.
-- **Explicação honesta:** variações da previsão são comparações dentro do modelo, não afirmações causais sobre o futebol real. Um fator visível não deve ser descrito como parte do cálculo se não o for.
-- **Experiência de demonstração:** leitura rápida, área de campo generosa, movimento fluido e boa apresentação em celular e desktop.
-- **Pequeno e concluído:** primeira publicação é um módulo de xG, não um portal de scout.
-- **Bilinguismo desde o início:** interface, textos explicativos e indicação das limitações em `pt-BR` e `en`.
+- **Show before explaining:** the usable pitch appears without mandatory onboarding.
+- **Put the number in context:** identify the model, its inputs, and omissions. “0.20 xG” means roughly 20 goals in 100 comparable shots according to that model; it is not the scoring probability of a specific player.
+- **Explain honestly:** changes in the estimate are comparisons within the model, not causal claims about real football. Do not describe a visible factor as a model input if it is not one.
+- **Make demonstrations easy:** quick reading, a generous pitch area, fluid movement, and good presentation on mobile and desktop.
+- **Ship a small, complete product:** the first release is an xG module, not a scouting portal.
+- **Support both languages from the start:** UI, explanations, and model limitations in `pt-BR` and `en`.
 
-## O que define sucesso
+## What success looks like
 
-**Meta de produto:** alguém que nunca estudou xG consegue montar uma chance e dizer, em palavras próprias, por que o modelo a avaliou daquela maneira. **Meta de entrega:** uma URL pública e um repositório público utilizáveis como peça de portfólio.
+**Product goal:** someone new to xG can build a chance and explain in their own words why the model evaluated it that way. **Delivery goal:** a public URL and repository usable as a portfolio piece.
 
-Na primeira rodada, testar com 5–8 pessoas, incluindo pelo menos um criador ou comentarista. Observar: conseguem interagir sem instrução oral? Entendem que o número é uma estimativa de modelo? Conseguem reconstruir um lance e explicar a mudança? Registraremos feedback qualitativo e falhas mais frequentes; analytics de produto são opcionais. Um resultado inicial bom é a maioria completar a primeira interação e explicar ao menos uma mudança com precisão, sem depender de uma meta estatística artificial para uma amostra pequena.
+In the first round, test with 5–8 people, including at least one creator or commentator. Observe whether they can interact without verbal instruction, recognize that the number is a model estimate, reconstruct a play, and explain a change. Record qualitative feedback and common failures; product analytics are optional. A good initial outcome is that most participants complete a first interaction and accurately explain at least one change, without inventing a statistical target for such a small sample.
 
-## Limites da primeira versão
+## First-release boundaries
 
-Um chutador, um goleiro, até três defensores, cinco presets, dois modos e dois idiomas. Sem contas, banco, backend obrigatório, times, partidas em tempo real, editor tático, outros tipos de estatística ou IA generativa. Gols famosos vêm **depois da validação**: recriar um lance histórico exigirá fonte confiável para posições e contexto do chute; qualquer aproximação será identificada como reconstrução ilustrativa.
+One shooter, one goalkeeper, up to three defenders, five presets, two modes, and two languages. No accounts, database, mandatory backend, teams, live matches, tactical editor, other metrics, or generative AI. Famous goals come **after validation**: recreating one requires a reliable source for positions and shot context, and any approximation must be labeled as an illustrative reconstruction.
 
-## Evolução possível
+## Possible evolution
 
-Se o módulo funcionar bem, manter a marca como guarda-chuva para experimentos independentes: gols famosos, xA, xThreat ou outras visualizações. A adição de um módulo dependerá de uso e aprendizado do primeiro, não de uma arquitetura preparada antecipadamente para vários produtos.
+If this module works, the brand can hold independent experiments: famous goals, xA, xThreat, or other visualizations. Add a module based on use and learning from the first one, not on architecture built prematurely for several products.
