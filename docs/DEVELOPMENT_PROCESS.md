@@ -6,7 +6,7 @@ The Issue is the executable unit. The Project board, when available, displays pr
 
 `unrefined` → `long-term` / `near-term` → `prioritized` → `pending spec` → `spec ready` → `ready for dev` → `in progress` → `review/qa` → `ready to deploy` → `done`
 
-`long-term` and `near-term` describe horizon rather than required consecutive steps. Move a task to `ready for dev` after its acceptance criteria and any material model or UX decision are clear. Small tasks may need only a concise Issue, without a separate plan comment. `done` means merged and checked. The owner controls prioritization, readiness, and merge.
+`long-term` and `near-term` describe horizon rather than required consecutive steps. The owner controls prioritization, spec approval, readiness for development, release readiness, and merge. `done` means merged and checked.
 
 ## Issue contract
 
@@ -14,9 +14,9 @@ Use the task template: outcome, context, scope, acceptance criteria, validation,
 
 ## Delivery
 
-1. Pick the highest priority `ready for dev` Issue and create `task/<number>-<short-name>` from `main`.
-2. Implement the smallest useful slice; update tests and docs that explain changed behavior.
-3. Open a draft PR linked with `Closes #<number>`, including checks and any remaining limitation.
-4. Review on the same branch. Merge after review, then move to `Done`.
+1. The owner asks for `spec #N` here. The assistant reads the Issue and repository, uses the shared `write-plan.md` prompt and publishes one canonical Implementation Plan comment. Feedback uses `revise-plan.md` and updates that comment.
+2. After the owner accepts the Plan and marks the card `ready for dev`, `dev #N` creates `agent/<number>-<short-name>` from `main`, follows `implement-task.md`, implements a bounded slice and checks it.
+3. Open a draft PR linked with `Closes #<number>`, including checks, documentation and remaining limits; move to `review/qa` when the PR exists.
+4. `review PR #N` examines feedback on the same branch, follows `address-review.md` for automated findings, validates fixes and replies with evidence. Human choices remain open. The owner controls `ready to deploy` and merge; then mark `done`.
 
-Do not add scheduled spec, implementation, or review agents until manual Issue → PR flow reveals a real bottleneck. This keeps the first release fast.
+These are chat-invoked workflows, not scheduled GitHub Actions. See [commands and learning protocol](COMMANDS.md). The prompts and output schemas live in `.github/codex/`. Project configuration is a separate manual Action.
