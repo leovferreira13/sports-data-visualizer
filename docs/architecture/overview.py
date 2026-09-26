@@ -1,6 +1,7 @@
 """Football, Visualized — architecture overview (documentation, not runtime code).
 
-Status: planned architecture; no application modules have been implemented yet.
+Status: the bilingual application shell is implemented; pitch and prediction modules
+remain planned.
 
 The first product is a public xG playground with an optional Learn mode. Next.js
 (App Router) supplies pages and locale routes, React keeps the interactive view
@@ -24,11 +25,13 @@ xG until that proof is complete. A build-time Python script may train/export a
 model, but is not a runtime dependency. There is no planned authentication,
 database, or inference API for v0.1.
 
-Locale routes /pt-BR and /en use matching dictionaries. The home route chooses
-the saved preference or browser language. Switching locales keeps the scene.
-Shareable scene URLs are deferred until their scope is confirmed.
+Locale routes /pt-BR and /en are implemented under app/[lang] with matching
+server-loaded dictionaries. The root route chooses the saved cookie preference,
+then browser language, then en. The manual selector persists its choice and
+retains the rest of the URL; preservation of future scenario state across a
+locale change remains an Issue #2 invariant.
 
-Read reference/ for planned module responsibilities and adr/ for consequential
-decisions. Update these files as implementation settles. Never describe a
-proposed component as if it already exists.
+Read reference/ for planned and implemented module responsibilities and adr/ for
+consequential decisions. Update these files as implementation settles. Never
+describe a proposed component as if it already exists.
 """
