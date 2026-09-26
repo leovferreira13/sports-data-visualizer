@@ -28,6 +28,7 @@ Architecture is a proposal until implemented. Update it as actual boundaries bec
 - Follow `docs/DEVELOPMENT_PROCESS.md` for status transitions and backlog conventions.
 - Explain material technical choices before implementation: what the framework feature does, its role here, rationale, tradeoff and a concrete example. Afterwards walk through changed files and checks so the owner can learn the stack.
 - Write an ADR for consequential structural choices, update its index, and distinguish planned from implemented behavior.
+- Before every commit, run the canonical `npm run check:precommit` verification script and fix failures rather than bypassing the hook. It must cover lint, TypeScript checking, Markdown language validation, and lightweight script validation. `npm install` configures `.githooks/pre-commit` through the package `prepare` script. Keep slower integration checks such as the production build and localized-route smoke test in CI unless a task specifically requires them locally.
 
 ## Product and data rules
 
@@ -41,6 +42,6 @@ Architecture is a proposal until implemented. Update it as actual boundaries bec
 
 - Write every repository Markdown file in English, including Issues-derived plans copied into Markdown, ADRs, README, prompts, and PR templates. Do not add Portuguese prose to any `.md` file.
 - Keep the bilingual product interface in locale resources (`pt-BR` and `en`); the English-only Markdown rule does not restrict translations shown to users.
-- Before publishing a PR, run `python3 scripts/check_markdown_language.py` and review short passages manually. CI runs the same check on pushes and PRs.
+- `npm run check:precommit` includes the Markdown language check; still review short passages manually before publishing a PR. CI runs the same canonical pre-commit checks on pushes and PRs.
 
 Never commit credentials or private user data.
