@@ -11,7 +11,7 @@ Build a working first interaction as soon as possible, then complete a small, tr
 | **0. Prepare** | 1–2 h | Repository, runnable app, and three starting documents. | Runs locally; scope and criteria recorded. |
 | **1. Playable pitch** | 4–8 h | Responsive pitch with shooter, goalkeeper, two defenders, and presets; distance and angle respond to dragging. | Mouse and touch work; pieces stay in bounds; no provisional number is labeled xG. |
 | **2. Prove the calculation** | 3–6 h to assess an existing artifact; more if training is needed | Small test takes a scenario state and returns a reproducible estimate. | Model rights and inputs checked; keeper/defenders affect the value if claimed; plausible scenes; limitations documented. |
-| **3. Publishable Playground** | 6–10 h after milestone 2 | Live estimate, explanations, five presets, up to three addable/removable defenders, reset, and `pt-BR`/`en` interface. | v0.1 acceptance criteria met on desktop and mobile. |
+| **3. Publishable Playground** | 6–10 h after milestone 2 | Live estimate, explanations, six presets, addable attackers and defenders, removal controls, reset, and `pt-BR`/`en` interface. | v0.1 acceptance criteria met on desktop and mobile. |
 | **4. Learn and publish** | 4–8 h | Optional 2–3-step tutorial on the same pitch, README, public URL, and short feedback round. | Full flow in both languages; model provenance/limits visible; public link tested. |
 | **5. Refine from real use** | Based on feedback | Fixes to confusion, bugs, and friction reported by fans and commentators. | Priorities come from observation rather than a speculative feature list. |
 
@@ -48,7 +48,7 @@ If a contextual model is not ready immediately, test the pitch as a prototype wi
 2. Moving the shot changes distance/angle consistently; pitch drawings match the numeric values.
 3. Moving the goalkeeper or a defender changes xG **when the corresponding feature exists in the model**; the UI never suggests an effect that is absent.
 4. The value is in [0, 1]; penalties and invalid states follow explicit rules; coordinate errors do not cause absurd jumps.
-5. All five presets load in both languages and remain editable. The tutorial can start and stop without reopening the site.
+5. All six presets load in both languages and remain editable. The tutorial can start and stop without reopening the site.
 6. Changing language preserves scene and mode, translates every text, and retains the choice on later visits; absent a saved choice, the initial locale follows browser preference.
 7. The explanation identifies the result as an estimate and lists included and omitted factors. Descriptions of changes derive from the same features as the prediction.
 8. The flow works with mouse and touch on desktop and mobile widths; critical interactions have an accessible alternative if dragging fails.

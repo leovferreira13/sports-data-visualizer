@@ -2,7 +2,7 @@
 
 An interactive, bilingual playground for understanding expected goals (xG). Move the shooter, goalkeeper, and defenders to explore how shot geometry and positioning affect a model's estimate.
 
-**Status:** bilingual application shell implemented; the playable pitch is next. No published xG estimate until its model, inputs, and limitations are validated.
+**Status:** bilingual playable pitch with six editable presets, movable players, addable attackers and defenders, distance, and angle. No published xG estimate until its model, inputs, and limitations are validated.
 
 ## Local development
 
@@ -19,11 +19,12 @@ Quality checks:
 
 ```bash
 npm run check:precommit
+npm run test
 npm run build
 npm run check:localization
 ```
 
-`npm install` also configures the repository's `.githooks/pre-commit` hook. Every commit runs `npm run check:precommit`, which covers lint, TypeScript, Markdown language, and lightweight shell-script validation. Build and route smoke checks remain CI-level integration checks.
+`npm install` also configures the repository's `.githooks/pre-commit` hook. Every commit runs `npm run check:precommit`, which covers lint, TypeScript, focused geometry tests, Markdown language, and lightweight shell-script validation. Build and route smoke checks remain CI-level integration checks.
 
 ## Project documents
 
@@ -33,4 +34,4 @@ npm run check:localization
 - [Development process](docs/DEVELOPMENT_PROCESS.md)
 - [Chat commands for spec, dev and review](docs/COMMANDS.md)
 
-Work is tracked in GitHub Issues. The first playable milestone focuses on a draggable pitch, geometry, and presets; model validation follows before an xG value is published.
+Work is tracked in GitHub Issues. Choose a starting situation or add players above the pitch; the measurements refer to the original striker (the shot taker). Drag a player or focus its marker and use the arrow keys (Shift for larger steps). Reset returns to the selected preset and removes added players. The scene remains in place when changing language within the same browser tab. Model validation follows before an xG value is published.

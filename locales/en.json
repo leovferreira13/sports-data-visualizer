@@ -15,7 +15,39 @@
   "playground": {
     "eyebrow": "Playground",
     "title": "Build the chance.",
-    "description": "The interactive pitch is the next step. This first version establishes the bilingual application shell.",
-    "status": "Pitch interaction and xG are intentionally not part of this scaffold."
+    "description": "Drag the players to explore how position changes the distance and shooting angle.",
+    "status": "This prototype shows geometry only. A validated xG estimate will follow in a later release.",
+    "pitchDescription": "Attacking half of the pitch with movable strikers, center-backs and a goalkeeper. Drag a player or focus one and use the arrow keys.",
+    "keyboardHint": "Use the arrow keys to move this player. Hold Shift for larger steps.",
+    "distance": "Distance to goal",
+    "angle": "Shooting angle",
+    "meters": "m",
+    "presetLabel": "Starting situation",
+    "reset": "Reset scene",
+    "addAttacker": "+ Attacker",
+    "addDefender": "+ Defender",
+    "defenderName": "Center-back",
+    "forward": "Toward the goal",
+    "sideways": "Across the pitch",
+    "players": {
+      "shooter": "Striker",
+      "goalkeeper": "Goalkeeper",
+      "defender1": "Center-back 1",
+      "defender2": "Center-back 2"
+    },
+    "playerGlyphs": {
+      "shooter": "ST",
+      "goalkeeper": "GK",
+      "defender1": "CB",
+      "defender2": "CB"
+    },
+    "presets": {
+      "centralChance": "Central chance",
+      "penalty": "Penalty",
+      "oneOnOne": "One-on-one",
+      "tightAngle": "Tight angle",
+      "longShot": "Long shot",
+      "crowdedBox": "Crowded box"
+    }
   }
 }
