@@ -1,6 +1,7 @@
 import { FIELD, type Scenario } from "./scenario";
 
 export const presetIds = [
+  "centralChance",
   "penalty",
   "oneOnOne",
   "tightAngle",
@@ -10,6 +11,15 @@ export const presetIds = [
 export type PresetId = (typeof presetIds)[number];
 
 const presets: Record<PresetId, Scenario> = {
+  centralChance: {
+    shotType: "open-play",
+    players: {
+      shooter: { x: 84, y: FIELD.centerY },
+      goalkeeper: { x: 102, y: FIELD.centerY },
+      defender1: { x: 93, y: FIELD.centerY - 3 },
+      defender2: { x: 93, y: FIELD.centerY + 3 },
+    },
+  },
   penalty: {
     shotType: "penalty",
     players: {

@@ -113,6 +113,14 @@ h1 {
 }
 
 .pitch-workspace { min-width: 0; }
+.pitch-workspace--loading { min-height: 30rem; }
+
+.measurements {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
 
 .pitch-surface {
   padding: 12px;
@@ -144,14 +152,17 @@ h1 {
 .pitch-player { cursor: grab; touch-action: none; }
 .pitch-player:active { cursor: grabbing; }
 .player-hit { fill: transparent; }
-.player-body { fill: #f7f3db; stroke: #132a1b; stroke-width: 0.25; }
-.pitch-player--shooter .player-body { fill: #ffcd68; }
-.pitch-player--goalkeeper .player-body { fill: #82d4e8; }
-.pitch-player.is-selected .player-body { stroke: #fff; stroke-width: 0.5; }
-.player-initial { fill: #14241a; font-size: 1.4px; font-weight: 800; pointer-events: none; user-select: none; }
+.player-body { fill: #70d0e0; stroke: #123443; stroke-width: 0.28; }
+.pitch-player--shooter .player-body { fill: #ffcb69; stroke: #50360c; }
+.goalkeeper-ring { fill: none; stroke: #e7fcff; stroke-width: 0.38; pointer-events: none; }
+.pitch-player.is-selected .player-body, .pitch-player:focus-visible .player-body {
+  stroke: #fff;
+  stroke-width: 0.5;
+}
+.player-position { fill: #12303a; font-size: 1.15px; font-weight: 800; pointer-events: none; user-select: none; }
+.pitch-player--shooter .player-position { fill: #38240b; }
 
 .pitch-dashboard { display: grid; gap: 22px; padding-top: 20px; }
-.measurements { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 .measurements > div {
   display: grid;
   gap: 7px;
@@ -161,7 +172,7 @@ h1 {
   background: var(--surface);
 }
 
-.measurements span, .scene-actions label, .position-controls label, .position-controls legend {
+.measurements span, .scene-actions label {
   color: var(--muted);
   font-size: 0.85rem;
 }
@@ -183,17 +194,6 @@ h1 {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
-
-.position-controls {
-  display: grid;
-  gap: 9px;
-  margin: 0;
-  padding: 16px;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-}
-.position-controls legend { padding: 0 6px; }
-.position-controls input[type="range"] { width: 100%; min-height: 44px; accent-color: var(--accent); }
 
 @media (max-width: 820px) {
   .site-header { align-items: flex-start; padding: 22px 0; }

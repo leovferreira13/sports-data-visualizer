@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type PointerEvent } from "react";
+import { useRef, useState, useSyncExternalStore, type KeyboardEvent, type PointerEvent } from "react";
 
 import { fromSvg, shotAngle, shotDistance, toSvg, viewBox } from "@/lib/geometry";
 import type { Dictionary } from "@/lib/i18n/dictionaries";
@@ -14,7 +14,6 @@ import {
 } from "@/lib/scenario-session";
 import {
   FIELD,
-  fieldBounds,
   goalPosts,
   movePlayer,
   playerIds,
@@ -40,39 +39,45 @@ function storageWrite(snapshot: ReturnType<typeof initialScene>) {
   }
 }
 
+// Keep the scene through locale-route remounts, while storage also survives reloads.
+let currentScene: ReturnType<typeof initialScene> | null = null;
+const sceneListeners = new Set<() => void>();
+
+function subscribeToScene(listener: () => void) {
+  sceneListeners.add(listener);
+  return () => { sceneListeners.delete(listener); };
+}
+
+function getScene() {
+  currentScene ??= storageRead() ?? initialScene();
+  return currentScene;
+}
+
+function getServerScene() {
+  return null;
+}
+
+function changeScene(update: (previous: ReturnType<typeof initialScene>) => ReturnType<typeof initialScene>) {
+  currentScene = update(getScene());
+  storageWrite(currentScene);
+  sceneListeners.forEach((listener) => listener());
+}
+
 export function PlayablePitch({ locale, copy }: Props) {
-  const [scene, setScene] = useState(initialScene);
+  const scene = useSyncExternalStore(subscribeToScene, getScene, getServerScene);
   const [selected, setSelected] = useState<PlayerId>("shooter");
-  const [loaded, setLoaded] = useState(false);
   const svgRef = useRef<SVGSVGElement>(null);
   const dragging = useRef<{ id: PlayerId; pointerId: number } | null>(null);
 
-  useEffect(() => {
-    let active = true;
-    queueMicrotask(() => {
-      if (!active) return;
-      setScene(storageRead() ?? initialScene());
-      setLoaded(true);
-    });
-    return () => { active = false; };
-  }, []);
-
-  useEffect(() => {
-    if (loaded) storageWrite(scene);
-  }, [loaded, scene]);
-
   const format = new Intl.NumberFormat(locale, { maximumFractionDigits: 1 });
-  const shooter = scene.scenario.players.shooter;
-  const shooterSvg = toSvg(shooter);
   const postSvg = goalPosts.map(toSvg);
-  const selectedPosition = scene.scenario.players[selected];
 
   function moveAt(id: PlayerId, event: PointerEvent<SVGGElement>) {
     const svg = svgRef.current;
     const matrix = svg?.getScreenCTM();
     if (!matrix) return;
     const point = new DOMPoint(event.clientX, event.clientY).matrixTransform(matrix.inverse());
-    setScene((previous) => ({
+    changeScene((previous) => ({
       ...previous,
       scenario: movePlayer(previous.scenario, id, fromSvg(point)),
     }));
@@ -97,24 +102,47 @@ export function PlayablePitch({ locale, copy }: Props) {
     if (dragging.current?.pointerId === event.pointerId) dragging.current = null;
   }
 
-  function updateAxis(axis: "x" | "y", value: number) {
-    setScene((previous) => ({
+  function updateAxis(id: PlayerId, axis: "x" | "y", value: number) {
+    changeScene((previous) => ({
       ...previous,
-      scenario: movePlayer(previous.scenario, selected, {
-        ...previous.scenario.players[selected],
-        [axis]: value,
+      scenario: movePlayer(previous.scenario, id, {
+        ...previous.scenario.players[id],
+        x: previous.scenario.players[id].x + (axis === "x" ? value : 0),
+        y: previous.scenario.players[id].y + (axis === "y" ? value : 0),
       }),
     }));
   }
 
+  function moveWithKeyboard(id: PlayerId, event: KeyboardEvent<SVGGElement>) {
+    const direction = {
+      ArrowUp: ["x", 1], ArrowDown: ["x", -1],
+      ArrowLeft: ["y", -1], ArrowRight: ["y", 1],
+    } as const;
+    const movement = direction[event.key as keyof typeof direction];
+    if (!movement) return;
+    event.preventDefault();
+    updateAxis(id, movement[0], movement[1] * (event.shiftKey ? 5 : 0.5));
+  }
+
+  if (!scene) {
+    return <div className="pitch-workspace pitch-workspace--loading" aria-busy="true" />;
+  }
+
+  const shooter = scene.scenario.players.shooter;
+  const shooterSvg = toSvg(shooter);
+
   return (
     <div className="pitch-workspace">
+      <div className="measurements" aria-live="off">
+        <div><span>{copy.distance}</span><strong>{format.format(shotDistance(shooter))} {copy.meters}</strong></div>
+        <div><span>{copy.angle}</span><strong>{format.format(shotAngle(shooter))}°</strong></div>
+      </div>
       <div className="pitch-surface">
         <svg
           ref={svgRef}
           className="pitch-svg"
           viewBox={`0 0 ${viewBox.width} ${viewBox.height}`}
-          role="img"
+          role="group"
           aria-label={copy.pitchDescription}
         >
           <rect className="field-outline" x="0.2" y="0.2" width="67.6" height="52.1" />
@@ -146,6 +174,11 @@ export function PlayablePitch({ locale, copy }: Props) {
                 key={id}
                 className={`pitch-player pitch-player--${id} ${selected === id ? "is-selected" : ""}`}
                 transform={`translate(${point.x} ${point.y})`}
+                role="button"
+                tabIndex={0}
+                aria-label={`${copy.players[id]}: ${copy.forward} ${format.format(scene.scenario.players[id].x)} ${copy.meters}, ${copy.sideways} ${format.format(scene.scenario.players[id].y)} ${copy.meters}. ${copy.keyboardHint}`}
+                onFocus={() => setSelected(id)}
+                onKeyDown={(event) => moveWithKeyboard(id, event)}
                 onPointerDown={(event) => startDrag(id, event)}
                 onPointerMove={continueDrag}
                 onPointerUp={stopDrag}
@@ -153,8 +186,9 @@ export function PlayablePitch({ locale, copy }: Props) {
                 onLostPointerCapture={stopDrag}
               >
                 <circle className="player-hit" r="4.5" />
+                {id === "goalkeeper" && <circle className="goalkeeper-ring" r="2.05" />}
                 <circle className="player-body" r={FIELD.markerRadius} />
-                <text className="player-initial" textAnchor="middle" dominantBaseline="central">
+                <text className="player-position" textAnchor="middle" dominantBaseline="central">
                   {copy.playerGlyphs[id]}
                 </text>
               </g>
@@ -164,11 +198,6 @@ export function PlayablePitch({ locale, copy }: Props) {
       </div>
 
       <div className="pitch-dashboard">
-        <div className="measurements" aria-live="off">
-          <div><span>{copy.distance}</span><strong>{format.format(shotDistance(shooter))} {copy.meters}</strong></div>
-          <div><span>{copy.angle}</span><strong>{format.format(shotAngle(shooter))}°</strong></div>
-        </div>
-
         <div className="scene-actions">
           <label htmlFor="scene-preset">{copy.presetLabel}</label>
           <div className="preset-row">
@@ -176,8 +205,9 @@ export function PlayablePitch({ locale, copy }: Props) {
               id="scene-preset"
               value={scene.presetId}
               onChange={(event) => {
-                if (!isPresetId(event.target.value)) return;
-                setScene({ presetId: event.target.value, scenario: getPreset(event.target.value) });
+                const presetId = event.target.value;
+                if (!isPresetId(presetId)) return;
+                changeScene(() => ({ presetId, scenario: getPreset(presetId) }));
                 setSelected("shooter");
               }}
             >
@@ -185,7 +215,7 @@ export function PlayablePitch({ locale, copy }: Props) {
             </select>
             <button
               type="button"
-              onClick={() => setScene((previous) => ({
+              onClick={() => changeScene((previous) => ({
                 ...previous,
                 scenario: getPreset(previous.presetId),
               }))}
@@ -194,38 +224,6 @@ export function PlayablePitch({ locale, copy }: Props) {
             </button>
           </div>
         </div>
-
-        <fieldset className="position-controls">
-          <legend>{copy.adjustPosition}</legend>
-          <label htmlFor="selected-player">{copy.playerLabel}</label>
-          <select
-            id="selected-player"
-            value={selected}
-            onChange={(event) => setSelected(event.target.value as PlayerId)}
-          >
-            {playerIds.map((id) => <option key={id} value={id}>{copy.players[id]}</option>)}
-          </select>
-          <label htmlFor="player-forward">{copy.forward}: {format.format(selectedPosition.x)} {copy.meters}</label>
-          <input
-            id="player-forward"
-            type="range"
-            min={fieldBounds.xMin}
-            max={fieldBounds.xMax}
-            step="0.1"
-            value={selectedPosition.x}
-            onChange={(event) => updateAxis("x", Number(event.target.value))}
-          />
-          <label htmlFor="player-sideways">{copy.sideways}: {format.format(selectedPosition.y)} {copy.meters}</label>
-          <input
-            id="player-sideways"
-            type="range"
-            min={fieldBounds.yMin}
-            max={fieldBounds.yMax}
-            step="0.1"
-            value={selectedPosition.y}
-            onChange={(event) => updateAxis("y", Number(event.target.value))}
-          />
-        </fieldset>
       </div>
     </div>
   );

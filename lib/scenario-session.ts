@@ -6,7 +6,7 @@ export const scenarioSessionKey = "football-visualized-scenario";
 export type SceneState = { presetId: PresetId; scenario: Scenario };
 
 export function initialScene(): SceneState {
-  return { presetId: "oneOnOne", scenario: getPreset("oneOnOne") };
+  return { presetId: "centralChance", scenario: getPreset("centralChance") };
 }
 
 export function parseScene(value: string | null): SceneState | null {

@@ -34,4 +34,4 @@ npm run check:localization
 - [Development process](docs/DEVELOPMENT_PROCESS.md)
 - [Chat commands for spec, dev and review](docs/COMMANDS.md)
 
-Work is tracked in GitHub Issues. The pitch supports pointer dragging and equivalent labeled position controls. It keeps the current scene when changing language within the same browser tab. Model validation follows before an xG value is published.
+Work is tracked in GitHub Issues. Drag a player or focus its marker and use the arrow keys (Shift for larger steps). The scene remains in place when changing language within the same browser tab. Model validation follows before an xG value is published.

@@ -55,6 +55,20 @@ describe("field geometry", () => {
 });
 
 describe("presets and tab snapshot", () => {
+  it("starts with a centered attack and defenders between shooter and goal", () => {
+    const scene = initialScene();
+    const { shooter, goalkeeper, defender1, defender2 } = scene.scenario.players;
+    expect(scene.presetId).toBe("centralChance");
+    expect(shooter.y).toBe(FIELD.centerY);
+    expect(defender1.x).toBeGreaterThan(shooter.x);
+    expect(defender2.x).toBeGreaterThan(shooter.x);
+    expect(defender1.x).toBeLessThan(goalkeeper.x);
+    expect(defender2.x).toBeLessThan(goalkeeper.x);
+    expect(defender1.x).toBe(defender2.x);
+    expect(defender1.y + defender2.y).toBe(FIELD.centerY * 2);
+    expect(shotDistance(shooter)).toBeLessThan(shotDistance(getPreset("longShot").players.shooter));
+  });
+
   it("gives each preset a distinct, valid, editable scene that resets independently", () => {
     const positions = new Set<string>();
     for (const id of presetIds) {
@@ -71,7 +85,7 @@ describe("presets and tab snapshot", () => {
       }
       positions.add(JSON.stringify(original.players));
     }
-    expect(positions.size).toBe(5);
+    expect(positions.size).toBe(presetIds.length);
   });
 
   it("round-trips a changed scenario independently of language", () => {

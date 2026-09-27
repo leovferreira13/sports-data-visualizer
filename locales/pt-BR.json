@@ -17,29 +17,29 @@
     "title": "Monte a chance.",
     "description": "Arraste os jogadores para explorar como a posição muda a distância e o ângulo da finalização.",
     "status": "Este protótipo mostra apenas a geometria. Uma estimativa de xG validada virá em uma próxima versão.",
-    "pitchDescription": "Meio campo de ataque com finalizador, goleiro e dois defensores. Arraste um jogador ou use os controles de posição abaixo.",
+    "pitchDescription": "Meio campo de ataque com centroavante, goleiro e dois zagueiros. Arraste um jogador ou selecione-o com o teclado e use as setas.",
+    "keyboardHint": "Use as setas para mover este jogador. Segure Shift para passos maiores.",
     "distance": "Distância até o gol",
     "angle": "Ângulo da finalização",
     "meters": "m",
     "presetLabel": "Situação inicial",
     "reset": "Restaurar cena",
-    "adjustPosition": "Ajustar jogador",
-    "playerLabel": "Jogador",
     "forward": "Em direção ao gol",
     "sideways": "Pela largura do campo",
     "players": {
-      "shooter": "Finalizador",
+      "shooter": "Centroavante",
       "goalkeeper": "Goleiro",
-      "defender1": "Defensor 1",
-      "defender2": "Defensor 2"
+      "defender1": "Zagueiro 1",
+      "defender2": "Zagueiro 2"
     },
     "playerGlyphs": {
-      "shooter": "F",
-      "goalkeeper": "G",
-      "defender1": "1",
-      "defender2": "2"
+      "shooter": "CA",
+      "goalkeeper": "GL",
+      "defender1": "ZG",
+      "defender2": "ZG"
     },
     "presets": {
+      "centralChance": "Chance central",
       "penalty": "Pênalti",
       "oneOnOne": "Cara a cara",
       "tightAngle": "Ângulo fechado",
