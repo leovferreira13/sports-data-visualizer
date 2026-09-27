@@ -1,11 +1,13 @@
 # Pitch and geometry
 
-**Status:** proposed; no application code yet.
+**Status:** first playable pitch implemented; prediction remains planned.
 
-`components/Pitch.tsx` is planned to draw a responsive half-pitch as SVG and handle Pointer Events for a shooter, goalkeeper and up to three defenders. `lib/geometry.ts` owns metric calculations, bounds and the screen-to-field transformation. `lib/presets.ts` supplies five starting situations. Exact file boundaries can change when implementation begins.
+`lib/scenario.ts` defines a typed four-player `Scenario`, metric field constants, valid bounds, and immutable player movement. The full field is 105 × 68 m; the visible attacking half is x = 52.5–105 m, with x increasing toward the attacked goal and y spanning the width. Player centers stay at least one marker radius inside the playing area. The goal center is (105, 34), and its posts are 7.32 m apart. `shotType` marks a penalty without assigning it an estimate.
 
-Use field coordinates in meters (proposed full pitch 105 × 68 m, goal 7.32 m wide). Increase `x` toward the attacked goal; `y` crosses the field. The visible half-pitch must not alter feature calculations. A `Scenario` holds shot position, goalkeeper, defender IDs/positions and an explicit `shotType` for open play versus penalty.
+`lib/geometry.ts` owns distance to goal center, the angle between shooter-to-post vectors, and the reversible projection to SVG. The `68 × 52.5` viewBox rotates the field: lateral y maps to screen x; distance from the attacked goal maps to screen y. Both axes keep one SVG unit per meter. The goal is at the top, so the cone, post markers, and numerical measurements share the same physical geometry. Pointer coordinates pass through the inverse of `getScreenCTM()`, including the SVG's responsive scaling.
 
-Distance is from shot to goal center; angle is the angle between vectors from shot to each post. The SVG cone, numerical values and model features must use the same geometry. Clamp drags to valid positions; provide an alternative to dragging for keyboard users. Moving a piece updates state first, then drawings and measurements derive from it.
+`lib/presets.ts` supplies five distinct four-piece scenarios. Selecting one creates a fresh copy, and reset restores the selected preset after any edits. `components/playable-pitch.tsx` owns scenario state, SVG drawings, pointer capture, measurements, and labeled native range controls for each player's two axes. Pointer capture continues a drag outside the marker and clears on release/cancellation. The controls give keyboard users the same positional edits. `app/[locale]/globals.css` styles the responsive pitch; `locales/` supplies English and Brazilian Portuguese labels.
 
-**Learning note:** SVG is a collection of browser elements, so each player and geometry line can be addressed and styled separately. React rerenders those elements from state; Pointer Events provide one interaction API across mouse and touch. This does not imply that every SVG shape should be exposed to assistive technology.
+`lib/scenario-session.ts` validates a versioned tab snapshot for locale navigation. Invalid, stale, or out-of-bounds snapshots fall back to the default one-on-one preset. There is no xG value, model feature extraction, URL scenario format, or third defender yet.
+
+**Learning note:** SVG elements are individual DOM objects, so React can redraw the cone and pieces from scenario state. Pointer Events unify mouse and touch, while the browser's SVG matrix handles responsive coordinate conversion. State remains in meters; the browser projection never becomes a second source of positions.

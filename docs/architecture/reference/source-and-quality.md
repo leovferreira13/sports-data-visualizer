@@ -4,11 +4,11 @@
 
 ## Suggested code map
 
-The implementation may use `app/[lang]/page.tsx`, `app/[lang]/layout.tsx`, `components/Pitch.tsx`, `components/InsightPanel.tsx`, `components/LearnMode.tsx`, `lib/geometry.ts`, `lib/features.ts`, `lib/predict.ts`, `lib/presets.ts`, `locales/pt-BR.json`, and `locales/en.json`. `model/model.json` and `scripts/train_model.py` are conditional on the model choice; `lib/scenario-url.ts` only exists if shareable URLs make v0.1. These are proposals, not existing files.
+The current shell and pitch use `app/[locale]/page.tsx`, `app/[locale]/layout.tsx`, `components/playable-pitch.tsx`, `lib/scenario.ts`, `lib/geometry.ts`, `lib/presets.ts`, `lib/scenario-session.ts`, `locales/pt-BR.json`, and `locales/en.json`. Prediction and Learn modules are still proposals; create their boundaries when their Issues establish real contracts. `model/model.json` and `scripts/train_model.py` are conditional on the model choice; `lib/scenario-url.ts` only exists if shareable URLs are implemented later.
 
 ## Quality gates
 
-- Check geometry, boundaries, feature extraction and inference with focused tests. Verify the same feature definitions during training and browser inference.
+- `npm run check:precommit` runs lint, typecheck, focused geometry/preset/snapshot tests, and documentation checks. CI also builds and checks localized routes. Feature extraction and inference tests will be needed when the model exists; verify the same definitions during training and browser inference.
 - Manually exercise drag on desktop and touch, and ensure keyboard or equivalent controls can operate every critical piece.
 - Keep decorative SVG elements quiet for screen readers; give movable pieces names and visible focus states.
 - Profile before adding debounce: a small local model should update on each move if practical.

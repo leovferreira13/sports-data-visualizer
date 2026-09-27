@@ -15,7 +15,36 @@
   "playground": {
     "eyebrow": "Playground",
     "title": "Monte a chance.",
-    "description": "O campo interativo é o próximo passo. Esta primeira versão estabelece a base bilíngue da aplicação.",
-    "status": "A interação com o campo e o xG não fazem parte deste primeiro scaffold."
+    "description": "Arraste os jogadores para explorar como a posição muda a distância e o ângulo da finalização.",
+    "status": "Este protótipo mostra apenas a geometria. Uma estimativa de xG validada virá em uma próxima versão.",
+    "pitchDescription": "Meio campo de ataque com finalizador, goleiro e dois defensores. Arraste um jogador ou use os controles de posição abaixo.",
+    "distance": "Distância até o gol",
+    "angle": "Ângulo da finalização",
+    "meters": "m",
+    "presetLabel": "Situação inicial",
+    "reset": "Restaurar cena",
+    "adjustPosition": "Ajustar jogador",
+    "playerLabel": "Jogador",
+    "forward": "Em direção ao gol",
+    "sideways": "Pela largura do campo",
+    "players": {
+      "shooter": "Finalizador",
+      "goalkeeper": "Goleiro",
+      "defender1": "Defensor 1",
+      "defender2": "Defensor 2"
+    },
+    "playerGlyphs": {
+      "shooter": "F",
+      "goalkeeper": "G",
+      "defender1": "1",
+      "defender2": "2"
+    },
+    "presets": {
+      "penalty": "Pênalti",
+      "oneOnOne": "Cara a cara",
+      "tightAngle": "Ângulo fechado",
+      "longShot": "Chute de longe",
+      "crowdedBox": "Área congestionada"
+    }
   }
 }

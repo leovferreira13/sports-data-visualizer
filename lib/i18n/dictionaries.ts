@@ -11,6 +11,25 @@ export type Dictionary = {
     title: string;
     description: string;
     status: string;
+    pitchDescription: string;
+    distance: string;
+    angle: string;
+    meters: string;
+    presetLabel: string;
+    reset: string;
+    adjustPosition: string;
+    playerLabel: string;
+    forward: string;
+    sideways: string;
+    players: { shooter: string; goalkeeper: string; defender1: string; defender2: string };
+    playerGlyphs: { shooter: string; goalkeeper: string; defender1: string; defender2: string };
+    presets: {
+      penalty: string;
+      oneOnOne: string;
+      tightAngle: string;
+      longShot: string;
+      crowdedBox: string;
+    };
   };
 };
 

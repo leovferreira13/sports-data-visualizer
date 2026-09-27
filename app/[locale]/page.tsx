@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 
+import { PlayablePitch } from "@/components/playable-pitch";
 import { localeFromRoute } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 
@@ -28,12 +29,7 @@ export default async function PlaygroundPage({
         <p className="status">{dictionary.playground.status}</p>
       </section>
 
-      <section className="pitch-placeholder" aria-hidden="true">
-        <div className="halfway-line" />
-        <div className="penalty-area" />
-        <div className="goal-area" />
-        <div className="penalty-arc" />
-      </section>
+      <PlayablePitch locale={locale} copy={dictionary.playground} />
     </main>
   );
 }

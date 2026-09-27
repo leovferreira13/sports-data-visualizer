@@ -2,7 +2,9 @@
   "name": "sports-data-visualizer",
   "version": "0.1.0",
   "private": true,
-  "engines": { "node": ">=20.9.0" },
+  "engines": {
+    "node": ">=20.9.0"
+  },
   "scripts": {
     "prepare": "bash scripts/install-git-hooks.sh",
     "dev": "next dev",
@@ -10,6 +12,7 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
+    "test": "vitest run",
     "check:precommit": "bash scripts/check-precommit.sh",
     "check:localization": "bash scripts/check-localization.sh"
   },
@@ -28,6 +31,7 @@
     "@types/react-dom": "19.3.0",
     "eslint": "9.39.5",
     "eslint-config-next": "16.3.6",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "vitest": "3.2.4"
   }
 }
