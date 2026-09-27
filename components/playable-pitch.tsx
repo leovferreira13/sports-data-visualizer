@@ -13,10 +13,13 @@ import {
   serializeScene,
 } from "@/lib/scenario-session";
 import {
+  addPlayer,
   FIELD,
   goalPosts,
+  maxExtraPlayers,
   movePlayer,
   playerIds,
+  playerPosition,
   type PlayerId,
 } from "@/lib/scenario";
 
@@ -106,9 +109,9 @@ export function PlayablePitch({ locale, copy }: Props) {
     changeScene((previous) => ({
       ...previous,
       scenario: movePlayer(previous.scenario, id, {
-        ...previous.scenario.players[id],
-        x: previous.scenario.players[id].x + (axis === "x" ? value : 0),
-        y: previous.scenario.players[id].y + (axis === "y" ? value : 0),
+        ...playerPosition(previous.scenario, id),
+        x: playerPosition(previous.scenario, id).x + (axis === "x" ? value : 0),
+        y: playerPosition(previous.scenario, id).y + (axis === "y" ? value : 0),
       }),
     }));
   }
@@ -130,12 +133,48 @@ export function PlayablePitch({ locale, copy }: Props) {
 
   const shooter = scene.scenario.players.shooter;
   const shooterSvg = toSvg(shooter);
+  const allPlayerIds: PlayerId[] = [
+    ...playerIds,
+    ...scene.scenario.extraAttackers.map((_, index) => `attacker-${index}` as const),
+    ...scene.scenario.extraDefenders.map((_, index) => `defender-${index}` as const),
+  ];
 
   return (
     <div className="pitch-workspace">
       <div className="measurements" aria-live="off">
         <div><span>{copy.distance}</span><strong>{format.format(shotDistance(shooter))} {copy.meters}</strong></div>
         <div><span>{copy.angle}</span><strong>{format.format(shotAngle(shooter))}°</strong></div>
+      </div>
+      <div className="scene-actions">
+        <label htmlFor="scene-preset">{copy.presetLabel}</label>
+        <div className="preset-row">
+          <select
+            id="scene-preset"
+            value={scene.presetId}
+            onChange={(event) => {
+              const presetId = event.target.value;
+              if (!isPresetId(presetId)) return;
+              changeScene(() => ({ presetId, scenario: getPreset(presetId) }));
+              setSelected("shooter");
+            }}
+          >
+            {presetIds.map((id) => <option key={id} value={id}>{copy.presets[id]}</option>)}
+          </select>
+          <button type="button" disabled={scene.scenario.extraAttackers.length >= maxExtraPlayers.attacker}
+            onClick={() => changeScene((previous) => ({ ...previous, scenario: addPlayer(previous.scenario, "attacker") }))}>
+            {copy.addAttacker}
+          </button>
+          <button type="button" disabled={scene.scenario.extraDefenders.length >= maxExtraPlayers.defender}
+            onClick={() => changeScene((previous) => ({ ...previous, scenario: addPlayer(previous.scenario, "defender") }))}>
+            {copy.addDefender}
+          </button>
+          <button type="button" onClick={() => {
+            changeScene((previous) => ({ ...previous, scenario: getPreset(previous.presetId) }));
+            setSelected("shooter");
+          }}>
+            {copy.reset}
+          </button>
+        </div>
       </div>
       <div className="pitch-surface">
         <svg
@@ -167,16 +206,21 @@ export function PlayablePitch({ locale, copy }: Props) {
             />
           ))}
 
-          {playerIds.map((id) => {
-            const point = toSvg(scene.scenario.players[id]);
+          {allPlayerIds.map((id) => {
+            const position = playerPosition(scene.scenario, id);
+            const point = toSvg(position);
+            const role = id === "shooter" || id.startsWith("attacker-") ? "attacker" : id === "goalkeeper" ? "goalkeeper" : "defender";
+            const name = id.startsWith("attacker-") ? `${copy.players.shooter} ${Number(id.slice(9)) + 2}`
+              : id.startsWith("defender-") ? `${copy.defenderName} ${Number(id.slice(9)) + 3}`
+                : copy.players[id as (typeof playerIds)[number]];
             return (
               <g
                 key={id}
-                className={`pitch-player pitch-player--${id} ${selected === id ? "is-selected" : ""}`}
+                className={`pitch-player pitch-player--${role} ${selected === id ? "is-selected" : ""}`}
                 transform={`translate(${point.x} ${point.y})`}
                 role="button"
                 tabIndex={0}
-                aria-label={`${copy.players[id]}: ${copy.forward} ${format.format(scene.scenario.players[id].x)} ${copy.meters}, ${copy.sideways} ${format.format(scene.scenario.players[id].y)} ${copy.meters}. ${copy.keyboardHint}`}
+                aria-label={`${name}: ${copy.forward} ${format.format(position.x)} ${copy.meters}, ${copy.sideways} ${format.format(position.y)} ${copy.meters}. ${copy.keyboardHint}`}
                 onFocus={() => setSelected(id)}
                 onKeyDown={(event) => moveWithKeyboard(id, event)}
                 onPointerDown={(event) => startDrag(id, event)}
@@ -189,41 +233,12 @@ export function PlayablePitch({ locale, copy }: Props) {
                 {id === "goalkeeper" && <circle className="goalkeeper-ring" r="2.05" />}
                 <circle className="player-body" r={FIELD.markerRadius} />
                 <text className="player-position" textAnchor="middle" dominantBaseline="central">
-                  {copy.playerGlyphs[id]}
+                  {role === "attacker" ? copy.playerGlyphs.shooter : role === "goalkeeper" ? copy.playerGlyphs.goalkeeper : copy.playerGlyphs.defender1}
                 </text>
               </g>
             );
           })}
         </svg>
-      </div>
-
-      <div className="pitch-dashboard">
-        <div className="scene-actions">
-          <label htmlFor="scene-preset">{copy.presetLabel}</label>
-          <div className="preset-row">
-            <select
-              id="scene-preset"
-              value={scene.presetId}
-              onChange={(event) => {
-                const presetId = event.target.value;
-                if (!isPresetId(presetId)) return;
-                changeScene(() => ({ presetId, scenario: getPreset(presetId) }));
-                setSelected("shooter");
-              }}
-            >
-              {presetIds.map((id) => <option key={id} value={id}>{copy.presets[id]}</option>)}
-            </select>
-            <button
-              type="button"
-              onClick={() => changeScene((previous) => ({
-                ...previous,
-                scenario: getPreset(previous.presetId),
-              }))}
-            >
-              {copy.reset}
-            </button>
-          </div>
-        </div>
       </div>
     </div>
   );

@@ -153,16 +153,15 @@ h1 {
 .pitch-player:active { cursor: grabbing; }
 .player-hit { fill: transparent; }
 .player-body { fill: #70d0e0; stroke: #123443; stroke-width: 0.28; }
-.pitch-player--shooter .player-body { fill: #ffcb69; stroke: #50360c; }
+.pitch-player--attacker .player-body { fill: #ffcb69; stroke: #50360c; }
 .goalkeeper-ring { fill: none; stroke: #e7fcff; stroke-width: 0.38; pointer-events: none; }
 .pitch-player.is-selected .player-body, .pitch-player:focus-visible .player-body {
   stroke: #fff;
   stroke-width: 0.5;
 }
 .player-position { fill: #12303a; font-size: 1.15px; font-weight: 800; pointer-events: none; user-select: none; }
-.pitch-player--shooter .player-position { fill: #38240b; }
+.pitch-player--attacker .player-position { fill: #38240b; }
 
-.pitch-dashboard { display: grid; gap: 22px; padding-top: 20px; }
 .measurements > div {
   display: grid;
   gap: 7px;
@@ -177,10 +176,10 @@ h1 {
   font-size: 0.85rem;
 }
 .measurements strong { font-size: clamp(1.35rem, 2vw, 1.9rem); }
-.scene-actions { display: grid; gap: 8px; }
-.preset-row { display: flex; gap: 10px; }
-.preset-row select { flex: 1; min-width: 0; }
-.pitch-dashboard select, .pitch-dashboard button {
+.scene-actions { display: grid; gap: 8px; margin-bottom: 16px; }
+.preset-row { display: flex; gap: 10px; flex-wrap: wrap; }
+.preset-row select { flex: 1 1 220px; min-width: 0; }
+.scene-actions select, .scene-actions button {
   min-height: 44px;
   border: 1px solid var(--border);
   border-radius: 9px;
@@ -188,9 +187,10 @@ h1 {
   color: var(--text);
   padding: 0 12px;
 }
-.pitch-dashboard button { cursor: pointer; }
-.pitch-dashboard button:hover { border-color: var(--accent); }
-.pitch-dashboard :is(button, select, input):focus-visible {
+.scene-actions button { cursor: pointer; }
+.scene-actions button:hover { border-color: var(--accent); }
+.scene-actions button:disabled { cursor: not-allowed; opacity: 0.55; }
+.scene-actions :is(button, select):focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
@@ -215,4 +215,5 @@ h1 {
   .pitch-surface { padding: 5px; border-radius: 12px; }
   .preset-row { flex-wrap: wrap; }
   .preset-row select { flex-basis: 100%; }
+  .preset-row button { flex: 1 1 calc(50% - 10px); }
 }

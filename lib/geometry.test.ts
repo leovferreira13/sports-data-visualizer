@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { fromSvg, shotAngle, shotDistance, toSvg } from "./geometry";
 import { getPreset, presetIds } from "./presets";
 import { initialScene, parseScene, serializeScene } from "./scenario-session";
-import { FIELD, fieldBounds, goalPosts, movePlayer, playerIds } from "./scenario";
+import { addPlayer, FIELD, fieldBounds, goalPosts, maxExtraPlayers, movePlayer, playerIds, playerPosition } from "./scenario";
 
 describe("field geometry", () => {
   it("measures a centered penalty from the same posts used by the drawing", () => {
@@ -96,13 +96,38 @@ describe("presets and tab snapshot", () => {
     expect(parseScene(serializeScene(state))).toEqual(state);
   });
 
+  it("adds independent, movable players and saves them in the tab snapshot", () => {
+    const base = getPreset("centralChance");
+    const added = addPlayer(addPlayer(addPlayer(base, "attacker"), "attacker"), "defender");
+    expect(base.extraAttackers).toHaveLength(0);
+    expect(added.extraAttackers).toHaveLength(2);
+    expect(added.extraDefenders).toHaveLength(1);
+    expect(added.extraAttackers[0]).not.toEqual(added.extraAttackers[1]);
+    const moved = movePlayer(added, "attacker-1", { x: 90, y: 20 });
+    expect(playerPosition(moved, "attacker-1")).toEqual({ x: 90, y: 20 });
+    expect(playerPosition(added, "attacker-1")).not.toEqual(playerPosition(moved, "attacker-1"));
+    expect(parseScene(serializeScene({ presetId: "centralChance", scenario: moved }))).toEqual({ presetId: "centralChance", scenario: moved });
+    let full = moved;
+    for (let i = 0; i < 20; i++) full = addPlayer(full, "defender");
+    expect(full.extraDefenders).toHaveLength(maxExtraPlayers.defender);
+    for (let i = 0; i < 20; i++) full = addPlayer(full, "attacker");
+    expect(full.extraAttackers).toHaveLength(maxExtraPlayers.attacker);
+  });
+
+  it("reads existing v1 tab scenes with empty extra-player lists", () => {
+    const { shotType, players } = getPreset("longShot");
+    expect(parseScene(JSON.stringify({ version: 1, presetId: "longShot", scenario: { shotType, players } })))
+      .toEqual({ presetId: "longShot", scenario: { shotType, players, extraAttackers: [], extraDefenders: [] } });
+  });
+
   it("rejects corrupt, stale, unknown, or out-of-bounds snapshots", () => {
     const valid = JSON.parse(serializeScene(initialScene()));
     expect(parseScene("{")).toBeNull();
     expect(parseScene(null)).toBeNull();
-    expect(parseScene(JSON.stringify({ ...valid, version: 2 }))).toBeNull();
+    expect(parseScene(JSON.stringify({ ...valid, version: 3 }))).toBeNull();
     expect(parseScene(JSON.stringify({ ...valid, presetId: "unknown" }))).toBeNull();
     expect(parseScene(JSON.stringify({ ...valid, scenario: { ...valid.scenario, shotType: "penalty" } }))).toBeNull();
+    expect(parseScene(JSON.stringify({ ...valid, scenario: { ...valid.scenario, extraAttackers: [{ x: 105, y: 34 }] } }))).toBeNull();
     valid.scenario.players.shooter.x = 105;
     expect(parseScene(JSON.stringify(valid))).toBeNull();
   });

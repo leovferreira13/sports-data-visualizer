@@ -55,7 +55,7 @@ In the first round, test with 5–8 people, including at least one creator or co
 
 ## First-release boundaries
 
-One shooter, one goalkeeper, up to three defenders, six presets, two modes, and two languages. No accounts, database, mandatory backend, teams, live matches, tactical editor, other metrics, or generative AI. Famous goals come **after validation**: recreating one requires a reliable source for positions and shot context, and any approximation must be labeled as an illustrative reconstruction.
+One designated shot taker, one goalkeeper, addable attackers and defenders, six presets, two modes, and two languages. No accounts, database, mandatory backend, teams, live matches, tactical editor, other metrics, or generative AI. Famous goals come **after validation**: recreating one requires a reliable source for positions and shot context, and any approximation must be labeled as an illustrative reconstruction.
 
 ## Possible evolution
 

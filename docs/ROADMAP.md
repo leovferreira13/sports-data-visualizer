@@ -11,7 +11,7 @@ Build a working first interaction as soon as possible, then complete a small, tr
 | **0. Prepare** | 1–2 h | Repository, runnable app, and three starting documents. | Runs locally; scope and criteria recorded. |
 | **1. Playable pitch** | 4–8 h | Responsive pitch with shooter, goalkeeper, two defenders, and presets; distance and angle respond to dragging. | Mouse and touch work; pieces stay in bounds; no provisional number is labeled xG. |
 | **2. Prove the calculation** | 3–6 h to assess an existing artifact; more if training is needed | Small test takes a scenario state and returns a reproducible estimate. | Model rights and inputs checked; keeper/defenders affect the value if claimed; plausible scenes; limitations documented. |
-| **3. Publishable Playground** | 6–10 h after milestone 2 | Live estimate, explanations, six presets, up to three addable/removable defenders, reset, and `pt-BR`/`en` interface. | v0.1 acceptance criteria met on desktop and mobile. |
+| **3. Publishable Playground** | 6–10 h after milestone 2 | Live estimate, explanations, six presets, addable attackers and defenders, removal controls, reset, and `pt-BR`/`en` interface. | v0.1 acceptance criteria met on desktop and mobile. |
 | **4. Learn and publish** | 4–8 h | Optional 2–3-step tutorial on the same pitch, README, public URL, and short feedback round. | Full flow in both languages; model provenance/limits visible; public link tested. |
 | **5. Refine from real use** | Based on feedback | Fixes to confusion, bugs, and friction reported by fans and commentators. | Priorities come from observation rather than a speculative feature list. |
 

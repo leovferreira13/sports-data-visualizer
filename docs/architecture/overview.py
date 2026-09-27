@@ -6,7 +6,7 @@ and guided Learn remain planned.
 The first product is a public xG playground with an optional Learn mode. Next.js
 (App Router) supplies pages and locale routes. A React Client Component owns the
 interactive scenario, and TypeScript describes its shape. SVG draws the attacking
-half; Pointer Events move four pieces on mouse and touch. Focusable player markers
+half; Pointer Events move preset players and added players on mouse and touch. Focusable player markers
 accept arrow keys as a keyboard-operable alternative.
 
 The intended data flow is:
@@ -20,7 +20,7 @@ validated, versioned model. There is no inference or xG value today.
 The field uses one coordinate system in meters, with x increasing toward the
 attacked goal. A uniform SVG projection rotates the attacking half so the goal
 is at the top. SVG coordinates are not the source of truth. Six presets and a
-versioned, validated tab-scoped scenario snapshot support reset and locale
+versioned, validated tab-scoped scenario snapshot, including added players, support reset and locale
 navigation. The planned Learn mode will reuse this simulation.
 
 Prediction is planned to run in the browser with a small versioned artifact.

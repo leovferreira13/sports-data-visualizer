@@ -18,6 +18,9 @@ export type Dictionary = {
     meters: string;
     presetLabel: string;
     reset: string;
+    addAttacker: string;
+    addDefender: string;
+    defenderName: string;
     forward: string;
     sideways: string;
     players: { shooter: string; goalkeeper: string; defender1: string; defender2: string };

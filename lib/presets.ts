@@ -1,4 +1,4 @@
-import { FIELD, type Scenario } from "./scenario";
+import { FIELD, type BaseScenario, type Scenario } from "./scenario";
 
 export const presetIds = [
   "centralChance",
@@ -10,7 +10,7 @@ export const presetIds = [
 ] as const;
 export type PresetId = (typeof presetIds)[number];
 
-const presets: Record<PresetId, Scenario> = {
+const presets: Record<PresetId, BaseScenario> = {
   centralChance: {
     shotType: "open-play",
     players: {
@@ -74,6 +74,8 @@ export function isPresetId(value: unknown): value is PresetId {
 export function getPreset(id: PresetId): Scenario {
   return {
     shotType: presets[id].shotType,
+    extraAttackers: [],
+    extraDefenders: [],
     players: {
       shooter: { ...presets[id].players.shooter },
       goalkeeper: { ...presets[id].players.goalkeeper },
