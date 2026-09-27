@@ -189,6 +189,15 @@ h1 {
 }
 .scene-actions button { cursor: pointer; }
 .scene-actions button:hover { border-color: var(--accent); }
+.scene-actions .scene-reset {
+  border-color: #b27a58;
+  background: #51382b;
+  color: #fff2e5;
+}
+.scene-actions .scene-reset:hover {
+  border-color: #e9ab7f;
+  background: #694632;
+}
 .scene-actions button:disabled { cursor: not-allowed; opacity: 0.55; }
 .scene-actions :is(button, select):focus-visible {
   outline: 2px solid var(--accent);

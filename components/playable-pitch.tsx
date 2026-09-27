@@ -168,7 +168,7 @@ export function PlayablePitch({ locale, copy }: Props) {
             onClick={() => changeScene((previous) => ({ ...previous, scenario: addPlayer(previous.scenario, "defender") }))}>
             {copy.addDefender}
           </button>
-          <button type="button" onClick={() => {
+          <button className="scene-reset" type="button" onClick={() => {
             changeScene((previous) => ({ ...previous, scenario: getPreset(previous.presetId) }));
             setSelected("shooter");
           }}>
