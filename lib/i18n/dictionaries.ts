@@ -6,6 +6,7 @@ export type Dictionary = {
   meta: { title: string; description: string };
   brand: { name: string; tagline: string };
   language: { label: string; english: string; portuguese: string };
+  attribution: { sourceLink: string; logoAlt: string; disclaimer: string };
   playground: {
     eyebrow: string;
     title: string;

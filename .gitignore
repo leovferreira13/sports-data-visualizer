@@ -34,3 +34,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local licensed data and experiments; review exported model parameters separately.
+/data/
+/downloads/
+/notebooks/
+/artifacts/
+*.ipynb
+*.parquet

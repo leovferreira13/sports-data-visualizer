@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 
@@ -72,6 +73,22 @@ export default async function LocaleLayout({
           </header>
 
           {children}
+
+          <footer className="site-footer">
+            <a
+              className="data-source-logo"
+              href="https://github.com/hudl/open-data"
+              aria-label={dictionary.attribution.sourceLink}
+            >
+              <Image
+                src="/branding/hudl-statsbomb-logo-reversed.png"
+                width={800}
+                height={122}
+                alt={dictionary.attribution.logoAlt}
+              />
+            </a>
+            <p>{dictionary.attribution.disclaimer}</p>
+          </footer>
         </div>
       </body>
     </html>

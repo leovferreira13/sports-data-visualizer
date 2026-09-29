@@ -46,6 +46,22 @@ button, select { font: inherit; }
 .brand strong { font-size: 1rem; letter-spacing: 0.02em; }
 .brand span { color: var(--muted); font-size: 0.82rem; }
 
+.site-footer {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 24px 0 32px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.55;
+}
+
+.site-footer p { margin: 0; max-width: 72ch; }
+.data-source-logo { display: block; flex: 0 0 170px; }
+.data-source-logo img { display: block; width: 100%; height: auto; }
+.data-source-logo:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
 .language-switcher {
   display: grid;
   gap: 6px;
@@ -225,4 +241,6 @@ h1 {
   .preset-row { flex-wrap: wrap; }
   .preset-row select { flex-basis: 100%; }
   .preset-row button { flex: 1 1 calc(50% - 10px); }
+  .site-footer { align-items: flex-start; flex-direction: column; gap: 12px; }
+  .data-source-logo { flex-basis: auto; width: 170px; }
 }
