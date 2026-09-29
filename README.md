@@ -35,3 +35,9 @@ npm run check:localization
 - [Chat commands for spec, dev and review](docs/COMMANDS.md)
 
 Work is tracked in GitHub Issues. Choose a starting situation or add players above the pitch; the measurements refer to the original striker (the shot taker). Drag a player or focus its marker and use the arrow keys (Shift for larger steps). Reset returns to the selected preset and removes added players. The scene remains in place when changing language within the same browser tab. Model validation follows before an xG value is published.
+
+## Data source and publication status
+
+The planned xG model will be independently trained using [StatsBomb Open Data](https://github.com/hudl/open-data). StatsBomb supplies the training data; it does not create or endorse this project or its model. The current pitch does not display a trained xG estimate. Before publishing one, the application will show StatsBomb credit and its official logo beside the xG result and methodology in both languages. No source event or 360 records or shot-level training examples will be redistributed here.
+
+The intended use is a free, non-commercial professional portfolio. See the [rights and release record](docs/architecture/reference/statsbomb-rights.md) for the source terms, Hudl Support's conditional answer, and the remaining publication checks.

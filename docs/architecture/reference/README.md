@@ -9,3 +9,4 @@ These are **proposed boundaries** until code exists. Update each page with actua
 | [Explanation and Learn](explanation-and-learn.md) | Honest insights, before/after comparisons and guided experiments |
 | [Localization and routing](localization-and-routing.md) | Language selection, routes and translation dictionaries |
 | [Sources and quality](source-and-quality.md) | Suggested code map, testing gates and external references |
+| [StatsBomb rights and release](statsbomb-rights.md) | Data-use terms, support response, attribution and publication gate |
