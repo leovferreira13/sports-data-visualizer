@@ -12,6 +12,11 @@
     "english": "English",
     "portuguese": "Português (Brasil)"
   },
+  "attribution": {
+    "sourceLink": "Repositório de origem dos dados StatsBomb Open Data",
+    "logoAlt": "Logo Hudl Statsbomb",
+    "disclaimer": "Fonte planejada para os dados do modelo de xG: StatsBomb Open Data. Este é um projeto independente, gratuito e não comercial; a Hudl Statsbomb não criou nem endossa seu modelo."
+  },
   "playground": {
     "eyebrow": "Playground",
     "title": "Monte a chance.",

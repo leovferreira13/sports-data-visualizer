@@ -12,6 +12,11 @@
     "english": "English",
     "portuguese": "Português (Brasil)"
   },
+  "attribution": {
+    "sourceLink": "StatsBomb Open Data source repository",
+    "logoAlt": "Hudl Statsbomb logo",
+    "disclaimer": "Planned xG data source: StatsBomb Open Data. This is an independent, free, non-commercial project; Hudl Statsbomb did not create or endorse its model."
+  },
   "playground": {
     "eyebrow": "Playground",
     "title": "Build the chance.",
