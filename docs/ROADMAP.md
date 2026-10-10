@@ -19,9 +19,9 @@ Build a working first interaction as soon as possible, then complete a small, tr
 
 ## Model decision at milestone 2
 
-First investigate an existing artifact whose **code and weights** are reusable, inputs match the pitch controls, and runtime fits a small app. Record origin, license, features, and a minimum test. A public repository without a clear license does not grant reuse rights.
+Parent issue #3 now selects our own model pipeline: audit legally usable StatsBomb Open Data in #9, define matching offline/browser features in #10, train a regularized logistic regression baseline and constrained XGBoost positional candidate in #11, then evaluate calibration and scene behavior before publication in #13. Record source/model provenance, actual inputs and limitations. The earlier licensed-artifact-first option is superseded.
 
-If none fits, train **a small logistic regression** outside the app with shot and positioning data available under suitable terms. Export coefficients and metadata for browser inference. This is a bounded fallback, not a research program. Handle penalties separately or exclude them if the dataset/model does not represent them; do not silently force a fixed value into the same model.
+Export reviewed parameters and metadata for browser inference only after the evaluation and rights gates pass. Keep source and shot-level records local. Open-play foot shots form the learned population; penalties follow the separately declared fixed 0.76 convention in #12, not a learned result.
 
 If a contextual model is not ready immediately, test the pitch as a prototype with **geometry and indicators** but do not publish xG that pretends to react to goalkeeper/defenders. If the fallback only uses shot location, say so plainly and do not attribute other players' effects to it. A complete v0.1 needs an estimate that matches the promised interactions.
 
