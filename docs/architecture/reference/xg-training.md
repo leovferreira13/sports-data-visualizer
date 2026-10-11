@@ -85,6 +85,8 @@ On the same environment, also use `compare_runs.py` to require byte-identical co
 
 Derived artifact/evidence/preparation IDs may differ when their inputs' bytes differ; each remains internally validated. Python patch versions and any byte differences are reported, never called byte-identical. The comparator does not ignore scientific code/configuration changes. A changed selected model or any tolerance failure is a failed reproduction.
 
+The comparator requires two outputs from `train_models.py`, each printed as `Complete immutable training: <path>`. A `prepare_training.py` output is a different phase and must be compared with `compare_runs.py`. Both training manifests must declare `phase: training`. Diagnostics identify an incorrect phase by side, or list the filenames present only on the left/right when training inventories differ. Each run's inventory and hashes are verified before this check, so do not add, delete or edit files to make the lists match. Update the comparator and inspect the existing runs without retraining; the diagnostic update does not change comparison rules.
+
 ## Output and review contract
 
 All scientific outputs stay under ignored `data/derived/`. Publication is staged atomically; completed directories cannot be overwritten. A changed input/code/configuration fails the run. Remove an abandoned staging directory if an OS-level interruption leaves one; rerun into a fresh output root. Do not delete or edit the source corpus.

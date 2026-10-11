@@ -55,8 +55,15 @@ def compare_training(left_dir, right_dir):
         raise AuditError("Comparison requires distinct runs")
     left, lm, lf = verified_side(left_dir, "left")
     right, rm, rf = verified_side(right_dir, "right")
-    if lm.get("phase") != "training" or rm.get("phase") != "training" or lf != rf:
-        raise AuditError("Expected matching complete training inventories")
+    for side, manifest in (("left", lm), ("right", rm)):
+        if manifest.get("phase") != "training":
+            phase = manifest.get("phase")
+            description = phase if phase in ("preparation", "features", "ingestion") else "missing or unrecognized"
+            raise AuditError(f"{side} run: expected training phase, found {description}; use the completed train_models.py output")
+    if lf != rf:
+        left_only = ", ".join(sorted(lf - rf)) or "none"
+        right_only = ", ".join(sorted(rf - lf)) or "none"
+        raise AuditError(f"Training inventories differ: left-only=[{left_only}]; right-only=[{right_only}]")
     for key in ("code_sha256", "dependencies", "protocol_sha256", "feature_run_id", "source_revision",
                 "split_sha256", "feature_contract_sha256", "selected_model"):
         if lm[key] != rm[key]:
