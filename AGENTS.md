@@ -10,7 +10,7 @@ Ship a small, useful xG playground quickly. Playground is the default; Learn is 
 | --- | --- |
 | Product intent | `docs/VISION.md` |
 | Planned milestones and acceptance | `docs/ROADMAP.md` and the current Issue |
-| Planned technical direction and module references | `docs/architecture/overview.py` and `docs/architecture/reference/` |
+| Planned technical direction and module references | `docs/architecture/overview.md` and `docs/architecture/reference/` |
 | Structural decisions | `docs/architecture/adr/` |
 | Task status and priority | GitHub Project #3 |
 | Implementation and verification | Code, tests, and PR |
@@ -32,6 +32,7 @@ Architecture is a proposal until implemented. Update it as actual boundaries bec
 
 ## Product and data rules
 
+- Use `python3 scripts/xg/compare_runs.py --left-dir <first-run-directory> --right-dir <second-run-directory>` for local audit/feature reproducibility comparisons. Record its result and keep private rows local; equal aggregate JSON alone does not verify the complete run.
 - Never label a provisional geometry heuristic as xG. An xG estimate requires documented model provenance, inputs, limitations, and checks.
 - A visual factor only receives a claimed numerical effect if the model actually uses it. Explain before/after changes as comparisons within the model.
 - Treat penalties separately if the model does not represent them. Historical scenes require sourcing and clear approximation labels.

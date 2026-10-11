@@ -31,7 +31,7 @@ npm run check:localization
 - [Product vision](docs/VISION.md)
 - [Delivery roadmap](docs/ROADMAP.md)
 - [Completed xG data feasibility audit](docs/reports/xg-data-audit.md)
-- [Architecture overview](docs/architecture/overview.py), [module reference](docs/architecture/reference/README.md) and [ADRs](docs/architecture/adr/README.md)
+- [Architecture overview](docs/architecture/overview.md), [module reference](docs/architecture/reference/README.md) and [ADRs](docs/architecture/adr/README.md)
 - [Development process](docs/DEVELOPMENT_PROCESS.md)
 - [Chat commands for spec, dev and review](docs/COMMANDS.md)
 
@@ -49,4 +49,4 @@ The offline [shot ingestion guide](docs/architecture/reference/statsbomb-ingesti
 
 ## Positional feature extraction
 
-The shared [feature contract and reproduction guide](docs/architecture/reference/shot-features.md) covers Python/browser parity and local feature generation. [Validation status](docs/reports/xg-feature-audit.md): synthetic checks and full-corpus aggregate review pass; provenance and repeatability QA remain pending. Features are not yet an xG model or public prediction.
+The shared [feature contract and reproduction guide](docs/architecture/reference/shot-features.md) covers Python/browser parity and local feature generation. [Validation status](docs/reports/xg-feature-audit.md): synthetic checks, full-corpus aggregates and manifest provenance pass; local compared-file equality is owner-confirmed. Use the documented comparator to verify complete runs. Features are not yet an xG model or public prediction. The [architecture overview](docs/architecture/overview.md) is now Markdown.

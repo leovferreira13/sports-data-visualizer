@@ -1,7 +1,7 @@
 # Positional feature extraction audit
 
 **Issue:** #10. **Contract:** `positional-features/v1`.
-**Status:** synthetic checks and full-corpus aggregate review passed on 2026-10-11; feature manifest/provenance and two-run byte comparison remain unconfirmed.
+**Status:** synthetic checks, full-corpus aggregate and feature manifest/provenance review passed on 2026-10-11. The owner confirmed equality of the compared files locally; future complete-directory comparisons use the committed comparator.
 
 ## Verified implementation evidence
 
@@ -58,9 +58,23 @@ The largest nearest-visible-defender distance, 125.0959631642844 m, is exactly t
 
 The scene diagnostic includes the shooter, keeper and observed opposing outfield players; it does not count teammates or unseen players. The 24.99% rate is not an invalid-data or unsupported-prediction rate. Offline positions were correctly retained on the full physical pitch, while current UI controls remain in the marker-safe attacking half. Keep this distinction explicit during training and controlled scene evaluation. Keeper-to-goal distances reach 61.5522 m; inspect sparse/extreme positional slices before defining empirical support, without silently deleting legitimate advanced-keeper cases or clipping positions.
 
-## Remaining provenance and repeatability QA
+## Provenance and reproducibility record
 
-The aggregate file does not contain the feature run ID, Python version, input/code hashes or a two-run comparison. Its own SHA-256 establishes the identity of the reviewed upload, not its link to a specific extractor/source run. Do not claim those checks passed until the owner confirms the byte comparison and the feature manifest is reviewed.
+The submitted feature manifest was checked against the reviewed upload, the current extraction code and contract, and the pinned ingestion provenance. The run ID also matches the canonical hash of the manifest contents excluding `run_id`.
+
+| Provenance item | Verified value |
+| --- | --- |
+| Feature run ID | `fe7c19c44a1101d61a39df586c957a1b85fef523a3c2a03c4c7faea603374517` |
+| Python / extractor version | `3.12.3` / `1.0.0` |
+| Feature contract SHA-256 | `7997e82634ffb78bac9d40b21c6715c8bb10cd8934e629a7a5fa09aed066bb67` |
+| Feature CLI SHA-256 | `c05c78fa790474fb8e8e25d75652aff09d3e213da250f3d4554233a004e00bed` |
+| Python feature module SHA-256 | `a51616d3b9377c81f3dd39d42709a509e5757bcd0936d31bfa685b6d8120195b` |
+| Reviewed feature manifest SHA-256 | `c84bb97394ed8d1f88d0205e1c289c3d6fadb9b997e04981ce2a336234c112f3` |
+| Private feature rows SHA-256 (manifest-declared) | `282f0c0fc781d3399015794fc2d8aa8e75928c68c255826e35d792899e22d976` |
+| Source Git revision | `4b73468fc5b0f1950f9f66fada70ad3a4f9327cb` |
+| Ingestion run ID | `b7d34951959b1b549ea93955c69fd7e60b91468e1ea14a43d3b146f606f2595e` |
+
+Ingestion corpus/audit hashes match the prior reviewed record. The uploaded feature audit matches the manifest's declared output hash. Private feature rows and the two full run directories were not transferred, so their hash and byte comparison were not independently recomputed by the assistant. The owner confirmed equality of the compared files locally. The comparator below provides an executable check of the complete file set, including the private feature rows, for subsequent comparisons; do not describe it as already executed on this full corpus.
 
 The full corpus remains local to the owner. To repeat the extraction, use the existing pinned ingestion run:
 
@@ -74,8 +88,14 @@ python3 scripts/xg/extract_features.py \
   --output-dir data/derived/xg-features-repeat
 ```
 
-Replace the enclosing ingestion path if a different `--output-dir` was used in #9. Both calls print their completed immutable run directories. Compare `features.jsonl`, `feature-audit.json` and `manifest.json` byte-for-byte; identical run IDs alone do not replace that comparison. The aggregate has been reviewed. For the remaining provenance check, share the feature run `manifest.json` and confirm byte-identical `features.jsonl`, `feature-audit.json` and `manifest.json` across the two runs; keep real feature rows and identifiers private.
+Replace the enclosing ingestion path if a different `--output-dir` was used in #9. After both runs, compare their complete immutable directories:
 
-Accepted/rejected counts, ranges, distributions and planning minima have been reconciled above. Match-level split/holdout feasibility remains a #11 check.
+```bash
+python3 scripts/xg/compare_runs.py \
+  --left-dir data/derived/xg-features/fe7c19c44a1101d61a39df586c957a1b85fef523a3c2a03c4c7faea603374517 \
+  --right-dir data/derived/xg-features-repeat/fe7c19c44a1101d61a39df586c957a1b85fef523a3c2a03c4c7faea603374517
+```
 
-Record actual feature run ID, Python version, contract/extractor/input/output hashes and two-run comparison here when verified. Do not insert unmeasured counts or infer predictive quality from geometric parity. #10's aggregate population check passes; final provenance/repeatability QA remains pending until that evidence is reviewed; public inference remains gated by #11–#13 and final rights QA in #8.
+Use the directories printed by the extractor when code/Python/input changes produce another run ID. The comparator verifies both manifest identities, exact declared file inventories and SHA-256 hashes, then compares `features.jsonl`, `feature-audit.json` and `manifest.json` byte for byte. It rejects comparing a directory with itself, missing/extra files, links, incomplete/corrupt manifests, differing metadata and changed outputs. `PASS` with exit status zero means every declared output and both manifests were verified and byte-identical. It never changes data. A failure returns exit status one and names the failed check without printing shot records.
+
+Accepted/rejected counts, ranges, distributions, provenance and planning minima have been reconciled above. Match-level split/holdout feasibility remains a #11 check. Public inference remains gated by #11–#13 and final rights QA in #8.
