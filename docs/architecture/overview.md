@@ -20,7 +20,7 @@ Six presets and a versioned, validated tab-scoped snapshot preserve positions, i
 
 ## Offline training and planned prediction boundary
 
-`scripts/xg/prepare_training.py` and `train_models.py` implement offline match-isolated preparation, train-only tuning, separate calibration/selection validation and frozen parameter export. A dedicated Python dependency lock and synthetic CI checks keep training outside the web runtime. Real-corpus execution and model selection remain pending owner execution. See the [training guide](reference/xg-training.md) and [execution status](../reports/xg-training-methodology.md).
+`scripts/xg/prepare_training.py` and `train_models.py` implement offline match-isolated preparation, train-only tuning, separate calibration/selection validation and frozen parameter export. A dedicated Python dependency lock and synthetic CI checks keep training outside the web runtime. The first owner-run actual-corpus artifacts passed internal review and select an XGBoost candidate; complete reproduction was confirmed by the owner. See the [training guide](reference/xg-training.md) and [execution status](../reports/xg-training-methodology.md).
 
 Versioned aggregate evaluation evidence supplies both the generated English report and the future bilingual Methodology and results tab; held-out test outcomes remain unopened until #13.
 

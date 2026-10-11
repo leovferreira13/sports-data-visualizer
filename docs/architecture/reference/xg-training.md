@@ -1,6 +1,6 @@
 # Offline xG training
 
-**Status:** scripts and contracts implemented for #11; real-corpus preparation, training and reproducibility are pending the owner's local execution. No trained public estimate or winning model is claimed.
+**Status:** #11 training is implemented; actual-corpus aggregate evidence passed review and complete local reproduction was confirmed by the owner. The frozen XGBoost candidate is awaiting browser parity and final-test evaluation; no public estimate is enabled.
 
 ## Responsibilities
 
@@ -61,7 +61,7 @@ Each model prints its stage; the bounded search has 60 logistic and 40 XGBoost f
 
 The successful output is `Complete immutable training: <path>; test outcomes unopened`. Completion does **not** imply a model was selected: read `selection.json`, whose status is `frozen_candidate` or `no_candidate`. If support is inadequate, preparation fails before fitting with an explicit reason. If no model qualifies, preserve that evidence and discuss remediation; do not open the final test to find a better choice.
 
-No real-data step has been run by the assistant. Synthetic tests validate execution and invariants, not the model's quality on your population.
+The owner ran training on the actual corpus. The submitted aggregate evidence and generated report passed consistency review, and the owner confirmed complete local reproduction. The assistant did not train on private rows. See the [reviewed training results](../../reports/xg-training-methodology.md) for the selected candidate, rationale, uncertainty and verification limits. Synthetic tests validate execution and invariants, not empirical model quality.
 
 ## Fresh environment and complete reproduction
 

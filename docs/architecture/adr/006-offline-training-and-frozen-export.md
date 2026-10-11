@@ -1,6 +1,6 @@
 # ADR 006: Offline training and a frozen parameter export
 
-**Status:** accepted implementation boundary for issue #11; empirical model choice and public release remain pending local training and #13.
+**Status:** accepted and implemented for issue #11. Actual-corpus selection and owner-confirmed complete reproduction are recorded in the [training review](../../reports/xg-training-methodology.md); browser parity and final-test/public-release review remain #12/#13 responsibilities.
 
 ## Context
 
