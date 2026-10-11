@@ -40,16 +40,29 @@ def compare_json(a, b, tolerance, path="root"):
         raise AuditError(f"Reproduction differs: {path}")
 
 
+def verified_side(directory, side):
+    try:
+        return verified_run(directory)
+    except AuditError as exc:
+        raise AuditError(f"{side} run: {exc}") from exc
+    except OSError as exc:
+        filename = "manifest.json" if exc.filename and Path(exc.filename).name == "manifest.json" else "a declared output"
+        raise AuditError(f"{side} run: cannot read {filename} ({type(exc).__name__})") from exc
+
+
 def compare_training(left_dir, right_dir):
     if Path(left_dir).resolve() == Path(right_dir).resolve():
         raise AuditError("Comparison requires distinct runs")
-    left, lm, lf = verified_run(left_dir)
-    right, rm, rf = verified_run(right_dir)
+    left, lm, lf = verified_side(left_dir, "left")
+    right, rm, rf = verified_side(right_dir, "right")
     if lm.get("phase") != "training" or rm.get("phase") != "training" or lf != rf:
         raise AuditError("Expected matching complete training inventories")
     for key in ("code_sha256", "dependencies", "protocol_sha256", "feature_run_id", "source_revision",
                 "split_sha256", "feature_contract_sha256", "selected_model"):
         if lm[key] != rm[key]:
+            if isinstance(lm[key], dict) and isinstance(rm[key], dict):
+                changed = sorted(name for name in set(lm[key]) | set(rm[key]) if lm[key].get(name) != rm[key].get(name))
+                raise AuditError(f"Scientific provenance differs: {key}.{changed[0]}")
             raise AuditError(f"Scientific provenance or decision differs: {key}")
     config = read_json(left / "protocol.json")
     from model_export import validate_envelope
@@ -96,8 +109,19 @@ def main():
     args = parser.parse_args()
     try:
         result = compare_training(args.left_dir, args.right_dir)
-    except (AuditError, OSError, KeyError, TypeError, ValueError, ValidationError):
-        print("FAIL: complete training reproduction differs", file=sys.stderr)
+    except AuditError as exc:
+        print(f"FAIL: {exc}", file=sys.stderr)
+        return 1
+    except OSError as exc:
+        # The failure category is useful; filenames may disclose local/private paths.
+        print(f"FAIL: cannot read a complete run ({type(exc).__name__})", file=sys.stderr)
+        return 1
+    except ValidationError as exc:
+        path = ".".join(str(part) for part in exc.absolute_path) or "root"
+        print(f"FAIL: invalid artifact schema at {path} ({exc.validator})", file=sys.stderr)
+        return 1
+    except (KeyError, TypeError, ValueError):
+        print("FAIL: malformed run metadata or numeric content", file=sys.stderr)
         return 1
     print(f"PASS: {result['files_verified']} files verified; {len(result['byte_differences'])} files differ byte for byte")
     print("PASS: scientific configuration, decisions and numeric tolerances agree")
