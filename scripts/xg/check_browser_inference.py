@@ -50,10 +50,15 @@ def selected_candidate(directory):
     selected_name = envelope["model_version"] + ".json"
     if selected_name not in names or (root / selected_name).read_bytes() != (root / "selected-model.json").read_bytes():
         raise AuditError("Selected candidate differs from its frozen experiment envelope")
-    if ((root / "protocol.json").read_bytes() != canonical(read_json(PROTOCOL_PATH)).encode()
-            or manifest.get("protocol_sha256") != sha256(PROTOCOL_PATH.read_bytes())
-            or manifest.get("feature_contract_sha256") != sha256(CONTRACT_PATH.read_bytes())):
-        raise AuditError("Frozen protocol or feature contract drift")
+    # Training identifies the canonical protocol, not the formatted source file.
+    # The feature contract intentionally uses its source-file byte identity.
+    frozen_protocol = canonical(read_json(PROTOCOL_PATH)).encode()
+    if (root / "protocol.json").read_bytes() != frozen_protocol:
+        raise AuditError("Frozen protocol content differs from the committed training protocol")
+    if manifest.get("protocol_sha256") != sha256(frozen_protocol):
+        raise AuditError("Frozen protocol identity differs from its canonical training digest")
+    if manifest.get("feature_contract_sha256") != sha256(CONTRACT_PATH.read_bytes()):
+        raise AuditError("Frozen feature contract byte identity differs from the committed contract")
     for key, value in envelope["provenance"].items():
         if manifest.get(key) != value:
             raise AuditError(f"Envelope and training provenance disagree: {key}")

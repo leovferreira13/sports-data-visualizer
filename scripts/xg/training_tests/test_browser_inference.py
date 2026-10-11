@@ -20,7 +20,7 @@ def fixture():
 def synthetic_training(root):
     """Invented integrity-only run, never a claim of actual training/quality evidence."""
     envelope = fixture()
-    envelope["provenance"]["protocol_sha256"] = sha256(PROTOCOL_PATH.read_bytes())
+    envelope["provenance"]["protocol_sha256"] = sha256(canonical(read_json(PROTOCOL_PATH)).encode())
     envelope = seal(envelope)
     decision = {"status": "frozen_candidate", "test_status": "unopened", "selected_model": envelope["model_version"],
                 "selected_artifact_id": envelope["artifact_id"]}
@@ -40,6 +40,36 @@ def resign(root):
 
 
 class BrowserInferenceTests(unittest.TestCase):
+    def test_uses_the_actual_training_canonical_digest_not_formatted_source_bytes(self):
+        reviewed = read_json(PROJECT / "docs/reports/xg-training-first-run/manifest.json")
+        expected = sha256(canonical(read_json(PROTOCOL_PATH)).encode())
+        self.assertEqual(reviewed["protocol_sha256"], expected)
+        self.assertNotEqual(expected, sha256(PROTOCOL_PATH.read_bytes()))
+        with tempfile.TemporaryDirectory() as tmp:
+            training = synthetic_training(Path(tmp) / "training")
+            self.assertEqual(selected_candidate(training)[1]["protocol_sha256"], expected)
+
+    def test_distinguishes_real_protocol_content_identity_and_feature_drift(self):
+        for kind in ("protocol_content", "protocol_identity", "feature_identity"):
+            with self.subTest(kind=kind), tempfile.TemporaryDirectory() as tmp:
+                training = synthetic_training(Path(tmp) / "training")
+                manifest = read_json(training / "manifest.json")
+                if kind == "protocol_content":
+                    protocol = read_json(training / "protocol.json")
+                    protocol["seed"] += 1
+                    (training / "protocol.json").write_text(canonical(protocol))
+                    reason = "Frozen protocol content differs"
+                elif kind == "protocol_identity":
+                    manifest["protocol_sha256"] = sha256(PROTOCOL_PATH.read_bytes())
+                    reason = "Frozen protocol identity differs"
+                else:
+                    manifest["feature_contract_sha256"] = "a" * 64
+                    reason = "Frozen feature contract byte identity differs"
+                (training / "manifest.json").write_text(canonical(manifest))
+                resign(training)
+                with self.assertRaisesRegex(AuditError, reason):
+                    selected_candidate(training)
+
     def test_independent_reference_parity_for_all_parameter_kinds_and_calibrators(self):
         for f in read_json(PROJECT / "tests/fixtures/inference-models.json"):
             with self.subTest(model=f["name"]):

@@ -51,6 +51,8 @@ Success prints `PASS: ... frozen-local-candidate; fixed tolerances agree` and th
 
 The command verifies the whole training inventory/hash identity, reads selected parameters and selection/protocol evidence, and generates synthetic cases. It never interprets held-out labels. It builds the production TypeScript modules with pinned esbuild in browser mode, rejects external dependencies, then executes that exact bundle in Node. Six presets (including penalty), movements, invalid scenes, deterministic varied scenes and exported float32 threshold boundaries are compared with Python. Invalid count/domain boundary vectors are negative tests, never rounded into valid inputs.
 
+Protocol identity follows training's canonical JSON digest (`sha256(canonical(protocol))`), while feature-contract identity follows its original file bytes. The checker reports protocol-content, protocol-identity and feature-identity mismatches separately. An older checker incorrectly reported drift for the owner's valid first run by hashing formatted protocol source bytes; update the #12 branch and rerun the same command, without editing any training outputs or retraining.
+
 For test-only verification without the real artifact:
 
 ```bash
