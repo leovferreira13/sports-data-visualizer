@@ -1,0 +1,14 @@
+{
+  "version": "xg-final-evaluation/v1",
+  "schema_file": "model/final-evaluation.schema.json",
+  "app_schema_file": "model/app-evidence.schema.json",
+  "separation": "development evidence retained verbatim; final-test separately identified",
+  "public_rules": [
+    "aggregate only",
+    "no source rows, identifiers, feature vectors or per-shot predictions",
+    "synthetic scene names/probabilities permitted"
+  ],
+  "nulls": "empty or insufficient bootstrap support uses null interval with valid/skipped counts",
+  "release": "needs_review or withheld; never automatic publication",
+  "local_predictions": "test-predictions.json remains private"
+}

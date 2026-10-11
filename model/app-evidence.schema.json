@@ -1,0 +1,226 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "contract_version": {
+      "const": "xg-app-evidence/v1"
+    },
+    "evidence_id": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "training_run_id": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "selected_artifact_id": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "release_status": {
+      "enum": [
+        "needs_review",
+        "withheld"
+      ]
+    },
+    "sections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "evidence_path": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "text",
+          "evidence_path"
+        ]
+      }
+    },
+    "tables": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "final_test": {
+          "type": "array",
+          "items": {
+            "$ref": "final-evaluation.schema.json#/$defs/result"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "validation": {
+          "$ref": "evaluation.schema.json#/properties/experiments"
+        }
+      },
+      "required": [
+        "final_test",
+        "validation"
+      ]
+    },
+    "charts": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "calibration": {
+          "type": "array",
+          "items": {
+            "$ref": "final-evaluation.schema.json#/$defs/calibration"
+          }
+        },
+        "slices": {
+          "type": "array",
+          "items": {
+            "$ref": "final-evaluation.schema.json#/$defs/slice"
+          }
+        }
+      },
+      "required": [
+        "calibration",
+        "slices"
+      ]
+    },
+    "paired": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "selected_minus_constant": {
+          "$ref": "#/$defs/pair"
+        },
+        "selected_minus_full_logistic": {
+          "$ref": "#/$defs/pair"
+        }
+      },
+      "required": [
+        "selected_minus_constant",
+        "selected_minus_full_logistic"
+      ]
+    },
+    "scene_audit": {
+      "$ref": "final-evaluation.schema.json#/$defs/scene_audit"
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "links": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "report": {
+          "type": "string"
+        },
+        "model_card": {
+          "type": "string"
+        },
+        "reproduction": {
+          "type": "string"
+        },
+        "training": {
+          "type": "string"
+        },
+        "rights": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "report",
+        "model_card",
+        "reproduction",
+        "training",
+        "rights"
+      ]
+    },
+    "publication_authorized": {
+      "const": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "contract_version",
+    "evidence_id",
+    "training_run_id",
+    "selected_artifact_id",
+    "release_status",
+    "sections",
+    "tables",
+    "charts",
+    "paired",
+    "scene_audit",
+    "limitations",
+    "links",
+    "publication_authorized"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sports-data-visualizer.local/model/app-evidence.schema.json",
+  "$defs": {
+    "pair": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "log_loss": {
+          "$ref": "#/$defs/interval"
+        },
+        "brier": {
+          "$ref": "#/$defs/interval"
+        }
+      },
+      "required": [
+        "log_loss",
+        "brier"
+      ]
+    },
+    "interval": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "estimate": {
+          "type": "number"
+        },
+        "interval": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "minItems": 2,
+              "maxItems": 2
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "valid_resamples": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "skipped_resamples": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "estimate",
+        "interval",
+        "valid_resamples",
+        "skipped_resamples"
+      ]
+    }
+  }
+}

@@ -83,3 +83,7 @@ Training contracts/scripts and synthetic verification are implemented; the first
 ### Browser inference implementation status (#12)
 
 Validated artifact loading, logistic/XGBoost inference, explicit unsupported/unavailable results and the separate 0.76 penalty convention are implemented. Invented-fixture parity is automated; the owner's frozen candidate passed 2,886 cases with zero probability difference, and complete repeat-run comparison passed. See the [inference review](reports/xg-browser-inference.md). The [prediction guide](architecture/reference/prediction.md) provides local commands, optional Chromium checks and repeat-run comparison. Actual weights remain local and the public page still displays geometry only.
+
+## Final evaluation handoff
+
+Issue #13 provides offline final-test evaluation infrastructure and generated aggregate report/model-card/app views. Actual-corpus results, complete reproduction and the dated decision remain pending. This does not close #3 or publish xG. #4 must integrate the Methodology and results tab and finish real production QA with #8.

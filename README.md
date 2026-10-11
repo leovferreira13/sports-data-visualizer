@@ -58,3 +58,7 @@ Issue #11 supplies [local training scripts and commands](docs/architecture/refer
 ## Browser inference verification
 
 Issue #12 implements validated logistic/XGBoost inference and a separate fixed 0.76 penalty convention. Use the [prediction guide](docs/architecture/reference/prediction.md) to verify your existing frozen training run locally; no retraining or uploading parameters is required. Repeat the parity command and compare its completed directories with `compare_runs.py`. Share only `parity.json`, `manifest.json` and the comparator output. [Verification status](docs/reports/xg-browser-inference.md) distinguishes invented-fixture checks from actual-candidate evidence. The owner-run frozen candidate passed 2,886 parity cases with zero probability difference; complete repeat-run comparison passed and the submitted aggregate evidence was reviewed. The public xG display and Methodology and results tab remain gated by #13/#8 and implemented in #4.
+
+## Final xG evaluation
+
+The final evaluator is implemented for local frozen-run execution; actual held-out results and public release remain pending. See the [command and review guide](docs/architecture/reference/xg-final-evaluation.md) and the [six-stage xG implementation summary](docs/reports/xg-implementation-summary.md). Reports and the future app methodology tab derive from the same versioned aggregate evidence.

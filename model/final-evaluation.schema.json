@@ -1,0 +1,939 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "contract_version": {
+      "const": "xg-final-evaluation/v1"
+    },
+    "evidence_id": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "provenance": {
+      "$ref": "#/$defs/provenance"
+    },
+    "protocol": {
+      "const": {
+        "version": "xg-final-evaluation/v1",
+        "training_protocol": "xg-training/v1",
+        "bootstrap": {
+          "resamples": 1000,
+          "seed": 7421,
+          "confidence": 0.95,
+          "method": "whole-match percentile; shot-weighted; paired draws"
+        },
+        "minima": {
+          "goals": 100,
+          "non_goals": 100,
+          "matches": 50
+        },
+        "decision": {
+          "constant_log_loss_improvement": 0.0001,
+          "max_brier_degradation": 0.0001,
+          "max_logistic_log_loss_degradation": 0.0001
+        },
+        "calibration": {
+          "bins": 10,
+          "review_rule": "supported bin residual interval excludes zero"
+        },
+        "sparse": {
+          "shots": 100,
+          "goals": 10
+        },
+        "additional_bins": {
+          "defenders_in_cone_count": [
+            0,
+            1,
+            2,
+            3,
+            5,
+            10
+          ],
+          "nearest_visible_defender_distance_m": [
+            0,
+            1,
+            2,
+            5,
+            10,
+            20,
+            50,
+            null
+          ]
+        },
+        "support": {
+          "method": "training-standardized retained-feature nearest-neighbor RMS",
+          "reference_max_rows": 2000,
+          "seed": 9123,
+          "quantile": 0.99,
+          "zero_defender": "separate observed-count cohort; sentinel distance omitted"
+        },
+        "tolerances": {
+          "metric": 1e-08,
+          "probability": 1e-06
+        },
+        "models": [
+          "selected",
+          "full_logistic",
+          "constant"
+        ],
+        "review_statuses": [
+          "needs_review",
+          "withheld"
+        ],
+        "public_distribution": "never authorized by automated evaluation; dated review and #4 production QA required"
+      }
+    },
+    "test_status": {
+      "const": "opened-final-evaluation"
+    },
+    "test_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "shots": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "goals": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "matches": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "prevalence": {
+          "type": "number"
+        },
+        "composition": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "competition_id": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "season_id": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "shots": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "goals": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "matches": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "prevalence": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "competition_id",
+              "season_id",
+              "shots",
+              "goals",
+              "matches",
+              "prevalence"
+            ]
+          }
+        }
+      },
+      "required": [
+        "shots",
+        "goals",
+        "matches",
+        "prevalence",
+        "composition"
+      ]
+    },
+    "population": {
+      "type": "string"
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/result"
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "paired": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "selected_minus_constant": {
+          "$ref": "#/$defs/pair"
+        },
+        "selected_minus_full_logistic": {
+          "$ref": "#/$defs/pair"
+        }
+      },
+      "required": [
+        "selected_minus_constant",
+        "selected_minus_full_logistic"
+      ]
+    },
+    "scene_audit": {
+      "$ref": "#/$defs/scene_audit"
+    },
+    "release_checks": {
+      "$ref": "#/$defs/checks"
+    },
+    "development_evidence": {
+      "$ref": "evaluation.schema.json"
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "contract_version",
+    "evidence_id",
+    "provenance",
+    "protocol",
+    "test_status",
+    "test_summary",
+    "population",
+    "results",
+    "paired",
+    "scene_audit",
+    "release_checks",
+    "development_evidence",
+    "limitations"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sports-data-visualizer.local/model/final-evaluation.schema.json",
+  "$defs": {
+    "interval": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "estimate": {
+          "type": "number"
+        },
+        "interval": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "minItems": 2,
+              "maxItems": 2
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "valid_resamples": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "skipped_resamples": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "estimate",
+        "interval",
+        "valid_resamples",
+        "skipped_resamples"
+      ]
+    },
+    "metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "log_loss": {
+          "type": "number"
+        },
+        "brier": {
+          "type": "number"
+        },
+        "shots": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "goals": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "prevalence": {
+          "type": "number"
+        },
+        "mean_probability": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "log_loss",
+        "brier",
+        "shots",
+        "goals",
+        "prevalence",
+        "mean_probability"
+      ]
+    },
+    "uncertainty": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "log_loss": {
+          "$ref": "#/$defs/interval"
+        },
+        "brier": {
+          "$ref": "#/$defs/interval"
+        },
+        "prevalence": {
+          "$ref": "#/$defs/interval"
+        },
+        "mean_probability": {
+          "$ref": "#/$defs/interval"
+        }
+      },
+      "required": [
+        "log_loss",
+        "brier",
+        "prevalence",
+        "mean_probability"
+      ]
+    },
+    "pair": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "log_loss": {
+          "$ref": "#/$defs/interval"
+        },
+        "brier": {
+          "$ref": "#/$defs/interval"
+        }
+      },
+      "required": [
+        "log_loss",
+        "brier"
+      ]
+    },
+    "calibration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "lower": {
+          "type": "number"
+        },
+        "upper": {
+          "type": "number"
+        },
+        "upper_inclusive": {
+          "type": "boolean"
+        },
+        "shots": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "goals": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "matches": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sparse": {
+          "type": "boolean"
+        },
+        "mean_probability": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "observed_rate": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "observed_interval": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/interval"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "residual_interval": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/interval"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "review_flag": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "lower",
+        "upper",
+        "upper_inclusive",
+        "shots",
+        "goals",
+        "matches",
+        "sparse",
+        "mean_probability",
+        "observed_rate",
+        "observed_interval",
+        "residual_interval",
+        "review_flag"
+      ]
+    },
+    "slice": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "feature": {
+          "type": "string"
+        },
+        "lower": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "upper": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "competition_id": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "season_id": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "shots": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "goals": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "matches": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sparse": {
+          "type": "boolean"
+        },
+        "metrics": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/metrics"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "uncertainty": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/uncertainty"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "paired": {
+          "anyOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "constant": {
+                  "$ref": "#/$defs/pair"
+                },
+                "full_logistic": {
+                  "$ref": "#/$defs/pair"
+                }
+              },
+              "required": [
+                "constant",
+                "full_logistic"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "feature",
+        "lower",
+        "upper",
+        "value",
+        "competition_id",
+        "season_id",
+        "shots",
+        "goals",
+        "matches",
+        "sparse",
+        "metrics",
+        "uncertainty",
+        "paired"
+      ]
+    },
+    "scene": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "scene": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "ok",
+            "unsupported",
+            "penalty-convention"
+          ]
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "probability": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "outside_training_marginals": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "support_category": {
+          "enum": [
+            "within_training_reference",
+            "outside_training_reference",
+            "insufficient_reference",
+            "unsupported",
+            "convention"
+          ]
+        },
+        "support_distance": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "support_threshold": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "support_reference_rows": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "support_cohort_rows": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "zero_defender_support_unestablished": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "scene",
+        "status",
+        "reason",
+        "probability",
+        "outside_training_marginals",
+        "support_category",
+        "support_distance",
+        "support_threshold",
+        "support_reference_rows",
+        "support_cohort_rows",
+        "zero_defender_support_unestablished"
+      ]
+    },
+    "checks": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "enum": [
+            "needs_review",
+            "withheld"
+          ]
+        },
+        "predicates": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "test_support": {
+              "type": "boolean"
+            },
+            "constant_log_loss": {
+              "type": "boolean"
+            },
+            "constant_brier": {
+              "type": "boolean"
+            },
+            "logistic_guardrail": {
+              "type": "boolean"
+            },
+            "scene_response": {
+              "type": "boolean"
+            },
+            "invariants": {
+              "type": "boolean"
+            },
+            "parity": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "test_support",
+            "constant_log_loss",
+            "constant_brier",
+            "logistic_guardrail",
+            "scene_response",
+            "invariants",
+            "parity"
+          ]
+        },
+        "calibration_review_bins": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "required_reviews": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "publication_authorized": {
+          "const": false
+        }
+      },
+      "required": [
+        "status",
+        "predicates",
+        "calibration_review_bins",
+        "required_reviews",
+        "publication_authorized"
+      ]
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "training_run_id": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "preparation_run_id": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "parity_run_id": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "feature_run_id": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "selected_artifact_id": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "logistic_artifact_id": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "split_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "feature_contract_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "training_protocol_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "final_protocol_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "training_manifest_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "preparation_manifest_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "parity_manifest_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "source_revision": {
+          "type": "string"
+        },
+        "code_sha256": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        },
+        "dependencies": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "historical_compatibility": {
+          "const": "recorded manifests validated; unchanged scientific semantics checked separately"
+        }
+      },
+      "required": [
+        "training_run_id",
+        "preparation_run_id",
+        "parity_run_id",
+        "feature_run_id",
+        "selected_artifact_id",
+        "logistic_artifact_id",
+        "split_sha256",
+        "feature_contract_sha256",
+        "training_protocol_sha256",
+        "final_protocol_sha256",
+        "training_manifest_sha256",
+        "preparation_manifest_sha256",
+        "parity_manifest_sha256",
+        "source_revision",
+        "code_sha256",
+        "dependencies",
+        "historical_compatibility"
+      ]
+    },
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "role": {
+          "enum": [
+            "selected",
+            "full_logistic",
+            "constant"
+          ]
+        },
+        "model_version": {
+          "type": "string"
+        },
+        "artifact_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "metrics": {
+          "$ref": "#/$defs/metrics"
+        },
+        "uncertainty": {
+          "$ref": "#/$defs/uncertainty"
+        },
+        "calibration_bins": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/calibration"
+          }
+        },
+        "slices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/slice"
+          }
+        }
+      },
+      "required": [
+        "role",
+        "model_version",
+        "artifact_id",
+        "metrics",
+        "uncertainty",
+        "calibration_bins",
+        "slices"
+      ]
+    },
+    "scene_audit": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/scene"
+          }
+        },
+        "responses": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "keeper": {
+              "type": "boolean"
+            },
+            "defender": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "keeper",
+            "defender"
+          ]
+        },
+        "invariants_pass": {
+          "type": "boolean"
+        },
+        "probability_differences": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "keeper": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            },
+            "defender": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            }
+          },
+          "required": [
+            "keeper",
+            "defender"
+          ]
+        },
+        "support_method": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "diagnostics",
+        "responses",
+        "invariants_pass",
+        "probability_differences",
+        "support_method"
+      ]
+    }
+  }
+}
