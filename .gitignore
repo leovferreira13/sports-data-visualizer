@@ -46,3 +46,6 @@ next-env.d.ts
 # Python script caches
 __pycache__/
 *.py[cod]
+
+# Dedicated offline training environment
+/.venv-xg/

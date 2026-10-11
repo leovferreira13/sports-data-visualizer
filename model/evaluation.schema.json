@@ -1,0 +1,1512 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "contract_version": {
+      "const": "xg-evaluation/v1"
+    },
+    "evidence_id": {
+      "type": "string"
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "preparation_run_id": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "protocol_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "feature_run_id": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "source_revision": {
+          "type": "string"
+        },
+        "split_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "code_sha256": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        },
+        "dependencies": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "preparation_run_id",
+        "protocol_sha256",
+        "feature_run_id",
+        "source_revision",
+        "split_sha256",
+        "code_sha256",
+        "dependencies"
+      ]
+    },
+    "population": {
+      "type": "string"
+    },
+    "exclusions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "feature_order": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "partitions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "train": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "shots": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "matches": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "goals": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "prevalence": {
+              "type": "number"
+            },
+            "composition": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "competition_id": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "season_id": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "shots": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "matches": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "goals": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "prevalence": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "competition_id",
+                  "season_id",
+                  "shots",
+                  "matches",
+                  "goals",
+                  "prevalence"
+                ]
+              }
+            }
+          },
+          "required": [
+            "shots",
+            "matches",
+            "goals",
+            "prevalence",
+            "composition"
+          ]
+        },
+        "calibration": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "shots": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "matches": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "goals": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "prevalence": {
+              "type": "number"
+            },
+            "composition": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "competition_id": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "season_id": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "shots": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "matches": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "goals": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "prevalence": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "competition_id",
+                  "season_id",
+                  "shots",
+                  "matches",
+                  "goals",
+                  "prevalence"
+                ]
+              }
+            }
+          },
+          "required": [
+            "shots",
+            "matches",
+            "goals",
+            "prevalence",
+            "composition"
+          ]
+        },
+        "selection": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "shots": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "matches": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "goals": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "prevalence": {
+              "type": "number"
+            },
+            "composition": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "competition_id": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "season_id": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "shots": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "matches": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "goals": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "prevalence": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "competition_id",
+                  "season_id",
+                  "shots",
+                  "matches",
+                  "goals",
+                  "prevalence"
+                ]
+              }
+            }
+          },
+          "required": [
+            "shots",
+            "matches",
+            "goals",
+            "prevalence",
+            "composition"
+          ]
+        },
+        "test": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "shots": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "matches": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "composition": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "competition_id": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "season_id": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "shots": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "matches": {
+                    "type": "integer",
+                    "minimum": 0
+                  }
+                },
+                "required": [
+                  "competition_id",
+                  "season_id",
+                  "shots",
+                  "matches"
+                ]
+              }
+            }
+          },
+          "required": [
+            "shots",
+            "matches",
+            "composition"
+          ]
+        }
+      },
+      "required": [
+        "train",
+        "calibration",
+        "selection",
+        "test"
+      ]
+    },
+    "test_status": {
+      "const": "unopened"
+    },
+    "experiments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "stage": {
+            "const": "validation-selection"
+          },
+          "status": {
+            "enum": [
+              "ok",
+              "failed"
+            ]
+          },
+          "feature_indices": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "configuration": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "C": {
+                "type": "number"
+              },
+              "max_depth": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "min_child_weight": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "learning_rate": {
+                "type": "number"
+              },
+              "probability": {
+                "type": "number"
+              }
+            },
+            "required": []
+          },
+          "variants": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "calibration": {
+                  "enum": [
+                    "identity",
+                    "sigmoid"
+                  ]
+                },
+                "metrics": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "log_loss": {
+                      "type": "number"
+                    },
+                    "brier": {
+                      "type": "number"
+                    },
+                    "shots": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "goals": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "prevalence": {
+                      "type": "number"
+                    },
+                    "mean_probability": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "log_loss",
+                    "brier",
+                    "shots",
+                    "goals",
+                    "prevalence",
+                    "mean_probability"
+                  ]
+                },
+                "calibration_bins": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "lower": {
+                        "type": "number"
+                      },
+                      "upper": {
+                        "type": "number"
+                      },
+                      "upper_inclusive": {
+                        "type": "boolean"
+                      },
+                      "shots": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "goals": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "mean_probability": {
+                        "anyOf": [
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "observed_rate": {
+                        "anyOf": [
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "sparse": {
+                        "type": "boolean"
+                      }
+                    },
+                    "required": [
+                      "lower",
+                      "upper",
+                      "upper_inclusive",
+                      "shots",
+                      "goals",
+                      "mean_probability",
+                      "observed_rate",
+                      "sparse"
+                    ]
+                  }
+                },
+                "slices": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "feature": {
+                        "type": "string"
+                      },
+                      "lower": {
+                        "type": "number"
+                      },
+                      "upper": {
+                        "anyOf": [
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "value": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "competition_id": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "season_id": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "shots": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "goals": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "sparse": {
+                        "type": "boolean"
+                      },
+                      "metrics": {
+                        "anyOf": [
+                          {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                              "log_loss": {
+                                "type": "number"
+                              },
+                              "brier": {
+                                "type": "number"
+                              },
+                              "shots": {
+                                "type": "integer",
+                                "minimum": 0
+                              },
+                              "goals": {
+                                "type": "integer",
+                                "minimum": 0
+                              },
+                              "prevalence": {
+                                "type": "number"
+                              },
+                              "mean_probability": {
+                                "type": "number"
+                              }
+                            },
+                            "required": [
+                              "log_loss",
+                              "brier",
+                              "shots",
+                              "goals",
+                              "prevalence",
+                              "mean_probability"
+                            ]
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      }
+                    },
+                    "required": [
+                      "feature",
+                      "shots",
+                      "goals",
+                      "sparse",
+                      "metrics"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "calibration",
+                "metrics",
+                "calibration_bins",
+                "slices"
+              ]
+            }
+          },
+          "reason": {
+            "type": "string"
+          },
+          "calibration_decision": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "adopted": {
+                "type": "boolean"
+              },
+              "comparison": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "log_loss": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "difference": {
+                            "type": "number"
+                          },
+                          "interval": {
+                            "type": "array",
+                            "minItems": 2,
+                            "maxItems": 2,
+                            "items": {
+                              "type": "number"
+                            }
+                          }
+                        },
+                        "required": [
+                          "difference",
+                          "interval"
+                        ]
+                      },
+                      "brier": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "difference": {
+                            "type": "number"
+                          },
+                          "interval": {
+                            "type": "array",
+                            "minItems": 2,
+                            "maxItems": 2,
+                            "items": {
+                              "type": "number"
+                            }
+                          }
+                        },
+                        "required": [
+                          "difference",
+                          "interval"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "log_loss",
+                      "brier"
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "fit_status": {
+                "enum": [
+                  "ok",
+                  "declined"
+                ]
+              }
+            },
+            "required": [
+              "adopted",
+              "comparison",
+              "fit_status"
+            ]
+          },
+          "standardized_coefficients": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "number"
+            }
+          },
+          "scene_diagnostics": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "scene": {
+                  "type": "string"
+                },
+                "status": {
+                  "enum": [
+                    "ok",
+                    "unsupported"
+                  ]
+                },
+                "reason": {
+                  "type": "string"
+                },
+                "probability": {
+                  "type": "number"
+                },
+                "outside_training_marginals": {
+                  "type": "boolean"
+                },
+                "zero_defender_support_unestablished": {
+                  "type": "boolean"
+                },
+                "note": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "scene",
+                "status"
+              ]
+            }
+          }
+        },
+        "required": [
+          "id",
+          "stage",
+          "status",
+          "feature_indices",
+          "variants"
+        ]
+      }
+    },
+    "selection": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "enum": [
+            "no_candidate",
+            "frozen_candidate"
+          ]
+        },
+        "selected_model": {
+          "type": "string"
+        },
+        "selected_artifact_id": {
+          "type": "string"
+        },
+        "lowest_log_loss_model": {
+          "type": "string"
+        },
+        "candidate_checks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "model": {
+                "type": "string"
+              },
+              "comparison_with_constant": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "log_loss": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "difference": {
+                        "type": "number"
+                      },
+                      "interval": {
+                        "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "required": [
+                      "difference",
+                      "interval"
+                    ]
+                  },
+                  "brier": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "difference": {
+                        "type": "number"
+                      },
+                      "interval": {
+                        "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "required": [
+                      "difference",
+                      "interval"
+                    ]
+                  }
+                },
+                "required": [
+                  "log_loss",
+                  "brier"
+                ]
+              },
+              "eligible": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "model",
+              "comparison_with_constant",
+              "eligible"
+            ]
+          }
+        },
+        "simplicity_checks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "model": {
+                "type": "string"
+              },
+              "comparison_with_best": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "log_loss": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "difference": {
+                        "type": "number"
+                      },
+                      "interval": {
+                        "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "required": [
+                      "difference",
+                      "interval"
+                    ]
+                  },
+                  "brier": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "difference": {
+                        "type": "number"
+                      },
+                      "interval": {
+                        "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "required": [
+                      "difference",
+                      "interval"
+                    ]
+                  }
+                },
+                "required": [
+                  "log_loss",
+                  "brier"
+                ]
+              },
+              "competitive": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "model",
+              "comparison_with_best",
+              "competitive"
+            ]
+          }
+        },
+        "reason": {
+          "type": "string"
+        },
+        "rationale": {
+          "type": "string"
+        },
+        "test_status": {
+          "const": "unopened"
+        },
+        "hypothesis": {
+          "type": "string"
+        },
+        "consequences": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "test_status",
+        "hypothesis",
+        "consequences",
+        "candidate_checks"
+      ]
+    },
+    "export_checks": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "absolute_probability_error": {
+            "type": "number"
+          },
+          "vectors_checked": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "tolerance": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "absolute_probability_error",
+          "vectors_checked",
+          "tolerance"
+        ]
+      }
+    },
+    "training_exploration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "partition": {
+          "const": "train"
+        },
+        "features": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "distributions": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "shots": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "min": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "max": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "quantiles": {
+                "anyOf": [
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "shots",
+              "min",
+              "max",
+              "quantiles"
+            ]
+          }
+        },
+        "zero_defender_sentinel_shots": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "correlation_population": {
+          "type": "string"
+        },
+        "pearson": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          }
+        },
+        "spearman": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          }
+        },
+        "goal_rates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "feature": {
+                "type": "string"
+              },
+              "lower": {
+                "type": "number"
+              },
+              "upper": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "value": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "competition_id": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "season_id": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "shots": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "goals": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "sparse": {
+                "type": "boolean"
+              },
+              "observed_rate": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "feature",
+              "shots",
+              "goals",
+              "sparse",
+              "observed_rate"
+            ]
+          }
+        },
+        "visibility": {
+          "type": "string"
+        },
+        "support_note": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "partition",
+        "features",
+        "distributions",
+        "zero_defender_sentinel_shots",
+        "correlation_population",
+        "pearson",
+        "spearman",
+        "goal_rates",
+        "visibility",
+        "support_note"
+      ]
+    },
+    "cv": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "status": {
+            "enum": [
+              "ok",
+              "failed"
+            ]
+          },
+          "selected_configuration": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "C": {
+                "type": "number"
+              },
+              "max_depth": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "min_child_weight": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "learning_rate": {
+                "type": "number"
+              },
+              "probability": {
+                "type": "number"
+              }
+            },
+            "required": []
+          },
+          "candidates": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "configuration": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "C": {
+                      "type": "number"
+                    },
+                    "max_depth": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "min_child_weight": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "learning_rate": {
+                      "type": "number"
+                    },
+                    "probability": {
+                      "type": "number"
+                    }
+                  },
+                  "required": []
+                },
+                "status": {
+                  "enum": [
+                    "ok",
+                    "failed"
+                  ]
+                },
+                "oof_metrics": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "log_loss": {
+                      "type": "number"
+                    },
+                    "brier": {
+                      "type": "number"
+                    },
+                    "shots": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "goals": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "prevalence": {
+                      "type": "number"
+                    },
+                    "mean_probability": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "log_loss",
+                    "brier",
+                    "shots",
+                    "goals",
+                    "prevalence",
+                    "mean_probability"
+                  ]
+                },
+                "fold_metrics": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "log_loss": {
+                        "type": "number"
+                      },
+                      "brier": {
+                        "type": "number"
+                      },
+                      "shots": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "goals": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "prevalence": {
+                        "type": "number"
+                      },
+                      "mean_probability": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "log_loss",
+                      "brier",
+                      "shots",
+                      "goals",
+                      "prevalence",
+                      "mean_probability"
+                    ]
+                  }
+                },
+                "reason": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "configuration",
+                "status"
+              ]
+            }
+          },
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "candidates"
+        ]
+      }
+    },
+    "ui_diagnostics_from_feature_audit": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "shooter_outside_ui_bounds": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "represented_scene_outside_ui_bounds": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "shooter_outside_ui_bounds",
+        "represented_scene_outside_ui_bounds"
+      ]
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "protocol": {
+      "const": {
+        "version": "xg-training/v1",
+        "seed": 42,
+        "partition_weights": {
+          "train": 6,
+          "calibration": 1,
+          "selection": 1,
+          "test": 2
+        },
+        "folds": 5,
+        "minima": {
+          "shots": 10000,
+          "goals": 1000,
+          "matches": 200,
+          "competitions": 3,
+          "validation_class": 100,
+          "fold_class": 50
+        },
+        "logistic": {
+          "C": [
+            0.01,
+            0.1,
+            1,
+            10
+          ],
+          "penalty": "l2",
+          "solver": "lbfgs",
+          "max_iter": 2000,
+          "tol": 1e-08,
+          "class_weight": null
+        },
+        "xgboost": {
+          "max_depth": [
+            2,
+            3
+          ],
+          "learning_rate": [
+            0.05,
+            0.1
+          ],
+          "min_child_weight": [
+            5,
+            20
+          ],
+          "n_estimators": 300,
+          "objective": "binary:logistic",
+          "tree_method": "hist",
+          "n_jobs": 1,
+          "reg_lambda": 1,
+          "reg_alpha": 0,
+          "subsample": 1,
+          "colsample_bytree": 1,
+          "scale_pos_weight": 1
+        },
+        "metric_clip": 1e-12,
+        "calibration": {
+          "method": "sigmoid-of-clipped-logit",
+          "clip": 1e-12,
+          "penalty": null,
+          "max_iter": 2000,
+          "tol": 1e-08
+        },
+        "bootstrap": {
+          "resamples": 1000,
+          "seed": 7421,
+          "confidence": 0.95
+        },
+        "decision": {
+          "min_log_loss_improvement": 0.0001,
+          "max_brier_degradation": 0.0001,
+          "cv_tie_tolerance": 1e-12
+        },
+        "bins": {
+          "shot_distance_m": [
+            0,
+            5,
+            10,
+            15,
+            20,
+            30,
+            50,
+            null
+          ],
+          "goal_opening_angle_deg": [
+            0,
+            5,
+            10,
+            20,
+            40,
+            90,
+            180
+          ],
+          "goalkeeper_distance_to_goal_m": [
+            0,
+            2,
+            5,
+            10,
+            20,
+            null
+          ]
+        },
+        "sparse": {
+          "shots": 100,
+          "goals": 10
+        },
+        "tolerances": {
+          "logistic_export": 1e-10,
+          "xgboost_export": 1e-07,
+          "reproduction_metric": 1e-08,
+          "reproduction_probability": 1e-06
+        },
+        "experiments": [
+          {
+            "id": "geometry_logistic",
+            "kind": "logistic",
+            "indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          {
+            "id": "defenders_logistic",
+            "kind": "logistic",
+            "indices": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5
+            ]
+          },
+          {
+            "id": "full_logistic",
+            "kind": "logistic",
+            "indices": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ]
+          },
+          {
+            "id": "full_xgboost",
+            "kind": "xgboost",
+            "indices": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "contract_version",
+    "evidence_id",
+    "provenance",
+    "population",
+    "exclusions",
+    "feature_order",
+    "partitions",
+    "test_status",
+    "experiments",
+    "selection",
+    "export_checks",
+    "training_exploration",
+    "cv",
+    "ui_diagnostics_from_feature_audit",
+    "limitations",
+    "protocol"
+  ]
+}

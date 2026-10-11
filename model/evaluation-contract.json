@@ -1,0 +1,27 @@
+{
+  "version": "xg-evaluation/v1",
+  "schema_file": "model/evaluation.schema.json",
+  "metric_definitions": {
+    "log_loss": "natural log; probability clipped at 1e-12 only for metric computation",
+    "brier": "mean squared probability error"
+  },
+  "stages": [
+    "train exploration",
+    "train group CV",
+    "validation calibration fitting",
+    "validation selection"
+  ],
+  "test_status": "unopened in issue #11",
+  "public_rules": [
+    "aggregate fields only",
+    "no match or event identifiers",
+    "no real feature vectors or shot coordinates",
+    "synthetic scene diagnostics only"
+  ],
+  "missing_bins": "null rate for empty bin",
+  "sparse_rule": {
+    "shots_below": 100,
+    "goals_below": 10
+  },
+  "final_test": "issue #13 must add a separately identified evaluation; never overwrite validation"
+}

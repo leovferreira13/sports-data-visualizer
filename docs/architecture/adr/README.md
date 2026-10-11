@@ -9,3 +9,5 @@ Use an ADR for a consequential, structural or difficult-to-reverse choice. An AD
 | [003 — Metric pitch and tab-scoped scene](003-metric-pitch-and-tab-scene.md) | Accepted | Uniform metric SVG projection and validated session scene across locale changes |
 | [004 — Local shot ingestion](004-local-shot-ingestion.md) | Accepted for ingestion | Embedded shot frames as primary positioning source; deterministic local-only corpus and aggregate audit |
 | [005 — Shared positional features](005-shared-positional-features.md) | Accepted for extraction | Versioned metric geometry, required keeper, independent Python/TypeScript parity and private immutable feature runs |
+
+- [006: Offline training and frozen export](006-offline-training-and-frozen-export.md)

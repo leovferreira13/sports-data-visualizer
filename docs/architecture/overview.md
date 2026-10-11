@@ -18,7 +18,11 @@ Six presets and a versioned, validated tab-scoped snapshot preserve positions, i
 
 `scripts/xg/compare_runs.py` validates each run's manifest identity, file inventory and output hashes, then compares every declared output and the manifest byte for byte. It supports ingestion and feature runs and returns nonzero on a mismatch. Run it on two distinct completed run directories; it performs no writes.
 
-## Planned prediction boundary
+## Offline training and planned prediction boundary
+
+`scripts/xg/prepare_training.py` and `train_models.py` implement offline match-isolated preparation, train-only tuning, separate calibration/selection validation and frozen parameter export. A dedicated Python dependency lock and synthetic CI checks keep training outside the web runtime. The first owner-run actual-corpus artifacts passed internal review and select an XGBoost candidate; complete reproduction was confirmed by the owner. See the [training guide](reference/xg-training.md) and [execution status](../reports/xg-training-methodology.md).
+
+Versioned aggregate evaluation evidence supplies both the generated English report and the future bilingual Methodology and results tab; held-out test outcomes remain unopened until #13.
 
 Prediction will run in the browser with a small versioned artifact. Parent issue #3 selects our own logistic baseline and XGBoost candidate, with match-based splits, calibration and scene evaluation before publication. Features, fitted preprocessing and use rights must match the eventual artifact. No number is displayed as xG before those gates pass.
 

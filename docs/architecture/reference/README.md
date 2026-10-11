@@ -16,3 +16,5 @@ These are **proposed boundaries** until code exists. Update each page with actua
 The completed [xG data feasibility audit](../../reports/xg-data-audit.md) is stored under `docs/reports/`. It records the population, coverage, provenance and planning limits for issue #9.
 
 The [feature extraction audit](../../reports/xg-feature-audit.md) tracks synthetic parity and the pending full-corpus feature check.
+
+- [Offline xG training](xg-training.md): protected match partitions, training/calibration/selection, parameter export, local reproduction and aggregate review handoff.

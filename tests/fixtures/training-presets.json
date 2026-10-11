@@ -1,0 +1,170 @@
+[
+  {
+    "name": "centralChance",
+    "scene": {
+      "contract_version": "positional-features/v1",
+      "shot_type": "open-play",
+      "shooter": {
+        "x": 84,
+        "y": 34
+      },
+      "goalkeepers": [
+        {
+          "x": 102,
+          "y": 34
+        }
+      ],
+      "defenders": [
+        {
+          "x": 93,
+          "y": 31
+        },
+        {
+          "x": 93,
+          "y": 37
+        }
+      ],
+      "observation": "synthetic"
+    }
+  },
+  {
+    "name": "penalty",
+    "scene": {
+      "contract_version": "positional-features/v1",
+      "shot_type": "penalty",
+      "shooter": {
+        "x": 94,
+        "y": 34
+      },
+      "goalkeepers": [
+        {
+          "x": 102.5,
+          "y": 34
+        }
+      ],
+      "defenders": [
+        {
+          "x": 83,
+          "y": 23
+        },
+        {
+          "x": 83,
+          "y": 45
+        }
+      ],
+      "observation": "synthetic"
+    }
+  },
+  {
+    "name": "oneOnOne",
+    "scene": {
+      "contract_version": "positional-features/v1",
+      "shot_type": "open-play",
+      "shooter": {
+        "x": 89,
+        "y": 34
+      },
+      "goalkeepers": [
+        {
+          "x": 100,
+          "y": 35
+        }
+      ],
+      "defenders": [
+        {
+          "x": 79,
+          "y": 24
+        },
+        {
+          "x": 78,
+          "y": 46
+        }
+      ],
+      "observation": "synthetic"
+    }
+  },
+  {
+    "name": "tightAngle",
+    "scene": {
+      "contract_version": "positional-features/v1",
+      "shot_type": "open-play",
+      "shooter": {
+        "x": 98,
+        "y": 52
+      },
+      "goalkeepers": [
+        {
+          "x": 102,
+          "y": 36
+        }
+      ],
+      "defenders": [
+        {
+          "x": 96,
+          "y": 45
+        },
+        {
+          "x": 88,
+          "y": 48
+        }
+      ],
+      "observation": "synthetic"
+    }
+  },
+  {
+    "name": "longShot",
+    "scene": {
+      "contract_version": "positional-features/v1",
+      "shot_type": "open-play",
+      "shooter": {
+        "x": 65,
+        "y": 30
+      },
+      "goalkeepers": [
+        {
+          "x": 102,
+          "y": 34
+        }
+      ],
+      "defenders": [
+        {
+          "x": 83,
+          "y": 30
+        },
+        {
+          "x": 85,
+          "y": 42
+        }
+      ],
+      "observation": "synthetic"
+    }
+  },
+  {
+    "name": "crowdedBox",
+    "scene": {
+      "contract_version": "positional-features/v1",
+      "shot_type": "open-play",
+      "shooter": {
+        "x": 94,
+        "y": 30
+      },
+      "goalkeepers": [
+        {
+          "x": 102,
+          "y": 34
+        }
+      ],
+      "defenders": [
+        {
+          "x": 99,
+          "y": 31
+        },
+        {
+          "x": 97,
+          "y": 35
+        }
+      ],
+      "observation": "synthetic"
+    }
+  }
+]
