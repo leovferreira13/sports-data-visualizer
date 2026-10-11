@@ -1,0 +1,9 @@
+{
+  "version": "browser-inference/v1",
+  "feature_contract_sha256": "7997e82634ffb78bac9d40b21c6715c8bb10cd8934e629a7a5fa09aed066bb67",
+  "max_trees": 300,
+  "max_nodes_per_tree": 15,
+  "max_depth": 3,
+  "penalty_convention": "penalty-fixed-0.76/v1",
+  "penalty_probability": 0.76
+}

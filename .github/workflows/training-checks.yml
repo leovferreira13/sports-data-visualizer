@@ -15,5 +15,20 @@ jobs:
           cache: pip
           cache-dependency-path: scripts/xg/requirements.lock
       - run: python -m pip install -r scripts/xg/requirements.lock
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
       - name: Check offline training with invented data only
         run: python -m unittest discover -s scripts/xg/training_tests -p 'test_*.py' -v
+      - name: Install isolated browser test tools
+        run: |
+          npm install --prefix "$RUNNER_TEMP/xg-browser-tools" --no-package-lock playwright@1.62.1
+          "$RUNNER_TEMP/xg-browser-tools/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Compare invented envelopes in actual Chromium
+        env:
+          NODE_PATH: ${{ runner.temp }}/xg-browser-tools/node_modules
+        run: |
+          python scripts/xg/check_browser_inference.py \
+            --synthetic --browser --output-dir data/derived/browser-inference-ci

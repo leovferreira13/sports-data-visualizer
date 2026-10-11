@@ -79,3 +79,7 @@ If a contextual model is not ready immediately, test the pitch as a prototype wi
 ### Offline training implementation status (#11)
 
 Training contracts/scripts and synthetic verification are implemented; the first owner-run actual-corpus artifacts passed internal review, with successful complete reproduction confirmed by the owner. See the [local training guide](architecture/reference/xg-training.md) and [status report](reports/xg-training-methodology.md). The Methodology and results tab in #4 consumes the same aggregate evidence as the generated report. Final-test evaluation and release remain gated by #13 and final rights QA in #8.
+
+### Browser inference implementation status (#12)
+
+Validated artifact loading, logistic/XGBoost inference, explicit unsupported/unavailable results and the separate 0.76 penalty convention are implemented. Invented-fixture parity is automated; the owner's frozen-candidate verification remains pending. The [prediction guide](architecture/reference/prediction.md) provides local commands, optional Chromium checks and repeat-run comparison. Actual weights remain local and the public page still displays geometry only.

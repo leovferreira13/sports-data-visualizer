@@ -11,3 +11,4 @@ Use an ADR for a consequential, structural or difficult-to-reverse choice. An AD
 | [005 — Shared positional features](005-shared-positional-features.md) | Accepted for extraction | Versioned metric geometry, required keeper, independent Python/TypeScript parity and private immutable feature runs |
 
 - [006: Offline training and frozen export](006-offline-training-and-frozen-export.md)
+- [007: Browser inference and separate penalty convention](007-browser-inference-and-penalty.md)
