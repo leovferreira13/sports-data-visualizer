@@ -1,6 +1,6 @@
 # Football, Visualized — product vision
 
-**Status:** initial direction · **First module:** Expected Goals (xG) · **Updated:** 2026-09-26
+**Status:** portfolio-focused first release · **First module:** Expected Goals (xG) · **Updated:** 2026-10-11
 
 ## One-sentence concept
 
@@ -10,7 +10,7 @@ An interactive football pitch where anyone can move the shooter, goalkeeper, and
 
 xG often appears in broadcasts and analysis as a finished number. Fans struggle to see which characteristics of a chance influenced the estimate and why two seemingly similar chances receive different values. Analysts, journalists, and commentators also need to recreate a play and explain it quickly to an audience.
 
-The primary audience is the curious football fan; the secondary audience is the analyst or creator who wants to **demonstrate** a game situation. The experience should require no statistical background, account, or preparatory reading.
+The visitor experience serves a curious football fan without requiring statistical background, an account or preparatory reading. The owner's primary delivery goal is a professional portfolio: recruiters and technical reviewers should be able to explore a complete product and trace its data, ML, browser-inference and product decisions. Broad adoption and maximum predictive accuracy are not first-release goals.
 
 ## Proposition
 
@@ -44,6 +44,8 @@ Learn uses the same rules, calculation, and controls as Playground. Visitors can
 - **Put the number in context:** identify the model, its inputs, and omissions. “0.20 xG” means roughly 20 goals in 100 comparable shots according to that model; it is not the scoring probability of a specific player.
 - **Explain honestly:** changes in the estimate are comparisons within the model, not causal claims about real football. Do not describe a visible factor as a model input if it is not one.
 - **Make demonstrations easy:** quick reading, a generous pitch area, fluid movement, and good presentation on mobile and desktop.
+- **Permit illustrative exploration:** rare/extreme but valid scenes are intentional. Support diagnostics inform concise explanations, not automatic blocking. Avoid precision or causal promises and explain that tree predictions can remain unchanged after small movements.
+- **Expose the decisions:** a visible adjacent Methodology and results tab shares the report's aggregate evidence, separates validation from test and links architecture/ADRs/reproduction for reviewers.
 - **Ship a small, complete product:** the first release is an xG module, not a scouting portal.
 - **Support both languages from the start:** UI, explanations, and model limitations in `pt-BR` and `en`.
 
@@ -51,7 +53,7 @@ Learn uses the same rules, calculation, and controls as Playground. Visitors can
 
 **Product goal:** someone new to xG can build a chance and explain in their own words why the model evaluated it that way. **Delivery goal:** a public URL and repository usable as a portfolio piece.
 
-In the first round, test with 5–8 people, including at least one creator or commentator. Observe whether they can interact without verbal instruction, recognize that the number is a model estimate, reconstruct a play, and explain a change. Record qualitative feedback and common failures; product analytics are optional. A good initial outcome is that most participants complete a first interaction and accurately explain at least one change, without inventing a statistical target for such a small sample.
+Use a small targeted qualitative review to check whether a newcomer can interact without verbal instruction and explain a model response, and whether a technical reader can follow the implementation rationale. Invite a football-interested reader or technical peer if available. Record available feedback and useful follow-ups; a fixed participant quota, traffic target or analytics installation is not a release gate.
 
 ## First-release boundaries
 
@@ -60,3 +62,7 @@ One designated shot taker, one goalkeeper, addable attackers and defenders, six 
 ## Possible evolution
 
 If this module works, the brand can hold independent experiments: famous goals, xA, xThreat, or other visualizations. Add a module based on use and learning from the first one, not on architecture built prematurely for several products.
+
+## Current model and delivery handoff
+
+The frozen shallow XGBoost has accepted actual-corpus scientific evidence with support/transfer limitations. Use it for the educational v0.1 instead of requiring another optimization cycle. #4 integrates inference, proportional support explanations and mandatory methodology/results; #5 adds optional Learn and the shareable portfolio release. #4 may start before #3/#8 close. Actual parameter/export, rights/history and integrated product attribution/assets QA must finish before public distribution. The owner controls publication and board/merge state.
