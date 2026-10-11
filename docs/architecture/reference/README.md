@@ -11,3 +11,5 @@ These are **proposed boundaries** until code exists. Update each page with actua
 | [Sources and quality](source-and-quality.md) | Suggested code map, testing gates and external references |
 | [StatsBomb rights and release](statsbomb-rights.md) | Data-use terms, support response, attribution and publication gate |
 | [StatsBomb ingestion](statsbomb-ingestion.md) | Local shot corpus, deterministic audit, source identity, visibility and recovery |
+
+The completed [xG data feasibility audit](../../reports/xg-data-audit.md) is stored under `docs/reports/`. It records the population, coverage, provenance and planning limits for issue #9.

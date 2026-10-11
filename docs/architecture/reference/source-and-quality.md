@@ -2,7 +2,7 @@
 
 **Status:** proposed checks for the first release.
 
-Local StatsBomb ingestion and its synthetic tests are implemented in `scripts/xg/ingest_statsbomb.py` and `scripts/xg/tests/test_ingest_statsbomb.py`. See [ingestion and audit](statsbomb-ingestion.md) for reproducible commands, eligibility, visibility and output contracts. The corpus and per-match counts stay local; the [completed competition-level audit](../../../reports/xg-data-audit.md) records the passing feasibility screen and its limitations. Training and browser prediction remain planned.
+Local StatsBomb ingestion and its synthetic tests are implemented in `scripts/xg/ingest_statsbomb.py` and `scripts/xg/tests/test_ingest_statsbomb.py`. See [ingestion and audit](statsbomb-ingestion.md) for reproducible commands, eligibility, visibility and output contracts. The corpus and per-match counts stay local; the [completed competition-level audit](../../reports/xg-data-audit.md) records the passing feasibility screen and its limitations. Training and browser prediction remain planned.
 
 ## Suggested code map
 

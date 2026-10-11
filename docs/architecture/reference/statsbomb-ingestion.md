@@ -1,6 +1,6 @@
 # StatsBomb shot ingestion and audit
 
-**Status:** ingestion and the [full real-data audit](../../../reports/xg-data-audit.md) are complete for issue #9. Feature extraction, training and browser prediction remain separate tasks.
+**Status:** ingestion and the [full real-data audit](../../reports/xg-data-audit.md) are complete for issue #9. Feature extraction, training and browser prediction remain separate tasks.
 
 ## Runtime boundary
 
@@ -54,7 +54,7 @@ Each successful run creates an immutable directory named by its manifest digest 
 
 Counts reconcile from matches to competitions to totals, including every exclusive funnel rejection. A zero denominator yields a null rate. All payloads use deterministic ordering without timestamps or absolute machine paths. Identical source, extractor, Python version and selection reproduce byte-identical outputs. Python version is part of the run identity.
 
-Inside this project, the CLI restricts outputs to `data/derived/`; it rejects `public/`, `reports/` and other project paths before writing source rows. External local output directories are supported for experiments and synthetic tests and must not be published.
+Inside this project, the CLI restricts outputs to `data/derived/`; it rejects `public/`, `docs/reports/` and other project paths before writing source rows. External local output directories are supported for experiments and synthetic tests and must not be published.
 
 Outputs are staged and renamed only after reconciliation and source/extractor revalidation. A failed run returns nonzero, removes its staging directory and preserves previous complete runs. An existing run with modified outputs is never overwritten: use a fresh output directory and investigate the difference. Rebuild from the recorded source revision and extractor contents to recover. The CLI reports aggregates and file/match context, not raw records.
 
@@ -82,4 +82,4 @@ On 2026-10-11, the owner completed two full local audits at the pinned revision 
 
 The aggregate audit hash and competition-to-total counts, exclusions, visibility distributions and pooled rates were independently checked from the uploaded `audit.json`. The repository extractor hash matches the local run. Six source-to-corpus examples (goal and non-goal across Premier League 2015/16, Euro 2020 and World Cup 2022) passed the owner's independent spot check; four also verified separate 360 joins and normalized roles. Original inputs and shot/per-match outputs remain local.
 
-The [completed report](../../../reports/xg-data-audit.md) records provenance, competition coverage, denominators, exclusions, visibility and 360 comparisons. Its planning screen passes with 35,024 position-usable shots and 3,261 goals across eight distinct competitions. This is data feasibility evidence only; #10, #11 and #13 still own features, training/splitting and evaluation.
+The [completed report](../../reports/xg-data-audit.md) records provenance, competition coverage, denominators, exclusions, visibility and 360 comparisons. Its planning screen passes with 35,024 position-usable shots and 3,261 goals across eight distinct competitions. This is data feasibility evidence only; #10, #11 and #13 still own features, training/splitting and evaluation.

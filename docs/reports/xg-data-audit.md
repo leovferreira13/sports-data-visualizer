@@ -163,10 +163,10 @@ The owner also ran an independent source-to-corpus spot check: one goal and one 
 | match-counts.csv SHA-256 | `de1ab9e3cb2a0d6ad7efb4459df3d35a5f89e636f1bab277f193b898a1a7d066` |
 | shots.jsonl SHA-256 | `c31b3735eb164e5b9fbd3c59d6c809a5d74b957176229828556e652df7301f2a` |
 
-Reproduce using the [ingestion guide](../docs/architecture/reference/statsbomb-ingestion.md) with the pinned source and extractor. Python version participates in run identity. Manifests retain the sorted input hash inventory locally; this report publishes aggregate evidence only. No raw records, match/event identifiers, player positions, shot-level examples or per-match tables are redistributed.
+Reproduce using the [ingestion guide](../architecture/reference/statsbomb-ingestion.md) with the pinned source and extractor. Python version participates in run identity. Manifests retain the sorted input hash inventory locally; this report publishes aggregate evidence only. No raw records, match/event identifiers, player positions, shot-level examples or per-match tables are redistributed.
 
 ## Attribution and release boundary
 
-![Hudl Statsbomb logo](../assets/hudl-statsbomb-logo.png)
+![Hudl Statsbomb logo](../../assets/hudl-statsbomb-logo.png)
 
-Data source: Hudl StatsBomb Open Data. This is an independent project; StatsBomb does not create or endorse its model. Follow the [rights and release record](../docs/architecture/reference/statsbomb-rights.md). Issue #8 remains in review/QA until the final model artifact and deployed product satisfy the release checks. Completing this data audit does not close that publication gate.
+Data source: Hudl StatsBomb Open Data. This is an independent project; StatsBomb does not create or endorse its model. Follow the [rights and release record](../architecture/reference/statsbomb-rights.md). Issue #8 remains in review/QA until the final model artifact and deployed product satisfy the release checks. Completing this data audit does not close that publication gate.
