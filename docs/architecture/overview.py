@@ -15,7 +15,7 @@ The intended data flow is:
     -> SVG drawing and distance/angle labels
 
 The later prediction path will extend geometry with model features and a
-validated, versioned model. There is no inference or xG value today.
+validated, versioned model. Shared metric feature extraction is implemented; there is no inference or xG value today.
 
 The field uses one coordinate system in meters, with x increasing toward the
 attacked goal. A uniform SVG projection rotates the attacking half so the goal
@@ -28,6 +28,12 @@ a pinned official StatsBomb checkout, audits embedded shot frames separately
 from optional 360 coverage, and writes deterministic local-only data outputs.
 Competition-level audit evidence may be published; source and shot rows may not.
 This Python CLI is not a Next.js runtime or production-build dependency.
+
+Positional feature extraction is implemented in lib/features.ts and scripts/xg/features.py,
+using model/feature-contract.json and executable cross-language synthetic parity tests.
+The local scripts/xg/extract_features.py materializes private immutable feature runs
+with aggregate diagnostics; complete licensed-corpus validation remains pending.
+Observation metadata is separate from the eight ordered model inputs.
 
 Prediction is planned to run in the browser with a small versioned artifact.
 Parent issue #3 selects our own logistic baseline and XGBoost candidate. Their features must
