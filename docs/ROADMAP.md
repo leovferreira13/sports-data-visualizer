@@ -1,16 +1,16 @@
 # Football, Visualized — delivery roadmap
 
-**Status:** plan for the first public release · **Updated:** 2026-09-26
+**Status:** plan for the first public release · **Updated:** 2026-10-11
 
 ## Delivery rule
 
-Build a working first interaction as soon as possible, then complete a small, trustworthy release. The time ranges below are **focused-effort estimates**, not promised deadlines. Model investigation determines whether publication fits in one weekend or needs another cycle.
+Build a working first interaction as soon as possible, then complete a small, trustworthy release. The time ranges below are **focused-effort estimates**, not promised deadlines. The model's scientific milestone is complete. Prioritize the intuitive educational portfolio, reviewer-visible reasoning and scoped publication QA; another model optimization cycle is not required for v0.1.
 
 | Milestone | Indicative effort | End demonstration | Exit condition |
 | --- | --- | --- | --- |
 | **0. Prepare** | 1–2 h | Repository, runnable app, and three starting documents. | Runs locally; scope and criteria recorded. |
 | **1. Playable pitch** | 4–8 h | Responsive pitch with shooter, goalkeeper, two defenders, and presets; distance and angle respond to dragging. | Mouse and touch work; pieces stay in bounds; no provisional number is labeled xG. |
-| **2. Prove the calculation** | 3–6 h to assess an existing artifact; more if training is needed | Small test takes a scenario state and returns a reproducible estimate. | Model rights and inputs checked; keeper/defenders affect the value if claimed; plausible scenes; limitations documented. |
+| **2. Prove the calculation** | Completed in #9–#13 | Small test takes a scenario state and returns a reproducible estimate. | Model rights and inputs checked; keeper/defenders affect the value if claimed; scientific checks and scene responses recorded; support/transfer limitations documented. |
 | **3. Publishable Playground** | 6–10 h after milestone 2 | Live estimate, explanations, six presets, addable attackers and defenders, removal controls, reset, and `pt-BR`/`en` interface. | v0.1 acceptance criteria met on desktop and mobile. |
 | **4. Learn and publish** | 4–8 h | Optional 2–3-step tutorial on the same pitch, README, public URL, and short feedback round. | Full flow in both languages; model provenance/limits visible; public link tested. |
 | **5. Refine from real use** | Based on feedback | Fixes to confusion, bugs, and friction reported by fans and commentators. | Priorities come from observation rather than a speculative feature list. |
@@ -32,6 +32,8 @@ If a contextual model is not ready immediately, test the pitch as a prototype wi
 - Playground on entry; a half-pitch with consistent orientation and scale; shooter, goalkeeper, and up to three defenders movable with mouse and touch.
 - Presets: penalty, one-on-one, tight angle, long shot, and crowded box; reset to the selected preset.
 - `0.xx xG` (or `0,xx xG` by locale) and equivalent percentage, plus distance, angle, and a simple description of shot-cone occupancy.
+- Free exploration of rare/extreme scenes within valid controls, with proportional support notes and no diagnostic-only blocking.
+- Visible, directly accessible Methodology and results tab beside Playground, with plain-language explanations plus technical evidence/architecture links.
 - “What affects this chance?” panel with current observations; after moving a piece, compare before/after only for factors actually used by the model.
 - Learn mode with 2–3 optional experiments: distance and angle; move a defender out of the way; reposition the goalkeeper. Hide any experiment unsupported by the selected model.
 - Portuguese / English selector; initial language from browser preference, persisted manual choice, and complete translations including methodology notes.
@@ -46,7 +48,7 @@ If a contextual model is not ready immediately, test the pitch as a prototype wi
 
 1. A new visitor lands in Playground and can move the shooter without reading extensive instructions.
 2. Moving the shot changes distance/angle consistently; pitch drawings match the numeric values.
-3. Moving the goalkeeper or a defender changes xG **when the corresponding feature exists in the model**; the UI never suggests an effect that is absent.
+3. Moving the goalkeeper or a defender evaluates the actual retained features; some movements can leave tree outputs unchanged. The UI never invents an effect, forces monotonicity or promises real-world causality.
 4. The value is in [0, 1]; penalties and invalid states follow explicit rules; coordinate errors do not cause absurd jumps.
 5. All six presets load in both languages and remain editable. The tutorial can start and stop without reopening the site.
 6. Changing language preserves scene and mode, translates every text, and retains the choice on later visits; absent a saved choice, the initial locale follows browser preference.
@@ -56,7 +58,7 @@ If a contextual model is not ready immediately, test the pitch as a prototype wi
 
 ## Open points resolved by the prototype
 
-- **Model:** licensed reuse or an in-house regression; record the choice before showing a value.
+- **Model:** resolved: independently trained shallow XGBoost, compared against regularized logistic baselines; final scientific evidence is accepted with limitations.
 - **Scenario link:** desirable for commentators; include in v0.1 if it fits after calculation and accessibility. Otherwise make it the highest-priority next improvement.
 - **Penalty:** include a visual preset already on the pitch; show xG only with treatment compatible with the selected model.
 - **Mobile pitch:** test a horizontal pitch with framing and touch before investing in a separate vertical representation.
@@ -74,7 +76,7 @@ If a contextual model is not ready immediately, test the pitch as a prototype wi
 3. Prove `scenario → features → model → xG` and document provenance.
 4. Add honest before/after insights and explicit penalty handling.
 5. Finish translation, responsiveness, Learn, and essential accessibility.
-6. Publish, show real users, and record the three highest-priority improvements.
+6. Publish with owner authorization after scoped rights/product QA; record targeted qualitative feedback and useful prioritized improvements.
 
 ### Offline training implementation status (#11)
 
@@ -91,3 +93,9 @@ Issue #13 provides offline final-test evaluation infrastructure and generated ag
 ## Actual-corpus final review
 
 The owner-run final evidence passes all automated predicates and the owner reports all requested comparators PASS. Aggregate identity/provenance and report/app consistency were independently checked. Scientific evidence is accepted with sparse/extreme/preset support limitations; actual parameter/export/rights and integrated #4/#8 publication QA remain pending. See `docs/reports/xg-final-evaluation.md` and `docs/reports/xg-final-review-record.json`. Public xG remains disabled.
+
+## Portfolio alignment and completion ownership (2026-10-11)
+
+#4 presents actual model responses, tree plateaus, illustrative presets and layered methodology; #5 provides short optional experiments, a concise interview-ready README/walkthrough and small targeted qualitative review. A fixed 5–8-person feedback cohort, growth/traffic targets and universal scene precision are not release gates. No new training work is required for the educational first release.
+
+#9–#13 are closed and the final-evaluation PR is merged. #3's technical/scientific milestone is complete; #3/#8 remain open for the actual parameter/history/integrated xG/methodology attribution/build/network checks required by their current acceptance criteria. Start #4 from the accepted scientific handoff without requiring epic closure. #4 collects the concrete QA evidence for #8; #5 publishes afterward with owner authorization. This preserves publication checks without a circular development dependency.
