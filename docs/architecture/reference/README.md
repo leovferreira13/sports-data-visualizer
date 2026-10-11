@@ -6,7 +6,7 @@ These are **proposed boundaries** until code exists. Update each page with actua
 | --- | --- |
 | [Pitch and geometry](pitch-and-geometry.md) | Coordinate system, SVG projection, dragging, distance, angle, presets |
 | [Shot features](shot-features.md) | Shared positional contract, Python/browser parity and local feature materialization |
-| [Prediction](prediction.md) | Feature extraction, model artifact, xG inference and provenance |
+| [Prediction](prediction.md) | Implemented artifact loading, browser-safe inference, fixed penalty route and local parity checks |
 | [Explanation and Learn](explanation-and-learn.md) | Honest insights, before/after comparisons and guided experiments |
 | [Localization and routing](localization-and-routing.md) | Language selection, routes and translation dictionaries |
 | [Sources and quality](source-and-quality.md) | Suggested code map, testing gates and external references |
