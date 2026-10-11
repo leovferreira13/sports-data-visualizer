@@ -1,6 +1,6 @@
 # ADR 008: Frozen final evaluation and an explicit publication gate
 
-**Status:** implemented infrastructure for #13; actual-corpus final findings and dated release decision pending.
+**Status:** implemented infrastructure for #13; actual-corpus scientific review accepted with limitations; distribution/publication decision pending.
 
 ## Context
 
@@ -19,3 +19,7 @@ Generate report, model card and schema-validated app evidence from one immutable
 Retuning against the test would invalidate its independent role. Quietly changing the candidate to the logistic baseline after failure would be another selection step. Treating every shot as independent would underrepresent shared match context. Manually maintained report/app metric tables could drift. Automatic publication based on statistical checks would omit support, rights and product review.
 
 Feature-space support is descriptive, not a proof of realistic joint player configurations or a new runtime exclusion. Passing an observed baseline guardrail does not prove equivalence. Scientific or critical qualitative failures withhold release; a later model change needs an explicitly revised independent evaluation. The final empirical selection/release decision will be appended only after actual owner execution and evidence review.
+
+## Actual-corpus review (2026-10-11)
+
+The owner supplied final aggregate evidence and reports all requested comparators PASS. All automated predicates pass; paired final scores favor the frozen XGBoost within the represented cohort. Sparse/extreme calibration, an adverse cone-count slice, partial visibility and four outside-reference open-play presets require explicit app explanations. See the [dated review](../../reports/xg-final-evaluation.md) and [review record](../../reports/xg-final-review-record.json). The original needs_review artifact is preserved; actual parameter/export/rights and integrated publication QA remain pending. No model or evaluation rule changed.

@@ -86,4 +86,8 @@ Validated artifact loading, logistic/XGBoost inference, explicit unsupported/una
 
 ## Final evaluation handoff
 
-Issue #13 provides offline final-test evaluation infrastructure and generated aggregate report/model-card/app views. Actual-corpus results, complete reproduction and the dated decision remain pending. This does not close #3 or publish xG. #4 must integrate the Methodology and results tab and finish real production QA with #8.
+Issue #13 provides offline final-test evaluation infrastructure and generated aggregate report/model-card/app views. Owner-run actual-corpus results pass automated gates and complete comparators are reported PASS. Scientific review accepts the evidence with support limitations; distribution/publication decisions remain pending. This does not close #3 or publish xG. #4 must integrate the Methodology and results tab and finish real production QA with #8.
+
+## Actual-corpus final review
+
+The owner-run final evidence passes all automated predicates and the owner reports all requested comparators PASS. Aggregate identity/provenance and report/app consistency were independently checked. Scientific evidence is accepted with sparse/extreme/preset support limitations; actual parameter/export/rights and integrated #4/#8 publication QA remain pending. See `docs/reports/xg-final-evaluation.md` and `docs/reports/xg-final-review-record.json`. Public xG remains disabled.

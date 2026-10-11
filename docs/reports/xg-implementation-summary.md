@@ -1,6 +1,6 @@
 # Six-stage xG implementation and current evidence
 
-**Status:** #8–#12 have implementation and reviewed evidence; #13 final-evaluation infrastructure is implemented. Actual-corpus final execution/review and final product QA remain pending. This is not an epic-completion or publication announcement.
+**Status:** #8–#12 have implementation and reviewed evidence; #13 final-evaluation infrastructure is implemented. Actual-corpus final scientific review is accepted with limitations; final export/rights/product QA remains pending. This is not an epic-completion or publication announcement.
 
 ## Pipeline and responsibilities
 
@@ -11,7 +11,7 @@
 | #10 | Independent Python/TypeScript eight-feature extraction | Synthetic parity plus full-corpus aggregate review; local deterministic comparison |
 | #11 | Match-isolated split, bounded train-only tuning, separate calibration/selection and frozen candidate | Owner-run actual training/complete reproduction; no test outcome parsing |
 | #12 | Validated browser inference, logistic/tree numerical semantics and penalty route | Actual-candidate browser-bundle parity and complete owner comparison passed |
-| #13 | Frozen held-out evaluation, uncertainty, support, report/card/app evidence and release checks | Infrastructure and synthetic behavior checked; actual-corpus run/review pending |
+| #13 | Frozen held-out evaluation, uncertainty, support, report/card/app evidence and release checks | Actual-corpus automated gates pass; scientific review accepted with support limitations; distribution/product QA pending |
 
 ## Data and feature decisions
 
@@ -64,7 +64,7 @@ The owner reported byte-identical complete training runs (17 files) and complete
 
 The owner can evaluate the original frozen candidate, full logistic and constant on identical held-out rows, with whole-match uncertainty, calibration, fixed supported/sparse slices and training-only synthetic support diagnostics. Completed withheld evidence survives statistical failures. Report, model card and the future bilingual Methodology and results tab share the same aggregate source. No public xG is enabled by this implementation.
 
-The final evaluation protocol is predeclared, but its actual metrics, calibration flags and release status are unknown until local execution. Final model eligibility requires complete reproduction, dated scientific/rights/export review and an explicit disposition of limitations. #4 still owns actual integrated production/attribution QA; finish #8 QA there and close #3 only after every child passes.
+The final evaluation protocol was predeclared. Owner-run final evidence now passes the automated gates and complete comparator checks are reported PASS. Both paired score intervals favor the frozen candidate, and no supported calibration bin is flagged. Scientific review accepts the evidence with explicit sparse-slice/preset/transfer limitations; see the [final review](xg-final-evaluation.md). Final model eligibility requires complete reproduction, dated scientific/rights/export review and an explicit disposition of limitations. #4 still owns actual integrated production/attribution QA; finish #8 QA there and close #3 only after every child passes.
 
 ## Evidence and commands
 
@@ -74,3 +74,5 @@ The final evaluation protocol is predeclared, but its actual metrics, calibratio
 - [Browser inference review](xg-browser-inference.md)
 - [Final local commands and review contract](../architecture/reference/xg-final-evaluation.md)
 - [Rights record](../architecture/reference/statsbomb-rights.md)
+
+- [Final actual-corpus review](xg-final-evaluation.md), [generated report](xg-final-first-run/methodology.md) and [dated decision record](xg-final-review-record.json)

@@ -1,6 +1,6 @@
 # Football, Visualized — architecture overview
 
-**Status:** bilingual shell, playable pitch, local ingestion, positional features, offline training and browser-safe inference infrastructure implemented. Owner-run actual-candidate browser-bundle parity passed; final evaluation infrastructure is implemented; actual-corpus final review/release and guided Learn remain pending.
+**Status:** bilingual shell, playable pitch, local ingestion, positional features, offline training and browser-safe inference infrastructure implemented. Owner-run actual-candidate browser-bundle parity passed; final evaluation infrastructure is implemented; actual-corpus scientific review is accepted with limitations; distribution/product QA and guided Learn remain pending.
 
 ## Application and scene
 
@@ -22,7 +22,7 @@ Six presets and a versioned, validated tab-scoped snapshot preserve positions, i
 
 `scripts/xg/prepare_training.py` and `train_models.py` implement offline match-isolated preparation, train-only tuning, separate calibration/selection validation and frozen parameter export. A dedicated Python dependency lock and synthetic CI checks keep training outside the web runtime. The first owner-run actual-corpus artifacts passed internal review and select an XGBoost candidate; complete reproduction was confirmed by the owner. See the [training guide](reference/xg-training.md) and [execution status](../reports/xg-training-methodology.md).
 
-Versioned aggregate evaluation evidence supplies both the generated English report and the future bilingual Methodology and results tab; held-out test outcomes are opened only by the #13 final evaluator after frozen-run verification. The actual-corpus final run remains pending.
+Versioned aggregate evaluation evidence supplies both the generated English report and the future bilingual Methodology and results tab; held-out test outcomes are opened only by the #13 final evaluator after frozen-run verification. The owner-run final evidence now passes automated gates and aggregate review; publication QA remains pending.
 
 `lib/model.ts` validates and captures immutable versioned parameters; `lib/predict.ts` evaluates scene features with the frozen preprocessing/calibration and returns explicit learned, convention, unsupported or unavailable results. Penalties return the separate fixed 0.76 convention. The local parity command checks the browser-safe bundle against Python and emits aggregate immutable evidence; actual parameters stay local. See the [prediction guide](reference/prediction.md). Final evaluation and rights QA in #13/#8 precede public display in #4.
 
@@ -37,3 +37,7 @@ Python may train and export a model offline; it is not a browser/runtime depende
 Read [module references](reference/README.md) for responsibilities and contracts, and [ADRs](adr/README.md) for consequential decisions. References distinguish implemented and proposed behavior; update them as boundaries change.
 
 `evaluate_final.py` verifies original immutable runs, records test access and emits final probability scores, match-bootstrap uncertainty, scene-support diagnostics and reviewed-data app views. Generated reports and app tables share one aggregate artifact. Automated checks never authorize publication. See the [final evaluation guide](reference/xg-final-evaluation.md) and [ADR 008](adr/008-final-evaluation-and-publication-gate.md).
+
+## Actual-corpus final review
+
+The owner-run final evidence passes all automated predicates and the owner reports all requested comparators PASS. Aggregate identity/provenance and report/app consistency were independently checked. Scientific evidence is accepted with sparse/extreme/preset support limitations; actual parameter/export/rights and integrated #4/#8 publication QA remain pending. See `docs/reports/xg-final-evaluation.md` and `docs/reports/xg-final-review-record.json`. Public xG remains disabled.

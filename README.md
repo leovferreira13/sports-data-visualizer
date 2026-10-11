@@ -61,4 +61,8 @@ Issue #12 implements validated logistic/XGBoost inference and a separate fixed 0
 
 ## Final xG evaluation
 
-The final evaluator is implemented for local frozen-run execution; actual held-out results and public release remain pending. See the [command and review guide](docs/architecture/reference/xg-final-evaluation.md) and the [six-stage xG implementation summary](docs/reports/xg-implementation-summary.md). Reports and the future app methodology tab derive from the same versioned aggregate evidence.
+The final evaluator is implemented for local frozen-run execution; actual held-out scientific evidence is accepted with limitations; public release remains pending. See the [command and review guide](docs/architecture/reference/xg-final-evaluation.md) and the [six-stage xG implementation summary](docs/reports/xg-implementation-summary.md). Reports and the future app methodology tab derive from the same versioned aggregate evidence.
+
+## Actual-corpus final review
+
+The owner-run final evidence passes all automated predicates and the owner reports all requested comparators PASS. Aggregate identity/provenance and report/app consistency were independently checked. Scientific evidence is accepted with sparse/extreme/preset support limitations; actual parameter/export/rights and integrated #4/#8 publication QA remain pending. See `docs/reports/xg-final-evaluation.md` and `docs/reports/xg-final-review-record.json`. Public xG remains disabled.

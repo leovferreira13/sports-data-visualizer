@@ -1,6 +1,6 @@
 # Offline xG training
 
-**Status:** #11 training is implemented; actual-corpus aggregate evidence passed review and complete local reproduction was confirmed by the owner. The frozen XGBoost candidate passed owner-run browser-bundle parity and is awaiting final-test evaluation; no public estimate is enabled.
+**Status:** #11 training is implemented; actual-corpus aggregate evidence passed review and complete local reproduction was confirmed by the owner. The frozen XGBoost candidate passed owner-run browser-bundle parity and passed final-test automated gates and aggregate scientific review with support limitations; no public estimate is enabled.
 
 ## Responsibilities
 
@@ -120,4 +120,8 @@ The export validator checks full feature order/checksum, retained indices, fitte
 
 ## Final-test handoff
 
-Issue #13 now provides a [separate final evaluator](xg-final-evaluation.md). Use the original complete preparation/training runs and matching actual-candidate parity without another fit. Actual-corpus final results and the dated publication decision remain pending.
+Issue #13 now provides a [separate final evaluator](xg-final-evaluation.md). Use the original complete preparation/training runs and matching actual-candidate parity without another fit. Actual-corpus scientific review is accepted with limitations; the final publication decision remains pending.
+
+## Actual-corpus final review
+
+The owner-run final evidence passes all automated predicates and the owner reports all requested comparators PASS. Aggregate identity/provenance and report/app consistency were independently checked. Scientific evidence is accepted with sparse/extreme/preset support limitations; actual parameter/export/rights and integrated #4/#8 publication QA remain pending. See `docs/reports/xg-final-evaluation.md` and `docs/reports/xg-final-review-record.json`. Public xG remains disabled.

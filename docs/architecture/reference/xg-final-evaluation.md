@@ -1,6 +1,6 @@
 # Frozen xG final evaluation and release gate
 
-**Status:** #13 implements the offline evaluator, immutable evidence, aggregate app handoff and complete comparator. Synthetic execution validates software behavior only. The actual held-out test has not been evaluated by the assistant; owner execution/review is required. Public xG remains disabled.
+**Status:** #13 implements the offline evaluator, immutable evidence, aggregate app handoff and complete comparator. Synthetic execution validates software behavior only. The owner-run actual held-out evidence and comparator PASS were supplied; aggregate scientific review accepts it with support limitations. The assistant did not recompute metrics from private rows. Final distribution/product QA remains pending. Public xG remains disabled.
 
 ## Boundaries and protocol
 
@@ -99,3 +99,7 @@ A release record should include: date; reviewer; code commit; training/final/mod
 Recheck [StatsBomb rights](statsbomb-rights.md) for the documented free non-commercial portfolio and parameter distribution. The recorded support response already covers that scope; a material scope change requires a fresh review. Inspect tracked content/history and proposed assets for source rows or recoverable examples. Before actual publication, #4/#8 must additionally inspect real integrated bundles/network assets and visible accessible attribution/logo on `/en` and `/br`, including small screens; the Methodology and results tab is mandatory. Current geometry-shell QA cannot attest to that later product.
 
 Finish #8 QA when model work completes. #3 closes only after all six children pass; the owner controls merge, board state and publication. This implementation alone does not close the epic.
+
+## Actual-corpus final review
+
+The owner-run final evidence passes all automated predicates and the owner reports all requested comparators PASS. Aggregate identity/provenance and report/app consistency were independently checked. Scientific evidence is accepted with sparse/extreme/preset support limitations; actual parameter/export/rights and integrated #4/#8 publication QA remain pending. See `docs/reports/xg-final-evaluation.md` and `docs/reports/xg-final-review-record.json`. Public xG remains disabled.

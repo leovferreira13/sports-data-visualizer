@@ -1,6 +1,6 @@
 # Source material and quality gates
 
-**Status:** ingestion, features, training, browser inference and final evaluation infrastructure are implemented; actual-corpus final review and integrated publication QA remain pending.
+**Status:** ingestion, features, training, browser inference and final evaluation infrastructure are implemented; actual-corpus scientific review is accepted with limitations; integrated publication QA remains pending.
 
 Local StatsBomb ingestion and its synthetic tests are implemented in `scripts/xg/ingest_statsbomb.py` and `scripts/xg/tests/test_ingest_statsbomb.py`. See [ingestion and audit](statsbomb-ingestion.md) for reproducible commands, eligibility, visibility and output contracts. The corpus and per-match counts stay local; the [completed competition-level audit](../../reports/xg-data-audit.md) records the passing feasibility screen and its limitations. Training and browser prediction have owner-run evidence; see [training](xg-training.md), [prediction](prediction.md) and [final evaluation](xg-final-evaluation.md).
 
