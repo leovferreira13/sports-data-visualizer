@@ -18,3 +18,5 @@ The completed [xG data feasibility audit](../../reports/xg-data-audit.md) is sto
 The [feature extraction audit](../../reports/xg-feature-audit.md) tracks synthetic parity and the pending full-corpus feature check.
 
 - [Offline xG training](xg-training.md): protected match partitions, training/calibration/selection, parameter export, local reproduction and aggregate review handoff.
+
+- [Final xG evaluation and release gate](xg-final-evaluation.md): frozen test commands, aggregate handoff, reproduction and review.

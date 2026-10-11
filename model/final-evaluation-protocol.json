@@ -1,0 +1,69 @@
+{
+  "version": "xg-final-evaluation/v1",
+  "training_protocol": "xg-training/v1",
+  "bootstrap": {
+    "resamples": 1000,
+    "seed": 7421,
+    "confidence": 0.95,
+    "method": "whole-match percentile; shot-weighted; paired draws"
+  },
+  "minima": {
+    "goals": 100,
+    "non_goals": 100,
+    "matches": 50
+  },
+  "decision": {
+    "constant_log_loss_improvement": 0.0001,
+    "max_brier_degradation": 0.0001,
+    "max_logistic_log_loss_degradation": 0.0001
+  },
+  "calibration": {
+    "bins": 10,
+    "review_rule": "supported bin residual interval excludes zero"
+  },
+  "sparse": {
+    "shots": 100,
+    "goals": 10
+  },
+  "additional_bins": {
+    "defenders_in_cone_count": [
+      0,
+      1,
+      2,
+      3,
+      5,
+      10
+    ],
+    "nearest_visible_defender_distance_m": [
+      0,
+      1,
+      2,
+      5,
+      10,
+      20,
+      50,
+      null
+    ]
+  },
+  "support": {
+    "method": "training-standardized retained-feature nearest-neighbor RMS",
+    "reference_max_rows": 2000,
+    "seed": 9123,
+    "quantile": 0.99,
+    "zero_defender": "separate observed-count cohort; sentinel distance omitted"
+  },
+  "tolerances": {
+    "metric": 1e-08,
+    "probability": 1e-06
+  },
+  "models": [
+    "selected",
+    "full_logistic",
+    "constant"
+  ],
+  "review_statuses": [
+    "needs_review",
+    "withheld"
+  ],
+  "public_distribution": "never authorized by automated evaluation; dated review and #4 production QA required"
+}

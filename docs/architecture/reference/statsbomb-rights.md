@@ -41,3 +41,7 @@ Reviewer: project owner and implementer at publication time. Record the date, co
 | Production scope | Review tracked files and history, `public/`, the production build, browser network assets, `/en` and `/br`, and absence of ads, payments, paid API and raw-data downloads. Record commands and screenshots of **our UI only** if useful. | Pending final product |
 
 If a source record entered Git history, plan a separately reviewed history cleanup before publication. If any check fails, keep the repository private and xG unpublished, correct the finding and rerun this review. Release and issue closure require a dated final decision, not merely the support response.
+
+## Final-model evidence handoff (2026-10-11)
+
+Actual-corpus final aggregate evidence passes the predeclared quantitative checks and scientific review with explicit support limitations; the owner reports complete comparator PASS. See the [final review](../../reports/xg-final-evaluation.md). This does not complete this rights/publication record: the actual parameter envelope was not supplied for independent content inspection, and current terms/logo guidance, export/history and #4 integrated production/network/bilingual attribution QA still require final review. Keep the release decision pending and finish #8 QA at that publication boundary.

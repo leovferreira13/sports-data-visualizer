@@ -1,0 +1,22 @@
+{
+  "review_date": "2026-10-11",
+  "reviewer": "assistant/implementer; owner-supplied aggregate evidence",
+  "final_run_id": "fdfc9df9e8b7c9a565df298d372a262091439fb8fb14a69043c1c904e7379ee4",
+  "evidence_id": "e579e10f9699077ddf05e7433af5ed63edf0e03c3ea8c7ca295844951d74ea08",
+  "selected_artifact_id": "758526873b8a3a2681f655c064dee52f8bd33749accd499d015420dbe8e11b9a",
+  "training_run_id": "222909fe801f4865897fea3541e023fed626f6736dca6ef69ceada1f7c57945a",
+  "scientific_review": "accepted_with_limitations",
+  "reproduction": "owner reports all requested comparators PASS; private complete runs and fresh environment not independently inspected",
+  "automated_status": "needs_review",
+  "parameter_distribution_review": "pending; actual envelope not supplied for content inspection",
+  "publication_authorized": false,
+  "required_product_handoff": [
+    "visible represented-scene and partial-visibility explanation",
+    "outside-reference presets and sparse/extreme support warnings",
+    "sparse calibration/slices and adverse cone-count findings",
+    "no causal, uniform-superiority or unseen-cohort claims",
+    "bilingual methodology, attribution/logo, production/network/history/export QA"
+  ],
+  "decision_scope": "continue #4 integration planning; no public distribution approval",
+  "review_report": "docs/reports/xg-final-evaluation.md"
+}
