@@ -1,6 +1,6 @@
 # StatsBomb shot ingestion and audit
 
-**Status:** ingestion implemented for issue #9; the full real-data audit is pending. Feature extraction, training and browser prediction remain separate tasks.
+**Status:** ingestion and the [full real-data audit](../../../reports/xg-data-audit.md) are complete for issue #9. Feature extraction, training and browser prediction remain separate tasks.
 
 ## Runtime boundary
 
@@ -76,10 +76,10 @@ The tests create tiny synthetic Git repositories; they do not download data or i
 
 Only a completed competition-level aggregate report, schema/methodology, synthetic fixtures and code may be committed for this issue. Keep all original, per-match and shot-level outputs inside ignored data paths. Inspect tracked content and `public/` before the PR. Follow the [rights and release record](statsbomb-rights.md); #8 remains open until the final model and deployed product are reviewed.
 
-### Current execution evidence and blocker
+### Completed execution evidence
 
-On 2026-10-10, this environment obtained all 1,813 requested event files and 98 of the 166 corresponding tracked 360 files at the selected revision. Each obtained input was verified against the official Git blob hash. The remaining 68 360 inputs are larger than the connector's effective response transport limit; reads fail with `Transport closed`. The smallest failing input is 7,716,578 bytes; the largest is 11,742,547 bytes. Direct retrieval also failed with `Proxy CONNECT aborted due to timeout`. These are retrieval failures, not observed missing coverage in StatsBomb.
+On 2026-10-11, the owner completed two full local audits at the pinned revision with Python 3.12.3 and confirmed byte-identical corpus, match counts, audit and manifest. All 1,813 event files and 166 corresponding tracked 360 inputs were present. This resolves the earlier connector transport blocker; locally omitted tracked files must still fail rather than become reported missing coverage.
 
-Two real subset runs over the complete available Premier League 2015/16 population successfully audited 380 matches, 7,790 eligible base shots and 7,778 position-usable shots, producing byte-identical corpus, match counts, audit and manifest. Its manifest identifies the subset and its planning screen does not pass the complete-cohort condition. Private samples from several additional competitions checked outcome mapping and role names; a World Cup 2022 sample checked 360 event-ID joins and actor inclusion. These checks support the implementation, but do not replace the full audit.
+The aggregate audit hash and competition-to-total counts, exclusions, visibility distributions and pooled rates were independently checked from the uploaded `audit.json`. The repository extractor hash matches the local run. Six source-to-corpus examples (goal and non-goal across Premier League 2015/16, Euro 2020 and World Cup 2022) passed the owner's independent spot check; four also verified separate 360 joins and normalized roles. Original inputs and shot/per-match outputs remain local.
 
-The full CLI run correctly fails on a missing tracked input and preserves complete prior runs. Issue #9 remains incomplete until all selected tracked 360 files are present, two full runs produce identical output hashes, counts reconcile, and the aggregate `reports/xg-data-audit.md` is written with the feasibility result. Run the reproduction command above in an environment with the complete official checkout to resolve this blocker. Do not interpret an omitted local file as absent official 360 coverage or proceed to a model-feasibility decision from this subset.
+The [completed report](../../../reports/xg-data-audit.md) records provenance, competition coverage, denominators, exclusions, visibility and 360 comparisons. Its planning screen passes with 35,024 position-usable shots and 3,261 goals across eight distinct competitions. This is data feasibility evidence only; #10, #11 and #13 still own features, training/splitting and evaluation.
