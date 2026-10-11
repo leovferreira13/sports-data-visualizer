@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "review_date": "2026-10-11",
+  "repository": "leovferreira13/sports-data-visualizer",
+  "reviewed_main_commit": "18036dfa9936bd811056f58813a65d2b4aef6c8d",
+  "remote_scope": {
+    "branch_heads": [
+      {
+        "name": "agent/1-bilingual-nextjs-scaffold",
+        "sha": "3d8dc4a16714715513e119777fc66d880733cb53"
+      },
+      {
+        "name": "agent/2-playable-pitch",
+        "sha": "60e5f75f86049e0e0b44823c0815187ec3e079df"
+      },
+      {
+        "name": "agent/4-5-portfolio-scope",
+        "sha": "ee79cbffabf684032d6afd0e4682f61ddd70dc48"
+      },
+      {
+        "name": "agent/8-statsbomb-rights",
+        "sha": "e98316c85937ac6b8b8e4570d2ac46e079f5b205"
+      },
+      {
+        "name": "agent/9-audit-results",
+        "sha": "f731b71504216e3b8bcdc15ec6cabe5a665ef620"
+      },
+      {
+        "name": "agent/9-statsbomb-audit",
+        "sha": "5a189da9e91273cd246bcbf9ba4adcae2ae9e3df"
+      },
+      {
+        "name": "agent/10-shot-features",
+        "sha": "671c36629968a0ada0647999a5efdc791725e5b6"
+      },
+      {
+        "name": "agent/11-xg-training",
+        "sha": "f95bf2fe1d694edf26ca21da0e2d1c0db20d0d52"
+      },
+      {
+        "name": "agent/12-browser-inference",
+        "sha": "4bcb1a2d698a6856440e0ec1d942db39749e7bc2"
+      },
+      {
+        "name": "agent/13-final-evaluation",
+        "sha": "32d62d9216f17ac1f98618f5bf1a43139a0b7f58"
+      },
+      {
+        "name": "main",
+        "sha": "18036dfa9936bd811056f58813a65d2b4aef6c8d"
+      }
+    ],
+    "reachable_commits": 112,
+    "unique_trees": 101,
+    "unique_blobs": 339,
+    "text_blobs_scanned": 337,
+    "binary_blobs": 2,
+    "tags": 0,
+    "all_branch_heads_reachable_from_reviewed_history": true
+  },
+  "checks": {
+    "forbidden_data_paths": "pass",
+    "structured_private_prediction_and_source_record_scan": "pass",
+    "prose_source_record_pattern_scan": "pass",
+    "binary_inventory": "only two previously sourced official logo PNGs",
+    "ignore_rules": "data/downloads/notebooks/artifacts, notebooks/parquet and local environment excluded"
+  },
+  "limitations": [
+    "Audit is bounded to the recorded reachable remote branch history, not untracked owner files or future commits.",
+    "Actual integrated #4 build/network content and rendered attribution are checked in #4 before publication."
+  ]
+}

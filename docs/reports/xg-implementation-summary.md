@@ -76,3 +76,7 @@ The final evaluation protocol was predeclared. Owner-run final evidence now pass
 - [Rights record](../architecture/reference/statsbomb-rights.md)
 
 - [Final actual-corpus review](xg-final-evaluation.md), [generated report](xg-final-first-run/methodology.md) and [dated decision record](xg-final-review-record.json)
+
+## Rights completion handoff
+
+The owner assigned interface-dependent publication QA to #4. The dated #8 rights/artifact/repository completion review is in `docs/reports/statsbomb-rights-completion.md`. After its documentation is merged, #8 and the completed model epic #3 may close. Actual xG/methodology pages, final build/network content and attribution/logo QA remain mandatory in #4 before #5 publishes with owner authorization. No new training cycle or public release is authorized by this handoff.

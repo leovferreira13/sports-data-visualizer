@@ -99,3 +99,7 @@ The owner-run final evidence passes all automated predicates and the owner repor
 #4 presents actual model responses, tree plateaus, illustrative presets and layered methodology; #5 provides short optional experiments, a concise interview-ready README/walkthrough and small targeted qualitative review. A fixed 5–8-person feedback cohort, growth/traffic targets and universal scene precision are not release gates. No new training work is required for the educational first release.
 
 #9–#13 are closed and the final-evaluation PR is merged. #3's technical/scientific milestone is complete; #3/#8 remain open for the actual parameter/history/integrated xG/methodology attribution/build/network checks required by their current acceptance criteria. Start #4 from the accepted scientific handoff without requiring epic closure. #4 collects the concrete QA evidence for #8; #5 publishes afterward with owner authorization. This preserves publication checks without a circular development dependency.
+
+## Rights completion handoff
+
+The owner assigned interface-dependent publication QA to #4. The dated #8 rights/artifact/repository completion review is in `docs/reports/statsbomb-rights-completion.md`. After its documentation is merged, #8 and the completed model epic #3 may close. Actual xG/methodology pages, final build/network content and attribution/logo QA remain mandatory in #4 before #5 publishes with owner authorization. No new training cycle or public release is authorized by this handoff.
