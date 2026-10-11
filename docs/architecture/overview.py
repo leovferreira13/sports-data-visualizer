@@ -23,8 +23,14 @@ is at the top. SVG coordinates are not the source of truth. Six presets and a
 versioned, validated tab-scoped scenario snapshot, including added players, support reset and locale
 navigation. The planned Learn mode will reuse this simulation.
 
+Local shot ingestion is implemented in scripts/xg/ingest_statsbomb.py. It reads
+a pinned official StatsBomb checkout, audits embedded shot frames separately
+from optional 360 coverage, and writes deterministic local-only data outputs.
+Competition-level audit evidence may be published; source and shot rows may not.
+This Python CLI is not a Next.js runtime or production-build dependency.
+
 Prediction is planned to run in the browser with a small versioned artifact.
-This is conditional on finding or training a suitable model: its features must
+Parent issue #3 selects our own logistic baseline and XGBoost candidate. Their features must
 match the controls and its use rights must be clear. Do not display a number as
 xG until that proof is complete. A build-time Python script may train/export a
 model, but is not a runtime dependency. There is no planned authentication,

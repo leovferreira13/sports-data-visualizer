@@ -7,3 +7,4 @@ Use an ADR for a consequential, structural or difficult-to-reverse choice. An AD
 | [001 — Client-side interactive application](001-client-side-playground.md) | Accepted | Next.js, SVG, browser inference subject to model validation |
 | [002 — Locale-prefixed routing and persisted preference](002-locale-routing-and-preference.md) | Accepted | Explicit locale URLs, root negotiation, and a server-readable saved preference |
 | [003 — Metric pitch and tab-scoped scene](003-metric-pitch-and-tab-scene.md) | Accepted | Uniform metric SVG projection and validated session scene across locale changes |
+| [004 — Local shot ingestion](004-local-shot-ingestion.md) | Accepted for ingestion | Embedded shot frames as primary positioning source; deterministic local-only corpus and aggregate audit |
