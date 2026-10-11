@@ -1,6 +1,6 @@
 # Browser prediction and model loading
 
-**Status:** #12 inference infrastructure is implemented and tested with invented envelopes. Actual frozen-candidate parity needs the owner's completed training directory. The public page still displays geometry; #13/#8 gate release and #4 integrates results and methodology.
+**Status:** #12 inference infrastructure is implemented and tested with invented envelopes. Owner-run parity of the frozen candidate and complete local comparison passed; aggregate evidence was reviewed. The public page still displays geometry; #13/#8 gate release and #4 integrates results and methodology.
 
 ## Modules and result contract
 

@@ -1,6 +1,6 @@
 # Football, Visualized — architecture overview
 
-**Status:** bilingual shell, playable pitch, local ingestion, positional features, offline training and browser-safe inference infrastructure implemented. Actual-candidate browser parity, final release and guided Learn remain pending.
+**Status:** bilingual shell, playable pitch, local ingestion, positional features, offline training and browser-safe inference infrastructure implemented. Owner-run actual-candidate browser-bundle parity passed; final evaluation/release and guided Learn remain pending.
 
 ## Application and scene
 

@@ -1,6 +1,6 @@
 # ADR 007: Browser-safe inference and a distinct penalty convention
 
-**Date:** 2026-10-11. **Status:** accepted and implemented for #12 infrastructure; actual-candidate parity and release gates remain pending.
+**Date:** 2026-10-11. **Status:** accepted and implemented for #12 infrastructure; owner-run actual-candidate browser-bundle parity passed; final evaluation and release gates remain pending.
 
 ## Context
 

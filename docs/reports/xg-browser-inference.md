@@ -1,6 +1,6 @@
 # Browser inference verification
 
-**Issue:** #12. **Date:** 2026-10-11. **Status:** implementation and invented-artifact verification pass; actual frozen-candidate parity remains pending owner-local execution. No public xG is enabled.
+**Issue:** #12. **Date:** 2026-10-11. **Status:** implementation, invented-artifact checks and owner-run frozen-candidate parity pass; complete local comparison is owner-confirmed. No public xG is enabled.
 
 ## Scope and reviewed evidence
 
@@ -30,12 +30,16 @@ Follow the [prediction guide](../architecture/reference/prediction.md#local-veri
 
 ## Canonical protocol identity correction
 
-The first owner-local parity attempt stopped before prediction because the checker compared the recorded canonical protocol digest with the formatted source file digest. Training intentionally identifies `canonical(protocol)`; the feature contract intentionally retains its raw file byte digest. The corrected checker follows those separate identities and reports protocol-content, protocol-identity and feature-identity drift separately. A regression test checks the committed first actual-corpus manifest digest and a synthetic completed training run; negative tests retain rejection of real changes. The synthetic evidence above was regenerated with this correction. No scientific configuration, model parameters or tolerances changed; no retraining is required. Actual-candidate parity still needs the owner rerun.
+The first owner-local parity attempt stopped before prediction because the checker compared the recorded canonical protocol digest with the formatted source file digest. Training intentionally identifies `canonical(protocol)`; the feature contract intentionally retains its raw file byte digest. The corrected checker follows those separate identities and reports protocol-content, protocol-identity and feature-identity drift separately. A regression test checks the committed first actual-corpus manifest digest and a synthetic completed training run; negative tests retain rejection of real changes. The synthetic evidence above was regenerated with this correction. No scientific configuration, model parameters or tolerances changed; no retraining is required. The owner rerun passed; its reviewed evidence is recorded below.
 
-## Actual-candidate handoff and remaining gates
+## Actual-candidate review and remaining gates
 
-The reviewed #11 record selects `full_xgboost`, artifact ID `758526873b8a3a2681f655c064dee52f8bd33749accd499d015420dbe8e11b9a`. Its actual parameter envelope remains on the owner's machine and was **not** verified by these invented-artifact checks.
+The owner supplied [parity.json](xg-browser-inference-first-run/parity.json) and [manifest.json](xg-browser-inference-first-run/manifest.json) from completed inference run `2bb3480ed11edf50a166e4a2328bfb4171ceba36a547ef1abfd53128cca12770`. It verifies the exact #11 `full_xgboost` candidate `758526873b8a3a2681f655c064dee52f8bd33749accd499d015420dbe8e11b9a`, from training run `222909fe801f4865897fea3541e023fed626f6736dca6ef69ceada1f7c57945a`.
 
-Run the local parity command twice against that existing completed training directory, then compare the printed completed parity directories. Share only both parity/manifest files and the comparison output. If an integrity, unsupported-format or tolerance error occurs, preserve it and investigate the exact frozen artifact rather than changing thresholds or silently substituting a candidate. Actual-candidate parity remains an open #12 acceptance item until that evidence passes.
+The run checked **2,886 cases**: 184 learned scenes, three penalty cases, ten unsupported scenes and 2,689 vector cases (189 invalid vectors are a subset). The maximum probability difference was **0**, against the fixed 1e-7 tolerance. The maximum feature residual was 1.4210854715202004e-14. Execution used the browser-target bundle in Node 22.22.2, esbuild 0.28.2 and Python 3.12.3. This is actual-candidate Node execution; the separately recorded actual Chromium checks used invented envelopes. Do not describe it as an actual-candidate Chromium run.
 
-#13 evaluates the exact frozen candidate on the unopened test, examines empirical scene support and finalizes the model card/release decision. Final #8 QA reviews actual asset/parameter distribution and attribution. #4 integrates the public result and bilingual Methodology and results tab after those gates. Marginal compatibility and synthetic numerical parity do not demonstrate real-world support, transfer, causality or rights to distribute weights.
+The assistant verified the submitted manifest's canonical identity, report byte hash, complete two-file inventory, report/manifest agreement, exact inference code hashes against the PR implementation, frozen artifact/training identity, counts and declared tolerance. The report records no held-out label interpretation or parameter publication. The actual envelope and private training rows were not supplied; the assistant did not independently recompute its probabilities.
+
+The owner also reported **PASS from the complete-run comparator** for repeated local parity runs. This is owner-confirmed complete comparison, not an assistant rerun against both private directories. No second run artifact or verbatim terminal log was supplied. The reviewed first-run aggregates and owner confirmation satisfy the #12 numerical-parity handoff; the implementation is ready for review/QA. Issue closure remains subject to merge and checks.
+
+#13 evaluates the exact frozen candidate on the unopened test, examines empirical scene support and finalizes the model card/release decision. Final #8 QA reviews actual asset/parameter distribution and attribution. #4 integrates the public result and bilingual Methodology and results tab after those gates. Numerical parity does not demonstrate empirical support, transfer, causality or rights to distribute weights.
