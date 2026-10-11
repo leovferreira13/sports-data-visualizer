@@ -31,7 +31,7 @@ npm run check:localization
 - [Product vision](docs/VISION.md)
 - [Delivery roadmap](docs/ROADMAP.md)
 - [Completed xG data feasibility audit](docs/reports/xg-data-audit.md)
-- [Architecture overview](docs/architecture/overview.py), [module reference](docs/architecture/reference/README.md) and [ADRs](docs/architecture/adr/README.md)
+- [Architecture overview](docs/architecture/overview.md), [module reference](docs/architecture/reference/README.md) and [ADRs](docs/architecture/adr/README.md)
 - [Development process](docs/DEVELOPMENT_PROCESS.md)
 - [Chat commands for spec, dev and review](docs/COMMANDS.md)
 
@@ -46,3 +46,7 @@ The planned xG model will be independently trained using [StatsBomb Open Data](h
 The intended use is a free, non-commercial professional portfolio without ads, paid services, raw-data hosting or resale. Publishing a model artifact requires a separate review to ensure it contains parameters and metadata only. The logo above comes from the [official Hudl Statsbomb Media Pack](https://statsbomb.com/media-pack/). See the [rights and release record](docs/architecture/reference/statsbomb-rights.md) for the source terms, Hudl Support's conditional answer, and the remaining publication checks.
 
 The offline [shot ingestion guide](docs/architecture/reference/statsbomb-ingestion.md) explains how to rebuild a pinned local corpus and compare embedded shot-frame coverage with separate 360 coverage. All source, per-match and shot-level files remain under ignored local data paths. The completed [aggregate audit for #9](docs/reports/xg-data-audit.md) covers 1,813 matches and all 166 corresponding tracked 360 files. Two full local runs agreed byte for byte; the planning screen passes with 35,024 position-usable shots and 3,261 goals across eight distinct competitions. This audit measures feasibility, not model performance. Feature extraction, training and validation remain separate tasks.
+
+## Positional feature extraction
+
+The shared [feature contract and reproduction guide](docs/architecture/reference/shot-features.md) covers Python/browser parity and local feature generation. [Validation status](docs/reports/xg-feature-audit.md): synthetic checks, full-corpus aggregates and manifest provenance pass; local compared-file equality is owner-confirmed. Use the documented comparator to verify complete runs. Features are not yet an xG model or public prediction. The [architecture overview](docs/architecture/overview.md) is now Markdown.

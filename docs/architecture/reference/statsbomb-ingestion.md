@@ -83,3 +83,15 @@ On 2026-10-11, the owner completed two full local audits at the pinned revision 
 The aggregate audit hash and competition-to-total counts, exclusions, visibility distributions and pooled rates were independently checked from the uploaded `audit.json`. The repository extractor hash matches the local run. Six source-to-corpus examples (goal and non-goal across Premier League 2015/16, Euro 2020 and World Cup 2022) passed the owner's independent spot check; four also verified separate 360 joins and normalized roles. Original inputs and shot/per-match outputs remain local.
 
 The [completed report](../../reports/xg-data-audit.md) records provenance, competition coverage, denominators, exclusions, visibility and 360 comparisons. Its planning screen passes with 35,024 position-usable shots and 3,261 goals across eight distinct competitions. This is data feasibility evidence only; #10, #11 and #13 still own features, training/splitting and evaluation.
+
+## Compare complete local runs
+
+Use the shared read-only comparator after two independent ingestion runs:
+
+```bash
+python3 scripts/xg/compare_runs.py \
+  --left-dir data/derived/xg-audit/<run-id> \
+  --right-dir data/derived/xg-audit-repeat/<run-id>
+```
+
+Pass the completed run directories, not their parent output directories. It validates each manifest's canonical run identity, exact output inventory and SHA-256 hashes, then compares `shots.jsonl`, `match-counts.csv`, `audit.json` and `manifest.json` byte for byte. Identical but corrupt runs, missing/extra files, links and comparing a run with itself fail. Exit zero means complete integrity and equality passed; exit one indicates a failure. The script does not modify either run or print source records. It also supports feature extraction runs.

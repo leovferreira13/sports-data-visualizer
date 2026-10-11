@@ -1,0 +1,524 @@
+[
+  {
+    "name": "central",
+    "scene": {
+      "contract_version": "positional-features/v1",
+      "shot_type": "open-play",
+      "shooter": {
+        "x": 84,
+        "y": 34
+      },
+      "goalkeepers": [
+        {
+          "x": 102,
+          "y": 34
+        }
+      ],
+      "defenders": [
+        {
+          "x": 93,
+          "y": 34
+        },
+        {
+          "x": 93,
+          "y": 40
+        }
+      ],
+      "observation": "synthetic"
+    },
+    "expected": {
+      "status": "ok",
+      "features": {
+        "shot_distance_m": 21,
+        "absolute_lateral_offset_m": 0,
+        "visible_defender_count": 2,
+        "defenders_in_cone_count": 1,
+        "nearest_visible_defender_distance_m": 9,
+        "goalkeeper_distance_to_goal_m": 3,
+        "goalkeeper_distance_to_shot_m": 18
+      }
+    }
+  },
+  {
+    "name": "wide",
+    "scene": {
+      "contract_version": "positional-features/v1",
+      "shot_type": "open-play",
+      "shooter": {
+        "x": 98,
+        "y": 52
+      },
+      "goalkeepers": [
+        {
+          "x": 102,
+          "y": 36
+        }
+      ],
+      "defenders": [
+        {
+          "x": 96,
+          "y": 45
+        },
+        {
+          "x": 88,
+          "y": 48
+        }
+      ],
+      "observation": "synthetic"
+    },
+    "expected": {
+      "status": "ok"
+    }
+  },
+  {
+    "name": "wide-reflected",
+    "scene": {
+      "contract_version": "positional-features/v1",
+      "shot_type": "open-play",
+      "shooter": {
+        "x": 98,
+        "y": 16
+      },
+      "goalkeepers": [
+        {
+          "x": 102,
+          "y": 32
+        }
+      ],
+      "defenders": [
+        {
+          "x": 96,
+          "y": 23
+        },
+        {
+          "x": 88,
+          "y": 20
+        }
+      ],
+      "observation": "synthetic"
+    },
+    "expected": {
+      "status": "ok"
+    }
+  },
+  {
+    "name": "long",
+    "scene": {
+      "contract_version": "positional-features/v1",
+      "shot_type": "open-play",
+      "shooter": {
+        "x": 65,
+        "y": 30
+      },
+      "goalkeepers": [
+        {
+          "x": 102,
+          "y": 34
+        }
+      ],
+      "defenders": [
+        {
+          "x": 83,
+          "y": 30
+        },
+        {
+          "x": 85,
+          "y": 42
+        }
+      ],
+      "observation": "synthetic"
+    },
+    "expected": {
+      "status": "ok"
+    }
+  },
+  {
+    "name": "near-goal",
+    "scene": {
+      "contract_version": "positional-features/v1",
+      "shot_type": "open-play",
+      "shooter": {
+        "x": 104.999999,
+        "y": 34
+      },
+      "goalkeepers": [
+        {
+          "x": 102,
+          "y": 34
+        }
+      ],
+      "defenders": [
+        {
+          "x": 105,
+          "y": 34
+        },
+        {
+          "x": 104,
+          "y": 34
+        }
+      ],
+      "observation": "synthetic"
+    },
+    "expected": {
+      "status": "ok"
+    }
+  },
+  {
+    "name": "zero-defenders",
+    "scene": {
+      "contract_version": "positional-features/v1",
+      "shot_type": "open-play",
+      "shooter": {
+        "x": 84,
+        "y": 34
+      },
+      "goalkeepers": [
+        {
+          "x": 102,
+          "y": 34
+        }
+      ],
+      "defenders": [],
+      "observation": "synthetic"
+    },
+    "expected": {
+      "status": "ok",
+      "features": {
+        "visible_defender_count": 0,
+        "defenders_in_cone_count": 0
+      }
+    }
+  },
+  {
+    "name": "closed-triangle-boundaries",
+    "scene": {
+      "contract_version": "positional-features/v1",
+      "shot_type": "open-play",
+      "shooter": {
+        "x": 84,
+        "y": 34
+      },
+      "goalkeepers": [
+        {
+          "x": 102,
+          "y": 34
+        }
+      ],
+      "defenders": [
+        {
+          "x": 84,
+          "y": 34
+        },
+        {
+          "x": 94.5,
+          "y": 32.17
+        },
+        {
+          "x": 94.5,
+          "y": 35.83
+        },
+        {
+          "x": 105,
+          "y": 30.34
+        },
+        {
+          "x": 105,
+          "y": 37.66
+        },
+        {
+          "x": 105,
+          "y": 34
+        },
+        {
+          "x": 83,
+          "y": 34
+        },
+        {
+          "x": 94.5,
+          "y": 32.16
+        },
+        {
+          "x": 94.5,
+          "y": 35.84
+        }
+      ],
+      "observation": "synthetic"
+    },
+    "expected": {
+      "status": "ok",
+      "features": {
+        "visible_defender_count": 9,
+        "defenders_in_cone_count": 6,
+        "nearest_visible_defender_distance_m": 0
+      }
+    }
+  },
+  {
+    "name": "within-boundary-tolerance",
+    "scene": {
+      "contract_version": "positional-features/v1",
+      "shot_type": "open-play",
+      "shooter": {
+        "x": 84,
+        "y": 34
+      },
+      "goalkeepers": [
+        {
+          "x": 102,
+          "y": 34
+        }
+      ],
+      "defenders": [
+        {
+          "x": 94.5,
+          "y": 32.16999999634
+        }
+      ],
+      "observation": "synthetic"
+    },
+    "expected": {
+      "status": "ok",
+      "features": {
+        "defenders_in_cone_count": 1
+      }
+    }
+  },
+  {
+    "name": "outside-boundary-tolerance",
+    "scene": {
+      "contract_version": "positional-features/v1",
+      "shot_type": "open-play",
+      "shooter": {
+        "x": 84,
+        "y": 34
+      },
+      "goalkeepers": [
+        {
+          "x": 102,
+          "y": 34
+        }
+      ],
+      "defenders": [
+        {
+          "x": 94.5,
+          "y": 32.1699999634
+        }
+      ],
+      "observation": "synthetic"
+    },
+    "expected": {
+      "status": "ok",
+      "features": {
+        "defenders_in_cone_count": 0
+      }
+    }
+  },
+  {
+    "name": "full-pitch",
+    "scene": {
+      "contract_version": "positional-features/v1",
+      "shot_type": "open-play",
+      "shooter": {
+        "x": 0,
+        "y": 0
+      },
+      "goalkeepers": [
+        {
+          "x": 0,
+          "y": 68
+        }
+      ],
+      "defenders": [
+        {
+          "x": 10,
+          "y": 10
+        },
+        {
+          "x": 90,
+          "y": 30
+        }
+      ],
+      "observation": "synthetic"
+    },
+    "expected": {
+      "status": "ok"
+    }
+  },
+  {
+    "name": "ten-defenders",
+    "scene": {
+      "contract_version": "positional-features/v1",
+      "shot_type": "open-play",
+      "shooter": {
+        "x": 84,
+        "y": 34
+      },
+      "goalkeepers": [
+        {
+          "x": 102,
+          "y": 34
+        }
+      ],
+      "defenders": [
+        {
+          "x": 93,
+          "y": 34
+        },
+        {
+          "x": 93,
+          "y": 34
+        },
+        {
+          "x": 93,
+          "y": 34
+        },
+        {
+          "x": 93,
+          "y": 34
+        },
+        {
+          "x": 93,
+          "y": 34
+        },
+        {
+          "x": 93,
+          "y": 34
+        },
+        {
+          "x": 93,
+          "y": 34
+        },
+        {
+          "x": 93,
+          "y": 34
+        },
+        {
+          "x": 93,
+          "y": 34
+        },
+        {
+          "x": 93,
+          "y": 34
+        }
+      ],
+      "observation": "synthetic"
+    },
+    "expected": {
+      "status": "ok"
+    }
+  },
+  {
+    "name": "eleven-defenders",
+    "scene": {
+      "contract_version": "positional-features/v1",
+      "shot_type": "open-play",
+      "shooter": {
+        "x": 84,
+        "y": 34
+      },
+      "goalkeepers": [
+        {
+          "x": 102,
+          "y": 34
+        }
+      ],
+      "defenders": [
+        {
+          "x": 93,
+          "y": 34
+        },
+        {
+          "x": 93,
+          "y": 34
+        },
+        {
+          "x": 93,
+          "y": 34
+        },
+        {
+          "x": 93,
+          "y": 34
+        },
+        {
+          "x": 93,
+          "y": 34
+        },
+        {
+          "x": 93,
+          "y": 34
+        },
+        {
+          "x": 93,
+          "y": 34
+        },
+        {
+          "x": 93,
+          "y": 34
+        },
+        {
+          "x": 93,
+          "y": 34
+        },
+        {
+          "x": 93,
+          "y": 34
+        },
+        {
+          "x": 93,
+          "y": 34
+        }
+      ],
+      "observation": "synthetic"
+    },
+    "expected": {
+      "status": "unsupported",
+      "reason": "too_many_defenders"
+    }
+  },
+  {
+    "name": "goal-line",
+    "scene": {
+      "contract_version": "positional-features/v1",
+      "shot_type": "open-play",
+      "shooter": {
+        "x": 105,
+        "y": 34
+      },
+      "goalkeepers": [
+        {
+          "x": 102,
+          "y": 34
+        }
+      ],
+      "defenders": [],
+      "observation": "synthetic"
+    },
+    "expected": {
+      "status": "unsupported",
+      "reason": "goal_line_shot"
+    }
+  },
+  {
+    "name": "goal-post",
+    "scene": {
+      "contract_version": "positional-features/v1",
+      "shot_type": "open-play",
+      "shooter": {
+        "x": 105,
+        "y": 30.34
+      },
+      "goalkeepers": [
+        {
+          "x": 102,
+          "y": 34
+        }
+      ],
+      "defenders": [],
+      "observation": "synthetic"
+    },
+    "expected": {
+      "status": "unsupported",
+      "reason": "goal_line_shot"
+    }
+  }
+]

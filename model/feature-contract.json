@@ -1,0 +1,22 @@
+{
+  "version": "positional-features/v1",
+  "pitch": { "length_m": 105, "width_m": 68, "goal_width_m": 7.32, "center_y_m": 34 },
+  "ui_bounds": { "x_min": 53.9, "x_max": 103.6, "y_min": 1.4, "y_max": 66.6 },
+  "source": { "length": 120, "width": 80, "attacking_direction": "+x", "ingestion_schema_version": 1 },
+  "features": [
+    { "name": "shot_distance_m", "type": "float", "unit": "m" },
+    { "name": "goal_opening_angle_deg", "type": "float", "unit": "degrees" },
+    { "name": "absolute_lateral_offset_m", "type": "float", "unit": "m" },
+    { "name": "visible_defender_count", "type": "integer", "unit": "count" },
+    { "name": "defenders_in_cone_count", "type": "integer", "unit": "count" },
+    { "name": "nearest_visible_defender_distance_m", "type": "float", "unit": "m" },
+    { "name": "goalkeeper_distance_to_goal_m", "type": "float", "unit": "m" },
+    { "name": "goalkeeper_distance_to_shot_m", "type": "float", "unit": "m" }
+  ],
+  "tolerance": { "barycentric": 1e-9, "absolute": 1e-9, "relative": 1e-9 },
+  "domain": { "shot_type": "open-play", "body_parts": ["Left Foot", "Right Foot"], "population": "male", "max_defenders": 10, "goalkeeper_count": 1, "shot_before_goal_line": true },
+  "missingness": { "frame": "reject-missing-empty-invalid", "goalkeeper": "reject-zero-multiple", "zero_defenders_distance": "pitch-diagonal", "unseen_players": "never-impute" },
+  "normalization": "scale-source-positions-to-meters; physical-goal-posts; no-clamping-rounding-or-fitted-scaling",
+  "cone": "closed-finite-triangle-of-player-centers",
+  "omissions": ["teammates", "extra-attackers", "keeper-alignment", "player-identity", "technique", "unseen-pressure"]
+}
