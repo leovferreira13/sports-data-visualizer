@@ -32,7 +32,7 @@ This Python CLI is not a Next.js runtime or production-build dependency.
 Positional feature extraction is implemented in lib/features.ts and scripts/xg/features.py,
 using model/feature-contract.json and executable cross-language synthetic parity tests.
 The local scripts/xg/extract_features.py materializes private immutable feature runs
-with aggregate diagnostics; complete licensed-corpus validation remains pending.
+with aggregate diagnostics; full-corpus aggregates pass; provenance and repeatability QA remain pending.
 Observation metadata is separate from the eight ordered model inputs.
 
 Prediction is planned to run in the browser with a small versioned artifact.

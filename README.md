@@ -49,4 +49,4 @@ The offline [shot ingestion guide](docs/architecture/reference/statsbomb-ingesti
 
 ## Positional feature extraction
 
-The shared [feature contract and reproduction guide](docs/architecture/reference/shot-features.md) covers Python/browser parity and local feature generation. [Validation status](docs/reports/xg-feature-audit.md): synthetic checks pass; the complete licensed-corpus feature audit is pending. Features are not yet an xG model or public prediction.
+The shared [feature contract and reproduction guide](docs/architecture/reference/shot-features.md) covers Python/browser parity and local feature generation. [Validation status](docs/reports/xg-feature-audit.md): synthetic checks and full-corpus aggregate review pass; provenance and repeatability QA remain pending. Features are not yet an xG model or public prediction.

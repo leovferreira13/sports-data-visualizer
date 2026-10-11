@@ -2,7 +2,7 @@
 
 **Status:** feature extraction implemented; model choice and prediction remain gated by Issue #3.
 
-`lib/features.ts` now extracts eight ordered positional features from metric scenes or browser `Scenario` values. The shared contract and independent Python implementation are documented in [shot features](shot-features.md). No probability is produced. Keeper position is required; observed defender counts, finite-cone counts and nearest distance include every represented outfield defender. Extra attackers and keeper alignment are omitted in v1. Synthetic parity is verified; full-corpus extraction validation is tracked in the feature audit.
+`lib/features.ts` now extracts eight ordered positional features from metric scenes or browser `Scenario` values. The shared contract and independent Python implementation are documented in [shot features](shot-features.md). No probability is produced. Keeper position is required; observed defender counts, finite-cone counts and nearest distance include every represented outfield defender. Extra attackers and keeper alignment are omitted in v1. Synthetic parity is verified; the full-corpus aggregate check passes, with final provenance/repeatability QA tracked in the feature audit.
 
 `lib/predict.ts` should expose a deterministic `predict(features, modelMetadata)` result with a probability in `[0, 1]` and model ID. Versioned metadata should identify data/model provenance, licensing, supported shot population, actual features, penalty treatment, evaluation, calibration and omissions. A lightweight `model/model.json` can be imported by the browser if its size and format permit it.
 
