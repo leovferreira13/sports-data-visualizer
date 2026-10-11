@@ -50,3 +50,7 @@ The offline [shot ingestion guide](docs/architecture/reference/statsbomb-ingesti
 ## Positional feature extraction
 
 The shared [feature contract and reproduction guide](docs/architecture/reference/shot-features.md) covers Python/browser parity and local feature generation. [Validation status](docs/reports/xg-feature-audit.md): synthetic checks, full-corpus aggregates and manifest provenance pass; local compared-file equality is owner-confirmed. Use the documented comparator to verify complete runs. Features are not yet an xG model or public prediction. The [architecture overview](docs/architecture/overview.md) is now Markdown.
+
+## Offline model training
+
+Issue #11 supplies [local training scripts and commands](docs/architecture/reference/xg-training.md), a committed experiment protocol, frozen parameter export and versioned aggregate evidence for the later methodology/results tab. Train on your private complete feature run using the locked Python 3.12 environment. [Execution status](docs/reports/xg-training-methodology.md): synthetic workflow/reproduction checks pass; real-corpus fitting and selection remain pending. Test outcomes stay unopened until #13; no public xG is enabled.

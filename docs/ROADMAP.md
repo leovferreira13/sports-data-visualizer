@@ -75,3 +75,7 @@ If a contextual model is not ready immediately, test the pitch as a prototype wi
 4. Add honest before/after insights and explicit penalty handling.
 5. Finish translation, responsiveness, Learn, and essential accessibility.
 6. Publish, show real users, and record the three highest-priority improvements.
+
+### Offline training implementation status (#11)
+
+Training contracts/scripts and synthetic verification are implemented; actual-corpus preparation, fitting, selection and fresh-environment reproduction remain pending owner execution. See the [local training guide](architecture/reference/xg-training.md) and [status report](reports/xg-training-methodology.md). The Methodology and results tab in #4 consumes the same aggregate evidence as the generated report. Final-test evaluation and release remain gated by #13 and final rights QA in #8.

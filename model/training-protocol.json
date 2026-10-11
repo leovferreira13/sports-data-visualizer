@@ -1,0 +1,22 @@
+{
+  "version": "xg-training/v1",
+  "seed": 42,
+  "partition_weights": {"train": 6, "calibration": 1, "selection": 1, "test": 2},
+  "folds": 5,
+  "minima": {"shots": 10000, "goals": 1000, "matches": 200, "competitions": 3, "validation_class": 100, "fold_class": 50},
+  "logistic": {"C": [0.01, 0.1, 1, 10], "penalty": "l2", "solver": "lbfgs", "max_iter": 2000, "tol": 1e-8, "class_weight": null},
+  "xgboost": {"max_depth": [2, 3], "learning_rate": [0.05, 0.1], "min_child_weight": [5, 20], "n_estimators": 300, "objective": "binary:logistic", "tree_method": "hist", "n_jobs": 1, "reg_lambda": 1, "reg_alpha": 0, "subsample": 1, "colsample_bytree": 1, "scale_pos_weight": 1},
+  "metric_clip": 1e-12,
+  "calibration": {"method": "sigmoid-of-clipped-logit", "clip": 1e-12, "penalty": null, "max_iter": 2000, "tol": 1e-8},
+  "bootstrap": {"resamples": 1000, "seed": 7421, "confidence": 0.95},
+  "decision": {"min_log_loss_improvement": 0.0001, "max_brier_degradation": 0.0001, "cv_tie_tolerance": 1e-12},
+  "bins": {"shot_distance_m": [0, 5, 10, 15, 20, 30, 50, null], "goal_opening_angle_deg": [0, 5, 10, 20, 40, 90, 180], "goalkeeper_distance_to_goal_m": [0, 2, 5, 10, 20, null]},
+  "sparse": {"shots": 100, "goals": 10},
+  "tolerances": {"logistic_export": 1e-10, "xgboost_export": 1e-7, "reproduction_metric": 1e-8, "reproduction_probability": 1e-6},
+  "experiments": [
+    {"id": "geometry_logistic", "kind": "logistic", "indices": [0, 1, 2]},
+    {"id": "defenders_logistic", "kind": "logistic", "indices": [0, 1, 2, 3, 4, 5]},
+    {"id": "full_logistic", "kind": "logistic", "indices": [0, 1, 2, 3, 4, 5, 6, 7]},
+    {"id": "full_xgboost", "kind": "xgboost", "indices": [0, 1, 2, 3, 4, 5, 6, 7]}
+  ]
+}
