@@ -53,15 +53,15 @@ The shared [feature contract and reproduction guide](docs/architecture/reference
 
 ## Offline model training
 
-Issue #11 supplies [local training scripts and commands](docs/architecture/reference/xg-training.md), a committed experiment protocol, frozen parameter export and versioned aggregate evidence for the methodology/results tab. Train on your private complete feature run using the locked Python 3.12 environment. [Execution status](docs/reports/xg-training-methodology.md): synthetic workflow/reproduction checks pass; the first owner-run corpus artifacts passed internal review, with successful complete reproduction confirmed by the owner. Test outcomes stay unopened until #13; no public xG is enabled.
+Issue #11 supplies [local training scripts and commands](docs/architecture/reference/xg-training.md), a committed experiment protocol, frozen parameter export and versioned aggregate evidence for the methodology/results section. Train on your private complete feature run using the locked Python 3.12 environment. [Execution status](docs/reports/xg-training-methodology.md): synthetic workflow/reproduction checks pass; the first owner-run corpus artifacts passed internal review, with successful complete reproduction confirmed by the owner. Test outcomes stay unopened until #13; no public xG is enabled.
 
 ## Browser inference verification
 
-Issue #12 implements validated logistic/XGBoost inference and a separate fixed 0.76 penalty convention. Use the [prediction guide](docs/architecture/reference/prediction.md) to verify your existing frozen training run locally; no retraining or uploading parameters is required. Repeat the parity command and compare its completed directories with `compare_runs.py`. Share only `parity.json`, `manifest.json` and the comparator output. [Verification status](docs/reports/xg-browser-inference.md) distinguishes invented-fixture checks from actual-candidate evidence. The owner-run frozen candidate passed 2,886 parity cases with zero probability difference; complete repeat-run comparison passed and the submitted aggregate evidence was reviewed. The public xG display and Methodology and results tab remain gated by #13/#8 and implemented in #4.
+Issue #12 implements validated logistic/XGBoost inference and a separate fixed 0.76 penalty convention. Use the [prediction guide](docs/architecture/reference/prediction.md) to verify your existing frozen training run locally; no retraining or uploading parameters is required. Repeat the parity command and compare its completed directories with `compare_runs.py`. Share only `parity.json`, `manifest.json` and the comparator output. [Verification status](docs/reports/xg-browser-inference.md) distinguishes invented-fixture checks from actual-candidate evidence. The owner-run frozen candidate passed 2,886 parity cases with zero probability difference; complete repeat-run comparison passed and the submitted aggregate evidence was reviewed. The public xG display and Methodology and results section remain gated by #13/#8 and implemented in #4.
 
 ## Final xG evaluation
 
-The final evaluator is implemented for local frozen-run execution; actual held-out scientific evidence is accepted with limitations; public release remains pending. See the [command and review guide](docs/architecture/reference/xg-final-evaluation.md) and the [six-stage xG implementation summary](docs/reports/xg-implementation-summary.md). Reports and the future app methodology tab derive from the same versioned aggregate evidence.
+The final evaluator is implemented for local frozen-run execution; actual held-out scientific evidence is accepted with limitations; public release remains pending. See the [command and review guide](docs/architecture/reference/xg-final-evaluation.md) and the [six-stage xG implementation summary](docs/reports/xg-implementation-summary.md). Reports and the app methodology section derive from the same versioned aggregate evidence.
 
 ## Actual-corpus final review
 
@@ -69,8 +69,8 @@ The owner-run final evidence passes all automated predicates and the owner repor
 
 ## Reviewed xG Playground and methodology
 
-The local app now executes the original reviewed independent XGBoost in the browser. Explore six editable presets, move players with mouse/touch/keyboard or position inputs, add/remove up to three represented defenders, and inspect actual before/after output. Other attackers are visual only. Penalties use a separately labeled fixed 0.76 convention.
+The local app now executes the original reviewed independent XGBoost in the browser. Explore six editable presets, move players with mouse/touch/keyboard or position inputs, add/remove up to three represented defenders, and see the current xG and all eight live input cards. Other attackers are visual only. Penalties use a separately labeled fixed 0.76 convention.
 
-Methodology/results is directly accessible at `/en/methodology` and `/br/methodology`. Its tables/chart use the same reviewed aggregate evidence as the reports, with selection and final test clearly separated, sparse calibration bins and the adverse cone-count slice visible.
+Methodology/results follows the Playground on the same page, directly accessible at `/en#methodology` and `/br#methodology`; old dedicated URLs redirect there. Its tables/chart use the same reviewed aggregate evidence as the reports, with selection and final test clearly separated, sparse calibration bins and the adverse cone-count slice visible.
 
 Run `npm run build` and `npm start`; no private dataset or Python runtime is needed for the application. Model/evidence byte checks run before building. See the [integration reference](docs/architecture/reference/playground-and-methodology.md), [ADR](docs/architecture/adr/009-integrated-playground-and-evidence.md) and [integrated QA](docs/reports/xg-playground-qa.md). Public publication remains owner-authorized in #5.

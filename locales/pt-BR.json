@@ -20,7 +20,7 @@
   "playground": {
     "eyebrow": "Playground",
     "title": "Monte a chance.",
-    "description": "Arraste os jogadores e observe a estimativa. Use as setas do teclado ou os controles de posição para ajustar a jogada.",
+    "description": "Mova os jogadores. Veja como as posições mudam as entradas e a estimativa.",
     "status": "Modelo independente treinado com StatsBomb Open Data. A cena posicional é ilustrativa, tem visibilidade parcial e não representa a probabilidade exata de um jogador.",
     "pitchDescription": "Meio campo de ataque com centroavantes, zagueiros e goleiro móveis. Arraste um jogador ou selecione-o com o teclado e use as setas.",
     "keyboardHint": "Use as setas para mover este jogador. Segure Shift para passos maiores.",
@@ -59,22 +59,7 @@
       "penalty": "Pênalti: convenção fixa, não uma previsão aprendida",
       "unavailable": "Modelo indisponível. Nenhuma estimativa substituta será mostrada. Recarregue a página para tentar novamente.",
       "unsupported": "Esta entrada não pode ser avaliada. Ajuste a cena ou restaure o preset.",
-      "observations": "O que está representado",
-      "explanation": "A estimativa usa oito características de posição. Habilidade, velocidade, pressão dinâmica e outros atacantes não são modelados.",
-      "support": "Presets são ilustrações. Poucos defensores representados e posições extremas têm suporte limitado; o treino observa apenas parte dos jogadores.",
-      "zero": "Nenhum defensor representado: cálculo permitido, mas suporte empírico não estabelecido.",
-      "outside": "Este preset original ficou fora da referência descritiva de treino. A classificação não é recalculada após edições e não impede explorar.",
-      "within": "Este preset original ficou dentro da referência descritiva; isso não comprova uma cena realista ou validada.",
-      "before": "Antes",
-      "after": "Depois",
-      "difference": "Variação (pontos percentuais)",
-      "comparison": "Última alteração concluída",
-      "plateau": "As características mudaram, mas o resultado ficou no mesmo patamar das árvores. Movimentos pequenos podem manter a estimativa.",
-      "belowResolution": "O resultado mudou menos que a precisão exibida.",
-      "omitted": "Nenhuma característica modelada mudou. Outros atacantes são apenas visuais; um movimento sem deslocamento também mantém o resultado.",
       "convention": "Posições não alteram a convenção de pênalti de 0,76.",
-      "causality": "Comparação dentro deste modelo, não uma garantia causal no futebol real.",
-      "changed": "Características alteradas",
       "remove": "Remover jogador selecionado",
       "selected": "Jogador selecionado",
       "position": "Controles de posição",
@@ -89,7 +74,22 @@
         "goalkeeper_distance_to_goal_m": "Goleiro até o gol (m)",
         "goalkeeper_distance_to_shot_m": "Goleiro até o chute (m)"
       },
-      "loading": "Carregando o modelo revisado…"
+      "loading": "Carregando o modelo revisado…",
+      "cardLabels": {
+        "shot_distance_m": "Distância ao gol",
+        "goal_opening_angle_deg": "Ângulo do chute",
+        "absolute_lateral_offset_m": "Desvio lateral",
+        "visible_defender_count": "Defensores",
+        "defenders_in_cone_count": "Defensores no cone",
+        "nearest_visible_defender_distance_m": "Defensor mais perto",
+        "goalkeeper_distance_to_goal_m": "Goleiro até o gol",
+        "goalkeeper_distance_to_shot_m": "Goleiro até o chute"
+      },
+      "independentModel": "Modelo independente",
+      "fixedPenalty": "Pênalti · valor fixo",
+      "modelFeatures": "Entradas do modelo",
+      "positionFeatures": "Medidas da cena",
+      "noDefender": "Sem defensores"
     }
   },
   "navigation": {
@@ -125,7 +125,6 @@
     "inferenceTitle": "Execução e reprodução",
     "inference": "TypeScript extrai as mesmas oito entradas do pipeline Python. O carregador valida e captura parâmetros imutáveis; XGBoost preserva comparações e acumulação float32 com tolerância de 1e-7. Árvores podem manter o resultado após pequenos movimentos. Entradas inválidas ou modelo indisponível não recebem heurística substituta. Pênaltis usam a convenção fixa de 0,76, separada do modelo aprendido.",
     "review": "A revisão científica foi aceita com limitações e a distribuição do artefato exato foi revisada no escopo gratuito/não comercial. O status automático original continua “needs_review”; revisão não autoriza publicação. O treino privado e a reprodução completa foram executados pelo autor; o assistente revisou agregados e checks, sem rerodar os dados privados.",
-    "linksTitle": "Explore as decisões técnicas",
     "model": "Modelo",
     "shots": "Chutes",
     "goals": "Gols",
@@ -155,15 +154,6 @@
       "nearest_visible_defender_distance_m": "Proximidade do adversário observado mais perto.",
       "goalkeeper_distance_to_goal_m": "Posicionamento do goleiro em relação ao gol.",
       "goalkeeper_distance_to_shot_m": "Proximidade entre goleiro e chute."
-    },
-    "links": {
-      "report": "Avaliação final",
-      "modelCard": "Ficha do modelo",
-      "architecture": "Arquitetura",
-      "adr": "Decisões de arquitetura",
-      "reproduction": "Reprodução local",
-      "training": "Racional do treino",
-      "rights": "Fonte e direitos"
     },
     "identity": "Identidade e revisão",
     "configuration": "Configuração congelada",

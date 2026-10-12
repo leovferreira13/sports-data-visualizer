@@ -62,6 +62,17 @@ try {
     const copy = JSON.parse(readFileSync(`locales/${locale}.json`, "utf8"));
     await page.goto(`${base}/${route}`);
     await page.getByTestId("xg").waitFor();
+    const pitchBox = await page.locator(".pitch-surface").boundingBox();
+    const featureBox = await page.locator(".features-section").boundingBox();
+    assert(pitchBox.x + pitchBox.width <= featureBox.x);
+    assert.equal(await page.locator(".feature-card").count(), 8);
+    assert((await page.locator("#methodology").count()) === 1);
+    assert.equal(
+      await page
+        .getByText("Explore the technical decisions", { exact: true })
+        .count(),
+      0,
+    );
     const preset = page.locator("#scene-preset");
     for (const id of [
       "centralChance",
@@ -105,11 +116,19 @@ try {
         JSON.parse(sessionStorage.getItem("football-visualized-scenario"))
           .scenario.players.shooter.x === 84.5,
     );
-    // Blur explicitly completes a keyboard comparison without a test-only timeout.
-    await preset.focus();
-    await page
-      .getByRole("heading", { name: copy.playground.results.comparison })
-      .waitFor();
+    assert.equal(await page.locator(".feature-card").count(), 8);
+    assert.equal(
+      await page
+        .locator('.feature-card[data-feature="shot_distance_m"] .feature-value')
+        .innerText(),
+      locale === "en" ? "20.5" : "20,5",
+    );
+    assert.equal(
+      await page
+        .locator(".comparison-card, .feature-observations, .section-navigation")
+        .count(),
+      0,
+    );
     let marker = await shooter.boundingBox();
     await page.mouse.move(
       marker.x + marker.width / 2,
@@ -125,27 +144,29 @@ try {
     assert.notEqual((await snapshot()).scenario.players.shooter.y, 34);
     const edited = (await snapshot()).scenario;
     await page
-      .getByRole("link", { name: copy.navigation.methodology, exact: true })
+      .getByRole("link", {
+        name: `${copy.navigation.methodology} ↓`,
+        exact: true,
+      })
       .click();
     await page
       .getByRole("heading", { name: copy.methodology.title, exact: true })
       .waitFor();
-    assert.equal(
-      await page
-        .locator('nav.section-navigation [aria-current="page"]')
-        .innerText(),
-      copy.navigation.methodology,
-    );
+    await page.waitForURL(`${base}/${route}#methodology`);
     assert((await page.locator("#slices").innerText()).includes("815"));
     assert.equal(await page.locator("svg[role=img]").count(), 1);
     await page
-      .getByRole("link", { name: copy.navigation.playground, exact: true })
+      .getByRole("link", {
+        name: `${copy.navigation.playground} ↑`,
+        exact: true,
+      })
       .click();
     await page.getByTestId("xg").waitFor();
     assert.deepEqual((await snapshot()).scenario, edited);
     await page.reload();
     await page.getByTestId("xg").waitFor();
     assert.deepEqual((await snapshot()).scenario, edited);
+    await page.locator(".position-adjustments > summary").click();
     const selector = page.locator(".position-controls select");
     for (const id of ["defender1", "defender2"]) {
       await selector.selectOption(id);
@@ -154,10 +175,21 @@ try {
         .click();
     }
     assert.equal(await page.locator(".pitch-player--defender").count(), 0);
-    assert(
-      (await page.locator(".support-note").allTextContents())
-        .join(" ")
-        .includes(copy.playground.results.zero),
+    assert.equal(
+      await page
+        .locator(
+          '.feature-card[data-feature="visible_defender_count"] .feature-value',
+        )
+        .innerText(),
+      "0",
+    );
+    assert.equal(
+      await page
+        .locator(
+          '.feature-card[data-feature="nearest_visible_defender_distance_m"] .feature-value',
+        )
+        .innerText(),
+      "—",
     );
     for (let i = 0; i < 3; i++)
       await page
@@ -176,11 +208,6 @@ try {
     await selector.selectOption("attacker-0");
     await page.locator(".position-controls input").first().fill("70");
     assert.equal(await page.getByTestId("xg").innerText(), beforeAttacker);
-    assert(
-      (await page.locator(".comparison-card").innerText()).includes(
-        copy.playground.results.omitted,
-      ),
-    );
     await preset.selectOption("penalty");
     await page.locator(".position-controls input").first().fill("70");
     assert.equal(
@@ -189,11 +216,22 @@ try {
     );
     assert(
       (await page.locator(".prediction-card").textContent()).includes(
-        copy.playground.results.penalty,
+        copy.playground.results.fixedPenalty,
       ),
     );
     await page.setViewportSize({ width: 390, height: 844 });
     await preset.selectOption("centralChance");
+    assert.equal(await page.locator(".feature-card").count(), 8);
+    const cards = await page.locator(".feature-card").evaluateAll((cards) =>
+      cards.map((card) => ({
+        x: card.getBoundingClientRect().x,
+        y: card.getBoundingClientRect().y,
+      })),
+    );
+    assert(cards[0].x < cards[1].x && Math.abs(cards[0].y - cards[1].y) < 1);
+    await page.locator(".features-section").scrollIntoViewIfNeeded();
+    const estimateBox = await page.locator(".prediction-card").boundingBox();
+    assert(estimateBox.y >= 0 && estimateBox.y < 50);
     const svg = page.locator(".pitch-svg");
     await svg.scrollIntoViewIfNeeded();
     marker = await page
@@ -228,9 +266,14 @@ try {
     );
     const logo = page.locator(".data-source-logo img");
     await logo.scrollIntoViewIfNeeded();
+    await page.waitForFunction(() => {
+      const img = document.querySelector(".data-source-logo img");
+      return img.complete && img.naturalWidth > 0;
+    });
     assert(await logo.evaluate((img) => img.complete && img.naturalWidth > 0));
     assert((await logo.getAttribute("alt")).length > 0);
     await page.goto(`${base}/${route}/methodology`);
+    await page.waitForURL(`${base}/${route}#methodology`);
     assert(
       await page.evaluate(
         () => document.documentElement.scrollWidth <= innerWidth,
@@ -239,7 +282,7 @@ try {
     assert((await page.locator(".table-scroll").count()) >= 5);
     await page.setViewportSize({ width: 1440, height: 1000 });
     findings.push(
-      `${route}: presets, mouse/keyboard/touch, comparisons, editing, reload/navigation, mobile evidence/attribution PASS`,
+      `${route}: presets, live eight-feature cards, mouse/keyboard/touch, editing, reload/anchors, mobile sticky xG and evidence/attribution PASS`,
     );
   }
   await page.goto(`${base}/en`);
@@ -251,11 +294,11 @@ try {
   await page.getByTestId("xg").waitFor();
   assert.deepEqual((await snapshot()).scenario, prior);
   await page
-    .getByRole("link", { name: "Metodologia e resultados", exact: true })
+    .getByRole("link", { name: "Metodologia e resultados ↓", exact: true })
     .click();
-  await page.waitForURL(`${base}/br/methodology`);
+  await page.waitForURL(`${base}/br#methodology`);
   await page.locator(".language-switcher select").selectOption("en");
-  await page.waitForURL(`${base}/en/methodology`);
+  await page.waitForURL(`${base}/en#methodology`);
   assert.deepEqual((await snapshot()).scenario, prior);
   const modelResponse = await page.request.get(
     `${base}/model/selected-model.json`,
@@ -324,6 +367,7 @@ try {
   await blocked.getByTestId("xg").waitFor();
   await blocked.locator(".pitch-player--attacker").first().focus();
   await blocked.locator(".pitch-player--attacker").first().press("ArrowUp");
+  await blocked.locator(".position-adjustments > summary").click();
   assert.equal(
     await blocked.locator(".position-controls input").first().inputValue(),
     "84.5",

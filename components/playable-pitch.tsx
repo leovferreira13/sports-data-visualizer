@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  useEffect,
   useRef,
   useState,
   useSyncExternalStore,
@@ -10,16 +9,9 @@ import {
 } from "react";
 
 import { PredictionPanel } from "./prediction-panel";
-import { compareScenes, type Comparison } from "@/lib/insights";
 import { predictScenario } from "@/lib/predict";
 import { useSelectedModel } from "@/lib/model-store";
-import {
-  fromSvg,
-  shotAngle,
-  shotDistance,
-  toSvg,
-  viewBox,
-} from "@/lib/geometry";
+import { fromSvg, toSvg, viewBox } from "@/lib/geometry";
 import type { Dictionary } from "@/lib/i18n/dictionaries";
 import type { Locale } from "@/lib/i18n/config";
 import { getPreset, isPresetId, presetIds } from "@/lib/presets";
@@ -48,7 +40,6 @@ type PlaygroundCopy = Dictionary["playground"];
 type Props = {
   locale: Locale;
   copy: PlaygroundCopy;
-  presetSupport: Record<string, string>;
 };
 
 function storageRead() {
@@ -101,16 +92,13 @@ function changeScene(
   sceneListeners.forEach((listener) => listener());
 }
 
-export function PlayablePitch({ locale, copy, presetSupport }: Props) {
+export function PlayablePitch({ locale, copy }: Props) {
   const scene = useSyncExternalStore(
     subscribeToScene,
     getScene,
     getServerScene,
   );
   const [selected, setSelected] = useState<PlayerId>("shooter");
-  const [comparison, setComparison] = useState<Comparison | null>(null);
-  const before = useRef<Scenario | null>(null);
-  const keyboardTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const controlsRef = useRef<HTMLSelectElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
   const dragging = useRef<{ id: PlayerId; pointerId: number } | null>(null);
@@ -122,49 +110,11 @@ export function PlayablePitch({ locale, copy, presetSupport }: Props) {
   const model =
     selectedModel.status === "ready" ? selectedModel.model : undefined;
 
-  function finishComparison() {
-    if (keyboardTimer.current) clearTimeout(keyboardTimer.current);
-    keyboardTimer.current = null;
-    if (!before.current) return;
-    const after = getScene().scenario;
-    setComparison(
-      compareScenes(
-        before.current,
-        after,
-        predictScenario(before.current, model),
-        predictScenario(after, model),
-      ),
-    );
-    before.current = null;
-  }
-  function beginComparison() {
-    if (!before.current) {
-      before.current = getScene().scenario;
-      setComparison(null);
-    }
-  }
-  function clearComparison() {
-    if (keyboardTimer.current) clearTimeout(keyboardTimer.current);
-    keyboardTimer.current = null;
-    before.current = null;
-    dragging.current = null;
-    setComparison(null);
-  }
-  useEffect(
-    () => () => {
-      if (keyboardTimer.current) clearTimeout(keyboardTimer.current);
-    },
-    [],
-  );
-
   function applyAction(action: (scenario: Scenario) => Scenario) {
-    finishComparison();
-    beginComparison();
     changeScene((previous) => ({
       ...previous,
       scenario: action(previous.scenario),
     }));
-    finishComparison();
   }
 
   function playerName(id: PlayerId) {
@@ -191,8 +141,6 @@ export function PlayablePitch({ locale, copy, presetSupport }: Props) {
   function startDrag(id: PlayerId, event: PointerEvent<SVGGElement>) {
     if (dragging.current !== null) return;
     event.preventDefault();
-    finishComparison();
-    beginComparison();
     event.currentTarget.setPointerCapture(event.pointerId);
     dragging.current = { id, pointerId: event.pointerId };
     setSelected(id);
@@ -208,7 +156,6 @@ export function PlayablePitch({ locale, copy, presetSupport }: Props) {
   function stopDrag(event: PointerEvent<SVGGElement>) {
     if (dragging.current?.pointerId === event.pointerId) {
       dragging.current = null;
-      finishComparison();
     }
   }
 
@@ -234,10 +181,7 @@ export function PlayablePitch({ locale, copy, presetSupport }: Props) {
     if (!movement) return;
     event.preventDefault();
     if (dragging.current) return;
-    beginComparison();
     updateAxis(id, movement[0], movement[1] * (event.shiftKey ? 5 : 0.5));
-    if (keyboardTimer.current) clearTimeout(keyboardTimer.current);
-    keyboardTimer.current = setTimeout(finishComparison, 450);
   }
 
   if (!scene) {
@@ -253,43 +197,11 @@ export function PlayablePitch({ locale, copy, presetSupport }: Props) {
   const shooterSvg = toSvg(shooter);
   const allPlayerIds = representedPlayerIds(scene.scenario);
   const result = predictScenario(scene.scenario, model);
-  const originalSupport =
-    JSON.stringify(scene.scenario) === JSON.stringify(getPreset(scene.presetId))
-      ? presetSupport[scene.presetId]
-      : undefined;
   const selectedId = allPlayerIds.includes(selected) ? selected : "shooter";
   const selectedPosition = playerPosition(scene.scenario, selectedId);
 
   return (
     <div className="pitch-workspace">
-      <div className="playground-insights">
-        <PredictionPanel
-          locale={locale}
-          copy={copy.results}
-          scenario={scene.scenario}
-          result={result}
-          loading={selectedModel.status === "loading"}
-          comparison={comparison}
-          originalSupport={originalSupport}
-        />
-        {scene.migratedDefenderLimit && (
-          <p role="status" className="support-note">
-            {copy.results.migration}
-          </p>
-        )}
-        <div className="measurements" aria-live="off">
-          <div>
-            <span>{copy.distance}</span>
-            <strong>
-              {format.format(shotDistance(shooter))} {copy.meters}
-            </strong>
-          </div>
-          <div>
-            <span>{copy.angle}</span>
-            <strong>{format.format(shotAngle(shooter))}°</strong>
-          </div>
-        </div>
-      </div>
       <div className="pitch-editor">
         <div className="scene-actions">
           <label htmlFor="scene-preset">{copy.presetLabel}</label>
@@ -298,7 +210,6 @@ export function PlayablePitch({ locale, copy, presetSupport }: Props) {
               id="scene-preset"
               value={scene.presetId}
               onChange={(event) => {
-                clearComparison();
                 const presetId = event.target.value;
                 if (!isPresetId(presetId)) return;
                 changeScene(() => ({
@@ -395,10 +306,8 @@ export function PlayablePitch({ locale, copy, presetSupport }: Props) {
                   tabIndex={0}
                   aria-label={`${name}: ${copy.forward} ${format.format(position.x)} ${copy.meters}, ${copy.sideways} ${format.format(position.y)} ${copy.meters}. ${copy.keyboardHint}`}
                   onFocus={() => {
-                    finishComparison();
                     setSelected(id);
                   }}
-                  onBlur={finishComparison}
                   onKeyDown={(event) => moveWithKeyboard(id, event)}
                   onPointerDown={(event) => startDrag(id, event)}
                   onPointerMove={continueDrag}
@@ -452,7 +361,6 @@ export function PlayablePitch({ locale, copy, presetSupport }: Props) {
             className="scene-reset"
             type="button"
             onClick={() => {
-              clearComparison();
               changeScene((previous) => ({
                 presetId: previous.presetId,
                 scenario: getPreset(previous.presetId),
@@ -463,68 +371,84 @@ export function PlayablePitch({ locale, copy, presetSupport }: Props) {
             {copy.reset}
           </button>
         </div>
-        <fieldset className="position-controls">
-          <legend>{copy.results.position}</legend>
-          <label>
-            {copy.results.selected}
-            <select
-              ref={controlsRef}
-              value={selectedId}
-              onChange={(event) => {
-                finishComparison();
-                setSelected(event.target.value as PlayerId);
+        <details className="position-adjustments">
+          <summary>{copy.results.position}</summary>
+          <fieldset className="position-controls">
+            <legend>{copy.results.position}</legend>
+            <label>
+              {copy.results.selected}
+              <select
+                ref={controlsRef}
+                value={selectedId}
+                onChange={(event) => {
+                  setSelected(event.target.value as PlayerId);
+                }}
+              >
+                {allPlayerIds.map((id) => (
+                  <option key={id} value={id}>
+                    {playerName(id)}
+                  </option>
+                ))}
+              </select>
+            </label>
+            {(["x", "y"] as const).map((axis) => (
+              <label key={axis}>
+                {axis === "x" ? copy.forward : copy.sideways} ({copy.meters})
+                <input
+                  type="number"
+                  step="0.5"
+                  min={
+                    axis === "x"
+                      ? FIELD.halfLine + FIELD.markerRadius
+                      : FIELD.markerRadius
+                  }
+                  max={
+                    axis === "x"
+                      ? FIELD.length - FIELD.markerRadius
+                      : FIELD.width - FIELD.markerRadius
+                  }
+                  value={Number(selectedPosition[axis].toFixed(2))}
+                  onChange={(event) => {
+                    const value = event.target.valueAsNumber;
+                    if (Number.isFinite(value))
+                      applyAction((scenario) =>
+                        movePlayer(scenario, selectedId, {
+                          ...playerPosition(scenario, selectedId),
+                          [axis]: value,
+                        }),
+                      );
+                  }}
+                />
+              </label>
+            ))}
+            <button
+              type="button"
+              disabled={selectedId === "shooter" || selectedId === "goalkeeper"}
+              onClick={() => {
+                dragging.current = null;
+                applyAction((scenario) => removePlayer(scenario, selectedId));
+                setSelected("shooter");
+                controlsRef.current?.focus();
               }}
             >
-              {allPlayerIds.map((id) => (
-                <option key={id} value={id}>
-                  {playerName(id)}
-                </option>
-              ))}
-            </select>
-          </label>
-          {(["x", "y"] as const).map((axis) => (
-            <label key={axis}>
-              {axis === "x" ? copy.forward : copy.sideways} ({copy.meters})
-              <input
-                type="number"
-                step="0.5"
-                min={
-                  axis === "x"
-                    ? FIELD.halfLine + FIELD.markerRadius
-                    : FIELD.markerRadius
-                }
-                max={
-                  axis === "x"
-                    ? FIELD.length - FIELD.markerRadius
-                    : FIELD.width - FIELD.markerRadius
-                }
-                value={Number(selectedPosition[axis].toFixed(2))}
-                onChange={(event) => {
-                  const value = event.target.valueAsNumber;
-                  if (Number.isFinite(value))
-                    applyAction((scenario) =>
-                      movePlayer(scenario, selectedId, {
-                        ...playerPosition(scenario, selectedId),
-                        [axis]: value,
-                      }),
-                    );
-                }}
-              />
-            </label>
-          ))}
-          <button
-            type="button"
-            disabled={selectedId === "shooter" || selectedId === "goalkeeper"}
-            onClick={() => {
-              dragging.current = null;
-              applyAction((scenario) => removePlayer(scenario, selectedId));
-              setSelected("shooter");
-              controlsRef.current?.focus();
-            }}
-          >
-            {copy.results.remove}
-          </button>
-        </fieldset>
+              {copy.results.remove}
+            </button>
+          </fieldset>
+        </details>
+      </div>
+      <div className="playground-insights">
+        <PredictionPanel
+          locale={locale}
+          copy={copy.results}
+          scenario={scene.scenario}
+          result={result}
+          loading={selectedModel.status === "loading"}
+        />
+        {scene.migratedDefenderLimit && (
+          <p role="status" className="support-note">
+            {copy.results.migration}
+          </p>
+        )}
       </div>
     </div>
   );

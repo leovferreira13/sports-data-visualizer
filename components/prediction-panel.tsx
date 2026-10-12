@@ -1,7 +1,7 @@
 import type { Dictionary } from "@/lib/i18n/dictionaries";
 import type { Locale } from "@/lib/i18n/config";
-import { extractScenarioFeatures } from "@/lib/features";
-import { probabilityLabels, type Comparison } from "@/lib/insights";
+import { extractScenarioFeatures, featureNames } from "@/lib/features";
+import { probabilityLabels } from "@/lib/insights";
 import type { PredictionResult } from "@/lib/predict";
 import type { Scenario } from "@/lib/scenario";
 
@@ -11,8 +11,6 @@ type Props = {
   scenario: Scenario;
   result: PredictionResult;
   loading?: boolean;
-  comparison: Comparison | null;
-  originalSupport?: string;
 };
 
 export function PredictionPanel({
@@ -21,22 +19,20 @@ export function PredictionPanel({
   scenario,
   result,
   loading,
-  comparison,
-  originalSupport,
 }: Props) {
-  const features = extractScenarioFeatures(scenario);
+  // Penalty cards describe positions only; the fixed convention ignores these inputs.
+  const features = extractScenarioFeatures(
+    scenario.shotType === "penalty"
+      ? { ...scenario, shotType: "open-play" }
+      : scenario,
+  );
   const number = new Intl.NumberFormat(locale, { maximumFractionDigits: 1 });
   const labels =
     result.status === "ok"
       ? probabilityLabels(result.probability, locale)
       : null;
-  const delta =
-    comparison &&
-    new Intl.NumberFormat(locale, {
-      maximumFractionDigits: 1,
-      minimumFractionDigits: 1,
-      signDisplay: "exceptZero",
-    }).format(comparison.delta * 100);
+  const convention =
+    result.status === "ok" && result.source === "penalty-convention";
   return (
     <>
       <section
@@ -44,11 +40,14 @@ export function PredictionPanel({
         aria-labelledby="estimate-title"
         data-result-status={result.status}
       >
-        <p id="estimate-title" className="eyebrow">
-          {result.status === "ok" && result.source === "penalty-convention"
-            ? copy.penalty
-            : copy.estimate}
-        </p>
+        <div className="estimate-heading">
+          <p id="estimate-title" className="eyebrow">
+            {copy.estimate}
+          </p>
+          <span className="model-kind">
+            {convention ? copy.fixedPenalty : copy.independentModel}
+          </span>
+        </div>
         {labels ? (
           <div className="prediction-value">
             <strong data-testid="xg">
@@ -65,91 +64,52 @@ export function PredictionPanel({
                 : copy.unavailable}
           </p>
         )}
-        <p>
-          {result.status === "ok" && result.source === "penalty-convention"
-            ? copy.convention
-            : copy.explanation}
-        </p>
+        {convention && <p className="penalty-note">{copy.convention}</p>}
       </section>
-      {features.status === "ok" && (
-        <details className="feature-observations">
-          <summary>{copy.observations}</summary>
-          <dl>
-            {Object.entries(features.features).map(([name, value]) => (
-              <div key={name}>
-                <dt>{copy.features[name as keyof typeof copy.features]}</dt>
-                <dd>
-                  {name === "nearest_visible_defender_distance_m" &&
-                  features.features.visible_defender_count === 0
-                    ? "—"
-                    : number.format(value)}
-                </dd>
+      <section className="features-section" aria-labelledby="features-title">
+        <h2 id="features-title">
+          {convention ? copy.positionFeatures : copy.modelFeatures}
+        </h2>
+        <div className="feature-cards" aria-live="off">
+          {featureNames.map((name) => {
+            const value =
+              features.status === "ok" ? features.features[name] : null;
+            const missing =
+              name === "nearest_visible_defender_distance_m" &&
+              features.status === "ok" &&
+              features.features.visible_defender_count === 0;
+            const unit = [
+              "visible_defender_count",
+              "defenders_in_cone_count",
+            ].includes(name)
+              ? ""
+              : name === "goal_opening_angle_deg"
+                ? "°"
+                : "m";
+            return (
+              <div
+                className="feature-card"
+                key={name}
+                data-feature={name}
+                title={copy.features[name]}
+              >
+                <span className="feature-name">{copy.cardLabels[name]}</span>
+                <strong
+                  aria-label={`${copy.features[name]}: ${missing ? copy.noDefender : value === null ? "—" : number.format(value)}`}
+                >
+                  <span className="feature-value">
+                    {value === null || missing ? "—" : number.format(value)}
+                  </span>
+                  {!missing && value !== null && unit && <small>{unit}</small>}
+                </strong>
+                {missing && (
+                  <span className="feature-note">{copy.noDefender}</span>
+                )}
               </div>
-            ))}
-          </dl>
-        </details>
-      )}
-      <aside className="support-note">
-        <p>{copy.support}</p>
-        {features.status === "ok" &&
-          features.features.visible_defender_count === 0 && <p>{copy.zero}</p>}
-        {originalSupport &&
-          result.status === "ok" &&
-          result.source === "learned-model" && (
-            <p>
-              {originalSupport === "outside_training_reference"
-                ? copy.outside
-                : originalSupport === "within_training_reference"
-                  ? copy.within
-                  : copy.zero}
-            </p>
-          )}
-      </aside>
-      {comparison && result.status === "ok" && (
-        <section
-          className="comparison-card"
-          aria-live="polite"
-          aria-atomic="true"
-        >
-          <h2>{copy.comparison}</h2>
-          <dl className="comparison-values">
-            <div>
-              <dt>{copy.before}</dt>
-              <dd>{probabilityLabels(comparison.before, locale).percent}</dd>
-            </div>
-            <div>
-              <dt>{copy.after}</dt>
-              <dd>{probabilityLabels(comparison.after, locale).percent}</dd>
-            </div>
-            <div>
-              <dt>{copy.difference}</dt>
-              <dd>
-                {comparison.kind === "below-resolution"
-                  ? `${comparison.delta > 0 ? "+" : "−"}< ${number.format(0.1)}`
-                  : delta}
-              </dd>
-            </div>
-          </dl>
-          {comparison.kind !== "changed" && (
-            <p>
-              {
-                copy[
-                  comparison.kind === "below-resolution"
-                    ? "belowResolution"
-                    : comparison.kind
-                ]
-              }
-            </p>
-          )}
-          {!!comparison.changed.length && (
-            <p>
-              {copy.changed}:{" "}
-              {comparison.changed.map((name) => copy.features[name]).join("; ")}
-            </p>
-          )}
-          <p className="muted">{copy.causality}</p>
-        </section>
-      )}
+            );
+          })}
+        </div>
+      </section>
     </>
   );
 }

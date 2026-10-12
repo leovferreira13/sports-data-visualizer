@@ -45,7 +45,7 @@ Learn uses the same rules, calculation, and controls as Playground. Visitors can
 - **Explain honestly:** changes in the estimate are comparisons within the model, not causal claims about real football. Do not describe a visible factor as a model input if it is not one.
 - **Make demonstrations easy:** quick reading, a generous pitch area, fluid movement, and good presentation on mobile and desktop.
 - **Permit illustrative exploration:** rare/extreme but valid scenes are intentional. Support diagnostics inform concise explanations, not automatic blocking. Avoid precision or causal promises and explain that tree predictions can remain unchanged after small movements.
-- **Expose the decisions:** a visible adjacent Methodology and results tab shares the report's aggregate evidence, separates validation from test and links architecture/ADRs/reproduction for reviewers.
+- **Expose the decisions:** a visible adjacent Methodology and results section shares the report's aggregate evidence, separates validation from test and links architecture/ADRs/reproduction for reviewers.
 - **Ship a small, complete product:** the first release is an xG module, not a scouting portal.
 - **Support both languages from the start:** UI, explanations, and model limitations in `pt-BR` and `en`.
 
@@ -66,3 +66,7 @@ If this module works, the brand can hold independent experiments: famous goals, 
 ## Current model and delivery handoff
 
 The frozen shallow XGBoost has accepted actual-corpus scientific evidence with support/transfer limitations. Use it for the educational v0.1 instead of requiring another optimization cycle. #4 integrates inference, proportional support explanations and mandatory methodology/results; #5 adds optional Learn and the shareable portfolio release. #4 may start before #3/#8 close. Actual parameter/export, rights/history and integrated product attribution/assets QA must finish before public distribution. The owner controls publication and board/merge state.
+
+## Owner-directed Playground revision (2026-10-11)
+
+The current #4 UI places the pitch left and eight retained-feature cards plus current xG right. Mobile uses a compact sticky xG strip within the Playground, the pitch, then two-column cards. The last-completed-change panel and expanded observations block are removed; support/illustration explanations remain in Methodology. Secondary position controls are collapsible. Methodology is server-rendered below the pitch on the same localized page, with anchor navigation and redirects from former dedicated URLs. The technical-links block is removed from the product; repository references remain available. This revision supersedes earlier references to adjacent tabs or comparison panels and does not change inference, parameters or scientific evidence.
