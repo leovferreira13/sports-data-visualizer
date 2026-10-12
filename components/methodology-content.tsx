@@ -14,6 +14,21 @@ import {
 export async function MethodologyContent({ locale }: { locale: Locale }) {
   const dictionary = await getDictionary(locale),
     c = dictionary.methodology;
+  const reviewDate = new Intl.DateTimeFormat(locale, {
+    dateStyle: "medium",
+    timeZone: "UTC",
+  }).format(new Date(`${scientificReview.review_date}T00:00:00Z`));
+  const evidenceLabel = (value: string) => {
+    const labels: Record<string, string> = {
+      identity: c.displayValues.identityCalibration,
+      accepted_with_limitations: c.displayValues.acceptedWithLimitations,
+      needs_review: c.displayValues.needsReview,
+    };
+    if (!Object.hasOwn(labels, value)) {
+      throw new Error(`Missing localized evidence label: ${value}`);
+    }
+    return labels[value];
+  };
   const number = new Intl.NumberFormat(locale, { maximumFractionDigits: 6 });
   const integer = new Intl.NumberFormat(locale);
   const percent = new Intl.NumberFormat(locale, {
@@ -179,7 +194,7 @@ export async function MethodologyContent({ locale }: { locale: Locale }) {
               </div>
               <div>
                 <dt>{c.calibrationLabel}</dt>
-                <dd>identity</dd>
+                <dd>{evidenceLabel("identity")}</dd>
               </div>
             </dl>
           </section>
@@ -401,13 +416,17 @@ export async function MethodologyContent({ locale }: { locale: Locale }) {
                 <dt>{c.evidence}</dt>
                 <dd>{xgEvidence.evidence_id}</dd>
                 <dt>
-                  {c.scientificReview} · {scientificReview.review_date}
+                  {c.scientificReview} · {reviewDate}
                 </dt>
-                <dd>{scientificReview.scientific_review}</dd>
+                <dd data-review-status={scientificReview.scientific_review}>
+                  {evidenceLabel(scientificReview.scientific_review)}
+                </dd>
                 <dt>{c.automatedStatus}</dt>
-                <dd>{xgEvidence.release_status}</dd>
+                <dd data-release-status={xgEvidence.release_status}>
+                  {evidenceLabel(xgEvidence.release_status)}
+                </dd>
                 <dt>{c.publicationAuthorization}</dt>
-                <dd>{String(xgEvidence.publication_authorized)}</dd>
+                <dd>{xgEvidence.publication_authorized ? c.displayValues.yes : c.displayValues.no}</dd>
                 <dt>{c.final}</dt>
                 <dd>
                   {integer.format(selectedTest.metrics.shots)} {c.shots} ·{" "}

@@ -1,0 +1,187 @@
+{
+  "meta": {
+    "title": "Voetbal, uitgelegd",
+    "description": "Een interactieve speelomgeving om schotsituaties in het voetbal te begrijpen."
+  },
+  "brand": {
+    "name": "Voetbal, uitgelegd",
+    "tagline": "Verplaats de spelers. Ontdek wat een scoringskans verandert."
+  },
+  "language": {
+    "label": "Taal"
+  },
+  "attribution": {
+    "sourceLink": "Bronrepository van StatsBomb Open Data",
+    "logoAlt": "Hudl Statsbomb-logo",
+    "disclaimer": "Onafhankelijk, gratis en niet-commercieel project. Ons model is getraind op StatsBomb Open Data; het is geen Hudl Statsbomb xG en wordt niet door Hudl Statsbomb onderschreven. Bronrecords worden niet verspreid."
+  },
+  "playground": {
+    "eyebrow": "Speelomgeving",
+    "title": "Bouw de kans op.",
+    "description": "Verplaats de spelers. Bekijk hoe posities de invoer en de schatting veranderen.",
+    "status": "Onafhankelijk model getraind op StatsBomb Open Data. Deze positiesituatie is illustratief, toont slechts een deel van de spelers en geeft niet de exacte kans van een specifieke speler.",
+    "pitchDescription": "Aanvallende helft van het veld met verplaatsbare spitsen, centrale verdedigers en een keeper. Sleep een speler of selecteer deze met het toetsenbord en gebruik de pijltjestoetsen.",
+    "keyboardHint": "Gebruik de pijltjestoetsen om deze speler te verplaatsen. Houd Shift ingedrukt voor grotere stappen.",
+    "distance": "Afstand tot doel",
+    "angle": "Schothoek",
+    "meters": "m",
+    "presetLabel": "Beginsituatie",
+    "reset": "Situatie herstellen",
+    "addAttacker": "+ Aanvaller",
+    "addDefender": "+ Verdediger",
+    "defenderName": "Centrale verdediger",
+    "forward": "Naar het doel",
+    "sideways": "Over de breedte",
+    "players": {
+      "shooter": "Spits",
+      "goalkeeper": "Keeper",
+      "defender1": "Centrale verdediger 1",
+      "defender2": "Centrale verdediger 2"
+    },
+    "playerGlyphs": {
+      "shooter": "SP",
+      "goalkeeper": "K",
+      "defender1": "CV",
+      "defender2": "CV"
+    },
+    "presets": {
+      "centralChance": "Centrale kans",
+      "penalty": "Strafschop",
+      "oneOnOne": "Eén tegen één",
+      "tightAngle": "Scherpe hoek",
+      "longShot": "Afstandsschot",
+      "crowdedBox": "Vol strafschopgebied"
+    },
+    "results": {
+      "estimate": "Schatting van dit model",
+      "penalty": "Strafschop: vaste conventie, geen aangeleerde voorspelling",
+      "unavailable": "Model niet beschikbaar. Er wordt geen vervangende schatting getoond. Herlaad de pagina om opnieuw te proberen.",
+      "unsupported": "Deze invoer kan niet worden beoordeeld. Pas de situatie aan of herstel de beginsituatie.",
+      "convention": "Posities veranderen de vaste strafschopwaarde van 0,76 niet.",
+      "remove": "Geselecteerde speler verwijderen",
+      "selected": "Geselecteerde speler",
+      "position": "Positie instellen",
+      "migration": "Je opgeslagen situatie is aangepast aan de limiet van drie verdedigers; de eerste posities zijn behouden.",
+      "features": {
+        "shot_distance_m": "Schotafstand (m)",
+        "goal_opening_angle_deg": "Openingshoek van het doel (°)",
+        "absolute_lateral_offset_m": "Zijdelingse afwijking (m)",
+        "visible_defender_count": "Weergegeven verdedigers",
+        "defenders_in_cone_count": "Verdedigers in schotdriehoek",
+        "nearest_visible_defender_distance_m": "Dichtstbijzijnde verdediger (m)",
+        "goalkeeper_distance_to_goal_m": "Keeper tot doel (m)",
+        "goalkeeper_distance_to_shot_m": "Keeper tot schot (m)"
+      },
+      "loading": "Het gecontroleerde model wordt geladen…",
+      "cardLabels": {
+        "shot_distance_m": "Afstand tot doel",
+        "goal_opening_angle_deg": "Schothoek",
+        "absolute_lateral_offset_m": "Zijwaartse afstand",
+        "visible_defender_count": "Verdedigers",
+        "defenders_in_cone_count": "In schotdriehoek",
+        "nearest_visible_defender_distance_m": "Dichtste verdediger",
+        "goalkeeper_distance_to_goal_m": "Keeper tot doel",
+        "goalkeeper_distance_to_shot_m": "Keeper tot schot"
+      },
+      "fixedPenalty": "Strafschop · vaste waarde",
+      "modelFeatures": "Modelinvoer",
+      "positionFeatures": "Situatiemetingen",
+      "noDefender": "Geen verdedigers"
+    }
+  },
+  "navigation": {
+    "label": "Projectonderdelen",
+    "playground": "Speelomgeving",
+    "methodology": "Methodologie en resultaten"
+  },
+  "methodology": {
+    "eyebrow": "Keuzes, bewijs en beperkingen",
+    "title": "Achter de schatting",
+    "intro": "Een speelomgeving om scoringskansen te begrijpen en te zien hoe gegevens, modelkeuzes en software samen het getal op het scherm bepalen.",
+    "overviewTitle": "Wat het getal betekent",
+    "overview": "Een schatting van 0,20 xG staat volgens dit model voor ongeveer 20 doelpunten uit 100 vergelijkbare schoten. Dit is geen exacte kans voor een bepaalde speler. De verzonnen situatie vereenvoudigt de werkelijke context.",
+    "dataTitle": "Bron en populatie",
+    "data": "We gebruiken StatsBomb Open Data met waargenomen doelpunten en niet-doelpunten; de xG van de bron is nooit de doelvariabele. De populatie bestaat uit schoten met de voet van mannen in open spel. Kopballen, strafschoppen en andere situaties zijn uitgesloten van de training. Eventframes vormen de primaire waarneming; eventuele 360-gegevens garanderen niet dat alle verdedigers zichtbaar zijn. Situaties zonder zichtbare keeper en singuliere gevallen op de doellijn worden uitgesloten, zonder imputatie.",
+    "featuresTitle": "Acht positievariabelen",
+    "featuresIntro": "Geometrie beschrijft de kans; aantallen en afstanden beschrijven waargenomen tegenstanders. De schotdriehoek is de begrensde driehoek tussen het schot en de doelpalen. Posities worden in meters uitgedrukt, onafhankelijk van SVG. Zonder verdedigers wordt de velddiagonaal als speciale afstandswaarde gebruikt, naast het expliciete aantal. Andere aanvallers, identiteit, voorkeursvoet, techniek, snelheid en tijdscontext worden niet meegenomen.",
+    "trainingTitle": "Training, selectie en vastzetten",
+    "training": "Volledige wedstrijden worden gescheiden voor training, kalibratie, selectie en test, zodat events uit dezelfde wedstrijd niet over groepen worden verdeeld. De begrensde zoekprocedure gebruikt vijf folds, uitsluitend op de trainingsdata; de schaling voor logistische regressie wordt binnen elke fold aangepast. Drie logistische regressies onderzoeken geometrie, verdedigers en alle variabelen afzonderlijk. Ondiepe XGBoost-bomen testen niet-lineaire interacties. Er is geen klassenbalancering of hertraining na selectie.",
+    "selection": "De vooraf vastgelegde regel selecteerde XGBoost op basis van de waargenomen prestaties en een grens voor verslechtering van de Brier-score om eenvoud te verkiezen. De selectie-intervallen bewezen geen doorslaggevende superioriteit. Sigmoïdekalibratie voldeed niet aan de criteria voor toepassing. Vastzetten betekent dat invoer, voorbewerking, bomen en kalibratie worden vastgelegd voordat de eindtest wordt geopend; de interface voert alleen die parameters uit.",
+    "scoresTitle": "Validatie en eindtest",
+    "scores": "Log loss bestraft onjuiste kansen die met grote zekerheid worden voorspeld; Brier meet de gekwadrateerde kansfout. Lager is beter. Selectie kiest het model; de eindtest beoordeelt het reeds vastgelegde model en is niet gebruikt om het opnieuw af te stellen. De 95%-intervallen worden berekend door volledige wedstrijden opnieuw te bemonsteren, zodat afhankelijkheid tussen schoten behouden blijft.",
+    "validation": "Selectie — niet de eindtest",
+    "final": "Eindtest apart gehouden tot het vastzetten",
+    "pairedTitle": "Gepaarde verschillen op de eindtest",
+    "paired": "XGBoost min referentie: negatieve waarden zijn gunstig voor XGBoost. De totale intervallen zijn op deze test gunstig voor het kandidaatmodel; dit garandeert geen voordeel in elke deelgroep of overdraagbaarheid naar andere competities of situaties.",
+    "calibrationTitle": "Kalibratie en kleine steekproeven",
+    "calibration": "De diagonaal staat voor overeenstemming tussen het voorspelde gemiddelde en de waargenomen frequentie. Balken tonen op wedstrijden gebaseerde 95%-intervallen van de waargenomen frequentie; open punten markeren intervallen met weinig schoten. Geen interval met voldoende gegevens werd gemarkeerd, maar hoge kansen hebben weinig voorbeelden en onderbouwen geen nauwkeurigheid voor extreme situaties.",
+    "slicesTitle": "Ook de ongunstige deelgroep telt",
+    "slices": "Met twee verdedigers binnen de schotdriehoek presteerde XGBoost op deze test slechter dan de volledige logistische regressie. Dit betreft het aantal in de driehoek, niet het totaal op het veld. Dit resultaat blijft zichtbaar; algemene gemiddelden wissen lokale tekortkomingen niet uit.",
+    "supportTitle": "Illustratieve situaties en overdraagbaarheid",
+    "support": "De beschrijvende referentie gebruikt nabije voorbeelden in gestandaardiseerde variabelen uit uitsluitend de trainingsdata, met een drempel van 99% en een aparte groep zonder verdedigers. We publiceren geen referentierijen; de interface berekent daarom niet voor elke wijziging de gezamenlijke ondersteuning door trainingsdata. Vier beginsituaties in open spel vallen buiten deze referentie; binnen de referentie vallen bewijst evenmin realisme. Zeldzame situaties blijven verkenbaar. Vergelijkingen zijn geen causale effecten; gedeeltelijke zichtbaarheid, weinig verdedigers en andere domeinen beperken de interpretatie.",
+    "inferenceTitle": "Uitvoering en reproduceerbaarheid",
+    "inference": "TypeScript berekent dezelfde acht invoervariabelen als de Python-pijplijn. De loader valideert en bewaart onveranderlijke parameters; XGBoost behoudt float32-vergelijkingen en -accumulatie binnen een tolerantie van 1e-7. Kleine verplaatsingen kunnen dezelfde boomuitkomst behouden. Ongeldige invoer of niet-beschikbare modellen krijgen geen vervangende heuristiek. Strafschoppen gebruiken de vaste conventie van 0,76, los van het aangeleerde model.",
+    "review": "De wetenschappelijke beoordeling is met beperkingen aanvaard; verspreiding van het exacte modelbestand is beoordeeld voor gratis, niet-commercieel gebruik. De oorspronkelijke automatische status blijft ‘beoordeling nodig’; beoordeling geeft geen toestemming voor publicatie. Private training en volledige reproductie zijn lokaal uitgevoerd en gerapporteerd. De aggregaten en controles zijn beoordeeld zonder de private data opnieuw te verwerken.",
+    "model": "Model",
+    "shots": "Schoten",
+    "goals": "Doelpunten",
+    "mean": "Voorspeld gemiddelde",
+    "observed": "Waargenomen frequentie",
+    "interval": "95%-interval",
+    "sparse": "Weinig gegevens",
+    "supported": "Voldoende gegevens",
+    "bin": "Voorspellingsinterval",
+    "reference": "Referentie",
+    "estimate": "Verschil",
+    "feature": "Variabele",
+    "rationale": "Onderbouwing",
+    "models": {
+      "constant": "Constante doelfrequentie",
+      "geometry_logistic": "Logistisch: geometrie",
+      "defenders_logistic": "Logistisch: verdedigers",
+      "full_logistic": "Volledige logistische regressie",
+      "full_xgboost": "Volledig XGBoost"
+    },
+    "featureRationales": {
+      "shot_distance_m": "Afstand tot het midden van het doel.",
+      "goal_opening_angle_deg": "Opening tussen de doelpalen.",
+      "absolute_lateral_offset_m": "Zijdelingse asymmetrie zonder onderscheid tussen links en rechts.",
+      "visible_defender_count": "Aantal weergegeven tegenstanders.",
+      "defenders_in_cone_count": "Bezetting van de schotdriehoek.",
+      "nearest_visible_defender_distance_m": "Nabijheid van de dichtstbijzijnde waargenomen tegenstander.",
+      "goalkeeper_distance_to_goal_m": "Positie van de keeper ten opzichte van het doel.",
+      "goalkeeper_distance_to_shot_m": "Afstand tussen keeper en schot."
+    },
+    "identity": "Identiteit en beoordeling",
+    "configuration": "Vastgelegde configuratie",
+    "trees": "bomen",
+    "depth": "diepte",
+    "learningRate": "leersnelheid",
+    "minChildWeight": "minimaal gewicht van een kindknoop",
+    "calibrationLabel": "Kalibratie",
+    "artifact": "Modelbestand",
+    "trainingRun": "Trainingsrun",
+    "evidence": "Bewijs",
+    "scientificReview": "Wetenschappelijke beoordeling",
+    "automatedStatus": "Oorspronkelijke automatische status",
+    "publicationAuthorization": "Toestemming voor publicatie",
+    "score": "Score",
+    "partitionsTitle": "Verdeling van wedstrijden",
+    "partition": "Deelverzameling",
+    "matches": "Wedstrijden",
+    "partitions": {
+      "train": "Training",
+      "calibration": "Kalibratie",
+      "selection": "Selectie",
+      "test": "Eindtest"
+    },
+    "unopened": "Niet geopend tijdens selectie",
+    "displayValues": {
+      "identityCalibration": "Geen herkalibratie (identiteit)",
+      "acceptedWithLimitations": "Aanvaard met beperkingen",
+      "needsReview": "Beoordeling nodig",
+      "yes": "Ja",
+      "no": "Nee"
+    }
+  }
+}

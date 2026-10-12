@@ -1,6 +1,6 @@
 # Football, Visualized — delivery roadmap
 
-**Status:** plan for the first public release · **Updated:** 2026-10-11
+**Status:** plan for the first public release · **Updated:** 2026-10-12
 
 ## Delivery rule
 
@@ -12,7 +12,7 @@ Build a working first interaction as soon as possible, then complete a small, tr
 | **1. Playable pitch** | 4–8 h | Responsive pitch with shooter, goalkeeper, two defenders, and presets; distance and angle respond to dragging. | Mouse and touch work; pieces stay in bounds; no provisional number is labeled xG. |
 | **2. Prove the calculation** | Completed in #9–#13 | Small test takes a scenario state and returns a reproducible estimate. | Model rights and inputs checked; keeper/defenders affect the value if claimed; scientific checks and scene responses recorded; support/transfer limitations documented. |
 | **3. Publishable Playground** | 6–10 h after milestone 2 | Live estimate, explanations, six presets, addable attackers and defenders, removal controls, reset, and `pt-BR`/`en` interface. | v0.1 acceptance criteria met on desktop and mobile. |
-| **4. Learn and publish** | 4–8 h | Optional 2–3-step tutorial on the same pitch, README, public URL, and short feedback round. | Full flow in both languages; model provenance/limits visible; public link tested. |
+| **4. Portfolio release** | Scoped in #24–#26 | Five-language Playground, professional presentation and Railway public URL. Learn (#5) is deferred. | Full flow in all five languages; model provenance/limits visible; public link tested. |
 | **5. Refine from real use** | Based on feedback | Fixes to confusion, bugs, and friction reported by fans and commentators. | Priorities come from observation rather than a speculative feature list. |
 
 **First observable milestone:** after milestone 1, people can drag pieces and switch presets. This answers “how quickly can we make a working first version?” **Publication gate:** only after milestone 2 may a number be presented as an xG estimate.
@@ -36,7 +36,7 @@ If a contextual model is not ready immediately, test the pitch as a prototype wi
 - Visible, directly accessible Methodology and results section below Playground, with plain-language explanations plus technical evidence/architecture links.
 - “What affects this chance?” panel with current observations; after moving a piece, compare before/after only for factors actually used by the model.
 - Learn mode with 2–3 optional experiments: distance and angle; move a defender out of the way; reposition the goalkeeper. Hide any experiment unsupported by the selected model.
-- Portuguese / English selector; initial language from browser preference, persisted manual choice, and complete translations including methodology notes.
+- Portuguese / English / Dutch / Spanish / German selector; initial language from browser preference, persisted manual choice, and complete translations including methodology notes.
 
 **Delivery**
 
@@ -50,7 +50,7 @@ If a contextual model is not ready immediately, test the pitch as a prototype wi
 2. Moving the shot changes distance/angle consistently; pitch drawings match the numeric values.
 3. Moving the goalkeeper or a defender evaluates the actual retained features; some movements can leave tree outputs unchanged. The UI never invents an effect, forces monotonicity or promises real-world causality.
 4. The value is in [0, 1]; penalties and invalid states follow explicit rules; coordinate errors do not cause absurd jumps.
-5. All six presets load in both languages and remain editable. The tutorial can start and stop without reopening the site.
+5. All six presets load in all five languages and remain editable. Optional Learn is deferred and does not block release.
 6. Changing language preserves scene and mode, translates every text, and retains the choice on later visits; absent a saved choice, the initial locale follows browser preference.
 7. The explanation identifies the result as an estimate and lists included and omitted factors. Descriptions of changes derive from the same features as the prediction.
 8. The flow works with mouse and touch on desktop and mobile widths; critical interactions have an accessible alternative if dragging fails.
@@ -84,7 +84,7 @@ Training contracts/scripts and synthetic verification are implemented; the first
 
 ### Browser inference implementation status (#12)
 
-Validated artifact loading, logistic/XGBoost inference, explicit unsupported/unavailable results and the separate 0.76 penalty convention are implemented. Invented-fixture parity is automated; the owner's frozen candidate passed 2,886 cases with zero probability difference, and complete repeat-run comparison passed. See the [inference review](reports/xg-browser-inference.md). The [prediction guide](architecture/reference/prediction.md) provides local commands, optional Chromium checks and repeat-run comparison. The reviewed weights are now a hash-checked static asset and the local page displays learned estimates; authorized public deployment remains #5.
+Validated artifact loading, logistic/XGBoost inference, explicit unsupported/unavailable results and the separate 0.76 penalty convention are implemented. Invented-fixture parity is automated; the owner's frozen candidate passed 2,886 cases with zero probability difference, and complete repeat-run comparison passed. See the [inference review](reports/xg-browser-inference.md). The [prediction guide](architecture/reference/prediction.md) provides local commands, optional Chromium checks and repeat-run comparison. The reviewed weights are now a hash-checked static asset and the local page displays learned estimates; authorized public deployment is tracked in #26.
 
 ## Final evaluation handoff
 
@@ -96,20 +96,29 @@ The owner-run final evidence passes all automated predicates and the owner repor
 
 ## Portfolio alignment and completion ownership (2026-10-11)
 
-#4 presents actual model responses, tree plateaus, illustrative presets and layered methodology; #5 provides short optional experiments, a concise interview-ready README/walkthrough and small targeted qualitative review. A fixed 5–8-person feedback cohort, growth/traffic targets and universal scene precision are not release gates. No new training work is required for the educational first release.
+#4 presents actual model responses, tree plateaus, illustrative presets and layered methodology; #5 provides deferred optional experiments; #25 owns the interview-ready README/walkthrough and targeted qualitative review. A fixed 5–8-person feedback cohort, growth/traffic targets and universal scene precision are not release gates. No new training work is required for the educational first release.
 
-#9–#13 are closed and the final-evaluation PR is merged. #3's technical/scientific milestone is complete; #8 is closed following its scoped rights/artifact/history completion; integrated xG/methodology publication checks were explicitly transferred to #4. Start #4 from the accepted scientific handoff without requiring epic closure. #4 collects the concrete QA evidence for #8; #5 publishes afterward with owner authorization. This preserves publication checks without a circular development dependency.
+#9–#13 are closed and the final-evaluation PR is merged. #3's technical/scientific milestone is complete; #8 is closed following its scoped rights/artifact/history completion; integrated xG/methodology publication checks were explicitly transferred to #4. Start #4 from the accepted scientific handoff without requiring epic closure. #4 collects the concrete QA evidence for #8; #26 owns subsequent authorized publication. This preserves publication checks without a circular development dependency.
 
 ## Rights completion handoff
 
-The owner assigned interface-dependent publication QA to #4. The dated #8 rights/artifact/repository completion review is in `docs/reports/statsbomb-rights-completion.md`. After its documentation is merged, #8 and the completed model epic #3 may close. Actual xG/methodology pages, final build/network content and attribution/logo QA remain mandatory in #4 before #5 publishes with owner authorization. No new training cycle or public release is authorized by this handoff.
+The owner assigned interface-dependent publication QA to #4. The dated #8 rights/artifact/repository completion review is in `docs/reports/statsbomb-rights-completion.md`. After its documentation is merged, #8 and the completed model epic #3 may close. Actual xG/methodology pages, final build/network content and attribution/logo QA remain mandatory in #4 before #26 completes authorized publication. No new training cycle or public release is authorized by this handoff.
 
 ## Integrated #4 delivery
 
 The reviewed parameter envelope is now integrated into the bilingual Playground, with explicit prediction states, zero-to-three represented defenders, honest comparisons and inline Methodology/results. The original fitted feature contract, parameters and aggregate evidence remain unchanged. See [Playground and Methodology/results](architecture/reference/playground-and-methodology.md) for actual modules and commands.
 
-Earlier statements that actual weights are local-only or that the UI displays geometry only describe the pre-integration state. #8 is closed; #4 owns the dated integrated QA record and any explicitly unresolved logo/publication checks. Learn and authorized deployment remain #5. See `docs/reports/xg-playground-qa.md`; no public release is implied.
+Earlier statements that actual weights are local-only or that the UI displays geometry only describe the pre-integration state. #8 is closed; #4 owns the dated integrated QA record and any explicitly unresolved logo/publication checks. Learn remains deferred in #5; authorized deployment is tracked in #26. See `docs/reports/xg-playground-qa.md`; no public release is implied.
 
 ## Owner-directed Playground revision (2026-10-11)
 
 The current #4 UI places the pitch left and eight retained-feature cards plus current xG right. Mobile uses a compact sticky xG strip within the Playground, the pitch, then two-column cards. The last-completed-change panel and expanded observations block are removed; support/illustration explanations remain in Methodology. Secondary position controls are collapsible. Methodology is server-rendered below the pitch on the same localized page, with anchor navigation and redirects from former dedicated URLs. The technical-links block is removed from the product; repository references remain available. This revision supersedes earlier references to adjacent tabs or comparison panels and does not change inference, parameters or scientific evidence.
+
+## Five-language extension (#24, 2026-10-12)
+
+The current product supports `/en`, `/br`, `/nl`, `/es` and `/de`, with full
+Playground/Methodology copy, native language choices, persisted preference and
+locale-aware display formatting. Parameters, features, evidence and scene storage
+are unchanged. See [localization QA](reports/localization-qa.md).
+Portfolio presentation/editorial cleanup remains #25; Railway publication and
+live checks remain #26. Learn (#5) is not a release prerequisite.

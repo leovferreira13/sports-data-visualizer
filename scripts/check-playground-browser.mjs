@@ -58,10 +58,18 @@ try {
   for (const [route, locale] of [
     ["en", "en"],
     ["br", "pt-BR"],
+    ["nl", "nl"],
+    ["es", "es"],
+    ["de", "de"],
   ]) {
     const copy = JSON.parse(readFileSync(`locales/${locale}.json`, "utf8"));
     await page.goto(`${base}/${route}`);
     await page.getByTestId("xg").waitFor();
+    assert.equal(await page.locator("html").getAttribute("lang"), locale);
+    assert.equal(await page.title(), copy.meta.title);
+    assert.equal(await page.locator('meta[name="description"]').getAttribute("content"), copy.meta.description);
+    assert.equal(await page.locator(".language-switcher option").count(), 5);
+    assert.equal(await page.locator(".data-source-logo").getAttribute("aria-label"), copy.attribution.sourceLink);
     const pitchBox = await page.locator(".pitch-surface").boundingBox();
     const featureBox = await page.locator(".features-section").boundingBox();
     assert(pitchBox.x + pitchBox.width <= featureBox.x);
@@ -121,7 +129,7 @@ try {
       await page
         .locator('.feature-card[data-feature="shot_distance_m"] .feature-value')
         .innerText(),
-      locale === "en" ? "20.5" : "20,5",
+      new Intl.NumberFormat(locale, { maximumFractionDigits: 1 }).format(20.5),
     );
     assert.equal(
       await page
@@ -201,7 +209,7 @@ try {
     await page.locator(".position-controls input").first().fill("70");
     assert.equal(
       (await page.getByTestId("xg").innerText()).replace(/\s/g, ""),
-      `${locale === "en" ? "0.76" : "0,76"}xG`,
+      `${new Intl.NumberFormat(locale, { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(0.76)}xG`,
     );
     assert(
       (await page.locator(".prediction-card").textContent()).includes(
@@ -260,7 +268,19 @@ try {
       return img.complete && img.naturalWidth > 0;
     });
     assert(await logo.evaluate((img) => img.complete && img.naturalWidth > 0));
-    assert((await logo.getAttribute("alt")).length > 0);
+    assert.equal(await logo.getAttribute("alt"), copy.attribution.logoAlt);
+    assert((await page.locator(".site-footer").innerText()).includes(copy.attribution.disclaimer));
+    await page.locator(".evidence-identity summary").click();
+    assert.equal(await page.locator("[data-review-status]").innerText(), copy.methodology.displayValues.acceptedWithLimitations);
+    assert.equal(await page.locator("[data-release-status]").innerText(), copy.methodology.displayValues.needsReview);
+    if (locale === "nl" || locale === "de") {
+      await page.setViewportSize({ width: 320, height: 844 });
+      assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+      for (const card of await page.locator(".feature-card").all()) {
+        assert(await card.evaluate((el) => el.scrollWidth <= el.clientWidth));
+      }
+      await page.setViewportSize({ width: 390, height: 844 });
+    }
     await page.goto(`${base}/${route}/methodology`);
     await page.waitForURL(`${base}/${route}#methodology`);
     assert(
@@ -277,16 +297,33 @@ try {
   await page.goto(`${base}/en`);
   await page.getByTestId("xg").waitFor();
   await page.locator("#scene-preset").selectOption("tightAngle");
-  const prior = (await snapshot()).scenario;
-  await page.locator(".language-switcher select").selectOption("pt-BR");
-  await page.waitForURL(`${base}/br`);
-  await page.getByTestId("xg").waitFor();
-  assert.deepEqual((await snapshot()).scenario, prior);
-  await page.goto(`${base}/br#methodology`);
-  await page.waitForURL(`${base}/br#methodology`);
-  await page.locator(".language-switcher select").selectOption("en");
-  await page.waitForURL(`${base}/en#methodology`);
-  assert.deepEqual((await snapshot()).scenario, prior);
+  await page.locator(".position-adjustments > summary").click();
+  await page.locator(".position-controls input").first().fill("80");
+  await page.getByRole("button", { name: "+ Attacker", exact: true }).click();
+  await page.getByRole("button", { name: "+ Defender", exact: true }).click();
+  const prior = await snapshot();
+  const routeLocales = [["en", "en"], ["br", "pt-BR"], ["nl", "nl"], ["es", "es"], ["de", "de"]];
+  // Cycle every locale on an edited scene, retaining query and section hash.
+  await page.goto(`${base}/en?qa=locale#methodology`);
+  for (const [route, locale] of routeLocales) {
+    await page.locator(".language-switcher select").selectOption(locale);
+    await page.waitForURL(`${base}/${route}?qa=locale#methodology`);
+    await page.getByTestId("xg").waitFor();
+    assert.deepEqual(await snapshot(), prior);
+    const cookie = (await context.cookies()).find((x) => x.name === "football-visualized-locale");
+    if (locale !== "en") assert.equal(cookie?.value, locale);
+    await page.reload();
+    await page.getByTestId("xg").waitFor();
+    assert.deepEqual(await snapshot(), prior);
+    if (locale !== "en") {
+      await page.goto(`${base}/`);
+      await page.waitForURL(`${base}/${route}`);
+      await page.getByTestId("xg").waitFor();
+      assert.deepEqual(await snapshot(), prior);
+      await page.goto(`${base}/${route}?qa=locale#methodology`);
+    }
+  }
+  await page.goto(`${base}/en`);
   const modelResponse = await page.request.get(
     `${base}/model/selected-model.json`,
   );
@@ -296,51 +333,39 @@ try {
     createHash("sha256").update(modelBytes).digest("hex"),
     "c0d91256a2c0f83ede48f1f549b8a0cc379e6ef675ccd4ce9ef10e471bb4350d",
   );
-  for (const failure of ["network", "hash"]) {
-    const failedContext = await browser.newContext();
-    await failedContext.route("**/model/selected-model.json", (route) =>
-      failure === "network"
-        ? route.fulfill({ status: 503, body: "Unavailable" })
-        : route.fulfill({
-            status: 200,
-            contentType: "application/json",
-            body: Buffer.concat([modelBytes, Buffer.from(" ")]),
-          }),
-    );
-    const failed = await failedContext.newPage();
-    await failed.goto(`${base}/en`);
-    await failed.getByText("Model unavailable.", { exact: false }).waitFor();
-    assert.equal(await failed.getByTestId("xg").count(), 0);
-    await failed.locator("#scene-preset").selectOption("penalty");
-    await failed.getByTestId("xg").waitFor();
-    assert.equal(
-      (await failed.getByTestId("xg").innerText()).replace(/\s/g, ""),
-      "0.76xG",
-    );
-    await failedContext.close();
-  }
-  const loadingContext = await browser.newContext();
-  let releaseModel;
-  const delayed = new Promise((resolve) => {
-    releaseModel = resolve;
-  });
-  await loadingContext.route("**/model/selected-model.json", async (route) => {
-    await delayed;
-    await route.fulfill({
-      status: 200,
-      contentType: "application/json",
-      body: modelBytes,
+  for (const [routeName, locale] of routeLocales) {
+    const copy = JSON.parse(readFileSync(`locales/${locale}.json`, "utf8"));
+    for (const failure of ["network", "hash"]) {
+      const failedContext = await browser.newContext();
+      await failedContext.route("**/model/selected-model.json", (route) =>
+        failure === "network"
+          ? route.fulfill({ status: 503, body: "Unavailable" })
+          : route.fulfill({ status: 200, contentType: "application/json", body: Buffer.concat([modelBytes, Buffer.from(" ")]) }),
+      );
+      const failed = await failedContext.newPage();
+      await failed.goto(`${base}/${routeName}`);
+      await failed.getByText(copy.playground.results.unavailable, { exact: true }).waitFor();
+      assert.equal(await failed.getByTestId("xg").count(), 0);
+      await failed.locator("#scene-preset").selectOption("penalty");
+      await failed.getByTestId("xg").waitFor();
+      assert.equal((await failed.getByTestId("xg").innerText()).replace(/\s/g, ""), `${new Intl.NumberFormat(locale, { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(0.76)}xG`);
+      await failedContext.close();
+    }
+    const loadingContext = await browser.newContext();
+    let releaseModel;
+    const delayed = new Promise((resolve) => { releaseModel = resolve; });
+    await loadingContext.route("**/model/selected-model.json", async (route) => {
+      await delayed;
+      await route.fulfill({ status: 200, contentType: "application/json", body: modelBytes });
     });
-  });
-  const loadingPage = await loadingContext.newPage();
-  await loadingPage.goto(`${base}/en`);
-  await loadingPage
-    .getByText("Loading the reviewed model…", { exact: true })
-    .waitFor();
-  assert.equal(await loadingPage.getByTestId("xg").count(), 0);
-  releaseModel();
-  await loadingPage.getByTestId("xg").waitFor();
-  await loadingContext.close();
+    const loadingPage = await loadingContext.newPage();
+    await loadingPage.goto(`${base}/${routeName}`);
+    await loadingPage.getByText(copy.playground.results.loading, { exact: true }).waitFor();
+    assert.equal(await loadingPage.getByTestId("xg").count(), 0);
+    releaseModel();
+    await loadingPage.getByTestId("xg").waitFor();
+    await loadingContext.close();
+  }
   const isolated = await browser.newContext();
   const blocked = await isolated.newPage();
   await blocked.addInitScript(() => {
@@ -359,7 +384,24 @@ try {
     await blocked.locator(".position-controls input").first().inputValue(),
     "84.5",
   );
+  await blocked.locator(".language-switcher select").selectOption("nl");
+  await blocked.waitForURL(`${base}/nl`);
+  await blocked.getByTestId("xg").waitFor();
+  await blocked.locator(".position-adjustments > summary").click();
+  assert.equal(await blocked.locator(".position-controls input").first().inputValue(), "84.5");
   await isolated.close();
+  const noCookies = await browser.newContext();
+  const cookieBlocked = await noCookies.newPage();
+  await cookieBlocked.addInitScript(() => {
+    Object.defineProperty(document, "cookie", { get: () => "", set: () => {} });
+  });
+  await cookieBlocked.goto(`${base}/en`);
+  await cookieBlocked.getByTestId("xg").waitFor();
+  await cookieBlocked.locator(".language-switcher select").selectOption("de");
+  await cookieBlocked.waitForURL(`${base}/de`);
+  await cookieBlocked.getByTestId("xg").waitFor();
+  assert.equal((await noCookies.cookies()).length, 0);
+  await noCookies.close();
   assert.deepEqual(errors, []);
   assert(
     ![...requests].some((path) =>
@@ -372,9 +414,13 @@ try {
     version: browser.version(),
     viewport: [1440, 1000],
     mobile: [390, 844],
+    narrow_mobile: [320, 844],
+    narrow_mobile_locales: ["nl", "de"],
+    locales: ["en", "pt-BR", "nl", "es", "de"],
     findings,
     locale_and_view_retention: "PASS",
     blocked_storage: "PASS",
+    blocked_cookie_navigation: "PASS",
     model_loading_network_and_hash_failure: "PASS",
     served_model_sha256: createHash("sha256").update(modelBytes).digest("hex"),
     page_errors: errors,

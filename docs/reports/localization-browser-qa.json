@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "engine": "Chromium",
+  "version": "153.0.8010.0",
+  "viewport": [
+    1440,
+    1000
+  ],
+  "mobile": [
+    390,
+    844
+  ],
+  "narrow_mobile": [
+    320,
+    844
+  ],
+  "narrow_mobile_locales": [
+    "nl",
+    "de"
+  ],
+  "locales": [
+    "en",
+    "pt-BR",
+    "nl",
+    "es",
+    "de"
+  ],
+  "findings": [
+    "en: presets, live eight-feature cards, mouse/keyboard/touch, editing, reload/anchors, mobile sticky xG and evidence/attribution PASS",
+    "br: presets, live eight-feature cards, mouse/keyboard/touch, editing, reload/anchors, mobile sticky xG and evidence/attribution PASS",
+    "nl: presets, live eight-feature cards, mouse/keyboard/touch, editing, reload/anchors, mobile sticky xG and evidence/attribution PASS",
+    "es: presets, live eight-feature cards, mouse/keyboard/touch, editing, reload/anchors, mobile sticky xG and evidence/attribution PASS",
+    "de: presets, live eight-feature cards, mouse/keyboard/touch, editing, reload/anchors, mobile sticky xG and evidence/attribution PASS"
+  ],
+  "locale_and_view_retention": "PASS",
+  "blocked_storage": "PASS",
+  "blocked_cookie_navigation": "PASS",
+  "model_loading_network_and_hash_failure": "PASS",
+  "served_model_sha256": "c0d91256a2c0f83ede48f1f549b8a0cc379e6ef675ccd4ce9ef10e471bb4350d",
+  "page_errors": [],
+  "network_paths": [
+    "/",
+    "/_next/image",
+    "/_next/static/chunks/00fku1i3li68g.js",
+    "/_next/static/chunks/0y-dctk-kmqss.js",
+    "/_next/static/chunks/196x_tfexoucg.js",
+    "/_next/static/chunks/1vosrfg_maoqd.css",
+    "/_next/static/chunks/300zjr1xml9xr.js",
+    "/_next/static/chunks/3ewp08ebnb49j.js",
+    "/_next/static/chunks/3fntmmi971322.js",
+    "/_next/static/chunks/3s6nzrbk-8mnv.js",
+    "/_next/static/chunks/turbopack-0qdq-7c70s5o8.js",
+    "/br",
+    "/br/methodology",
+    "/de",
+    "/de/methodology",
+    "/en",
+    "/en/methodology",
+    "/es",
+    "/es/methodology",
+    "/model/selected-model.json",
+    "/nl",
+    "/nl/methodology"
+  ],
+  "public_deployment_tested": false
+}

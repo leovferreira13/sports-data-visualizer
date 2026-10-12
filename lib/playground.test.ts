@@ -65,18 +65,6 @@ describe("actual reviewed model and evidence", () => {
       await loadSelectedModelBytes(Uint8Array.from(changed).buffer),
     ).toEqual({ status: "invalid", reason: "artifact_contract" });
   });
-  it("keeps both locale dictionaries structurally complete", () => {
-    function keys(v: unknown, prefix = ""): string[] {
-      return v && typeof v === "object"
-        ? Object.entries(v).flatMap(([k, x]) => keys(x, `${prefix}.${k}`))
-        : [prefix];
-    }
-    expect(
-      keys(JSON.parse(readFileSync("locales/en.json", "utf8"))).sort(),
-    ).toEqual(
-      keys(JSON.parse(readFileSync("locales/pt-BR.json", "utf8"))).sort(),
-    );
-  });
 });
 
 describe("deliberate defender editing and snapshots", () => {

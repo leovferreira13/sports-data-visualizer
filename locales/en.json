@@ -8,9 +8,7 @@
     "tagline": "Move the players. Understand what changes a goal-scoring chance."
   },
   "language": {
-    "label": "Language",
-    "english": "English",
-    "portuguese": "Português (Brasil)"
+    "label": "Language"
   },
   "attribution": {
     "sourceLink": "StatsBomb Open Data source repository",
@@ -177,6 +175,13 @@
       "selection": "Selection",
       "test": "Final test"
     },
-    "unopened": "Unopened during selection"
+    "unopened": "Unopened during selection",
+    "displayValues": {
+      "identityCalibration": "No recalibration (identity)",
+      "acceptedWithLimitations": "Accepted with limitations",
+      "needsReview": "Needs review",
+      "yes": "Yes",
+      "no": "No"
+    }
   }
 }

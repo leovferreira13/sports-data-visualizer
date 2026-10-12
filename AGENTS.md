@@ -2,7 +2,7 @@
 
 ## Goal
 
-Ship a small, useful xG playground quickly. Playground is the default; Learn is optional. The UI supports Portuguese and English. See `docs/VISION.md` and `docs/ROADMAP.md`.
+Ship a small, useful xG playground quickly. Playground is the default; Learn is optional. The UI supports Portuguese, English, Dutch, Spanish and German. See `docs/VISION.md` and `docs/ROADMAP.md`.
 
 ## Sources of truth
 
@@ -42,7 +42,7 @@ Architecture is a proposal until implemented. Update it as actual boundaries bec
 ## Documentation language
 
 - Write every repository Markdown file in English, including Issues-derived plans copied into Markdown, ADRs, README, prompts, and PR templates. Do not add Portuguese prose to any `.md` file.
-- Keep the bilingual product interface in locale resources (`pt-BR` and `en`); the English-only Markdown rule does not restrict translations shown to users.
+- Keep the five-language product interface in locale resources (`pt-BR`, `en`, `nl`, `es` and `de`); the English-only Markdown rule does not restrict translations shown to users.
 - `npm run check:precommit` includes the Markdown language check; still review short passages manually before publishing a PR. CI runs the same canonical pre-commit checks on pushes and PRs.
 
 Never commit credentials or private user data.
