@@ -6,7 +6,7 @@
 
 The complete requested cohort passes every agreed planning minimum: 35,024 position-usable shots, 3,261 goals, 1,813 represented matches and eight distinct competitions across ten competition/seasons. This permits the planned feature and training experiments; it does not establish predictive quality, calibration or suitability for every scene in the playground.
 
-Every selected event file and all 166 corresponding tracked 360 files were available in the owner's completed local runs. The earlier connector download limitation has been resolved by local execution. The absence of a 360 file in the pinned source remains an official availability observation, not an omitted local input.
+Every selected event file and all 166 corresponding tracked 360 files were available in the completed local runs. The earlier connector download limitation has been resolved by local execution. The absence of a 360 file in the pinned source remains an official availability observation, not an omitted local input.
 
 Embedded shot freeze frames remain the primary positional source. Of 35,057 eligible base shots, all have valid nonempty embedded frames; 35,024 have exactly one identifiable opponent goalkeeper. The other 33 shots (10 goals) remain in the local base corpus and are excluded only from the provisional position-usable cohort.
 
@@ -147,9 +147,9 @@ Four substantially available 2015/16 leagues contribute 29,499 of the 35,024 usa
 
 ## Provenance and verification
 
-The owner executed both full runs locally with Python 3.12.3 and confirmed byte-identical `shots.jsonl`, `match-counts.csv`, `audit.json` and `manifest.json`. The assistant independently verified the uploaded aggregate audit hash, all competition-to-total count sums, disjoint exclusions, defender-distribution sums and pooled rate calculations. The extractor SHA-256 also matches the repository file. Full input and corpus files were not transferred to the assistant environment.
+Both full runs were executed locally with Python 3.12.3; byte-identical outputs were reported for `shots.jsonl`, `match-counts.csv`, `audit.json` and `manifest.json`. The assistant independently verified the uploaded aggregate audit hash, all competition-to-total count sums, disjoint exclusions, defender-distribution sums and pooled rate calculations. The extractor SHA-256 also matches the repository file. Full input and corpus files were not transferred to the assistant environment.
 
-The owner also ran an independent source-to-corpus spot check: one goal and one non-goal each from Premier League 2015/16, Euro 2020 and World Cup 2022. All six passed type, body-part, outcome/label, original-location and normalized embedded-role checks; four matched 360 event IDs and normalized separate-frame players. These samples support semantic correctness but are not exhaustive manual validation. Synthetic tests cover failure boundaries and mapping behavior.
+An independent source-to-corpus spot check was reported locally: one goal and one non-goal each from Premier League 2015/16, Euro 2020 and World Cup 2022. All six passed type, body-part, outcome/label, original-location and normalized embedded-role checks; four matched 360 event IDs and normalized separate-frame players. These samples support semantic correctness but are not exhaustive manual validation. Synthetic tests cover failure boundaries and mapping behavior.
 
 | Provenance item | Value |
 | --- | --- |

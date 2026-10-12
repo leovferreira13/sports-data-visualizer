@@ -1,16 +1,16 @@
 # Playground and Methodology/results
 
-**Status:** implemented in #4; public deployment remains #5.
+**Status:** implemented in #4; public deployment remains #26.
 
 ## Responsibilities
 
 `components/playable-pitch.tsx` retains the tab-scoped scene store, Pointer Events/capture and arrow-key controls. Number inputs provide an equivalent accessible position control. `lib/scenario.ts` owns deliberate add/remove, represented IDs and the zero-to-three defender UI limit; shooter/keeper cannot be removed. `lib/scenario-session.ts` writes v3 and migrates v1/v2 snapshots with a one-time disclosure for excess legacy defenders. Blocked storage leaves the in-memory scene usable.
 
-`lib/selected-model.ts` verifies exact static asset bytes before parsing. `lib/model-store.ts` fetches the model once and exposes loading/ready/invalid states. `lib/predict.ts` remains the prediction authority. `components/prediction-panel.tsx` shows the current xG/percentage and eight live cards directly from the feature extractor. The owner removed the last-completed-change panel and its interaction bookkeeping; pure comparison helpers remain available for later guided experiments.
+`lib/selected-model.ts` verifies exact static asset bytes before parsing. `lib/model-store.ts` fetches the model once and exposes loading/ready/invalid states. `lib/predict.ts` remains the prediction authority. `components/prediction-panel.tsx` shows the current xG/percentage and eight live cards directly from the feature extractor. The last-completed-change panel and its interaction bookkeeping were removed; pure comparison helpers remain available for later guided experiments.
 
 The pitch is on the left and results/cards on the right at desktop widths. On mobile, the result becomes a compact sticky strip, followed by the pitch and a two-column card grid. The strip is bounded by the Playground so it does not follow visitors into Methodology. Position inputs are available in a disclosure; mouse, touch and marker keyboard movement remain immediate. Count cards have no distance units. With zero defenders the nearest-defender card shows no value rather than presenting the sentinel as a physical distance. Penalty cards are explicitly scene measurements, while the separately labeled estimate stays fixed.
 
-`components/methodology-content.tsx` server-renders evidence below the Playground on `/en#methodology` and `/br#methodology`, using `lib/xg-evidence.ts`. Scrolling between sections preserves the mounted scene; no jump or return links are shown. The previous `/en/methodology` and `/br/methodology` routes return 307 redirects to the corresponding anchor, preserving shared links. Locale switching retains the anchor and scene. There are no section tabs or technical-links promotional block. Support/illustration, omitted factors, tree plateaus and scientific limitations remain in Methodology, along with the source credit and shared footer.
+`components/methodology-content.tsx` server-renders evidence below the Playground on `/en#methodology`, `/br#methodology`, `/nl#methodology`, `/es#methodology` and `/de#methodology`, using `lib/xg-evidence.ts`. Scrolling between sections preserves the mounted scene; no jump or return links are shown. The previous dedicated methodology routes in all five locales return 307 redirects to the corresponding anchor, preserving shared links. Locale switching retains the anchor and scene. There are no section tabs or technical-links promotional block. Support/illustration, omitted factors, tree plateaus and scientific limitations remain in Methodology, along with the source credit and shared footer.
 
 The learned field/feature contract, original presets and model parameters are unchanged. Deliberate removed-marker metadata changes only the UI adapter. No descriptive support warning disables valid inference. Original preset classifications disappear after editing; no training reference rows or per-shot predictions are shipped.
 
@@ -44,7 +44,7 @@ NODE_PATH=/tmp/xg-browser-tools/node_modules \
 
 `INFERENCE_CHROMIUM_EXECUTABLE` optionally chooses an intentional compatible local executable. The product script starts a local production server itself; `PRODUCT_QA_PORT` defaults to 3010. `PRODUCT_QA_OUTPUT` optionally records aggregate QA/network paths. Browser tools are absent from production dependencies.
 
-See [integrated QA](../../reports/xg-playground-qa.md) and [ADR 009](../adr/009-integrated-playground-and-evidence.md). Public deployment smoke testing is still required in #5; none of these scripts authorize release.
+See [integrated QA](../../reports/xg-playground-qa.md) and [ADR 009](../adr/009-integrated-playground-and-evidence.md). Public deployment smoke testing is still required in #26; none of these scripts authorize release.
 
 ## Exact distribution and asset inspection
 

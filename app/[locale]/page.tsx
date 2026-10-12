@@ -4,6 +4,7 @@ import { MethodologyContent } from "@/components/methodology-content";
 import { PlayablePitch } from "@/components/playable-pitch";
 import { localeFromRoute } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
+import { project } from "@/lib/project";
 
 type PlaygroundPageProps = {
   params: Promise<{ locale: string }>;
@@ -30,6 +31,14 @@ export default async function PlaygroundPage({ params }: PlaygroundPageProps) {
           <p className="eyebrow">{dictionary.playground.eyebrow}</p>
           <h1 id="playground-title">{dictionary.playground.title}</h1>
           <p className="lead">{dictionary.playground.description}</p>
+          <div className="project-author">
+            <span>{dictionary.author.by} <strong>{project.author}</strong></span>
+            <nav aria-label={dictionary.author.links}>
+              <a href={project.github}>GitHub</a>
+              <a href={project.linkedin}>LinkedIn</a>
+              <a href={project.repository}>{dictionary.author.repository}</a>
+            </nav>
+          </div>
         </section>
 
         <PlayablePitch locale={locale} copy={dictionary.playground} />

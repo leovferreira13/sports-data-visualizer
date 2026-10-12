@@ -1,76 +1,99 @@
 # Football, Visualized
 
-An interactive, five-language playground for understanding expected goals (xG). Move the shooter, goalkeeper, and defenders to explore how shot geometry and positioning affect a model's estimate.
+An interactive xG playground for football fans, analysts and curious engineers. Move the shooter, goalkeeper and defenders to explore how eight positional inputs affect an independent model's estimate, then inspect the methodology behind it.
 
-**Status:** five-language reviewed-model Playground and Methodology/results implemented. Learn (#5) is deferred; portfolio presentation (#25) and Railway publication (#26) are separate tasks.
+A portfolio project by **Leonardo Ferreira** · [GitHub](https://github.com/leovferreira13) · [LinkedIn](https://www.linkedin.com/in/leonardo-v-ferreira)
 
-## Local development
+![English Playground with an illustrative central chance and eight live feature cards](assets/portfolio/playground.png)
 
-Requirements: Node.js 20.9 or newer, npm, Python 3.10 or newer, and Git. Python/Git run the offline ingestion tests and checks; the web application itself runs with Next.js.
+**Status:** the reviewed-model Playground and Methodology/results are implemented in Portuguese, English, Dutch, Spanish and German. Public hosting and repository access are tracked in [#26](https://github.com/leovferreira13/sports-data-visualizer/issues/26); the live link will be added after deployment. Optional Learn experiments are deferred in #5.
+
+## Explore the product
+
+- Edit six illustrative presets, move players with mouse, touch or keyboard, and use position inputs as an accessible alternative.
+- Inspect live xG, distance, shooting angle and six further retained model inputs beside the pitch.
+- Add/remove up to three represented defenders. Additional attackers are visual only.
+- Change language or reload within the same tab while retaining the scene.
+- Read inline Methodology/results: model selection, held-out evaluation, calibration, support diagnostics and limitations.
+
+## Engineering decisions
+
+This project covers product scope, interaction design, a reproducible offline data/ML pipeline and browser delivery. The implementation deliberately keeps the production application small.
+
+| Decision | Why it fits | Tradeoff |
+| --- | --- | --- |
+| Next.js/React with a metric SVG scene | Responsive mouse/touch/keyboard interaction; coordinates stay in meters while rendering adapts to the viewport | SVG and accessibility controls require careful coordinate/focus handling |
+| Shared eight-feature contract in Python and TypeScript | Offline training and browser inference measure the same scene | Independent implementations require parity checks |
+| Regularized logistic baselines and a shallow XGBoost candidate | Compare a simple reference with limited nonlinear interactions under a declared selection protocol | Trees can produce plateaus and nonmonotonic local responses |
+| Offline training, parameter-only browser inference | No production inference API, database, Python runtime or private dataset | Export precision, loader validation and exact asset integrity must be verified |
+| Exact-byte static model with SHA-256 verification | Preserve the original fitted envelope despite build-tool numeric rewriting | HTTPS/Web Crypto is needed; invalid/unavailable assets fail explicitly |
+| One aggregate evidence source for reports and app tables | Reviewers see the same numbers in both presentations | Historical/generated evidence must remain immutable |
+
+See the [architecture](docs/architecture/overview.md), [decision records](docs/architecture/adr/README.md) and [implementation summary](docs/reports/xg-implementation-summary.md) for the rationale and verification boundaries.
+
+## Model evidence and limits
+
+The independently trained shallow XGBoost uses StatsBomb Open Data embedded shot-frame observations. Selection and the final match-held-out test are separate; there was no post-test refit. The final cohort contains **363 matches, 7,160 shots and 655 goals**. All seven predeclared quantitative predicates passed; paired final probability-score intervals favored the selected model over full logistic and constant references within this cohort.
+
+That result supports the educational portfolio's scope, not universal superiority or exact probabilities for a particular player. High-probability/extreme-distance groups and zero/few-defender scenes have limited support. Four of five open-play presets fall outside the training-only nearest-neighbor reference. The two-defenders-in-cone slice performed worse than full logistic. Player movement can leave tree estimates unchanged; comparisons describe the model, not real-world causality. Penalties use a separately labeled fixed **0.76 convention**, not the learned open-play model. Omitted factors include player skill and shot context beyond the retained positional inputs.
+
+Local complete scientific reproduction was reported PASS; submitted aggregate identities, provenance and generated-view consistency were independently inspected. Private-row computation was not independently repeated in the review environment. [Final review](docs/reports/xg-final-evaluation.md), [generated methodology](docs/reports/xg-final-first-run/methodology.md), [model card](docs/reports/xg-final-first-run/model-card.md) and [integrated product QA](docs/reports/xg-playground-qa.md) document both evidence and limitations.
+
+## Run locally
+
+The web application requires **Node.js 20.9+ and npm**. Git and Python 3.10+ are needed for repository hooks/full checks; the offline training environment has its own [Python 3.12 dependency lock](docs/architecture/reference/xg-training.md). Private data and Python are not required to serve the built app.
 
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
-Open `http://localhost:3000`. The root route chooses a saved language preference, then browser language, then English. Direct application routes are `/en`, `/br`, `/nl`, `/es` and `/de`.
+Open [http://localhost:3000/en](http://localhost:3000/en). Direct routes are `/en`, `/br`, `/nl`, `/es` and `/de`. `/` selects saved preference, then browser language, then English.
 
-Quality checks:
+For a production build:
+
+```bash
+npm run build
+npm start
+```
+
+Verification:
 
 ```bash
 npm run check:precommit
-npm run test
 npm run build
 npm run check:localization
 ```
 
-`npm install` also configures the repository's `.githooks/pre-commit` hook. Every commit runs `npm run check:precommit`, which covers lint, TypeScript, focused geometry tests, synthetic Python ingestion tests, Markdown language, and lightweight shell-script validation. Build and route smoke checks remain CI-level integration checks.
+The canonical pre-commit check includes lint, TypeScript, unit tests, synthetic Python ingestion/feature checks, English Markdown and shell validation. Builds verify the original model/evidence identity before compiling. `npm ci` installs the Git hook through the prepare script.
 
-## Project documents
+For public hosting, set `SITE_URL` to the final HTTPS origin **before building**; no path, credentials or nonstandard port. Without it, local builds omit canonical/share-image URLs and disable indexing. [Presentation and deployment metadata](docs/architecture/reference/portfolio-presentation.md) documents the contract and release handoff.
 
-- [Product vision](docs/VISION.md)
-- [Delivery roadmap](docs/ROADMAP.md)
-- [Completed xG data feasibility audit](docs/reports/xg-data-audit.md)
-- [Architecture overview](docs/architecture/overview.md), [module reference](docs/architecture/reference/README.md) and [ADRs](docs/architecture/adr/README.md)
-- [Development process](docs/DEVELOPMENT_PROCESS.md)
-- [Chat commands for spec, dev and review](docs/COMMANDS.md)
+## A short reviewer walkthrough
 
-Work is tracked in GitHub Issues. Choose a starting situation or add players above the pitch; the measurements refer to the original striker (the shot taker). Drag a player or focus its marker and use the arrow keys (Shift for larger steps). Reset returns to the selected preset and removes added players. The scene remains in place when changing language within the same browser tab. Model validation follows before an xG value is published.
+1. Open `/en` and move the shooter. Distance/angle and xG update together; small movements may leave tree output unchanged.
+2. Move the goalkeeper or a defender and inspect the relevant input cards. Add/remove a defender; extra attackers do not influence this model.
+3. Try Penalty to see the separate convention, then return to an open-play preset.
+4. Switch languages and check that the scene persists. Use arrow keys or position inputs to explore without dragging.
+5. Scroll to Methodology/results, compare selection with final test, and inspect sparse calibration/support notes. Follow the references below for implementation and reproduction.
 
-## Data source and publication status
+## Technical references
+
+- [Product vision](docs/VISION.md) and [roadmap](docs/ROADMAP.md)
+- [Pinned source ingestion](docs/architecture/reference/statsbomb-ingestion.md) and [aggregate data audit](docs/reports/xg-data-audit.md)
+- [Feature contract and complete-run comparison](docs/architecture/reference/shot-features.md)
+- [Training and reproduction](docs/architecture/reference/xg-training.md), [browser parity](docs/architecture/reference/prediction.md) and [final evaluation](docs/architecture/reference/xg-final-evaluation.md)
+- [Integrated Playground](docs/architecture/reference/playground-and-methodology.md), [localization QA](docs/reports/localization-qa.md) and [portfolio QA](docs/reports/portfolio-presentation-qa.md)
+- [Development process](docs/DEVELOPMENT_PROCESS.md) and [chat commands](docs/COMMANDS.md)
+
+Offline reproduction uses separately obtained pinned source data and local immutable runs; public aggregate folders are evidence subsets, not complete private training runs. The guides specify comparator commands and permitted aggregate outputs.
+
+## Source, attribution and reuse
 
 <a href="https://github.com/hudl/open-data"><img src="assets/hudl-statsbomb-logo.png" width="320" alt="Hudl Statsbomb logo" /></a>
 
-The integrated xG model was independently trained using [StatsBomb Open Data](https://github.com/hudl/open-data), subject to the [StatsBomb Public Data User Agreement](https://github.com/hudl/open-data/blob/master/LICENSE.pdf). StatsBomb supplies the training data; it does not create or endorse this project or its model. The pitch fetches the exact reviewed parameter-only static asset, verifies its SHA-256, and executes it locally in the browser. The site footer shows the official logo, source credit and an independent-project disclaimer in all five languages. The localized Methodology/results view identifies the source, model provenance and accepted limitations. No source event or 360 records or shot-level training examples will be redistributed here.
+Trained using [StatsBomb Open Data](https://github.com/hudl/open-data), subject to its [Public Data User Agreement](https://github.com/hudl/open-data/blob/master/LICENSE.pdf). StatsBomb provides the source data; it does not create or endorse this project or its independent model. The app retains source credit, the official logo and independent-project wording in all five languages. Source event/360 records and shot-level training examples are not redistributed here.
 
-The intended use is a free, non-commercial professional portfolio without ads, paid services, raw-data hosting or resale. Publishing a model artifact requires a separate review to ensure it contains parameters and metadata only. The logo above comes from the [official Hudl Statsbomb Media Pack](https://statsbomb.com/media-pack/). See the [rights and release record](docs/architecture/reference/statsbomb-rights.md) for the source terms, Hudl Support's conditional answer, and the remaining publication checks.
+The intended use is a free, non-commercial professional portfolio without ads, paid services, raw-data hosting or resale. The logo comes from the [official Media Pack](https://statsbomb.com/media-pack/). See the [rights record](docs/architecture/reference/statsbomb-rights.md) for the conditional support response, scoped review and outstanding exact branding-guidance check.
 
-The offline [shot ingestion guide](docs/architecture/reference/statsbomb-ingestion.md) explains how to rebuild a pinned local corpus and compare embedded shot-frame coverage with separate 360 coverage. All source, per-match and shot-level files remain under ignored local data paths. The completed [aggregate audit for #9](docs/reports/xg-data-audit.md) covers 1,813 matches and all 166 corresponding tracked 360 files. Two full local runs agreed byte for byte; the planning screen passes with 35,024 position-usable shots and 3,261 goals across eight distinct competitions. This audit measures feasibility, not model performance. Feature extraction, training and validation remain separate tasks.
-
-## Positional feature extraction
-
-The shared [feature contract and reproduction guide](docs/architecture/reference/shot-features.md) covers Python/browser parity and local feature generation. [Validation status](docs/reports/xg-feature-audit.md): synthetic checks, full-corpus aggregates and manifest provenance pass; local compared-file equality is owner-confirmed. Use the documented comparator to verify complete runs. Features are not yet an xG model or public prediction. The [architecture overview](docs/architecture/overview.md) is now Markdown.
-
-## Offline model training
-
-Issue #11 supplies [local training scripts and commands](docs/architecture/reference/xg-training.md), a committed experiment protocol, frozen parameter export and versioned aggregate evidence for the methodology/results section. Train on your private complete feature run using the locked Python 3.12 environment. [Execution status](docs/reports/xg-training-methodology.md): synthetic workflow/reproduction checks pass; the first owner-run corpus artifacts passed internal review, with successful complete reproduction confirmed by the owner. Test outcomes stay unopened until #13; no public xG is enabled.
-
-## Browser inference verification
-
-Issue #12 implements validated logistic/XGBoost inference and a separate fixed 0.76 penalty convention. Use the [prediction guide](docs/architecture/reference/prediction.md) to verify your existing frozen training run locally; no retraining or uploading parameters is required. Repeat the parity command and compare its completed directories with `compare_runs.py`. Share only `parity.json`, `manifest.json` and the comparator output. [Verification status](docs/reports/xg-browser-inference.md) distinguishes invented-fixture checks from actual-candidate evidence. The owner-run frozen candidate passed 2,886 parity cases with zero probability difference; complete repeat-run comparison passed and the submitted aggregate evidence was reviewed. The public xG display and Methodology and results section remain gated by #13/#8 and implemented in #4.
-
-## Final xG evaluation
-
-The final evaluator is implemented for local frozen-run execution; actual held-out scientific evidence is accepted with limitations; public release remains pending. See the [command and review guide](docs/architecture/reference/xg-final-evaluation.md) and the [six-stage xG implementation summary](docs/reports/xg-implementation-summary.md). Reports and the app methodology section derive from the same versioned aggregate evidence.
-
-## Actual-corpus final review
-
-The owner-run final evidence passes all automated predicates and the owner reports all requested comparators PASS. Aggregate identity/provenance and report/app consistency were independently checked. Scientific evidence is accepted with sparse/extreme/preset support limitations; actual parameter/export/rights and integrated #4/#8 publication QA remain pending. See `docs/reports/xg-final-evaluation.md` and `docs/reports/xg-final-review-record.json`. Public xG remains disabled.
-
-## Reviewed xG Playground and methodology
-
-The local app now executes the original reviewed independent XGBoost in the browser. Explore six editable presets, move players with mouse/touch/keyboard or position inputs, add/remove up to three represented defenders, and see the current xG and all eight live input cards. Other attackers are visual only. Penalties use a separately labeled fixed 0.76 convention.
-
-Methodology/results follows the Playground on the same page, directly accessible at `/<locale-route>#methodology` in all five languages; old dedicated URLs redirect there. Its tables/chart use the same reviewed aggregate evidence as the reports, with selection and final test clearly separated, sparse calibration bins and the adverse cone-count slice visible.
-
-Run `npm run build` and `npm start`; no private dataset or Python runtime is needed for the application. Model/evidence byte checks run before building. See the [integration reference](docs/architecture/reference/playground-and-methodology.md), [ADR](docs/architecture/adr/009-integrated-playground-and-evidence.md) and [integrated QA](docs/reports/xg-playground-qa.md). Public deployment is tracked in #26.
+No code license has been selected. Public visibility alone does not grant a code reuse license; third-party data/logo terms remain separate. Publication and live asset/attribution checks remain #26 work.

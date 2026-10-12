@@ -1,7 +1,7 @@
 # Positional feature extraction audit
 
 **Issue:** #10. **Contract:** `positional-features/v1`.
-**Status:** synthetic checks, full-corpus aggregate and feature manifest/provenance review passed on 2026-10-11. The owner confirmed equality of the compared files locally; future complete-directory comparisons use the committed comparator.
+**Status:** synthetic checks, full-corpus aggregate and feature manifest/provenance review passed on 2026-10-11. Equality of the compared files was confirmed locally; future complete-directory comparisons use the committed comparator.
 
 ## Verified implementation evidence
 
@@ -11,11 +11,11 @@ Python materialization tests verify input/output hashes, manifest identity, excl
 
 A separate limited read-only smoke check on one official event file from the pinned source confirmed the +x goal convention for both teams and produced valid feature vectors for its 25 eligible open-play foot shots. No source examples or identifiers were committed. This checks real-format compatibility; it is not the complete feature population audit or an independent predictive evaluation.
 
-The [completed data audit](xg-data-audit.md) supplies the starting evidence: 35,057 eligible base shots, 35,024 provisional position-usable shots and 3,261 usable goals. These are the **starting ingestion counts**. The owner has now executed full feature extraction; the reviewed aggregate retains 35,020 shots and 3,259 goals. The four additional exclusions are singular goal-line shots (two goals). No count-cap or malformed-input exclusions appear in this run.
+The [completed data audit](xg-data-audit.md) supplies the starting evidence: 35,057 eligible base shots, 35,024 provisional position-usable shots and 3,261 usable goals. These are the **starting ingestion counts**. Full feature extraction was executed locally; the reviewed aggregate retains 35,020 shots and 3,259 goals. The four additional exclusions are singular goal-line shots (two goals). No count-cap or malformed-input exclusions appear in this run.
 
 ## Reviewed full-corpus result
 
-The owner supplied `feature-audit.json`; its SHA-256 is `fd2cf839e9248e1ff1697704ff7c303af40b0ac53f584d32f67ee39071855864`. The assistant independently checked all competition-to-total sums, shot/goal funnels, exclusive reasons, defender distributions, feature min/max pooling, sentinel value and UI-bound count relationships. The aggregate matches the previous ingestion base totals. Raw source records and private feature rows were not transferred or independently re-extracted.
+The submitted local `feature-audit.json` has SHA-256 `fd2cf839e9248e1ff1697704ff7c303af40b0ac53f584d32f67ee39071855864`. The assistant independently checked all competition-to-total sums, shot/goal funnels, exclusive reasons, defender distributions, feature min/max pooling, sentinel value and UI-bound count relationships. The aggregate matches the previous ingestion base totals. Raw source records and private feature rows were not transferred or independently re-extracted.
 
 | Metric | Result |
 | --- | ---: |
@@ -74,9 +74,9 @@ The submitted feature manifest was checked against the reviewed upload, the curr
 | Source Git revision | `4b73468fc5b0f1950f9f66fada70ad3a4f9327cb` |
 | Ingestion run ID | `b7d34951959b1b549ea93955c69fd7e60b91468e1ea14a43d3b146f606f2595e` |
 
-Ingestion corpus/audit hashes match the prior reviewed record. The uploaded feature audit matches the manifest's declared output hash. Private feature rows and the two full run directories were not transferred, so their hash and byte comparison were not independently recomputed by the assistant. The owner confirmed equality of the compared files locally. The comparator below provides an executable check of the complete file set, including the private feature rows, for subsequent comparisons; do not describe it as already executed on this full corpus.
+Ingestion corpus/audit hashes match the prior reviewed record. The uploaded feature audit matches the manifest's declared output hash. Private feature rows and the two full run directories were not transferred, so their hash and byte comparison were not independently recomputed by the assistant. Equality of the compared files was confirmed locally. The comparator below provides an executable check of the complete file set, including the private feature rows, for subsequent comparisons; do not describe it as already executed on this full corpus.
 
-The full corpus remains local to the owner. To repeat the extraction, use the existing pinned ingestion run:
+The full corpus remains on the local training machine. To repeat the extraction, use the existing pinned ingestion run:
 
 ```bash
 python3 scripts/xg/extract_features.py \

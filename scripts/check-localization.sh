@@ -78,4 +78,6 @@ assert_redirect "/en"   --header "Accept-Language: pt-BR,pt;q=0.9"   --header "C
 assert_redirect "/br"   --header "Accept-Language: en-US,en;q=0.9"   --header "Cookie: football-visualized-locale=pt-BR"
 assert_redirect "/br"   --header "Accept-Language: pt-BR,pt;q=0.9"   --header "Cookie: football-visualized-locale=invalid"
 
+python3 scripts/check_portfolio_metadata.py --base-url "${BASE_URL}"
+
 echo "Localization smoke checks passed."

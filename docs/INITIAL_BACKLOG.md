@@ -1,6 +1,6 @@
 # Initial backlog for GitHub Issues
 
-Create each section as one Issue, in order. The first two can start independently after repository setup. Keep the board statuses described in `DEVELOPMENT_PROCESS.md`.
+Historical starting scope; the current Issue and ROADMAP.md supersede earlier assumptions. Create bounded Issues for remaining outcomes. The first two can start independently after repository setup. Keep the board statuses described in `DEVELOPMENT_PROCESS.md`.
 
 ## 1. Scaffold the bilingual Next.js application
 
@@ -44,15 +44,15 @@ Create each section as one Issue, in order. The first two can start independentl
 
 **Validation:** Model fixtures, relevant interface checks, manual mouse/touch/keyboard walkthrough. **Milestone:** 3. **Dependency:** model proof and playable pitch.
 
-## 5. Add optional Learn mode and publish v0.1
+## 5. Add optional Learn mode (deferred)
 
-**Outcome:** A first-time visitor can complete two or three guided experiments, exit at any point, and share the live site with a commentator.
+**Outcome:** A visitor can complete two or three guided experiments and exit without losing the scene.
 
-**Scope:** Learn instructions for distance/angle, defender, keeper as supported by model; same simulation state as Playground; documentation, attributions, public deployment, short feedback round.
+**Scope:** Distance/angle, defender and keeper experiments supported by the same model and scene. Publication belongs to #26; portfolio presentation belongs to #25; localization was delivered in #24.
 
-**Acceptance:** Playground remains default; experiments work in both languages; exiting Learn preserves scene; README explains execution, model limits, and attribution; public URL works on mobile; feedback from 5–8 users is captured.
+**Acceptance:** Playground stays the default; guided experiments support all five locales and preserve the scene. Learn is not a public-release dependency.
 
-**Validation:** Complete both-language walkthroughs, live deployment smoke test, note three prioritized improvements. **Milestone:** 4–5. **Dependency:** public Playground.
+**Validation:** Targeted guided-experiment walkthroughs. **Dependency:** reviewed Playground.
 
 ## Later, after feedback
 

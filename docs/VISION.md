@@ -1,6 +1,6 @@
 # Football, Visualized — product vision
 
-**Status:** portfolio-focused first release · **First module:** Expected Goals (xG) · **Updated:** 2026-10-11
+**Status:** portfolio-focused first release · **First module:** Expected Goals (xG) · **Updated:** 2026-10-12
 
 ## One-sentence concept
 
@@ -10,33 +10,33 @@ An interactive football pitch where anyone can move the shooter, goalkeeper, and
 
 xG often appears in broadcasts and analysis as a finished number. Fans struggle to see which characteristics of a chance influenced the estimate and why two seemingly similar chances receive different values. Analysts, journalists, and commentators also need to recreate a play and explain it quickly to an audience.
 
-The visitor experience serves a curious football fan without requiring statistical background, an account or preparatory reading. The owner's primary delivery goal is a professional portfolio: recruiters and technical reviewers should be able to explore a complete product and trace its data, ML, browser-inference and product decisions. Broad adoption and maximum predictive accuracy are not first-release goals.
+The visitor experience serves a curious football fan without requiring statistical background, an account or preparatory reading. The primary delivery goal is a professional portfolio: recruiters and technical reviewers should be able to explore a complete product and trace its data, ML, browser-inference and product decisions. Broad adoption and maximum predictive accuracy are not first-release goals.
 
 ## Proposition
 
-**Playground is the default screen.** Visitors find a prepared chance, a prominent xG estimate, and a short prompt: “Drag the players to try another situation.” They can change presets, move pieces, and see which observable factors changed. An unobtrusive **Learn** control opens an interactive explanation on the same pitch rather than sending them to a theory page.
+**Playground is the default screen.** Visitors find a prepared chance, a prominent xG estimate, and a short prompt: “Drag the players to try another situation.” They can change presets, move pieces, and see which observable factors changed. Inline **Methodology and results** explains the current model below the pitch. Optional Learn experiments are deferred in #5.
 
 Working name: **Football, Visualized**. Product message: **Move the players. Understand what changes a goal-scoring chance.** The name does not require building a broader portal in the first release.
 
 ## Core experience
 
-1. Open the site in a language suggested by the browser: Brazilian Portuguese or English. A top-level selector can change it at any time.
+1. Open the site in a language suggested by the browser: Brazilian Portuguese, English, Dutch, Spanish or German. A top-level selector can change it at any time.
 2. See an initial scene with a shooter, goalkeeper, two defenders, goal, estimate, and brief contextual sentence.
 3. Drag a player; the pitch, measurements, and estimate respond during or immediately after movement.
 4. Choose and edit a preset: **Penalty, One-on-one, Tight angle, Long shot, Crowded box**.
-5. Switch to **Learn** for small experiments, such as moving a defender out of the shooting lane and seeing what changed.
+5. Scroll to Methodology/results to inspect evidence, support and omitted factors. Learn experiments are a later option.
 6. Copy a scenario link for someone else if sharing fits the first release; at minimum, presets must be reproducible.
 
 The panel shows **distance**, **shooting angle**, and **opponent/goalkeeper positioning**. Its explanation must distinguish geometric observations (“a defender is inside the shooting cone”) from model effects (“removing this defender raised this model's estimate by 0.04”). Never imply that a movement guarantees a goal.
 
-## Two modes, one simulation
+## Current Playground and deferred Learn
 
 | Mode | Purpose | Behavior |
 | --- | --- | --- |
 | **Playground — default** | Build and demonstrate chances freely | Editable pitch, presets, estimate, measurements, and concise explanations. |
-| **Learn** | Understand xG by experimenting | Short optional steps suggest a pitch change, show before/after values, then return free control. |
+| **Learn — deferred (#5)** | Understand xG by experimenting | Short optional steps suggest a pitch change, show before/after values, then return free control. |
 
-Learn uses the same rules, calculation, and controls as Playground. Visitors can leave without losing the scene they built.
+Planned Learn experiments will reuse the same rules, calculation and controls, retaining the scene when visitors leave. They do not block the first release.
 
 ## Product principles
 
@@ -45,7 +45,7 @@ Learn uses the same rules, calculation, and controls as Playground. Visitors can
 - **Explain honestly:** changes in the estimate are comparisons within the model, not causal claims about real football. Do not describe a visible factor as a model input if it is not one.
 - **Make demonstrations easy:** quick reading, a generous pitch area, fluid movement, and good presentation on mobile and desktop.
 - **Permit illustrative exploration:** rare/extreme but valid scenes are intentional. Support diagnostics inform concise explanations, not automatic blocking. Avoid precision or causal promises and explain that tree predictions can remain unchanged after small movements.
-- **Expose the decisions:** a visible adjacent Methodology and results section shares the report's aggregate evidence, separates validation from test and links architecture/ADRs/reproduction for reviewers.
+- **Expose the decisions:** a visible inline Methodology and results section shares the report's aggregate evidence, separates validation from test; repository documentation links architecture/ADRs/reproduction for reviewers.
 - **Ship a small, complete product:** the first release is an xG module, not a scouting portal.
 - **Support all five languages:** UI, explanations, and model limitations in `pt-BR`, `en`, `nl`, `es` and `de`.
 
@@ -65,8 +65,8 @@ If this module works, the brand can hold independent experiments: famous goals, 
 
 ## Current model and delivery handoff
 
-The frozen shallow XGBoost has accepted actual-corpus scientific evidence with support/transfer limitations. Use it for the educational v0.1 instead of requiring another optimization cycle. #4 integrates inference, proportional support explanations and mandatory methodology/results; #5 remains optional deferred Learn; #24 adds localization, #25 prepares portfolio presentation and #26 owns the shareable Railway release. #4 may start before #3/#8 close. Actual parameter/export, rights/history and integrated product attribution/assets QA must finish before public distribution. The owner controls publication and board/merge state.
+The frozen shallow XGBoost has accepted actual-corpus scientific evidence with support/transfer limitations. #4 integrates the reviewed exact model and inline methodology; #24 delivers five locales; #25 prepares presentation; #26 owns Railway hosting, public repository access and final live/branding checks. #3/#8 are closed after scoped completion. Publication and merge remain explicit controlled actions; completed local QA does not imply a public release.
 
-## Owner-directed Playground revision (2026-10-11)
+## Playground layout revision (2026-10-11)
 
 The current #4 UI places the pitch left and eight retained-feature cards plus current xG right. Mobile uses a compact sticky xG strip within the Playground, the pitch, then two-column cards. The last-completed-change panel and expanded observations block are removed; support/illustration explanations remain in Methodology. Secondary position controls are collapsible. Methodology is server-rendered below the pitch on the same localized page, with anchor navigation and redirects from former dedicated URLs. The technical-links block is removed from the product; repository references remain available. This revision supersedes earlier references to adjacent tabs or comparison panels and does not change inference, parameters or scientific evidence.

@@ -9,6 +9,7 @@ import {
   localeRoutes,
 } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
+import { portfolioMetadata } from "@/lib/portfolio-metadata";
 
 import "./globals.css";
 
@@ -35,10 +36,7 @@ export async function generateMetadata({
 
   const dictionary = await getDictionary(locale);
 
-  return {
-    title: dictionary.meta.title,
-    description: dictionary.meta.description,
-  };
+  return portfolioMetadata(locale, dictionary.meta);
 }
 
 export default async function LocaleLayout({

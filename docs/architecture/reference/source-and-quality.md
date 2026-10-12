@@ -1,12 +1,12 @@
 # Source material and quality gates
 
-**Status:** ingestion, features, training, browser inference and final evaluation infrastructure are implemented; actual-corpus scientific review is accepted with limitations; integrated publication QA remains pending.
+**Status:** ingestion, features, training, browser inference and final evaluation infrastructure are implemented; actual-corpus scientific review is accepted with limitations; local integrated product QA is recorded; #26 owns final live/branding checks.
 
-Local StatsBomb ingestion and its synthetic tests are implemented in `scripts/xg/ingest_statsbomb.py` and `scripts/xg/tests/test_ingest_statsbomb.py`. See [ingestion and audit](statsbomb-ingestion.md) for reproducible commands, eligibility, visibility and output contracts. The corpus and per-match counts stay local; the [completed competition-level audit](../../reports/xg-data-audit.md) records the passing feasibility screen and its limitations. Training and browser prediction have owner-run evidence; see [training](xg-training.md), [prediction](prediction.md) and [final evaluation](xg-final-evaluation.md).
+Local StatsBomb ingestion and its synthetic tests are implemented in `scripts/xg/ingest_statsbomb.py` and `scripts/xg/tests/test_ingest_statsbomb.py`. See [ingestion and audit](statsbomb-ingestion.md) for reproducible commands, eligibility, visibility and output contracts. The corpus and per-match counts stay local; the [completed competition-level audit](../../reports/xg-data-audit.md) records the passing feasibility screen and its limitations. Training and browser prediction have locally executed evidence; see [training](xg-training.md), [prediction](prediction.md) and [final evaluation](xg-final-evaluation.md).
 
 ## Suggested code map
 
-The current shell and pitch use `app/[locale]/page.tsx`, `app/[locale]/layout.tsx`, `components/playable-pitch.tsx`, `lib/scenario.ts`, `lib/geometry.ts`, `lib/presets.ts`, `lib/scenario-session.ts`, `locales/pt-BR.json`, and `locales/en.json`. Prediction uses `lib/model.ts`, `lib/predict.ts` and local frozen parameter envelopes; Learn remains planned. `lib/scenario-url.ts` only exists if shareable URLs are implemented later.
+The current shell and pitch use `app/[locale]/page.tsx`, `app/[locale]/layout.tsx`, `components/playable-pitch.tsx`, `lib/scenario.ts`, `lib/geometry.ts`, `lib/presets.ts`, `lib/scenario-session.ts`, all five `locales/*.json` dictionaries. Prediction uses `lib/model.ts`, `lib/predict.ts` and the exact reviewed static parameter envelope; Learn remains planned. `lib/scenario-url.ts` only exists if shareable URLs are implemented later.
 
 ## Quality gates
 

@@ -1,5 +1,7 @@
 # Actual-corpus final xG evaluation review
 
+**Current-status note (2026-10-12):** #24 extends the reviewed product to five languages; #25 prepares portfolio presentation; #26 owns Railway publication and remaining live/branding checks. Earlier release gates below describe this report's dated scope. Local reviewed-model xG is implemented; no live release is claimed.
+
 **Reviewed:** 2026-10-11. **Scientific outcome:** accepted aggregate evidence with explicit support/transfer limitations. **Publication decision:** pending parameter/export/rights and actual-product QA; no public release authorization.
 
 Final run: `fdfc9df9e8b7c9a565df298d372a262091439fb8fb14a69043c1c904e7379ee4`. Evidence: `e579e10f9699077ddf05e7433af5ed63edf0e03c3ea8c7ca295844951d74ea08`. Frozen model: `758526873b8a3a2681f655c064dee52f8bd33749accd499d015420dbe8e11b9a`. Training run: `222909fe801f4865897fea3541e023fed626f6736dca6ef69ceada1f7c57945a`.
@@ -8,7 +10,7 @@ Final run: `fdfc9df9e8b7c9a565df298d372a262091439fb8fb14a69043c1c904e7379ee4`. E
 
 The assistant validated the final schema, canonical evidence and manifest identities, linked provenance, hashes of all seven submitted files, exact current scientific/browser code hashes, and byte-for-byte regeneration of report, model card, release checks and app evidence. The submitted final protocol matches the predeclared committed contract. Original development evidence remains separately identified and unchanged.
 
-The owner reports that all requested comparators passed, covering final scientific reproduction, complete exact-byte comparison and generated-view verification. This is owner-reported complete local reproduction, not an assistant rerun against private data. Exact terminal logs and recreation of a fresh environment were not independently inspected. Python 3.12.3 is recorded in the actual run; the synthetic implementation suite used 3.12.14 with the same lock.
+All requested comparators were reported PASS locally, covering final scientific reproduction, complete exact-byte comparison and generated-view verification. This is reported local complete local reproduction, not an assistant rerun against private data. Exact terminal logs and recreation of a fresh environment were not independently inspected. Python 3.12.3 is recorded in the actual run; the synthetic implementation suite used 3.12.14 with the same lock.
 
 Private source/preparation rows, test predictions and actual parameter envelopes were not supplied in this review and are not committed. Their manifest-declared output hashes are retained as provenance, but were not independently recomputed. The archived seven-file folder is a public evidence subset, not a complete private run suitable for the complete comparator.
 
@@ -46,8 +48,8 @@ Required #4 handoff:
 
 ## Dated decision and remaining publication work
 
-Reviewer: assistant/implementer, using owner-supplied aggregates and owner-reported comparator PASS. Decision: accept the frozen model's offline predictive evidence for continued #4 integration planning, subject to the limitations above. The unmodified automated record remains needs_review and publication_authorized=false.
+Reviewer: assistant/implementer, using submitted aggregates and reported local comparator PASS. Decision: accept the frozen model's offline predictive evidence for continued #4 integration planning, subject to the limitations above. The unmodified automated record remains needs_review and publication_authorized=false.
 
-The owner subsequently supplied the exact model envelope; parameter-only contents, provenance and remote repository history were reviewed. Scoped rights/distribution review is accepted; see [completion record](statsbomb-rights-completion.md). The final integrated bundles/network assets and current rendered attribution/logo guidance remain #4 publication checks.
+The exact model envelope was subsequently submitted; parameter-only contents, provenance and remote repository history were reviewed. Scoped rights/distribution review is accepted; see [completion record](statsbomb-rights-completion.md). The final integrated bundles/network assets and current rendered attribution/logo guidance remain #4 publication checks.
 
 Before publication, #4/#8 must verify accessible source/logo attribution on /en and /br including small screens, the required Methodology and results tab, accepted-support warnings, the non-commercial scope and final product assets. Finish #8 QA then. Do not claim the epic is fully release-ready or mark #3/#13 closed automatically from this review. The owner controls merge/status/publication.

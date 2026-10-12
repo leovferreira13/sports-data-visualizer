@@ -1,7 +1,8 @@
 {
   "meta": {
-    "title": "Football, Visualized",
-    "description": "An interactive playground for understanding football shot situations."
+    "title": "Football, Visualized — interactive xG playground",
+    "description": "Move the shooter, goalkeeper and defenders, explore eight positional inputs, and inspect an independent xG model’s methodology. A project by Leonardo Ferreira.",
+    "imageAlt": "Illustrative football pitch and live xG input cards from Football, Visualized."
   },
   "brand": {
     "name": "Football, Visualized",
@@ -183,5 +184,10 @@
       "yes": "Yes",
       "no": "No"
     }
+  },
+  "author": {
+    "by": "By",
+    "links": "Author and project links",
+    "repository": "Repository"
   }
 }

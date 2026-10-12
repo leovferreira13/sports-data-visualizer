@@ -1,10 +1,12 @@
 # ADR 006: Offline training and a frozen parameter export
 
-**Status:** accepted and implemented for issue #11. Actual-corpus selection and owner-confirmed complete reproduction are recorded in the [training review](../../reports/xg-training-methodology.md); browser parity and final-test/public-release review remain #12/#13 responsibilities.
+**Current-status note (2026-10-12):** the original decision below retains its implementation-stage context. #4 integrates the reviewed model; #24 provides five locales; #26 owns public release. See the [current architecture](../overview.md).
+
+**Status:** accepted and implemented for issue #11. Actual-corpus selection and locally confirmed complete reproduction are recorded in the [training review](../../reports/xg-training-methodology.md); browser parity and final-test/public-release review remain #12/#13 responsibilities.
 
 ## Context
 
-The project needs reproducible probability estimates from eight positional features without a production inference service. Data remains private on the owner's machine. Feature contributions, calibration and model complexity must be examined carefully and exposed through the future app methodology tab.
+The project needs reproducible probability estimates from eight positional features without a production inference service. Data remains private on the local training machine. Feature contributions, calibration and model complexity must be examined carefully and exposed through the future app methodology tab.
 
 ## Decision
 

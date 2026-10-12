@@ -1,6 +1,8 @@
 # Frozen xG final evaluation and release gate
 
-**Status:** #13 implements the offline evaluator, immutable evidence, aggregate app handoff and complete comparator. Synthetic execution validates software behavior only. The owner-run actual held-out evidence and comparator PASS were supplied; aggregate scientific review accepts it with support limitations. The assistant did not recompute metrics from private rows. Final distribution/product QA remains pending. Public xG remains disabled.
+**Status:** offline tooling and reviewed actual-corpus evidence are implemented; reported local reproduction and independent aggregate inspection remain distinct. #4 integrates the unchanged reviewed model, #24 supplies five locales and #26 owns public release/live checks.
+
+The offline evaluator emits immutable evidence and generated aggregate app/report views, with a complete comparator. Synthetic execution validates software behavior only. Actual held-out evidence and reported local comparator PASS were supplied; aggregate scientific review accepts them with support limitations. Metrics were not independently recomputed from private rows.
 
 ## Boundaries and protocol
 
@@ -98,8 +100,8 @@ A release record should include: date; reviewer; code commit; training/final/mod
 
 Recheck [StatsBomb rights](statsbomb-rights.md) for the documented free non-commercial portfolio and parameter distribution. The recorded support response already covers that scope; a material scope change requires a fresh review. Inspect tracked content/history and proposed assets for source rows or recoverable examples. Before actual publication, #4/#8 must additionally inspect real integrated bundles/network assets and visible accessible attribution/logo on `/en` and `/br`, including small screens; the Methodology and results tab is mandatory. Current geometry-shell QA cannot attest to that later product.
 
-Finish #8 QA when model work completes. #3 closes only after all six children pass; the owner controls merge, board state and publication. This implementation alone does not close the epic.
+#3/#8 are closed after their scoped completion; final integrated and live release checks are documented separately in #4/#26. Merge, board state and publication remain controlled actions.
 
-## Actual-corpus final review
+## Current integrated delivery
 
-The owner-run final evidence passes all automated predicates and the owner reports all requested comparators PASS. Aggregate identity/provenance and report/app consistency were independently checked. Scientific evidence is accepted with sparse/extreme/preset support limitations; actual parameter/export/rights and integrated #4/#8 publication QA remain pending. See `docs/reports/xg-final-evaluation.md` and `docs/reports/xg-final-review-record.json`. Public xG remains disabled.
+Scientific evidence is accepted with sparse/extreme/preset support limitations. Exact parameter-only content and scoped rights/history review are recorded; local #4 integration QA is complete. Final Railway deployment, refreshed release assets/branding and live verification remain #26. See the [final review](../../reports/xg-final-evaluation.md) and [integration reference](playground-and-methodology.md). Historical pre-integration gates in earlier sections do not describe the current app status.

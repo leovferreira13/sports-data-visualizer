@@ -1,17 +1,19 @@
 # Six-stage xG implementation and current evidence
 
-**Status:** #8–#12 have implementation and reviewed evidence; #13 final-evaluation infrastructure is implemented. Actual-corpus final scientific review is accepted with limitations; final export/rights/product QA remains pending. This is not an epic-completion or publication announcement.
+**Current-status note (2026-10-12):** #3/#8 and the scientific children are complete; #4 integrates reviewed browser xG and inline Methodology; #24 supplies five languages. #25 prepares presentation; #26 owns publication and live/branding checks. Earlier handoff wording below is historical.
+
+**Status:** #8–#13 are complete within their scoped reviews. Scientific evidence is accepted with limitations; #4 integrates the reviewed exact model and records local product QA. Public deployment/live/branding checks remain #26.
 
 ## Pipeline and responsibilities
 
 | Issue | Delivered boundary | Evidence / remaining work |
 | --- | --- | --- |
-| #8 | StatsBomb portfolio rights, source/logo attribution and private data containment | Conditional support scope recorded; final actual-product/export/history QA remains open |
-| #9 | Pinned local ingestion, shot eligibility and embedded-frame audit | Owner-run full data audit reviewed; no raw records transferred |
+| #8 | StatsBomb portfolio rights, source/logo attribution and private data containment | Conditional support and scoped parameter/history review recorded; final release refresh and exact branding guidance remain #26 |
+| #9 | Pinned local ingestion, shot eligibility and embedded-frame audit | Locally executed full data audit reviewed; no raw records transferred |
 | #10 | Independent Python/TypeScript eight-feature extraction | Synthetic parity plus full-corpus aggregate review; local deterministic comparison |
-| #11 | Match-isolated split, bounded train-only tuning, separate calibration/selection and frozen candidate | Owner-run actual training/complete reproduction; no test outcome parsing |
-| #12 | Validated browser inference, logistic/tree numerical semantics and penalty route | Actual-candidate browser-bundle parity and complete owner comparison passed |
-| #13 | Frozen held-out evaluation, uncertainty, support, report/card/app evidence and release checks | Actual-corpus automated gates pass; scientific review accepted with support limitations; distribution/product QA pending |
+| #11 | Match-isolated split, bounded train-only tuning, separate calibration/selection and frozen candidate | Locally executed actual training/complete reproduction; no test outcome parsing |
+| #12 | Validated browser inference, logistic/tree numerical semantics and penalty route | Actual-candidate browser-bundle parity and complete reported local comparison passed |
+| #13 | Frozen held-out evaluation, uncertainty, support, report/card/app evidence and release checks | Actual-corpus automated gates pass; scientific review accepted with support limitations; local integrated QA recorded in #4; public release checks pending |
 
 ## Data and feature decisions
 
@@ -36,7 +38,7 @@ The three logistic experiments isolate geometry, defender information and the fu
 
 ## Actual selection-validation findings
 
-**These scores are selection validation, not final test.** Metrics below are drawn from the committed reviewed evidence; final-test tables will come from final-evaluation.json.
+**These scores are selection validation, not final test.** Metrics below are drawn from the committed reviewed evidence; final-test tables come from the separately generated final-evaluation.json.
 
 | Experiment | Retained features | Adopted calibration | Log loss | Brier |
 | --- | ---: | --- | ---: | ---: |
@@ -56,15 +58,15 @@ The full-logistic-minus-XGBoost log-loss difference is 0.003146802 with 95% pair
 
 Inference loads parameter-only envelopes after contract/schema/topology validation and captures immutable handles. Logistic evaluates standardized coefficients in double precision. XGBoost preserves float32 feature thresholds and sequential margin accumulation. Missing/invalid/unavailable inputs have explicit statuses; no heuristic is silently relabeled xG. Penalties route separately to fixed 0.76.
 
-Owner-run actual-candidate parity checked 2886 cases, including invented scenes/presets, invalid inputs and tree boundaries. Maximum reported probability error was 0.0; maximum feature error was 1.421e-14. XGBoost tolerance is 1e-7. The executed artifact was a browser-safe bundle in Node; this evidence is distinct from an actual Chromium run. Synthetic Chromium evidence checks infrastructure, not empirical model quality.
+Locally executed actual-candidate parity checked 2886 cases, including invented scenes/presets, invalid inputs and tree boundaries. Maximum reported probability error was 0.0; maximum feature error was 1.421e-14. XGBoost tolerance is 1e-7. The executed artifact was a browser-safe bundle in Node; this evidence is distinct from an actual Chromium run. Synthetic Chromium evidence checks infrastructure, not empirical model quality.
 
-The owner reported byte-identical complete training runs (17 files) and complete parity comparison. The assistant reviewed aggregate consistency/provenance and did not independently rerun the actual private rows. Fresh-environment creation was not independently verified.
+Byte-identical complete training runs (17 files) and complete parity comparison were reported locally. The assistant reviewed aggregate consistency/provenance and did not independently rerun the actual private rows. Fresh-environment creation was not independently verified.
 
 ## What #13 now makes possible
 
-The owner can evaluate the original frozen candidate, full logistic and constant on identical held-out rows, with whole-match uncertainty, calibration, fixed supported/sparse slices and training-only synthetic support diagnostics. Completed withheld evidence survives statistical failures. Report, model card and the implemented bilingual Methodology and results tab share the same aggregate source. No public xG is enabled by this implementation.
+The local evaluator compares the original frozen candidate, full logistic and constant on identical held-out rows, with whole-match uncertainty, calibration, fixed supported/sparse slices and training-only synthetic support diagnostics. Completed withheld evidence survives statistical failures. Report, model card and the implemented five-language inline Methodology and results section share the same aggregate source. The evaluator itself does not authorize a public deployment.
 
-The final evaluation protocol was predeclared. Owner-run final evidence now passes the automated gates and complete comparator checks are reported PASS. Both paired score intervals favor the frozen candidate, and no supported calibration bin is flagged. Scientific review accepts the evidence with explicit sparse-slice/preset/transfer limitations; see the [final review](xg-final-evaluation.md). Final model eligibility requires complete reproduction, dated scientific/rights/export review and an explicit disposition of limitations. #4 still owns actual integrated production/attribution QA; finish #8 QA there and close #3 only after every child passes.
+The final evaluation protocol was predeclared. Locally executed final evidence now passes the automated gates and complete comparator checks are reported PASS. Both paired score intervals favor the frozen candidate, and no supported calibration bin is flagged. Scientific review accepts the evidence with explicit sparse-slice/preset/transfer limitations; see the [final review](xg-final-evaluation.md). Final model eligibility requires complete reproduction, dated scientific/rights/export review and an explicit disposition of limitations. #4 records integrated production/attribution QA; #3/#8 are closed after scoped completion, with remaining final release checks retained in #26.
 
 ## Evidence and commands
 
@@ -77,12 +79,8 @@ The final evaluation protocol was predeclared. Owner-run final evidence now pass
 
 - [Final actual-corpus review](xg-final-evaluation.md), [generated report](xg-final-first-run/methodology.md) and [dated decision record](xg-final-review-record.json)
 
-## Rights completion handoff
+## Integrated delivery and publication
 
-The owner assigned interface-dependent publication QA to #4. The dated #8 rights/artifact/repository completion review is in `docs/reports/statsbomb-rights-completion.md`. After its documentation is merged, #8 and the completed model epic #3 may close. Actual xG/methodology pages, final build/network content and attribution/logo QA remain mandatory in #4 before #5 publishes with owner authorization. No new training cycle or public release is authorized by this handoff.
+The exact reviewed parameter envelope is hash-checked before browser inference. #4 records local production/network/source-logo QA; #24 extends the product to five languages. The original fitted contract, parameters and aggregate evidence remain unchanged. See [integration](../architecture/reference/playground-and-methodology.md), [product QA](xg-playground-qa.md) and [localization QA](localization-qa.md).
 
-## Integrated #4 delivery
-
-The reviewed parameter envelope is now integrated into the bilingual Playground, with explicit prediction states, zero-to-three represented defenders, honest comparisons and route-backed Methodology/results. The original fitted feature contract, parameters and aggregate evidence remain unchanged. See [Playground and Methodology/results](../architecture/reference/playground-and-methodology.md) for actual modules and commands.
-
-Earlier statements that actual weights are local-only or that the UI displays geometry only describe the pre-integration state. #8 is closed; #4 owns the dated integrated QA record and any explicitly unresolved logo/publication checks. Learn and authorized deployment remain #5. See `docs/reports/xg-playground-qa.md`; no public release is implied.
+#25 prepares portfolio presentation and #26 owns Railway hosting, final public links, refreshed release assets/content/attribution checks and actual deployed smoke testing. Detailed per-asset logo guidance remains explicitly unresolved. Learn is deferred in #5 and is not a publication dependency.
