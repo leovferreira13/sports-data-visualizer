@@ -16,6 +16,16 @@
 
 No fitting, feature extraction contract, inference parameters, aggregate scientific evidence or generated model reports were changed.
 
+## Language-navigation review follow-up
+
+The PR review reported unclear feedback during public language changes and an apparently English tab title. Local production reproduction confirmed that Next.js already changed the title's description after successful navigation, while the product-name prefix stayed English in every dictionary. The follow-up localizes the full title to each locale's visible brand name and tests direct visits, client navigation and reload.
+
+The selector now warms other locale routes on focus/pointer intent and uses React useTransition to track replacement. Pending navigation immediately displays the chosen target and a localized status overlay, disables repeat selection, and preserves the current scene underneath. Scroll/query/hash remain intact. The indicator respects reduced motion. No guarantee of zero real-network latency is made.
+
+Browser regression held the German route response after an English-page edit: prefetch was observed, the selected target/disabled control/status were verified before completion, the mobile overlay had no overflow, and releasing the response restored the selector with the German title and unchanged scene. This supplements the all-five-locale product regression. These changes are validated in the local production build and are not yet deployed.
+
+Icon provenance was confirmed from source and the #25 record: app/icon.svg is original SVG geometry authored for this project, separate from the official attribution logo. No third-party icon pack or downloaded football logo supplies the browser icon.
+
 ## Existing live deployment
 
 The [Railway demo](https://sports-data-visualizer-production.up.railway.app/en) is accessible without application authentication. Railway confirms source main at the base commit, deployment `48884b1e-73cc-4ee4-a4d6-3f9f1a703f2e`, Railpack 0.40.1, Node 20.20.2 and port 8080. This is the prior #25 application, not a deployed #26 candidate.

@@ -293,6 +293,7 @@ try {
     findings.push(
       `${route}: presets, live eight-feature cards, mouse/keyboard/touch, editing, reload/anchors, mobile sticky xG and evidence/attribution PASS`,
     );
+    console.log(`PASS: ${route} product walkthrough`);
   }
   await page.goto(`${base}/en`);
   await page.getByTestId("xg").waitFor();
@@ -309,11 +310,16 @@ try {
     await page.locator(".language-switcher select").selectOption(locale);
     await page.waitForURL(`${base}/${route}?qa=locale#methodology`);
     await page.getByTestId("xg").waitFor();
+    await page.waitForFunction(
+      (expected) => document.title === expected,
+      JSON.parse(readFileSync(`locales/${locale}.json`, "utf8")).meta.title,
+    );
     assert.deepEqual(await snapshot(), prior);
     const cookie = (await context.cookies()).find((x) => x.name === "football-visualized-locale");
     if (locale !== "en") assert.equal(cookie?.value, locale);
     await page.reload();
     await page.getByTestId("xg").waitFor();
+    assert.equal(await page.title(), JSON.parse(readFileSync(`locales/${locale}.json`, "utf8")).meta.title);
     assert.deepEqual(await snapshot(), prior);
     if (locale !== "en") {
       await page.goto(`${base}/`);
@@ -323,6 +329,53 @@ try {
       await page.goto(`${base}/${route}?qa=locale#methodology`);
     }
   }
+  console.log("PASS: localized titles and retained scene after navigation/reload");
+  // Hold a cold locale response to verify immediate feedback rather than just fast navigation.
+  const slowContext = await browser.newContext({
+    viewport: { width: 390, height: 844 },
+    reducedMotion: "reduce",
+  });
+  const slowPage = await slowContext.newPage();
+  const warmRoutes = new Set();
+  let releaseNavigation;
+  const navigationGate = new Promise((resolve) => { releaseNavigation = resolve; });
+  try {
+  await slowContext.route("**/*", async (route) => {
+    const path = new URL(route.request().url()).pathname;
+    if (["/br", "/nl", "/es", "/de"].includes(path)) warmRoutes.add(path);
+    if (path === "/de") await navigationGate;
+    await route.continue();
+  });
+  await slowPage.goto(`${base}/en?qa=language#methodology`);
+  await slowPage.getByTestId("xg").waitFor();
+  await slowPage.locator(".pitch-player--attacker").first().press("ArrowUp");
+  const slowScene = await slowPage.evaluate(() => JSON.parse(sessionStorage.getItem("football-visualized-scenario")));
+  const prefetchedGerman = slowPage.waitForRequest((request) => new URL(request.url()).pathname === "/de");
+  await slowPage.locator(".language-switcher select").focus();
+  await prefetchedGerman;
+  await slowPage.locator(".language-switcher select").selectOption("de");
+  const loading = slowPage.locator(".locale-loading");
+  await loading.waitFor({ state: "visible" });
+  assert.equal(await loading.innerText(), JSON.parse(readFileSync("locales/en.json", "utf8")).language.loading);
+  assert.equal(await slowPage.locator(".language-switcher select").inputValue(), "de");
+  assert(await slowPage.locator(".language-switcher select").isDisabled());
+  assert.equal(await slowPage.locator("html").getAttribute("lang"), "en");
+  assert.equal(await slowPage.locator(".locale-loading-spinner").evaluate((element) => getComputedStyle(element).animationName), "none");
+  assert(await slowPage.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+  if (process.env.PRODUCT_QA_LOADING_SCREENSHOT) await slowPage.screenshot({ path: process.env.PRODUCT_QA_LOADING_SCREENSHOT });
+  releaseNavigation();
+  await slowPage.waitForURL(`${base}/de?qa=language#methodology`);
+  await slowPage.getByTestId("xg").waitFor();
+  await loading.waitFor({ state: "hidden" });
+  assert(await slowPage.locator(".language-switcher select").isEnabled());
+  assert.equal(await slowPage.title(), JSON.parse(readFileSync("locales/de.json", "utf8")).meta.title);
+  assert.deepEqual(await slowPage.evaluate(() => JSON.parse(sessionStorage.getItem("football-visualized-scenario"))), slowScene);
+  assert(warmRoutes.has("/de"));
+  } finally {
+    releaseNavigation();
+    await slowContext.close();
+  }
+  console.log("PASS: delayed locale navigation feedback and prefetch");
   await page.goto(`${base}/en`);
   const modelResponse = await page.request.get(
     `${base}/model/selected-model.json`,
@@ -427,6 +480,9 @@ try {
     locales: ["en", "pt-BR", "nl", "es", "de"],
     findings,
     locale_and_view_retention: "PASS",
+    localized_titles_after_navigation_and_reload: "PASS",
+    locale_prefetch_and_delayed_navigation_feedback: "PASS",
+    reduced_motion_loading: "PASS",
     blocked_storage: "PASS",
     blocked_cookie_navigation: "PASS",
     model_loading_network_and_hash_failure: "PASS",

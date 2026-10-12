@@ -68,14 +68,14 @@
     "private_training_runtime_required": false
   },
   "source_file_sha256": {
-    "app/[locale]/globals.css": "ef2e24e1eb8fd53647e0cb2a22987985439b9373dc352f38cca15f79ba9b78a4",
-    "app/[locale]/layout.tsx": "dced5f0ee6605f8f10c6da91c241ee312cde42c03fe71f8c28686a1e5f414382",
+    "app/[locale]/globals.css": "ef751b0c43deb8d40307b73859b1905a7e1f8fbc6e71cde35f5cb1da48cd58a1",
+    "app/[locale]/layout.tsx": "2b7977e2371050c0732811edaee6c204a99cbb95daae6117728968e4d8711078",
     "app/[locale]/methodology/page.tsx": "2e9d6837192e0322b9837d394488fc0ce7cf888b06343ace5ca223a1a88e5e5b",
     "app/[locale]/page.tsx": "d2dc7395b2eb7e8e6608e42c8e97bbc4d980ea7c43a63933657965293d04d680",
     "app/icon.svg": "c66621871f04bcabf979462c22d12aed5c0a896732f97ae231f8257d5a57cfec",
     "app/robots.ts": "a894371a2b3832bfbaecd80c82283ccb4ac7925f49725917c9704ad5d8b00b8b",
     "app/sitemap.ts": "fd27a82866481fe1c2ea645f013c236903464b6e5ae9bb9edef1a0c8a7cf5c94",
-    "components/language-switcher.tsx": "c40991c7696afbd928615e8d2f23a66435f786a76d02f0c81ffb7400908c6f45",
+    "components/language-switcher.tsx": "c2210964d6f9eef1793736e125899efbb6b0d64e2f0eafcafd5c6f39094b8526",
     "components/methodology-content.tsx": "e8305b10b0d2be5b2da550a850a81a27c0b4199ca71aa5fc17d5171ba457e8ce",
     "components/playable-pitch.tsx": "4276abf3985658db0999517d51cc29fc22b85916b3216ff64f4071af8351dfb2",
     "components/prediction-localization.test.tsx": "90a0f0b5eabff0474ddde26b861061f22f1e3ec5639bf0ea8a3cb6700aa7c985",
@@ -103,11 +103,11 @@
     "lib/selected-model.ts": "dad81240117fc1d48b24aa09506fd8f8da6d9c35885aff7d014758fa10b22bfe",
     "lib/training-presets.test.ts": "8492f2b0d4f06141bfdc736f7fb79c5e3e1fa56a221d7125800392fb382e2383",
     "lib/xg-evidence.ts": "85888b499a05c1d06ead022d5d86701eb89c0a454ac6c0943214d0feb8060b54",
-    "locales/de.json": "15bcba581b38c16ab6f8d2caf3490da2bdc3d7e431d85de4a53d69d67bd23c8b",
-    "locales/en.json": "7f30026fce31d75fee190bb1a7fba31df12089a5b8961b24677756d677411cb7",
-    "locales/es.json": "3dc07ebc6272c04fc80409c7d4ec225ee87106be1ce3b1fd114818a1e3840244",
-    "locales/nl.json": "4021a8f82849ccee29aeb1946de8d6b483a7b69a85071852f193175743415585",
-    "locales/pt-BR.json": "15bf26ca8aa74a6261a00da596f85ebb1cbd268dae71386c9a2a48c3dd513fa6",
+    "locales/de.json": "fc3afe63f13f26e957c44c98e9a12bf836ae5eb61dbc9070321f4c439bfdc8d7",
+    "locales/en.json": "c0d9390ee050cb551f5f089e128bbea176f473ae6124ab6317a7178da38c9a53",
+    "locales/es.json": "a86684d7082c8e9de9298ce0de756c0617187a791645b3ca32319d84a2a397fe",
+    "locales/nl.json": "635c93f62d982a62a2c9588c0dac836f86c45736d1ddf5051045fea441224fd6",
+    "locales/pt-BR.json": "572f7a7ca4ccfc06507be15650dec02762139b10036c5800f27504f1ef06e8d4",
     "model/app-evidence.schema.json": "33bc6d998e2fb6ee7ff85f76e8454dd875ec2df8389c74432e9bf59fda9e77fa",
     "model/evaluation-contract.json": "0dc7d96f5818281d571c1d5fc14b01a9df17d85e0aaa90d374261034f4d5e4bc",
     "model/evaluation.schema.json": "6c297ddb67575233a0b77cce7f332e6381957c808d19a70045f85dcaf5593467",
@@ -122,7 +122,7 @@
     "scripts/audit-product-assets.py": "560bae2d2138cc300831f16ba56bb38ae6b471b297e6301f7dbf56861d486fb7",
     "scripts/check-localization.sh": "d9d20fd719502c40de30e2171ee8b56e2c68a8cb2b47001f704c19fc0e7f9b96",
     "scripts/check-model.mjs": "e5bd8a0f579bd154e8bdef5fdbe3bbeea0f7666b6b1b47eed1a8e869d6cd76da",
-    "scripts/check-playground-browser.mjs": "7b7dd3c31bb232d3d6e72553b7bf6b49a086db0d3135ccaddebbb309efc03baa",
+    "scripts/check-playground-browser.mjs": "1e7bdeaedfb7ffdeabdeafa3e1a2541f9fedb116aa5fa7538bdbf3b575121b03",
     "scripts/check-precommit.sh": "9ce982619dc131edff16dec16150748b708596c445adea053618748225d63f19",
     "scripts/check_markdown_language.py": "cd1a3acf5d4dffa510c8a2d7628a1b6837cedd75cd8d53354a158a7da04f61aa",
     "scripts/check_portfolio_metadata.py": "2a913eb43c56d20acd2d2381ac48920914710e38e75cd5f1630a7d5d8c157fdf",
@@ -174,11 +174,11 @@
   },
   "local_browser": {
     "schema_version": 1,
-    "checked_at": "2026-10-12T17:52:30.452Z",
+    "checked_at": "2026-10-12T18:21:58.734Z",
     "base_url": "http://127.0.0.1:3010",
     "mode": "local",
-    "checkout_revision": "6dd3c8570661dbeea40eca723b03f0336349dd2b",
-    "local_build_id": "NerFZ76uRBWBSn4bRoWoC",
+    "checkout_revision": "b80ca38a406dc1bb2654d02b862c9ca874c04b3a",
+    "local_build_id": "z2CxfA5TNBHKA4ox4X4UG",
     "deployed_revision": null,
     "remote_build_id": null,
     "engine": "Chromium",
@@ -214,6 +214,9 @@
       "de: presets, live eight-feature cards, mouse/keyboard/touch, editing, reload/anchors, mobile sticky xG and evidence/attribution PASS"
     ],
     "locale_and_view_retention": "PASS",
+    "localized_titles_after_navigation_and_reload": "PASS",
+    "locale_prefetch_and_delayed_navigation_feedback": "PASS",
+    "reduced_motion_loading": "PASS",
     "blocked_storage": "PASS",
     "blocked_cookie_navigation": "PASS",
     "model_loading_network_and_hash_failure": "PASS",
@@ -223,10 +226,10 @@
       "/",
       "/_next/image",
       "/_next/static/chunks/00fku1i3li68g.js",
-      "/_next/static/chunks/0wnrpnll6ve2c.css",
       "/_next/static/chunks/0y-dctk-kmqss.js",
       "/_next/static/chunks/196x_tfexoucg.js",
-      "/_next/static/chunks/300zjr1xml9xr.js",
+      "/_next/static/chunks/1mk925oe9r992.css",
+      "/_next/static/chunks/2keh4tflpl3vt.js",
       "/_next/static/chunks/3ewp08ebnb49j.js",
       "/_next/static/chunks/3fntmmi971322.js",
       "/_next/static/chunks/3s6nzrbk-8mnv.js",
@@ -248,11 +251,11 @@
   },
   "local_asset_review": {
     "schema_version": 1,
-    "build_id": "NerFZ76uRBWBSn4bRoWoC",
-    "base_revision": "6dd3c8570661dbeea40eca723b03f0336349dd2b",
+    "build_id": "z2CxfA5TNBHKA4ox4X4UG",
+    "base_revision": "b80ca38a406dc1bb2654d02b862c9ca874c04b3a",
     "scope": "current tracked paths/JSON and final static/prerendered production assets; prior history reviewed in #8",
     "tracked_files": 195,
-    "build_assets": 147,
+    "build_assets": 152,
     "embedded_model": [
       {
         "path": "public/model/selected-model.json",
@@ -384,5 +387,23 @@
     "Rerun actual-domain metadata/image and full remote interaction/network checks; inspect share preview.",
     "Make GitHub repository public through administration access and verify unauthenticated README/images.",
     "Review account billing alert/hard-limit settings; physical-device and social-platform coverage remain separately reported limitations."
-  ]
+  ],
+  "language_review_follow_up": {
+    "base_pr_revision": "7236c12981f951007b7ee442ef133e4b4cf7b7cb",
+    "implemented": [
+      "Interaction-intent prefetch for other locale routes",
+      "useTransition with immediate target selection, disabled duplicate control and localized pending overlay",
+      "Reduced-motion non-animated progress indicator",
+      "Full localized tab title through existing Next metadata"
+    ],
+    "validation": [
+      "Five-locale production browser regression PASS",
+      "Held German response: prefetch, pending status, chosen target, disabled select, completion and edited-scene preservation PASS",
+      "All locale titles after selection and reload PASS",
+      "Real-origin build and metadata/localization smoke PASS",
+      "Mobile overlay screenshot inspected"
+    ],
+    "deployed": false,
+    "icon_provenance": "Original SVG geometry authored for project in #25; not a downloaded logo or third-party icon asset."
+  }
 }

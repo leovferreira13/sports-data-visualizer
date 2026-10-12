@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Football, Visualized — interactieve xG-speelomgeving",
+    "title": "Voetbal, uitgelegd — interactieve xG-speelomgeving",
     "description": "Verplaats de schutter, keeper en verdedigers, verken acht positionele variabelen en bekijk de methodologie van een onafhankelijk xG-model. Een project van Leonardo Ferreira.",
     "imageAlt": "Illustratief voetbalveld en actuele xG-variabelen in Football, Visualized."
   },
@@ -9,7 +9,8 @@
     "tagline": "Verplaats de spelers. Ontdek wat een scoringskans verandert."
   },
   "language": {
-    "label": "Taal"
+    "label": "Taal",
+    "loading": "Taal wordt gewijzigd…"
   },
   "attribution": {
     "sourceLink": "Bronrepository van StatsBomb Open Data",

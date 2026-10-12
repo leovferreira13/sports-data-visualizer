@@ -49,6 +49,14 @@ numeric values never derive from translated labels. Standard technical names
 (xG, XGBoost, TypeScript, Python, StatsBomb Open Data, Log loss and Brier) are
 intentionally retained, alongside hashes and identifiers.
 
+## Language navigation feedback (#26)
+
+The selector warms other supported locale routes when focused or approached with a pointer, rather than fetching all translations on every initial visit. Prefetching adds background page requests only after interaction intent and can reduce a later navigation wait; it does not guarantee zero latency.
+
+React useTransition tracks router replacement. The selected target appears immediately, the selector is disabled against duplicate changes, and a localized full-screen status overlay remains visible until the navigation settles. Existing page/scene state remains underneath; query, hash and scroll position are retained. A non-animated indicator respects prefers-reduced-motion. The status uses the language of the current page so its message is understandable before the destination has loaded.
+
+Titles use each locale's visible product name plus its translated description. Next.js metadata remains the source of truth; no competing manual document.title assignment is added. Browser regression checks titles after language selection and reload, as well as direct route visits, and holds a destination response to verify pending feedback and scene retention.
+
 ## Verification and scope
 
 `npm run check:precommit` includes dictionary, negotiation and localized failure

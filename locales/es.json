@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Football, Visualized — simulador interactivo de xG",
+    "title": "Fútbol, explicado — simulador interactivo de xG",
     "description": "Mueve al tirador, al portero y a los defensores, explora ocho variables posicionales y consulta la metodología de un modelo independiente de xG. Un proyecto de Leonardo Ferreira.",
     "imageAlt": "Campo ilustrativo y tarjetas de variables de xG actualizadas en Football, Visualized."
   },
@@ -9,7 +9,8 @@
     "tagline": "Mueve a los jugadores. Entiende qué cambia una ocasión de gol."
   },
   "language": {
-    "label": "Idioma"
+    "label": "Idioma",
+    "loading": "Cambiando idioma…"
   },
   "attribution": {
     "sourceLink": "Repositorio de origen de StatsBomb Open Data",

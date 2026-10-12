@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Football, Visualized — playground interativo de xG",
+    "title": "Futebol, Explicado — playground interativo de xG",
     "description": "Mova o atacante, o goleiro e os defensores, explore oito variáveis posicionais e consulte a metodologia de um modelo independente de xG. Um projeto de Leonardo Ferreira.",
     "imageAlt": "Campo ilustrativo e cards de variáveis de xG atualizados no Football, Visualized."
   },
@@ -9,7 +9,8 @@
     "tagline": "Mova os jogadores. Entenda o que muda uma chance de gol."
   },
   "language": {
-    "label": "Idioma"
+    "label": "Idioma",
+    "loading": "Alterando idioma…"
   },
   "attribution": {
     "sourceLink": "Repositório de origem dos dados StatsBomb Open Data",

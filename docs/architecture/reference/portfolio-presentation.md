@@ -10,6 +10,8 @@
 
 `lib/portfolio-metadata.ts` supplies localized title/description/preview alt text, author metadata, Open Graph/Twitter cards, canonical and language-alternate links. The layout remains the locale metadata boundary. `app/icon.svg` is an original project icon; it is not a third-party brand asset. `app/robots.ts` and `app/sitemap.ts` expose the Next.js metadata routes.
 
+The #26 review localizes the full tab title, including the displayed product name, and verifies it after client navigation/reload. The browser icon was authored directly for #25 as SVG geometry (rounded background, ball circle and panel strokes). No icon pack, downloaded football logo or Hudl asset is used for that icon; the separately sourced Hudl logo remains attribution in the footer.
+
 ## Origin contract
 
 Set `SITE_URL` to the final public HTTPS origin at **build time**, for example the confirmed Railway-generated origin. It must contain no credentials, nonstandard port, path beyond `/`, query or fragment. Invalid or blank supplied values fail validation. Localhost, local names and IP literals are rejected. The origin is public configuration, not a secret, and is never inferred from a request header.
