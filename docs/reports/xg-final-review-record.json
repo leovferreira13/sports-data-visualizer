@@ -8,7 +8,7 @@
   "scientific_review": "accepted_with_limitations",
   "reproduction": "owner reports all requested comparators PASS; private complete runs and fresh environment not independently inspected",
   "automated_status": "needs_review",
-  "parameter_distribution_review": "pending; actual envelope not supplied for content inspection",
+  "parameter_distribution_review": "accepted for exact reviewed envelope and unchanged non-commercial support scope; see xg-artifact-distribution-review.json",
   "publication_authorized": false,
   "required_product_handoff": [
     "visible represented-scene and partial-visibility explanation",
@@ -18,5 +18,6 @@
     "bilingual methodology, attribution/logo, production/network/history/export QA"
   ],
   "decision_scope": "continue #4 integration planning; no public distribution approval",
-  "review_report": "docs/reports/xg-final-evaluation.md"
+  "review_report": "docs/reports/xg-final-evaluation.md",
+  "rights_completion_report": "docs/reports/statsbomb-rights-completion.md"
 }

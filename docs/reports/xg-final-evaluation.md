@@ -48,6 +48,6 @@ Required #4 handoff:
 
 Reviewer: assistant/implementer, using owner-supplied aggregates and owner-reported comparator PASS. Decision: accept the frozen model's offline predictive evidence for continued #4 integration planning, subject to the limitations above. The unmodified automated record remains needs_review and publication_authorized=false.
 
-Model distribution approval remains pending because actual parameter-only export contents were not independently inspected here. Recheck current official source/agreement/logo guidance and the documented conditional support scope for the actual publication path. Inspect export contents, tracked history and integrated bundles/network assets for source records or recoverable examples.
+The owner subsequently supplied the exact model envelope; parameter-only contents, provenance and remote repository history were reviewed. Scoped rights/distribution review is accepted; see [completion record](statsbomb-rights-completion.md). The final integrated bundles/network assets and current rendered attribution/logo guidance remain #4 publication checks.
 
 Before publication, #4/#8 must verify accessible source/logo attribution on /en and /br including small screens, the required Methodology and results tab, accepted-support warnings, the non-commercial scope and final product assets. Finish #8 QA then. Do not claim the epic is fully release-ready or mark #3/#13 closed automatically from this review. The owner controls merge/status/publication.
