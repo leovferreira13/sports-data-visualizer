@@ -315,7 +315,6 @@ export function PlayablePitch({ locale, copy }: Props) {
                   onPointerCancel={stopDrag}
                   onLostPointerCapture={stopDrag}
                 >
-                  <circle className="player-hit" r="4.5" />
                   {id === "goalkeeper" && (
                     <circle className="goalkeeper-ring" r="2.05" />
                   )}

@@ -68,6 +68,18 @@ describe("actual reviewed model and evidence", () => {
 });
 
 describe("deliberate defender editing and snapshots", () => {
+  it("adds every penalty participant outside the area even after editing and restoration", () => {
+    let scene = movePlayer(getPreset("penalty"), "shooter", { x: 100, y: 34 });
+    for (let i = 0; i < 9; i++) scene = addPlayer(scene, "attacker");
+    scene = addPlayer(scene, "defender");
+    for (const p of [...scene.extraAttackers, ...scene.extraDefenders]) {
+      expect(p.x + 1.4).toBeLessThan(105 - 16.5);
+    }
+    scene = movePlayer(scene, "defender1", { x: 100, y: 34 });
+    scene = addPlayer(removePlayer(scene, "defender1"), "defender");
+    expect(scene.players.defender1.x + 1.4).toBeLessThan(105 - 16.5);
+    expect(defenderCount(scene)).toBe(3);
+  });
   it("supports zero through three defenders without changing the feature domain", () => {
     let scene = getPreset("centralChance");
     scene = removePlayer(removePlayer(scene, "defender1"), "defender2");
