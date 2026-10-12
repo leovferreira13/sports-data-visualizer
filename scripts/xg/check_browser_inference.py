@@ -127,9 +127,9 @@ def reference(case, envelope):
     return {"features": f, "probability": float(predict_envelope(envelope, [f["vector"]], validate=False)[0])}
 
 
-def verify(envelope, browser=False):
+def verify(envelope, browser=False, extra_cases=None):
     validate_envelope(envelope)
-    cases = cases_for(envelope)
+    cases = cases_for(envelope) + (extra_cases or [])
     payload = canonical({"envelope": envelope, "cases": cases})
     command = ["node", str(RUNNER), *(["--browser"] if browser else [])]
     result = subprocess.run(command, input=payload, text=True, capture_output=True, cwd=PROJECT, timeout=120)

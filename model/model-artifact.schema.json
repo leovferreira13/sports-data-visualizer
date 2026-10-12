@@ -37,7 +37,8 @@
         "geometry_logistic",
         "defenders_logistic",
         "full_logistic",
-        "full_xgboost"
+        "full_xgboost",
+        "full_monotonic_xgboost"
       ]
     },
     "objective": {

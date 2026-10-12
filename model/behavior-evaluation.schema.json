@@ -1,0 +1,210 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "contract_version",
+    "evidence_id",
+    "feature_order",
+    "protocol",
+    "provenance",
+    "evaluation_scope",
+    "previous_final_test",
+    "original_training_run_id",
+    "reservation_run_id",
+    "models",
+    "candidate_training",
+    "native_export",
+    "logistic_diagnostics",
+    "selection",
+    "limitations",
+    "training_prevalence"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "contract_version": {
+      "const": "xg-behavior-evaluation/v1"
+    },
+    "evidence_id": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "feature_order": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": {
+        "type": "string"
+      }
+    },
+    "protocol": {
+      "type": "object"
+    },
+    "provenance": {
+      "type": "object"
+    },
+    "evaluation_scope": {
+      "const": "adaptive-selection-exploratory"
+    },
+    "previous_final_test": {
+      "const": "already_opened_not_parsed"
+    },
+    "original_training_run_id": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "reservation_run_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "models": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "full_xgboost",
+        "full_logistic",
+        "full_monotonic_xgboost"
+      ],
+      "properties": {
+        "full_xgboost": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "artifact_id",
+            "quality",
+            "behavior",
+            "scene_audit",
+            "parity",
+            "native_export_pass"
+          ],
+          "properties": {
+            "artifact_id": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "quality": {
+              "type": "object"
+            },
+            "behavior": {
+              "type": "object"
+            },
+            "scene_audit": {
+              "type": "object"
+            },
+            "parity": {
+              "type": "object"
+            },
+            "native_export_pass": {
+              "type": "boolean"
+            },
+            "gates": {
+              "type": "object"
+            }
+          }
+        },
+        "full_logistic": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "artifact_id",
+            "quality",
+            "behavior",
+            "scene_audit",
+            "parity",
+            "native_export_pass",
+            "gates"
+          ],
+          "properties": {
+            "artifact_id": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "quality": {
+              "type": "object"
+            },
+            "behavior": {
+              "type": "object"
+            },
+            "scene_audit": {
+              "type": "object"
+            },
+            "parity": {
+              "type": "object"
+            },
+            "native_export_pass": {
+              "type": "boolean"
+            },
+            "gates": {
+              "type": "object"
+            }
+          }
+        },
+        "full_monotonic_xgboost": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "artifact_id",
+            "quality",
+            "behavior",
+            "scene_audit",
+            "parity",
+            "native_export_pass",
+            "gates"
+          ],
+          "properties": {
+            "artifact_id": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "quality": {
+              "type": "object"
+            },
+            "behavior": {
+              "type": "object"
+            },
+            "scene_audit": {
+              "type": "object"
+            },
+            "parity": {
+              "type": "object"
+            },
+            "native_export_pass": {
+              "type": "boolean"
+            },
+            "gates": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "candidate_training": {
+      "type": "object"
+    },
+    "native_export": {
+      "type": "object"
+    },
+    "logistic_diagnostics": {
+      "type": "object"
+    },
+    "selection": {
+      "type": "object"
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "training_prevalence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    }
+  }
+}

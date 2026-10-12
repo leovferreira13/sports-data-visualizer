@@ -97,7 +97,8 @@ def validate_envelope(envelope):
         raise AuditError("Invalid model identity, feature mapping or contract")
     params = envelope["parameters"]
     expected = {"geometry_logistic": ("logistic", 3), "defenders_logistic": ("logistic", 6),
-                "full_logistic": ("logistic", 8), "full_xgboost": ("xgboost", 8)}
+                "full_logistic": ("logistic", 8), "full_xgboost": ("xgboost", 8),
+                "full_monotonic_xgboost": ("xgboost", 8)}
     if (params["kind"], len(indices)) != expected[envelope["model_version"]]:
         raise AuditError("Model identity and parameters disagree")
     expected_tolerance = 1e-10 if params["kind"] == "logistic" else 1e-7

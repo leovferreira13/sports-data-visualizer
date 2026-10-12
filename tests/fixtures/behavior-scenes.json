@@ -1,0 +1,174 @@
+{
+  "version": "xg-behavior-scenes/v1",
+  "paths": [
+    {
+      "name": "central_shooter",
+      "actor": "shooter",
+      "index": null,
+      "start": [
+        75,
+        34
+      ],
+      "end": [
+        103.5,
+        34
+      ],
+      "context": "ordinary"
+    },
+    {
+      "name": "offset_shooter",
+      "actor": "shooter",
+      "index": null,
+      "start": [
+        75,
+        42
+      ],
+      "end": [
+        101,
+        42
+      ],
+      "context": "ordinary"
+    },
+    {
+      "name": "lateral_shooter",
+      "actor": "shooter",
+      "index": null,
+      "start": [
+        90,
+        10
+      ],
+      "end": [
+        90,
+        58
+      ],
+      "context": "ordinary"
+    },
+    {
+      "name": "near_goal",
+      "actor": "shooter",
+      "index": null,
+      "start": [
+        103.5,
+        30
+      ],
+      "end": [
+        104.99,
+        30
+      ],
+      "context": "extreme"
+    },
+    {
+      "name": "long_distance",
+      "actor": "shooter",
+      "index": null,
+      "start": [
+        53.9,
+        34
+      ],
+      "end": [
+        75,
+        34
+      ],
+      "context": "extreme"
+    },
+    {
+      "name": "tight_angle",
+      "actor": "shooter",
+      "index": null,
+      "start": [
+        104.9,
+        10.5
+      ],
+      "end": [
+        100,
+        10.5
+      ],
+      "context": "extreme"
+    },
+    {
+      "name": "reported_central_analogue",
+      "actor": "shooter",
+      "index": null,
+      "start": [
+        91.6,
+        34
+      ],
+      "end": [
+        90.3,
+        34
+      ],
+      "context": "ordinary"
+    },
+    {
+      "name": "keeper_advance",
+      "actor": "goalkeepers",
+      "index": 0,
+      "start": [
+        104,
+        34
+      ],
+      "end": [
+        85,
+        34
+      ],
+      "context": "ordinary"
+    },
+    {
+      "name": "keeper_lateral",
+      "actor": "goalkeepers",
+      "index": 0,
+      "start": [
+        102,
+        24
+      ],
+      "end": [
+        102,
+        44
+      ],
+      "context": "ordinary"
+    },
+    {
+      "name": "nearest_defender",
+      "actor": "defenders",
+      "index": 0,
+      "start": [
+        85,
+        34
+      ],
+      "end": [
+        98,
+        34
+      ],
+      "context": "ordinary"
+    },
+    {
+      "name": "cone_crossing",
+      "actor": "defenders",
+      "index": 0,
+      "start": [
+        96,
+        28
+      ],
+      "end": [
+        96,
+        40
+      ],
+      "context": "ordinary"
+    }
+  ],
+  "arc": {
+    "name": "shooter_arc",
+    "radius_m": 15,
+    "angle_start_deg": -70,
+    "angle_end_deg": 70
+  },
+  "cone_probe": {
+    "shooter": [
+      90,
+      34
+    ],
+    "defender_x": 96,
+    "epsilon_m": 1e-06
+  },
+  "note": "Invented fixtures; the reported examples lack complete coordinates and cannot be reproduced exactly."
+}

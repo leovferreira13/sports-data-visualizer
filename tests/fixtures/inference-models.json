@@ -678,5 +678,220 @@
       "export_tolerance": 1e-07,
       "artifact_id": "1b566b9562e3934747519a06878203f63f69cdf38daed3f71b7e1dc0e7596e54"
     }
+  },
+  {
+    "name": "full_monotonic_xgboost",
+    "envelope": {
+      "schema_version": 1,
+      "contract_version": "positional-features/v1",
+      "feature_contract_sha256": "7997e82634ffb78bac9d40b21c6715c8bb10cd8934e629a7a5fa09aed066bb67",
+      "feature_order": [
+        "shot_distance_m",
+        "goal_opening_angle_deg",
+        "absolute_lateral_offset_m",
+        "visible_defender_count",
+        "defenders_in_cone_count",
+        "nearest_visible_defender_distance_m",
+        "goalkeeper_distance_to_goal_m",
+        "goalkeeper_distance_to_shot_m"
+      ],
+      "feature_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "model_version": "full_monotonic_xgboost",
+      "objective": "binary:logistic",
+      "parameters": {
+        "kind": "xgboost",
+        "base_margin": -1.25,
+        "input_precision": "float32",
+        "accumulator_precision": "float32",
+        "trees": [
+          [
+            {
+              "feature": 0,
+              "threshold": 21.0,
+              "left": 1,
+              "right": 2
+            },
+            {
+              "leaf": 0.4000000059604645
+            },
+            {
+              "leaf": -0.20000000298023224
+            }
+          ],
+          [
+            {
+              "feature": 6,
+              "threshold": 5.0,
+              "left": 1,
+              "right": 2
+            },
+            {
+              "leaf": 0.15000000596046448
+            },
+            {
+              "leaf": -0.30000001192092896
+            }
+          ],
+          [
+            {
+              "feature": 1,
+              "threshold": 20.0,
+              "left": 1,
+              "right": 2
+            },
+            {
+              "leaf": -0.10000000149011612
+            },
+            {
+              "leaf": 0.10000000149011612
+            }
+          ]
+        ]
+      },
+      "calibration": {
+        "method": "identity"
+      },
+      "provenance": {
+        "preparation_run_id": "40f787781ed6faf22a9a99e2837ba5eccca38ffc974d7b63ea45d66f56d94b0f",
+        "protocol_sha256": "40f787781ed6faf22a9a99e2837ba5eccca38ffc974d7b63ea45d66f56d94b0f",
+        "feature_run_id": "40f787781ed6faf22a9a99e2837ba5eccca38ffc974d7b63ea45d66f56d94b0f",
+        "source_revision": "SYNTHETIC invented weights, never trained",
+        "split_sha256": "40f787781ed6faf22a9a99e2837ba5eccca38ffc974d7b63ea45d66f56d94b0f",
+        "code_sha256": {
+          "invented": "40f787781ed6faf22a9a99e2837ba5eccca38ffc974d7b63ea45d66f56d94b0f"
+        },
+        "dependencies": {
+          "invented": "test-only"
+        }
+      },
+      "licensing": {
+        "data": "No source data; invented test parameters only",
+        "code": "Independent test fixture",
+        "libraries": {
+          "scikit-learn": "BSD-3-Clause",
+          "XGBoost": "Apache-2.0"
+        }
+      },
+      "export_tolerance": 1e-07,
+      "artifact_id": "1939df3aeace25e0613108a59fae8d636d37705c1dcd1f089e52848d24cd3be7"
+    }
+  },
+  {
+    "name": "full_monotonic_xgboost-calibrated",
+    "envelope": {
+      "schema_version": 1,
+      "contract_version": "positional-features/v1",
+      "feature_contract_sha256": "7997e82634ffb78bac9d40b21c6715c8bb10cd8934e629a7a5fa09aed066bb67",
+      "feature_order": [
+        "shot_distance_m",
+        "goal_opening_angle_deg",
+        "absolute_lateral_offset_m",
+        "visible_defender_count",
+        "defenders_in_cone_count",
+        "nearest_visible_defender_distance_m",
+        "goalkeeper_distance_to_goal_m",
+        "goalkeeper_distance_to_shot_m"
+      ],
+      "feature_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "model_version": "full_monotonic_xgboost",
+      "objective": "binary:logistic",
+      "parameters": {
+        "kind": "xgboost",
+        "base_margin": -1.25,
+        "input_precision": "float32",
+        "accumulator_precision": "float32",
+        "trees": [
+          [
+            {
+              "feature": 0,
+              "threshold": 21.0,
+              "left": 1,
+              "right": 2
+            },
+            {
+              "leaf": 0.4000000059604645
+            },
+            {
+              "leaf": -0.20000000298023224
+            }
+          ],
+          [
+            {
+              "feature": 6,
+              "threshold": 5.0,
+              "left": 1,
+              "right": 2
+            },
+            {
+              "leaf": 0.15000000596046448
+            },
+            {
+              "leaf": -0.30000001192092896
+            }
+          ],
+          [
+            {
+              "feature": 1,
+              "threshold": 20.0,
+              "left": 1,
+              "right": 2
+            },
+            {
+              "leaf": -0.10000000149011612
+            },
+            {
+              "leaf": 0.10000000149011612
+            }
+          ]
+        ]
+      },
+      "calibration": {
+        "method": "sigmoid",
+        "slope": 1.2,
+        "intercept": -0.1,
+        "clip": 1e-12
+      },
+      "provenance": {
+        "preparation_run_id": "40f787781ed6faf22a9a99e2837ba5eccca38ffc974d7b63ea45d66f56d94b0f",
+        "protocol_sha256": "40f787781ed6faf22a9a99e2837ba5eccca38ffc974d7b63ea45d66f56d94b0f",
+        "feature_run_id": "40f787781ed6faf22a9a99e2837ba5eccca38ffc974d7b63ea45d66f56d94b0f",
+        "source_revision": "SYNTHETIC invented weights, never trained",
+        "split_sha256": "40f787781ed6faf22a9a99e2837ba5eccca38ffc974d7b63ea45d66f56d94b0f",
+        "code_sha256": {
+          "invented": "40f787781ed6faf22a9a99e2837ba5eccca38ffc974d7b63ea45d66f56d94b0f"
+        },
+        "dependencies": {
+          "invented": "test-only"
+        }
+      },
+      "licensing": {
+        "data": "No source data; invented test parameters only",
+        "code": "Independent test fixture",
+        "libraries": {
+          "scikit-learn": "BSD-3-Clause",
+          "XGBoost": "Apache-2.0"
+        }
+      },
+      "export_tolerance": 1e-07,
+      "artifact_id": "2c813cb4a6baf6ad537b0be05d20de2d0e2c83c980b90bd2ec2356369c61f948"
+    }
   }
 ]
