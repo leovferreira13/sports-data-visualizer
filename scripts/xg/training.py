@@ -53,6 +53,12 @@ def estimator(experiment, hyper, config):
         return Pipeline([("scale", StandardScaler()),
                          ("model", LogisticRegression(**params, **hyper, random_state=config["seed"]))])
     params = {k: v for k, v in config["xgboost"].items() if k not in hyper}
+    if "monotone_constraints" in experiment:
+        constraints = experiment["monotone_constraints"]
+        if (experiment["indices"] != list(range(8))
+                or constraints != [-1, 1, 0, 0, 0, 0, 0, 0]):
+            raise AuditError("Unsupported research monotonic feature mapping")
+        params["monotone_constraints"] = tuple(constraints)
     return XGBClassifier(**params, **hyper, random_state=config["seed"])
 
 

@@ -54,6 +54,10 @@ The actual-corpus final aggregates pass the predeclared gates; complete local co
 8. A recruiter can identify author/purpose quickly; technical readers can find evidence, architecture and reproduction.
 9. Public app/repository links, share metadata and attribution are checked on the actual release.
 
+## Behavior research follow-up
+
+#31 adds predeclared offline comparisons of frozen full logistic, current XGBoost and a monotonic XGBoost candidate. Dense isolated/physical sweeps, quality margins, separate research evidence and optional unused-match confirmation are implemented as tooling. Actual-corpus phase A has been locally executed and reproduced, with submitted aggregate consistency reviewed. Its original disposition is retain-current; no new model or goalkeeper defaults are published. Correcting isolated distance/angle directions is an important product priority; a detailed comparison of exactly current and monotonic XGBoost is deferred to #34. Phase B is not required for this scoped closure. See [the research guide](architecture/reference/xg-behavior.md). This refinement is separate from #30 interaction fixes and does not reopen the first-release dependency chain.
+
 ## Deferred work
 
 Learn (#5) may add two or three optional experiments using the same scene/features; it must preserve free control and does not own publication. Scenario links are a useful next improvement if not included in v0.1. Historical reconstructions require sourced positions/context and clear approximation labels. Famous goals, other metrics, accounts and a broader platform are outside the release dependency chain.

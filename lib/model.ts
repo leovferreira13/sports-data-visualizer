@@ -3,7 +3,7 @@ import inference from "../model/inference-contract.json";
 import { featureContract, featureNames } from "./features";
 import { FIELD } from "./scenario";
 
-export type ModelVersion = "geometry_logistic" | "defenders_logistic" | "full_logistic" | "full_xgboost";
+export type ModelVersion = "geometry_logistic" | "defenders_logistic" | "full_logistic" | "full_xgboost" | "full_monotonic_xgboost";
 type Node = { leaf: number } | { feature: number; threshold: number; left: number; right: number };
 type Envelope = {
   artifact_id: string; model_version: ModelVersion; contract_version: string;
@@ -85,7 +85,7 @@ export function loadModel(value: unknown): ModelLoadResult {
     || JSON.stringify(raw.feature_order) !== JSON.stringify(featureNames)
     || JSON.stringify(envelope.feature_indices) !== JSON.stringify(expected)) return { status: "invalid", reason: "artifact_contract" };
   const p = envelope.parameters;
-  if ((envelope.model_version === "full_xgboost") !== (p.kind === "xgboost")
+  if ((envelope.model_version === "full_xgboost" || envelope.model_version === "full_monotonic_xgboost") !== (p.kind === "xgboost")
     || envelope.export_tolerance !== (p.kind === "logistic" ? 1e-10 : 1e-7)) return { status: "invalid", reason: "artifact_parameters" };
   if (p.kind === "logistic") {
     if ([p.mean, p.scale, p.coefficients].some(a => a.length !== expected.length) || p.scale.some(x => x <= 0)) {
