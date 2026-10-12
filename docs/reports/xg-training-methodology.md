@@ -1,7 +1,9 @@
 # xG training methodology: first actual-corpus review
 
+**Current-status note (2026-10-12):** #24 extends the reviewed product to five languages; #25 prepares portfolio presentation; #26 owns Railway publication and remaining live/branding checks. Earlier release gates below describe this report's dated scope. Local reviewed-model xG is implemented; no live release is claimed.
+
 **Issue:** #11. **Protocol:** `xg-training/v1`.
-**Status:** the owner's first actual-corpus training artifacts passed aggregate, provenance and report consistency review. The owner confirmed successful complete local reproduction with the training directories. Final-test evaluation and public release remain pending.
+**Status:** the first locally executed actual-corpus training artifacts passed aggregate, provenance and report consistency review. Successful complete local reproduction using the training directories was reported. Final-test evaluation and public release remain pending.
 
 ## Evidence and verification limits
 
@@ -19,19 +21,19 @@ All four trained models improve the constant training-prevalence reference on se
 
 The full-logistic-versus-XGBoost log-loss interval includes zero. The selection rule still rejects full logistic as competitive because its observed Brier degradation exceeds the predeclared 0.0001 guardrail. That is a protocol-driven candidate decision, not conclusive proof that XGBoost generalizes better. Selection uncertainty is exploratory and must stay distinct from the final evaluation in #13. Do not alter the protocol after seeing this result.
 
-The submitted export checks pass their recorded tolerances: logistic conversion has zero reported difference and XGBoost's reported error is below 1e-7. This is owner-run evidence of offline export parity, not independent verification of the unsupplied envelopes or browser parity. Controlled synthetic responses are finite and show defender/keeper effects, but sparse/unfamiliar support and the zero-defender sentinel still need #13 review.
+The submitted export checks pass their recorded tolerances: logistic conversion has zero reported difference and XGBoost's reported error is below 1e-7. This is locally executed evidence of offline export parity, not independent verification of the unsupplied envelopes or browser parity. Controlled synthetic responses are finite and show defender/keeper effects, but sparse/unfamiliar support and the zero-defender sentinel still need #13 review.
 
 ## Complete local reproduction and handoff
 
 The initial failures came from comparing preparation directories with the training comparator. They were an input-phase mistake, not evidence of differing fitted models. The CLI now distinguishes incorrect phases from differing training inventories and preserves integrity, provenance, schema and numeric diagnostics without changing scientific thresholds.
 
-After using the completed training directories, the owner reported:
+Using the completed training directories, the following comparator results were reported locally:
 
 ```text
 PASS: 17 files verified; 0 files differ byte for byte
 PASS: scientific configuration, decisions and numeric tolerances agree
 ```
 
-This confirms successful owner-run complete comparison, rather than equality of aggregate files alone. The assistant reviewed the submitted aggregates and comparator output; it did not execute this comparison against private rows. Separate creation of a fresh environment was not independently verified here.
+This confirms successful locally executed complete comparison, rather than equality of aggregate files alone. The assistant reviewed the submitted aggregates and comparator output; it did not execute this comparison against private rows. Separate creation of a fresh environment was not independently verified here.
 
 The training implementation and actual-corpus selection/reproduction evidence are ready for #11 review. Keep the candidate frozen. Issue #12 must establish browser inference parity, and #13 must evaluate the exact frozen candidate, full-logistic baseline and constant on the unopened final test. Public release still needs #8/#13 review. Do not refit, retune or weaken the protocol using the final test.

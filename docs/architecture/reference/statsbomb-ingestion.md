@@ -62,7 +62,7 @@ Outputs are staged and renamed only after reconciliation and source/extractor re
 
 The agreed planning screen requires at least 10,000 position-usable shots, 1,000 goals, 200 represented matches and three competitions. A deterministic whole-match diagnostic must have capacity for 2,000 held-out shots and 100 goals while leaving a nonempty complement. It is not the training/test split, and its identifiers are not published. #11 owns the split design and #13 owns model quality/calibration checks.
 
-These minima are not statistical guarantees. A negative screen completes the data audit but requires an owner decision on a narrower population/claim or authorized expansion before training experiments. Passing still requires documenting competition imbalance, partial visibility and exclusions.
+These minima are not statistical guarantees. A negative screen completes the data audit but requires an explicit scope decision on a narrower population/claim or authorized expansion before training experiments. Passing still requires documenting competition imbalance, partial visibility and exclusions.
 
 ## Verification and publication
 
@@ -78,9 +78,9 @@ Only a completed competition-level aggregate report, schema/methodology, synthet
 
 ### Completed execution evidence
 
-On 2026-10-11, the owner completed two full local audits at the pinned revision with Python 3.12.3 and confirmed byte-identical corpus, match counts, audit and manifest. All 1,813 event files and 166 corresponding tracked 360 inputs were present. This resolves the earlier connector transport blocker; locally omitted tracked files must still fail rather than become reported missing coverage.
+On 2026-10-11, two full local audits at the pinned revision used Python 3.12.3; byte-identical outputs were reported for corpus, match counts, audit and manifest. All 1,813 event files and 166 corresponding tracked 360 inputs were present. This resolves the earlier connector transport blocker; locally omitted tracked files must still fail rather than become reported missing coverage.
 
-The aggregate audit hash and competition-to-total counts, exclusions, visibility distributions and pooled rates were independently checked from the uploaded `audit.json`. The repository extractor hash matches the local run. Six source-to-corpus examples (goal and non-goal across Premier League 2015/16, Euro 2020 and World Cup 2022) passed the owner's independent spot check; four also verified separate 360 joins and normalized roles. Original inputs and shot/per-match outputs remain local.
+The aggregate audit hash and competition-to-total counts, exclusions, visibility distributions and pooled rates were independently checked from the uploaded `audit.json`. The repository extractor hash matches the local run. Six source-to-corpus examples (goal and non-goal across Premier League 2015/16, Euro 2020 and World Cup 2022) passed the reported independent local spot check; four also verified separate 360 joins and normalized roles. Original inputs and shot/per-match outputs remain local.
 
 The [completed report](../../reports/xg-data-audit.md) records provenance, competition coverage, denominators, exclusions, visibility and 360 comparisons. Its planning screen passes with 35,024 position-usable shots and 3,261 goals across eight distinct competitions. This is data feasibility evidence only; #10, #11 and #13 still own features, training/splitting and evaluation.
 

@@ -11,7 +11,7 @@ The positional model has accepted scientific evidence and a scoped parameter-onl
 - Serve the original reviewed envelope as an exact static JSON asset. Dev/build checks copy the tracked source bytes into a generated ignored public asset after provenance verification. The browser checks SHA-256 before parsing, validates the selected artifact and captures its immutable handle once. Infer locally with the existing predictor; never use a heuristic fallback. Loading, network failures and mismatched bytes are explicit states; penalties remain available without the model.
 - Keep the learned eight-feature contract and ten-defender model domain unchanged. The UI permits zero to three represented defenders. Preserve base marker IDs/coordinates and explicitly exclude deliberately removed base defenders in the Scenario adapter. Missing coordinates are still errors; shooter and keeper remain mandatory. Extra attackers are visual only.
 - Write v3 session snapshots. Read valid v1/v2 snapshots, retain base coordinates and the first extra defender when a legacy snapshot exceeds the new UI limit, disclose the migration once, and retain coordinates across route/locale navigation. This migration is not inference clamping or a support-based rejection.
-- Owner revision (2026-10-11): show eight retained feature inputs as compact live cards beside the pitch, with the estimate above them. Remove the last-completed-change panel and related event bookkeeping. The math, feature contract and static envelope remain unchanged.
+- Layout revision (2026-10-11): show eight retained feature inputs as compact live cards beside the pitch, with the estimate above them. Remove the last-completed-change panel and related event bookkeeping. The math, feature contract and static envelope remain unchanged.
 - Render Methodology below Playground on the same page. Scrolling preserves the mounted scene without jump or return links; old `/methodology` routes redirect to the localized anchor. Server-render aggregate tables, calibration SVG/table, paired uncertainty and the adverse cone-count slice. Remove the technical-links block while retaining repository documentation.
 - Keep descriptive preset/support explanations in Methodology, not above the interaction. No private reference rows or invented joint-support classifier are exported. Rare valid scenes remain computable.
 
@@ -21,7 +21,7 @@ Parameters are distributed as a downloadable static asset, under the exact scope
 
 Zero-defender inference is mathematically defined but empirical support is unestablished. UI limits do not imply supported scene accuracy. Tree outputs remain discontinuous. Optional local browser QA and actual-envelope parity supplement the original private-training evidence without reopening labels or fitting a model.
 
-Actual production build/network/attribution review is recorded separately. Detailed anonymous per-asset Media Pack guidance remains a documented release check if inaccessible; publication, public URL verification and visibility changes belong to #5 with owner authorization. Reverting the focused PR restores the prior geometry-only UI; frozen evidence is not rewritten.
+Actual production build/network/attribution review is recorded separately. Detailed anonymous per-asset Media Pack guidance remains a documented release check if inaccessible; publication, public URL verification and visibility changes belong to #26 with explicit publication authorization. Reverting the focused PR restores the prior geometry-only UI; frozen evidence is not rewritten.
 
 ## Evidence-based deviation from the spec
 
@@ -31,4 +31,4 @@ The static byte-preserving asset is the smallest robust alternative. The source 
 
 ## Responsive interaction revision
 
-At desktop widths the pitch is left and all eight cards/results are right. Mobile uses a compact sticky xG strip within the Playground, then the pitch and two-column cards; secondary coordinate controls are collapsible. This preserves live feedback within narrow screens without introducing an alternative model or separate mobile scene. The owner requested this single-page layout after running the initial draft locally.
+At desktop widths the pitch is left and all eight cards/results are right. Mobile uses a compact sticky xG strip within the Playground, then the pitch and two-column cards; secondary coordinate controls are collapsible. This preserves live feedback within narrow screens without introducing an alternative model or separate mobile scene. The single-page layout was selected following local review of the initial draft.

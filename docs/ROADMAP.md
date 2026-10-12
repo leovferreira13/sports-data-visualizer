@@ -1,124 +1,59 @@
 # Football, Visualized — delivery roadmap
 
-**Status:** plan for the first public release · **Updated:** 2026-10-12
+**Status:** first public release preparation · **Updated:** 2026-10-12
 
 ## Delivery rule
 
-Build a working first interaction as soon as possible, then complete a small, trustworthy release. The time ranges below are **focused-effort estimates**, not promised deadlines. The model's scientific milestone is complete. Prioritize the intuitive educational portfolio, reviewer-visible reasoning and scoped publication QA; another model optimization cycle is not required for v0.1.
+Ship a small, trustworthy educational portfolio with intuitive interaction and reviewer-visible reasoning. The scientific milestone is complete; another optimization cycle, Learn experiments, traffic targets and a fixed feedback quota are not release prerequisites.
 
-| Milestone | Indicative effort | End demonstration | Exit condition |
-| --- | --- | --- | --- |
-| **0. Prepare** | 1–2 h | Repository, runnable app, and three starting documents. | Runs locally; scope and criteria recorded. |
-| **1. Playable pitch** | 4–8 h | Responsive pitch with shooter, goalkeeper, two defenders, and presets; distance and angle respond to dragging. | Mouse and touch work; pieces stay in bounds; no provisional number is labeled xG. |
-| **2. Prove the calculation** | Completed in #9–#13 | Small test takes a scenario state and returns a reproducible estimate. | Model rights and inputs checked; keeper/defenders affect the value if claimed; scientific checks and scene responses recorded; support/transfer limitations documented. |
-| **3. Publishable Playground** | 6–10 h after milestone 2 | Live estimate, explanations, six presets, addable attackers and defenders, removal controls, reset, and `pt-BR`/`en` interface. | v0.1 acceptance criteria met on desktop and mobile. |
-| **4. Portfolio release** | Scoped in #24–#26 | Five-language Playground, professional presentation and Railway public URL. Learn (#5) is deferred. | Full flow in all five languages; model provenance/limits visible; public link tested. |
-| **5. Refine from real use** | Based on feedback | Fixes to confusion, bugs, and friction reported by fans and commentators. | Priorities come from observation rather than a speculative feature list. |
+| Milestone | Delivered or planned result | Exit condition |
+| --- | --- | --- |
+| 0. Prepare | Repository, local app and working agreement | Runnable shell and documented scope |
+| 1. Playable pitch | Metric SVG geometry, presets and accessible movement (#2) | Mouse/touch/keyboard controls and geometry checks |
+| 2. Prove the calculation | Pinned source audit, shared features, training, parity and final review (#9–#13) | Accepted scientific evidence with explicit support/transfer limitations |
+| 3. Reviewed-model Playground | Exact browser model asset, eight live cards and inline Methodology/results (#4) | Local product QA recorded; release-specific gaps remain explicit |
+| 4. Portfolio release | Five locales (#24, complete), presentation (#25), Railway hosting/public repository (#26) | Final public URL, metadata and scoped asset/attribution checks pass |
+| 5. Refine from use | Optional Learn (#5), scenario links and observed improvements | Priorities follow actual feedback |
 
-**First observable milestone:** after milestone 1, people can drag pieces and switch presets. This answers “how quickly can we make a working first version?” **Publication gate:** only after milestone 2 may a number be presented as an xG estimate.
+## Implemented product
 
-## Model decision at milestone 2
+- Playground opens directly: half-pitch, six editable presets, shooter, goalkeeper and zero to three represented defenders. Extra attackers are visual only.
+- Desktop places the pitch left and xG/eight input cards right. Mobile uses a compact sticky xG strip inside the Playground followed by pitch and cards. Secondary position inputs are collapsible; drag and keyboard controls remain immediate.
+- Predictions use the independently trained, frozen shallow XGBoost. Tree plateaus/nonmonotonic responses are valid; movement does not imply causal effects. Invalid/unavailable learned predictions have no heuristic fallback.
+- Penalties use a separate fixed 0.76 convention. Rare/extreme scenes stay explorable with their limitations explained in Methodology.
+- Methodology/results is server-rendered below the pitch and shares reviewed aggregate evidence with the reports. Former dedicated URLs redirect to the same locale's anchor. No section-jump links, last-change panel or technical-links promotional panel is shown.
+- `/en`, `/br`, `/nl`, `/es`, `/de` use complete locale resources, browser/saved preferences and locale-aware formatting. Scene state survives language changes and reload within the same tab.
 
-Parent issue #3 now selects our own model pipeline: audit legally usable StatsBomb Open Data in #9, define matching offline/browser features in #10, train a regularized logistic regression baseline and constrained XGBoost positional candidate in #11, then evaluate calibration and scene behavior before publication in #13. Record source/model provenance, actual inputs and limitations. The earlier licensed-artifact-first option is superseded.
+## Model rationale and completion
 
-Export reviewed parameters and metadata for browser inference only after the evaluation and rights gates pass. Keep source and shot-level records local. Open-play foot shots form the learned population; penalties follow the separately declared fixed 0.76 convention in #12, not a learned result.
+The licensed-artifact-first proposal was superseded by the independent model pipeline: audit legally usable StatsBomb Open Data (#9), define matching offline/browser features (#10), compare regularized logistic baselines and a constrained XGBoost positional candidate (#11), verify numerical parity (#12), then inspect final calibration, probability scores and scene support (#13). Train-only tuning, separate calibration/selection and match-held-out final test protect the evaluation boundary.
 
-If a contextual model is not ready immediately, test the pitch as a prototype with **geometry and indicators** but do not publish xG that pretends to react to goalkeeper/defenders. If the fallback only uses shot location, say so plainly and do not attribute other players' effects to it. A complete v0.1 needs an estimate that matches the promised interactions.
+The actual-corpus final aggregates pass the predeclared gates; complete local comparators were reported PASS. Aggregate identities/provenance and generated-view consistency were independently checked. Sparse/extreme/low-defender support, partial visibility, cohort transfer and an adverse cone-count slice remain accepted limitations. No source rows or shot-level examples are distributed. See the [final review](reports/xg-final-evaluation.md) and [implementation summary](reports/xg-implementation-summary.md).
 
-## v0.1 scope
+#3 and #8 are closed after their scoped scientific/rights handoffs. #4 integrates the exact reviewed parameter envelope and records local build/network/attribution QA. #24 extends the product to five locales. These completed checks are dated; #26 refreshes relevant assets/content for the exact release build and resolves the outstanding detailed per-asset logo-guidance review. Local QA does not prove a public deployment.
 
-**Interface and interaction**
+## Portfolio release sequence
 
-- Playground on entry; a half-pitch with consistent orientation and scale; shooter, goalkeeper, and up to three defenders movable with mouse and touch.
-- Presets: penalty, one-on-one, tight angle, long shot, and crowded box; reset to the selected preset.
-- `0.xx xG` (or `0,xx xG` by locale) and equivalent percentage, plus distance, angle, and a simple description of shot-cone occupancy.
-- Free exploration of rare/extreme scenes within valid controls, with proportional support notes and no diagnostic-only blocking.
-- Visible, directly accessible Methodology and results section below Playground, with plain-language explanations plus technical evidence/architecture links.
-- “What affects this chance?” panel with current observations; after moving a piece, compare before/after only for factors actually used by the model.
-- Learn mode with 2–3 optional experiments: distance and angle; move a defender out of the way; reposition the goalkeeper. Hide any experiment unsupported by the selected model.
-- Portuguese / English / Dutch / Spanish / German selector; initial language from browser preference, persisted manual choice, and complete translations including methodology notes.
+1. **#24 — localization:** delivered. [Localization QA](reports/localization-qa.md) records checks and translation-review limits.
+2. **#25 — presentation:** concise README, confirmed author links, screenshots/share image, localized metadata and professional impersonal documentation. [Portfolio QA](reports/portfolio-presentation-qa.md) distinguishes completed local work from live checks.
+3. **#26 — publication:** build/start in the selected Railway account, confirmed HTTPS origin, public repository, refreshed content/history/asset/attribution checks, live smoke tests and rollback instructions.
 
-**Delivery**
+#25 can be reviewed before deployment. Configure `SITE_URL`, rebuild and add the actual live link when #26 supplies the domain; deployed metadata/share-preview checks finish both tasks without a circular dependency. Publication does not depend on Learn.
 
-- Public URL and repository; concise README with local setup, model/data origin, limitations, credits, screenshot or GIF, and product decisions.
-- Comfortable touch targets, mobile layout, basic keyboard access to select and adjust pieces or equivalent alternative controls.
-- Manual checks in desktop and mobile browsers, focused tests of geometry and inference, and URL serialization if scenario sharing is included.
+## First-release acceptance
 
-## Acceptance criteria
+1. A new visitor can move the shooter without preparatory reading.
+2. Distances, angles and drawn geometry agree; current cards reflect the retained inputs.
+3. Goalkeeper/defender movements evaluate actual features without invented causal/monotonic claims.
+4. Probabilities remain bounded; penalties, unavailable assets and invalid inputs follow explicit rules.
+5. All six presets are editable in all five languages; language changes preserve the scene.
+6. Mouse/touch and accessible alternatives work at desktop/mobile widths.
+7. Model provenance, omitted factors, calibration/support and adverse findings are visible in Methodology.
+8. A recruiter can identify author/purpose quickly; technical readers can find evidence, architecture and reproduction.
+9. Public app/repository links, share metadata and attribution are checked on the actual release.
 
-1. A new visitor lands in Playground and can move the shooter without reading extensive instructions.
-2. Moving the shot changes distance/angle consistently; pitch drawings match the numeric values.
-3. Moving the goalkeeper or a defender evaluates the actual retained features; some movements can leave tree outputs unchanged. The UI never invents an effect, forces monotonicity or promises real-world causality.
-4. The value is in [0, 1]; penalties and invalid states follow explicit rules; coordinate errors do not cause absurd jumps.
-5. All six presets load in all five languages and remain editable. Optional Learn is deferred and does not block release.
-6. Changing language preserves scene and mode, translates every text, and retains the choice on later visits; absent a saved choice, the initial locale follows browser preference.
-7. The explanation identifies the result as an estimate and lists included and omitted factors. Descriptions of changes derive from the same features as the prediction.
-8. The flow works with mouse and touch on desktop and mobile widths; critical interactions have an accessible alternative if dragging fails.
-9. README, attribution, and public URL are ready to send to a commentator or recruiter.
+## Deferred work
 
-## Open points resolved by the prototype
+Learn (#5) may add two or three optional experiments using the same scene/features; it must preserve free control and does not own publication. Scenario links are a useful next improvement if not included in v0.1. Historical reconstructions require sourced positions/context and clear approximation labels. Famous goals, other metrics, accounts and a broader platform are outside the release dependency chain.
 
-- **Model:** resolved: independently trained shallow XGBoost, compared against regularized logistic baselines; final scientific evidence is accepted with limitations.
-- **Scenario link:** desirable for commentators; include in v0.1 if it fits after calculation and accessibility. Otherwise make it the highest-priority next improvement.
-- **Penalty:** include a visual preset already on the pitch; show xG only with treatment compatible with the selected model.
-- **Mobile pitch:** test a horizontal pitch with framing and touch before investing in a separate vertical representation.
-
-## After v0.1
-
-**v0.2, depending on feedback:** shareable links if deferred; 3–5 sourced historical reconstructions that distinguish observed versus inferred positions, shot type, and context missing from the model. Candidate examples for research, **not yet confirmed**: James Rodríguez in 2014, Van Persie in 2014, Ronaldinho in 2002.
-
-**Later:** other metrics as separate experiments. Work on xA, xThreat, scouting portal, or user accounts is not a dependency of the first release.
-
-## Practical order of the first tasks
-
-1. Create the app and one pitch geometry system; draw goal, cone, and pieces.
-2. Implement Pointer Events dragging, boundaries, and presets.
-3. Prove `scenario → features → model → xG` and document provenance.
-4. Add honest before/after insights and explicit penalty handling.
-5. Finish translation, responsiveness, Learn, and essential accessibility.
-6. Publish with owner authorization after scoped rights/product QA; record targeted qualitative feedback and useful prioritized improvements.
-
-### Offline training implementation status (#11)
-
-Training contracts/scripts and synthetic verification are implemented; the first owner-run actual-corpus artifacts passed internal review, with successful complete reproduction confirmed by the owner. See the [local training guide](architecture/reference/xg-training.md) and [status report](reports/xg-training-methodology.md). The Methodology and results section in #4 consumes the same aggregate evidence as the generated report. Final-test evaluation and release remain gated by #13 and final rights QA in #8.
-
-### Browser inference implementation status (#12)
-
-Validated artifact loading, logistic/XGBoost inference, explicit unsupported/unavailable results and the separate 0.76 penalty convention are implemented. Invented-fixture parity is automated; the owner's frozen candidate passed 2,886 cases with zero probability difference, and complete repeat-run comparison passed. See the [inference review](reports/xg-browser-inference.md). The [prediction guide](architecture/reference/prediction.md) provides local commands, optional Chromium checks and repeat-run comparison. The reviewed weights are now a hash-checked static asset and the local page displays learned estimates; authorized public deployment is tracked in #26.
-
-## Final evaluation handoff
-
-Issue #13 provides offline final-test evaluation infrastructure and generated aggregate report/model-card/app views. Owner-run actual-corpus results pass automated gates and complete comparators are reported PASS. Scientific review accepts the evidence with support limitations; distribution/publication decisions remain pending. This does not close #3 or publish xG. #4 must integrate the Methodology and results section and finish real production QA with #8.
-
-## Actual-corpus final review
-
-The owner-run final evidence passes all automated predicates and the owner reports all requested comparators PASS. Aggregate identity/provenance and report/app consistency were independently checked. Scientific evidence is accepted with sparse/extreme/preset support limitations; actual parameter/export/rights and integrated #4/#8 publication QA remain pending. See `docs/reports/xg-final-evaluation.md` and `docs/reports/xg-final-review-record.json`. Public xG remains disabled.
-
-## Portfolio alignment and completion ownership (2026-10-11)
-
-#4 presents actual model responses, tree plateaus, illustrative presets and layered methodology; #5 provides deferred optional experiments; #25 owns the interview-ready README/walkthrough and targeted qualitative review. A fixed 5–8-person feedback cohort, growth/traffic targets and universal scene precision are not release gates. No new training work is required for the educational first release.
-
-#9–#13 are closed and the final-evaluation PR is merged. #3's technical/scientific milestone is complete; #8 is closed following its scoped rights/artifact/history completion; integrated xG/methodology publication checks were explicitly transferred to #4. Start #4 from the accepted scientific handoff without requiring epic closure. #4 collects the concrete QA evidence for #8; #26 owns subsequent authorized publication. This preserves publication checks without a circular development dependency.
-
-## Rights completion handoff
-
-The owner assigned interface-dependent publication QA to #4. The dated #8 rights/artifact/repository completion review is in `docs/reports/statsbomb-rights-completion.md`. After its documentation is merged, #8 and the completed model epic #3 may close. Actual xG/methodology pages, final build/network content and attribution/logo QA remain mandatory in #4 before #26 completes authorized publication. No new training cycle or public release is authorized by this handoff.
-
-## Integrated #4 delivery
-
-The reviewed parameter envelope is now integrated into the bilingual Playground, with explicit prediction states, zero-to-three represented defenders, honest comparisons and inline Methodology/results. The original fitted feature contract, parameters and aggregate evidence remain unchanged. See [Playground and Methodology/results](architecture/reference/playground-and-methodology.md) for actual modules and commands.
-
-Earlier statements that actual weights are local-only or that the UI displays geometry only describe the pre-integration state. #8 is closed; #4 owns the dated integrated QA record and any explicitly unresolved logo/publication checks. Learn remains deferred in #5; authorized deployment is tracked in #26. See `docs/reports/xg-playground-qa.md`; no public release is implied.
-
-## Owner-directed Playground revision (2026-10-11)
-
-The current #4 UI places the pitch left and eight retained-feature cards plus current xG right. Mobile uses a compact sticky xG strip within the Playground, the pitch, then two-column cards. The last-completed-change panel and expanded observations block are removed; support/illustration explanations remain in Methodology. Secondary position controls are collapsible. Methodology is server-rendered below the pitch on the same localized page, with anchor navigation and redirects from former dedicated URLs. The technical-links block is removed from the product; repository references remain available. This revision supersedes earlier references to adjacent tabs or comparison panels and does not change inference, parameters or scientific evidence.
-
-## Five-language extension (#24, 2026-10-12)
-
-The current product supports `/en`, `/br`, `/nl`, `/es` and `/de`, with full
-Playground/Methodology copy, native language choices, persisted preference and
-locale-aware display formatting. Parameters, features, evidence and scene storage
-are unchanged. See [localization QA](reports/localization-qa.md).
-Portfolio presentation/editorial cleanup remains #25; Railway publication and
-live checks remain #26. Learn (#5) is not a release prerequisite.
+Use targeted qualitative review when readers are available. Record real feedback and follow-ups; no fixed participant quota or analytics requirement applies.

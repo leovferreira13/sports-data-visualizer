@@ -22,3 +22,5 @@ The [feature extraction audit](../../reports/xg-feature-audit.md) tracks synthet
 - [Final xG evaluation and release gate](xg-final-evaluation.md): frozen test commands, aggregate handoff, reproduction and review.
 
 - [Playground and Methodology/results](playground-and-methodology.md): implemented inference integration, deliberate editing, comparisons, navigation and local QA.
+
+- [Portfolio presentation and deployment metadata](portfolio-presentation.md) — confirmed authorship, screenshots, build-time origin and release handoff.

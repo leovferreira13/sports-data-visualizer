@@ -1,7 +1,8 @@
 {
   "meta": {
-    "title": "Fußball, erklärt",
-    "description": "Eine interaktive Umgebung zum Verständnis von Schusssituationen im Fußball."
+    "title": "Football, Visualized — interaktiver xG-Spielplatz",
+    "description": "Verschiebe Schützen, Torwart und Verteidiger, erkunde acht Positionsmerkmale und sieh dir die Methodik eines unabhängigen xG-Modells an. Ein Projekt von Leonardo Ferreira.",
+    "imageAlt": "Illustratives Fußballfeld und aktuelle xG-Merkmalskarten in Football, Visualized."
   },
   "brand": {
     "name": "Fußball, erklärt",
@@ -183,5 +184,10 @@
       "yes": "Ja",
       "no": "Nein"
     }
+  },
+  "author": {
+    "by": "Von",
+    "links": "Links zum Autor und zum Projekt",
+    "repository": "Repository"
   }
 }

@@ -1,7 +1,8 @@
 {
   "meta": {
-    "title": "Voetbal, uitgelegd",
-    "description": "Een interactieve speelomgeving om schotsituaties in het voetbal te begrijpen."
+    "title": "Football, Visualized — interactieve xG-speelomgeving",
+    "description": "Verplaats de schutter, keeper en verdedigers, verken acht positionele variabelen en bekijk de methodologie van een onafhankelijk xG-model. Een project van Leonardo Ferreira.",
+    "imageAlt": "Illustratief voetbalveld en actuele xG-variabelen in Football, Visualized."
   },
   "brand": {
     "name": "Voetbal, uitgelegd",
@@ -183,5 +184,10 @@
       "yes": "Ja",
       "no": "Nee"
     }
+  },
+  "author": {
+    "by": "Door",
+    "links": "Links naar de maker en het project",
+    "repository": "Repository"
   }
 }

@@ -1,10 +1,12 @@
 # ADR 007: Browser-safe inference and a distinct penalty convention
 
-**Date:** 2026-10-11. **Status:** accepted and implemented for #12 infrastructure; owner-run actual-candidate browser-bundle parity passed; final evaluation and release gates remain pending.
+**Current-status note (2026-10-12):** the original decision below retains its implementation-stage context. #4 integrates the reviewed model; #24 provides five locales; #26 owns public release. See the [current architecture](../overview.md).
+
+**Date:** 2026-10-11. **Status:** accepted and implemented for #12 infrastructure; locally executed actual-candidate browser-bundle parity passed; final evaluation and release gates remain pending.
 
 ## Context
 
-#11 freezes parameter-only logistic or shallow XGBoost envelopes. Browser predictions must retain fitted preprocessing/calibration and match offline semantics without an inference service. The actual candidate remains on the owner's machine. Public xG is gated by #13/#8 and presented by #4.
+#11 freezes parameter-only logistic or shallow XGBoost envelopes. Browser predictions must retain fitted preprocessing/calibration and match offline semantics without an inference service. The actual candidate remains on the local training machine. Public xG is gated by #13/#8 and presented by #4.
 
 ## Decision
 

@@ -1,7 +1,8 @@
 {
   "meta": {
-    "title": "Fútbol, explicado",
-    "description": "Un entorno interactivo para comprender situaciones de remate en el fútbol."
+    "title": "Football, Visualized — simulador interactivo de xG",
+    "description": "Mueve al tirador, al portero y a los defensores, explora ocho variables posicionales y consulta la metodología de un modelo independiente de xG. Un proyecto de Leonardo Ferreira.",
+    "imageAlt": "Campo ilustrativo y tarjetas de variables de xG actualizadas en Football, Visualized."
   },
   "brand": {
     "name": "Fútbol, explicado",
@@ -183,5 +184,10 @@
       "yes": "Sí",
       "no": "No"
     }
+  },
+  "author": {
+    "by": "Por",
+    "links": "Enlaces del autor y del proyecto",
+    "repository": "Repositorio"
   }
 }

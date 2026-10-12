@@ -1,6 +1,6 @@
 # Offline xG training
 
-**Status:** #11 training is implemented; actual-corpus aggregate evidence passed review and complete local reproduction was confirmed by the owner. The frozen XGBoost candidate passed owner-run browser-bundle parity and passed final-test automated gates and aggregate scientific review with support limitations; no public estimate is enabled.
+**Status:** offline tooling and reviewed actual-corpus evidence are implemented; reported local reproduction and independent aggregate inspection remain distinct. #4 integrates the unchanged reviewed model, #24 supplies five locales and #26 owns public release/live checks.
 
 ## Responsibilities
 
@@ -61,7 +61,7 @@ Each model prints its stage; the bounded search has 60 logistic and 40 XGBoost f
 
 The successful output is `Complete immutable training: <path>; test outcomes unopened`. Completion does **not** imply a model was selected: read `selection.json`, whose status is `frozen_candidate` or `no_candidate`. If support is inadequate, preparation fails before fitting with an explicit reason. If no model qualifies, preserve that evidence and discuss remediation; do not open the final test to find a better choice.
 
-The owner ran training on the actual corpus. The submitted aggregate evidence and generated report passed consistency review, and the owner confirmed complete local reproduction. The assistant did not train on private rows. See the [reviewed training results](../../reports/xg-training-methodology.md) for the selected candidate, rationale, uncertainty and verification limits. Synthetic tests validate execution and invariants, not empirical model quality.
+Training was executed locally on the actual corpus. The submitted aggregate evidence and generated report passed consistency review, and complete local reproduction was reported. The assistant did not train on private rows. See the [reviewed training results](../../reports/xg-training-methodology.md) for the selected candidate, rationale, uncertainty and verification limits. Synthetic tests validate execution and invariants, not empirical model quality.
 
 ## Fresh environment and complete reproduction
 
@@ -116,12 +116,12 @@ Sigmoid calibration uses two fitted parameters on calibration data only. A nonpo
 
 A zero observed defender list uses a sentinel, never an inferred empty pitch. Continuous distance distributions/correlations omit sentinel rows. Keeper extremes, full-pitch/UI differences and partial visibility need empirical-support review. Marginal ranges alone cannot establish joint support; the model does not represent extra attackers, keeper alignment, identity, technique or motion. Scene changes are comparisons within the model, not causal claims or mandatory monotonic relationships.
 
-The export validator checks full feature order/checksum, retained indices, fitted scale, model kind, calibration and topology. Logistic evaluation uses double precision; XGBoost conversion preserves float32 inputs/thresholds and sequential float32 margin accumulation. Only inference-relevant parameters survive conversion from the documented save-model JSON. Synthetic scene references contain no source examples. #12 implements browser-safe inference and a [local parity command](prediction.md#local-verification); use the existing completed training directory without refitting. Actual-candidate parity and complete local comparison passed with owner-run evidence; see the [inference review](../../reports/xg-browser-inference.md). Final evaluation/rights/public release remain #13/#8.
+The export validator checks full feature order/checksum, retained indices, fitted scale, model kind, calibration and topology. Logistic evaluation uses double precision; XGBoost conversion preserves float32 inputs/thresholds and sequential float32 margin accumulation. Only inference-relevant parameters survive conversion from the documented save-model JSON. Synthetic scene references contain no source examples. #12 implements browser-safe inference and a [local parity command](prediction.md#local-verification); use the existing completed training directory without refitting. Actual-candidate parity and complete local comparison passed with locally executed evidence; see the [inference review](../../reports/xg-browser-inference.md). Final evaluation and scoped rights review are complete in #13/#8; #26 owns live publication.
 
 ## Final-test handoff
 
 Issue #13 now provides a [separate final evaluator](xg-final-evaluation.md). Use the original complete preparation/training runs and matching actual-candidate parity without another fit. Actual-corpus scientific review is accepted with limitations; the final publication decision remains pending.
 
-## Actual-corpus final review
+## Current integrated delivery
 
-The owner-run final evidence passes all automated predicates and the owner reports all requested comparators PASS. Aggregate identity/provenance and report/app consistency were independently checked. Scientific evidence is accepted with sparse/extreme/preset support limitations; actual parameter/export/rights and integrated #4/#8 publication QA remain pending. See `docs/reports/xg-final-evaluation.md` and `docs/reports/xg-final-review-record.json`. Public xG remains disabled.
+Scientific evidence is accepted with sparse/extreme/preset support limitations. Exact parameter-only content and scoped rights/history review are recorded; local #4 integration QA is complete. Final Railway deployment, refreshed release assets/branding and live verification remain #26. See the [final review](../../reports/xg-final-evaluation.md) and [integration reference](playground-and-methodology.md). Historical pre-integration gates in earlier sections do not describe the current app status.

@@ -1,5 +1,7 @@
 # Integrated Playground and Methodology QA
 
+**Current-status note (2026-10-12):** #24 extends the reviewed product to five languages; #25 prepares portfolio presentation; #26 owns Railway publication and remaining live/branding checks. Earlier release gates below describe this report's dated scope. Local reviewed-model xG is implemented; no live release is claimed.
+
 **Date:** 2026-10-11. **Reviewer:** assistant/implementer. **Branch:** `agent/4-public-ready-playground`. **Scope:** #4 implementation and local production QA; no public deployment/visibility change.
 
 Machine-readable evidence and exact code/build identities: [QA record](xg-playground-qa.json). The base is `d8469ea88ecccf4e2e41f64f13d8a0e10dbfc539`; the record includes the production build ID and a SHA-256 inventory of application/model/verification code. It does not claim that a deployed public URL was tested.
@@ -8,7 +10,7 @@ Machine-readable evidence and exact code/build identities: [QA record](xg-playgr
 
 The Playground executes the unchanged reviewed independent XGBoost with explicit loading, learned, unsupported and unavailable states. Six original editable presets remain unchanged. Zero to three represented defenders can be added/removed, shooter and keeper remain mandatory, and extra attackers are visual only. Deliberate removal changes the Scenario adapter without changing the frozen feature domain/checksum. v3 snapshots preserve locale/navigation/reload behavior and migrate excess legacy defenders with a disclosure.
 
-After owner review, current xG and eight live input cards replace the last-completed-change panel and expanded observations block. Desktop uses pitch-left/cards-right; mobile uses a compact sticky xG strip, pitch, then two-column cards. Position controls are collapsible. Support, illustrative presets, omitted factors and tree plateaus are explained in Methodology; valid exploration is never gated.
+Following local product review, current xG and eight live input cards replace the last-completed-change panel and expanded observations block. Desktop uses pitch-left/cards-right; mobile uses a compact sticky xG strip, pitch, then two-column cards. Position controls are collapsible. Support, illustrative presets, omitted factors and tree plateaus are explained in Methodology; valid exploration is never gated.
 
 Methodology/results inline at `/en#methodology` and `/br#methodology` shares the reviewed aggregate numerical sources with the reports: match partitions, baseline experiments, selection versus final test, paired score uncertainty, calibration with sparse flags/intervals and the adverse two-defenders-in-cone slice. Tables supply accessible equivalents to the SVG calibration chart; narrative and interface labels are translated. The requested technical-links block is removed from the UI; repository documentation retains those references. Former dedicated routes redirect to the anchors.
 
@@ -36,7 +38,7 @@ Official README and agreement Git blobs remain identical to the #8 review on thi
 
 #5 also needs owner publication authorization and a smoke test of the actual public deployment, including final assets/network/attribution. A future build has a new identity and should rerun the concrete checks. Local emulated touch is not a physical-device check. Current content inspection is scoped and does not replace the previously recorded #8 history review or establish a general model-privacy guarantee.
 
-## Owner UI revision QA
+## Layout revision QA
 
 The revised production browser walkthrough verifies desktop orientation, eight cards, live distance updates after keyboard/drag input, zero-defender display, omitted-attacker invariance, independently labeled penalty measurements, both locale anchors, legacy redirects, mobile two-column ordering and sticky result visibility. Removed tabs, last-change panel and expanded observations do not appear. Lazy footer image loading is awaited explicitly after the now-longer inline methodology page. Desktop/mobile screenshots were inspected internally; no screenshots are committed.
 

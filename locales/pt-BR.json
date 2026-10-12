@@ -1,7 +1,8 @@
 {
   "meta": {
-    "title": "Futebol, Explicado",
-    "description": "Um playground interativo para entender situações de finalização no futebol."
+    "title": "Football, Visualized — playground interativo de xG",
+    "description": "Mova o atacante, o goleiro e os defensores, explore oito variáveis posicionais e consulte a metodologia de um modelo independente de xG. Um projeto de Leonardo Ferreira.",
+    "imageAlt": "Campo ilustrativo e cards de variáveis de xG atualizados no Football, Visualized."
   },
   "brand": {
     "name": "Futebol, Explicado",
@@ -183,5 +184,10 @@
       "yes": "Sim",
       "no": "Não"
     }
+  },
+  "author": {
+    "by": "Por",
+    "links": "Links do autor e do projeto",
+    "repository": "Repositório"
   }
 }
