@@ -204,7 +204,8 @@ h1 {
 
 .pitch-player { cursor: grab; touch-action: none; }
 .pitch-player:active { cursor: grabbing; }
-.player-hit { fill: transparent; }
+.pitch-player { pointer-events: none; }
+.player-body { pointer-events: all; }
 .player-body { fill: #70d0e0; stroke: #123443; stroke-width: 0.28; }
 .pitch-player--attacker .player-body { fill: #ffcb69; stroke: #50360c; }
 .goalkeeper-ring { fill: none; stroke: #e7fcff; stroke-width: 0.38; pointer-events: none; }

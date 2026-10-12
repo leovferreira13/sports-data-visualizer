@@ -73,13 +73,25 @@ export function addPlayer(scenario: Scenario, team: "attacker" | "defender"): Sc
     const restored = scenario.removedBaseDefenders[0];
     const next: Scenario = { ...scenario, removedBaseDefenders: scenario.removedBaseDefenders.filter(id => id !== restored) };
     if (!next.removedBaseDefenders?.length) delete next.removedBaseDefenders;
-    return next;
+    return scenario.shotType === "penalty"
+      ? movePlayer(next, restored, penaltyAddition(team, restored === "defender1" ? 0 : 1))
+      : next;
   }
   const shooter = scenario.players.shooter;
   const point = team === "attacker"
     ? { x: shooter.x - 4 - Math.floor(index / 2) * 3, y: shooter.y + (index % 2 ? -1 : 1) * (6 + Math.floor(index / 2) * 3) }
     : { x: (shooter.x + scenario.players.goalkeeper.x) / 2, y: FIELD.centerY + (index % 2 ? -1 : 1) * (9 + Math.floor(index / 2) * 3) };
-  return { ...scenario, [key]: [...scenario[key], clampPosition(point)] };
+  return { ...scenario, [key]: [...scenario[key], clampPosition(
+    scenario.shotType === "penalty" ? penaltyAddition(team, index) : point,
+  )] };
+}
+
+function penaltyAddition(team: "attacker" | "defender", index: number): Point {
+  // Keep the entire marker behind the area, independently of the edited shooter.
+  return {
+    x: FIELD.length - 16.5 - FIELD.markerRadius - (team === "attacker" ? 3 : 1) - Math.floor(index / 2) * 3,
+    y: FIELD.centerY + (index % 2 ? -1 : 1) * (6 + Math.floor(index / 2) * 3),
+  };
 }
 
 export function isValidPosition(value: unknown): value is Point {

@@ -4,7 +4,7 @@ An interactive xG playground for football fans, analysts and curious engineers. 
 
 A portfolio project by **Leonardo Ferreira** · [GitHub](https://github.com/leovferreira13) · [LinkedIn](https://www.linkedin.com/in/leonardo-v-ferreira)
 
-![English Playground with an illustrative central chance and eight live feature cards](assets/portfolio/playground.png)
+![English Playground with an illustrative long shot, two defenders in the cone and eight live feature cards](assets/portfolio/playground.png)
 
 **[Open the live Playground](https://sports-data-visualizer-production.up.railway.app/en)**
 
