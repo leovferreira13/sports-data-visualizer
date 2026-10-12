@@ -20,3 +20,5 @@ The [feature extraction audit](../../reports/xg-feature-audit.md) tracks synthet
 - [Offline xG training](xg-training.md): protected match partitions, training/calibration/selection, parameter export, local reproduction and aggregate review handoff.
 
 - [Final xG evaluation and release gate](xg-final-evaluation.md): frozen test commands, aggregate handoff, reproduction and review.
+
+- [Playground and Methodology/results](playground-and-methodology.md): implemented inference integration, deliberate editing, comparisons, navigation and local QA.

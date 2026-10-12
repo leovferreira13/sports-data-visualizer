@@ -1,6 +1,6 @@
 # Football, Visualized — architecture overview
 
-**Status:** bilingual shell, playable pitch, local ingestion, positional features, offline training and browser-safe inference infrastructure implemented. Owner-run actual-candidate browser-bundle parity passed; final evaluation infrastructure is implemented; actual-corpus scientific review is accepted with limitations; distribution/product QA and guided Learn remain pending.
+**Status:** bilingual shell, playable pitch, local ingestion, positional features, offline training and browser-safe inference infrastructure implemented. Owner-run actual-candidate browser-bundle parity passed; final evaluation infrastructure is implemented; actual-corpus scientific review is accepted with limitations; integrated product QA is recorded in #4; exact asset-guidance/public-release checks and guided Learn remain pending.
 
 ## Application and scene
 
@@ -8,7 +8,7 @@ Next.js App Router supplies pages and locale routes. A React Client Component ow
 
 Pointer, keyboard and preset interactions update metric scenario state, which drives geometry, SVG drawing and distance/angle labels. State uses a 105 × 68 m field with x increasing toward the attacked goal. A uniform SVG projection rotates the attacking half so the goal is at the top; SVG coordinates never become model inputs.
 
-Six presets and a versioned, validated tab-scoped snapshot preserve positions, including added players, across reloads and locale changes. Learn will reuse this simulation. Shared feature extraction is implemented, but there is no trained prediction or public xG value yet.
+Six presets and a versioned, validated tab-scoped snapshot preserve positions, including added players, across reloads and locale changes. Learn will reuse this simulation. Shared features drive the integrated reviewed XGBoost estimate. v3 snapshots support deliberate defender removal; the fitted feature contract is unchanged.
 
 ## Local data and features
 
@@ -22,9 +22,9 @@ Six presets and a versioned, validated tab-scoped snapshot preserve positions, i
 
 `scripts/xg/prepare_training.py` and `train_models.py` implement offline match-isolated preparation, train-only tuning, separate calibration/selection validation and frozen parameter export. A dedicated Python dependency lock and synthetic CI checks keep training outside the web runtime. The first owner-run actual-corpus artifacts passed internal review and select an XGBoost candidate; complete reproduction was confirmed by the owner. See the [training guide](reference/xg-training.md) and [execution status](../reports/xg-training-methodology.md).
 
-Versioned aggregate evaluation evidence supplies both the generated English report and the future bilingual Methodology and results tab; held-out test outcomes are opened only by the #13 final evaluator after frozen-run verification. The owner-run final evidence now passes automated gates and aggregate review; publication QA remains pending.
+Versioned aggregate evaluation evidence supplies both the generated English report and the implemented bilingual Methodology and results tab; held-out test outcomes are opened only by the #13 final evaluator after frozen-run verification. The owner-run final evidence now passes automated gates and aggregate review; publication QA remains pending.
 
-`lib/model.ts` validates and captures immutable versioned parameters; `lib/predict.ts` evaluates scene features with the frozen preprocessing/calibration and returns explicit learned, convention, unsupported or unavailable results. Penalties return the separate fixed 0.76 convention. The local parity command checks the browser-safe bundle against Python and emits aggregate immutable evidence; actual parameters stay local. See the [prediction guide](reference/prediction.md). Final evaluation and rights QA in #13/#8 precede public display in #4.
+`lib/model.ts` validates and captures immutable versioned parameters; `lib/predict.ts` evaluates scene features with the frozen preprocessing/calibration and returns explicit learned, convention, unsupported or unavailable results. Penalties return the separate fixed 0.76 convention. The local parity command checks the browser-safe bundle against Python and emits aggregate immutable evidence; the original parity harness does not emit parameters; #4 now serves the separately reviewed static artifact. See the [prediction guide](reference/prediction.md). Scientific/rights dispositions from #13/#8 authorize integration within the recorded scope; #4 product QA and #5 owner authorization gate public release.
 
 Python may train and export a model offline; it is not a browser/runtime dependency. Authentication, a database and an inference API are outside v0.1 scope.
 
@@ -40,8 +40,14 @@ Read [module references](reference/README.md) for responsibilities and contracts
 
 ## Actual-corpus final review
 
-The owner-run final evidence passes all automated predicates and the owner reports all requested comparators PASS. Aggregate identity/provenance and report/app consistency were independently checked. Scientific evidence is accepted with sparse/extreme/preset support limitations; actual parameter/export/rights and integrated #4/#8 publication QA remain pending. See `docs/reports/xg-final-evaluation.md` and `docs/reports/xg-final-review-record.json`. Public xG remains disabled.
+The owner-run final evidence passes all automated predicates and the owner reports all requested comparators PASS. Aggregate identity/provenance and report/app consistency were independently checked. Scientific evidence is accepted with sparse/extreme/preset support limitations; actual parameter/export/rights and integrated #4/#8 publication QA remain pending. See `docs/reports/xg-final-evaluation.md` and `docs/reports/xg-final-review-record.json`. Public deployment remains unauthorized; local model-backed xG is now implemented.
 
 ## Rights completion handoff
 
 The owner assigned interface-dependent publication QA to #4. The dated #8 rights/artifact/repository completion review is in `docs/reports/statsbomb-rights-completion.md`. After its documentation is merged, #8 and the completed model epic #3 may close. Actual xG/methodology pages, final build/network content and attribution/logo QA remain mandatory in #4 before #5 publishes with owner authorization. No new training cycle or public release is authorized by this handoff.
+
+## Integrated #4 delivery
+
+The reviewed parameter envelope is now fetched as an exact hash-checked static asset and integrated into the bilingual Playground, with explicit prediction states, zero-to-three represented defenders, honest comparisons and route-backed Methodology/results. The original fitted feature contract, parameters and aggregate evidence remain unchanged. See [Playground and Methodology/results](reference/playground-and-methodology.md) for actual modules and commands.
+
+Earlier statements that actual weights are local-only or that the UI displays geometry only describe the pre-integration state. #8 is closed; #4 owns the dated integrated QA record and any explicitly unresolved logo/publication checks. Learn and authorized deployment remain #5. See `docs/reports/xg-playground-qa.md`; no public release is implied.

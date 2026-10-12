@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 
+import { xgEvidence } from "@/lib/xg-evidence";
 import { PlayablePitch } from "@/components/playable-pitch";
 import { localeFromRoute } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
@@ -29,7 +30,7 @@ export default async function PlaygroundPage({
         <p className="status">{dictionary.playground.status}</p>
       </section>
 
-      <PlayablePitch locale={locale} copy={dictionary.playground} />
+      <PlayablePitch locale={locale} copy={dictionary.playground} presetSupport={Object.fromEntries(xgEvidence.scene_audit.diagnostics.map(item => [item.scene, item.support_category]))} />
     </main>
   );
 }

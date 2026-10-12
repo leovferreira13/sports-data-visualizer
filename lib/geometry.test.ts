@@ -109,7 +109,7 @@ describe("presets and tab snapshot", () => {
     expect(parseScene(serializeScene({ presetId: "centralChance", scenario: moved }))).toEqual({ presetId: "centralChance", scenario: moved });
     let full = moved;
     for (let i = 0; i < 20; i++) full = addPlayer(full, "defender");
-    expect(full.extraDefenders).toHaveLength(maxExtraPlayers.defender);
+    expect(full.extraDefenders).toHaveLength(1);
     for (let i = 0; i < 20; i++) full = addPlayer(full, "attacker");
     expect(full.extraAttackers).toHaveLength(maxExtraPlayers.attacker);
   });
@@ -124,7 +124,7 @@ describe("presets and tab snapshot", () => {
     const valid = JSON.parse(serializeScene(initialScene()));
     expect(parseScene("{")).toBeNull();
     expect(parseScene(null)).toBeNull();
-    expect(parseScene(JSON.stringify({ ...valid, version: 3 }))).toBeNull();
+    expect(parseScene(JSON.stringify({ ...valid, version: 4 }))).toBeNull();
     expect(parseScene(JSON.stringify({ ...valid, presetId: "unknown" }))).toBeNull();
     expect(parseScene(JSON.stringify({ ...valid, scenario: { ...valid.scenario, shotType: "penalty" } }))).toBeNull();
     expect(parseScene(JSON.stringify({ ...valid, scenario: { ...valid.scenario, extraAttackers: [{ x: 105, y: 34 }] } }))).toBeNull();

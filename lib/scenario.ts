@@ -15,8 +15,10 @@ export type BaseScenario = {
   shotType: ShotType;
   players: Record<(typeof playerIds)[number], Point>;
 };
-export type Scenario = BaseScenario & { extraAttackers: Point[]; extraDefenders: Point[] };
-export const maxExtraPlayers = { attacker: 9, defender: 8 } as const;
+export type BaseDefenderId = "defender1" | "defender2";
+export type Scenario = BaseScenario & { extraAttackers: Point[]; extraDefenders: Point[]; removedBaseDefenders?: BaseDefenderId[] };
+export const maxRepresentedDefenders = 3;
+export const maxExtraPlayers = { attacker: 9, defender: 3 } as const;
 
 export const goalPosts: readonly [Point, Point] = [
   { x: FIELD.length, y: FIELD.centerY - FIELD.goalWidth / 2 },
@@ -66,7 +68,13 @@ export function playerPosition(scenario: Scenario, id: PlayerId): Point {
 export function addPlayer(scenario: Scenario, team: "attacker" | "defender"): Scenario {
   const key = team === "attacker" ? "extraAttackers" : "extraDefenders";
   const index = scenario[key].length;
-  if (index >= maxExtraPlayers[team]) return scenario;
+  if (index >= maxExtraPlayers[team] || team === "defender" && defenderCount(scenario) >= maxRepresentedDefenders) return scenario;
+  if (team === "defender" && scenario.removedBaseDefenders?.length) {
+    const restored = scenario.removedBaseDefenders[0];
+    const next: Scenario = { ...scenario, removedBaseDefenders: scenario.removedBaseDefenders.filter(id => id !== restored) };
+    if (!next.removedBaseDefenders?.length) delete next.removedBaseDefenders;
+    return next;
+  }
   const shooter = scenario.players.shooter;
   const point = team === "attacker"
     ? { x: shooter.x - 4 - Math.floor(index / 2) * 3, y: shooter.y + (index % 2 ? -1 : 1) * (6 + Math.floor(index / 2) * 3) }
@@ -87,4 +95,26 @@ export function isValidPosition(value: unknown): value is Point {
     point.y >= fieldBounds.yMin &&
     point.y <= fieldBounds.yMax
   );
+}
+
+export function defenderCount(scenario: Scenario): number {
+  return 2 - (scenario.removedBaseDefenders?.length ?? 0) + scenario.extraDefenders.length;
+}
+
+export function representedPlayerIds(scenario: Scenario): PlayerId[] {
+  return [...playerIds.filter(id => !(scenario.removedBaseDefenders ?? []).includes(id as BaseDefenderId)),
+    ...scenario.extraAttackers.map((_, i) => `attacker-${i}` as const),
+    ...scenario.extraDefenders.map((_, i) => `defender-${i}` as const)];
+}
+
+export function removePlayer(scenario: Scenario, id: PlayerId): Scenario {
+  if (id === "shooter" || id === "goalkeeper") return scenario;
+  if (id === "defender1" || id === "defender2") {
+    const removed = scenario.removedBaseDefenders ?? [];
+    return removed.includes(id) ? scenario : { ...scenario, removedBaseDefenders: [...removed, id] };
+  }
+  const key = id.startsWith("attacker-") ? "extraAttackers" : "extraDefenders";
+  const index = Number(id.slice(9));
+  if (!Number.isInteger(index) || index < 0 || index >= scenario[key].length) return scenario;
+  return { ...scenario, [key]: scenario[key].filter((_, i) => i !== index) };
 }

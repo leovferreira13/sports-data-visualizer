@@ -2,7 +2,7 @@
 
 An interactive, bilingual playground for understanding expected goals (xG). Move the shooter, goalkeeper, and defenders to explore how shot geometry and positioning affect a model's estimate.
 
-**Status:** bilingual playable pitch with six editable presets, movable players, addable attackers and defenders, distance, and angle. No published xG estimate until its model, inputs, and limitations are validated.
+**Status:** bilingual reviewed-model Playground and Methodology/results implemented; optional Learn and authorized public release remain #5.
 
 ## Local development
 
@@ -41,7 +41,7 @@ Work is tracked in GitHub Issues. Choose a starting situation or add players abo
 
 <a href="https://github.com/hudl/open-data"><img src="assets/hudl-statsbomb-logo.png" width="320" alt="Hudl Statsbomb logo" /></a>
 
-The planned xG model will be independently trained using [StatsBomb Open Data](https://github.com/hudl/open-data), subject to the [StatsBomb Public Data User Agreement](https://github.com/hudl/open-data/blob/master/LICENSE.pdf). StatsBomb supplies the training data; it does not create or endorse this project or its model. The current pitch does not display a trained xG estimate. The site footer shows the official logo, source credit and an independent-project disclaimer in both languages. The future xG methodology will also identify the source and model provenance. No source event or 360 records or shot-level training examples will be redistributed here.
+The integrated xG model was independently trained using [StatsBomb Open Data](https://github.com/hudl/open-data), subject to the [StatsBomb Public Data User Agreement](https://github.com/hudl/open-data/blob/master/LICENSE.pdf). StatsBomb supplies the training data; it does not create or endorse this project or its model. The pitch fetches the exact reviewed parameter-only static asset, verifies its SHA-256, and executes it locally in the browser. The site footer shows the official logo, source credit and an independent-project disclaimer in both languages. The bilingual Methodology/results view identifies the source, model provenance and accepted limitations. No source event or 360 records or shot-level training examples will be redistributed here.
 
 The intended use is a free, non-commercial professional portfolio without ads, paid services, raw-data hosting or resale. Publishing a model artifact requires a separate review to ensure it contains parameters and metadata only. The logo above comes from the [official Hudl Statsbomb Media Pack](https://statsbomb.com/media-pack/). See the [rights and release record](docs/architecture/reference/statsbomb-rights.md) for the source terms, Hudl Support's conditional answer, and the remaining publication checks.
 
@@ -53,7 +53,7 @@ The shared [feature contract and reproduction guide](docs/architecture/reference
 
 ## Offline model training
 
-Issue #11 supplies [local training scripts and commands](docs/architecture/reference/xg-training.md), a committed experiment protocol, frozen parameter export and versioned aggregate evidence for the later methodology/results tab. Train on your private complete feature run using the locked Python 3.12 environment. [Execution status](docs/reports/xg-training-methodology.md): synthetic workflow/reproduction checks pass; the first owner-run corpus artifacts passed internal review, with successful complete reproduction confirmed by the owner. Test outcomes stay unopened until #13; no public xG is enabled.
+Issue #11 supplies [local training scripts and commands](docs/architecture/reference/xg-training.md), a committed experiment protocol, frozen parameter export and versioned aggregate evidence for the methodology/results tab. Train on your private complete feature run using the locked Python 3.12 environment. [Execution status](docs/reports/xg-training-methodology.md): synthetic workflow/reproduction checks pass; the first owner-run corpus artifacts passed internal review, with successful complete reproduction confirmed by the owner. Test outcomes stay unopened until #13; no public xG is enabled.
 
 ## Browser inference verification
 
@@ -66,3 +66,11 @@ The final evaluator is implemented for local frozen-run execution; actual held-o
 ## Actual-corpus final review
 
 The owner-run final evidence passes all automated predicates and the owner reports all requested comparators PASS. Aggregate identity/provenance and report/app consistency were independently checked. Scientific evidence is accepted with sparse/extreme/preset support limitations; actual parameter/export/rights and integrated #4/#8 publication QA remain pending. See `docs/reports/xg-final-evaluation.md` and `docs/reports/xg-final-review-record.json`. Public xG remains disabled.
+
+## Reviewed xG Playground and methodology
+
+The local app now executes the original reviewed independent XGBoost in the browser. Explore six editable presets, move players with mouse/touch/keyboard or position inputs, add/remove up to three represented defenders, and inspect actual before/after output. Other attackers are visual only. Penalties use a separately labeled fixed 0.76 convention.
+
+Methodology/results is directly accessible at `/en/methodology` and `/br/methodology`. Its tables/chart use the same reviewed aggregate evidence as the reports, with selection and final test clearly separated, sparse calibration bins and the adverse cone-count slice visible.
+
+Run `npm run build` and `npm start`; no private dataset or Python runtime is needed for the application. Model/evidence byte checks run before building. See the [integration reference](docs/architecture/reference/playground-and-methodology.md), [ADR](docs/architecture/adr/009-integrated-playground-and-evidence.md) and [integrated QA](docs/reports/xg-playground-qa.md). Public publication remains owner-authorized in #5.

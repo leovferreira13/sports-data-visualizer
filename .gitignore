@@ -49,3 +49,6 @@ __pycache__/
 
 # Dedicated offline training environment
 /.venv-xg/
+
+# Generated exact model asset, copied from the reviewed tracked source before dev/build.
+/public/model/selected-model.json

@@ -3,6 +3,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 
+import { SectionNavigation } from "@/components/section-navigation";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import {
   localeFromRoute,
@@ -72,6 +73,7 @@ export default async function LocaleLayout({
             />
           </header>
 
+          <SectionNavigation route={routeLocale} copy={dictionary.navigation} />
           {children}
 
           <footer className="site-footer">
