@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Football, Visualized — interaktiver xG-Spielplatz",
+    "title": "Fußball, erklärt — interaktiver xG-Spielplatz",
     "description": "Verschiebe Schützen, Torwart und Verteidiger, erkunde acht Positionsmerkmale und sieh dir die Methodik eines unabhängigen xG-Modells an. Ein Projekt von Leonardo Ferreira.",
     "imageAlt": "Illustratives Fußballfeld und aktuelle xG-Merkmalskarten in Football, Visualized."
   },
@@ -9,7 +9,8 @@
     "tagline": "Bewege die Spieler. Verstehe, was eine Torchance verändert."
   },
   "language": {
-    "label": "Sprache"
+    "label": "Sprache",
+    "loading": "Sprache wird gewechselt…"
   },
   "attribution": {
     "sourceLink": "Quellrepository von StatsBomb Open Data",

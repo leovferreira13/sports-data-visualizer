@@ -9,7 +9,8 @@
     "tagline": "Move the players. Understand what changes a goal-scoring chance."
   },
   "language": {
-    "label": "Language"
+    "label": "Language",
+    "loading": "Changing language…"
   },
   "attribution": {
     "sourceLink": "StatsBomb Open Data source repository",

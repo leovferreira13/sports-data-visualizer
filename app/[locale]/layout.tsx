@@ -65,6 +65,7 @@ export default async function LocaleLayout({
             <LanguageSwitcher
               currentLocale={locale}
               label={dictionary.language.label}
+              loadingLabel={dictionary.language.loading}
             />
           </header>
 

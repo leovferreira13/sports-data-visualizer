@@ -1,27 +1,19 @@
-// Optional local product QA. Playwright is installed separately, never in the app bundle.
+// Optional local/remote product QA. Playwright stays outside the app bundle.
 import { createHash } from "node:crypto";
 import assert from "node:assert/strict";
 import { readFileSync, writeFileSync } from "node:fs";
 import { createRequire } from "node:module";
-import { spawn } from "node:child_process";
+import { spawn, execFileSync } from "node:child_process";
+import { resolveQaTarget } from "./product-qa-target.mjs";
 const { chromium } = createRequire(import.meta.url)("playwright");
 const evidence = JSON.parse(
   readFileSync("docs/reports/xg-final-first-run/app-evidence.json", "utf8"),
 );
-const port = Number(process.env.PRODUCT_QA_PORT || 3010);
-const base = `http://127.0.0.1:${port}`;
-const server = spawn(
-  process.execPath,
-  [
-    "node_modules/next/dist/bin/next",
-    "start",
-    "--hostname",
-    "127.0.0.1",
-    "--port",
-    String(port),
-  ],
-  { stdio: "ignore" },
-);
+const target = resolveQaTarget(process.env);
+const base = target.base;
+const server = target.serverArgs
+  ? spawn(process.execPath, target.serverArgs, { stdio: "ignore" })
+  : null;
 let browser;
 const requests = new Set(),
   errors = [],
@@ -29,15 +21,16 @@ const requests = new Set(),
 try {
   for (let attempt = 0; attempt < 80; attempt++) {
     try {
-      if ((await fetch(`${base}/en`)).ok) break;
+      if ((await fetch(`${base}/en`, { signal: AbortSignal.timeout(10000) })).ok) break;
     } catch {
-      /* Wait for the local production server. */
+      /* Wait for the production server. */
     }
     if (attempt === 79) throw new Error("Production server unavailable");
     await new Promise((resolve) => setTimeout(resolve, 100));
   }
   browser = await chromium.launch({
     headless: true,
+    ...(process.env.PRODUCT_QA_PROXY ? { proxy: { server: process.env.PRODUCT_QA_PROXY } } : {}),
     ...(process.env.INFERENCE_CHROMIUM_EXECUTABLE
       ? { executablePath: process.env.INFERENCE_CHROMIUM_EXECUTABLE }
       : {}),
@@ -116,6 +109,7 @@ try {
       );
     }
     await preset.selectOption("centralChance");
+    const resetScene = (await snapshot()).scenario;
     const shooter = page.locator(".pitch-player--attacker").first();
     await shooter.focus();
     await shooter.press("ArrowUp");
@@ -136,6 +130,12 @@ try {
         .locator(".comparison-card, .feature-observations, .section-navigation")
         .count(),
       0,
+    );
+    await page.getByRole("button", { name: copy.playground.reset, exact: true }).click();
+    assert.deepEqual((await snapshot()).scenario, resetScene);
+    await shooter.press("ArrowUp");
+    await page.waitForFunction(
+      () => JSON.parse(sessionStorage.getItem("football-visualized-scenario")).scenario.players.shooter.x === 84.5,
     );
     let marker = await shooter.boundingBox();
     await page.mouse.move(
@@ -293,6 +293,7 @@ try {
     findings.push(
       `${route}: presets, live eight-feature cards, mouse/keyboard/touch, editing, reload/anchors, mobile sticky xG and evidence/attribution PASS`,
     );
+    console.log(`PASS: ${route} product walkthrough`);
   }
   await page.goto(`${base}/en`);
   await page.getByTestId("xg").waitFor();
@@ -309,11 +310,16 @@ try {
     await page.locator(".language-switcher select").selectOption(locale);
     await page.waitForURL(`${base}/${route}?qa=locale#methodology`);
     await page.getByTestId("xg").waitFor();
+    await page.waitForFunction(
+      (expected) => document.title === expected,
+      JSON.parse(readFileSync(`locales/${locale}.json`, "utf8")).meta.title,
+    );
     assert.deepEqual(await snapshot(), prior);
     const cookie = (await context.cookies()).find((x) => x.name === "football-visualized-locale");
     if (locale !== "en") assert.equal(cookie?.value, locale);
     await page.reload();
     await page.getByTestId("xg").waitFor();
+    assert.equal(await page.title(), JSON.parse(readFileSync(`locales/${locale}.json`, "utf8")).meta.title);
     assert.deepEqual(await snapshot(), prior);
     if (locale !== "en") {
       await page.goto(`${base}/`);
@@ -323,6 +329,53 @@ try {
       await page.goto(`${base}/${route}?qa=locale#methodology`);
     }
   }
+  console.log("PASS: localized titles and retained scene after navigation/reload");
+  // Hold a cold locale response to verify immediate feedback rather than just fast navigation.
+  const slowContext = await browser.newContext({
+    viewport: { width: 390, height: 844 },
+    reducedMotion: "reduce",
+  });
+  const slowPage = await slowContext.newPage();
+  const warmRoutes = new Set();
+  let releaseNavigation;
+  const navigationGate = new Promise((resolve) => { releaseNavigation = resolve; });
+  try {
+  await slowContext.route("**/*", async (route) => {
+    const path = new URL(route.request().url()).pathname;
+    if (["/br", "/nl", "/es", "/de"].includes(path)) warmRoutes.add(path);
+    if (path === "/de") await navigationGate;
+    await route.continue();
+  });
+  await slowPage.goto(`${base}/en?qa=language#methodology`);
+  await slowPage.getByTestId("xg").waitFor();
+  await slowPage.locator(".pitch-player--attacker").first().press("ArrowUp");
+  const slowScene = await slowPage.evaluate(() => JSON.parse(sessionStorage.getItem("football-visualized-scenario")));
+  const prefetchedGerman = slowPage.waitForRequest((request) => new URL(request.url()).pathname === "/de");
+  await slowPage.locator(".language-switcher select").focus();
+  await prefetchedGerman;
+  await slowPage.locator(".language-switcher select").selectOption("de");
+  const loading = slowPage.locator(".locale-loading");
+  await loading.waitFor({ state: "visible" });
+  assert.equal(await loading.innerText(), JSON.parse(readFileSync("locales/en.json", "utf8")).language.loading);
+  assert.equal(await slowPage.locator(".language-switcher select").inputValue(), "de");
+  assert(await slowPage.locator(".language-switcher select").isDisabled());
+  assert.equal(await slowPage.locator("html").getAttribute("lang"), "en");
+  assert.equal(await slowPage.locator(".locale-loading-spinner").evaluate((element) => getComputedStyle(element).animationName), "none");
+  assert(await slowPage.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+  if (process.env.PRODUCT_QA_LOADING_SCREENSHOT) await slowPage.screenshot({ path: process.env.PRODUCT_QA_LOADING_SCREENSHOT });
+  releaseNavigation();
+  await slowPage.waitForURL(`${base}/de?qa=language#methodology`);
+  await slowPage.getByTestId("xg").waitFor();
+  await loading.waitFor({ state: "hidden" });
+  assert(await slowPage.locator(".language-switcher select").isEnabled());
+  assert.equal(await slowPage.title(), JSON.parse(readFileSync("locales/de.json", "utf8")).meta.title);
+  assert.deepEqual(await slowPage.evaluate(() => JSON.parse(sessionStorage.getItem("football-visualized-scenario"))), slowScene);
+  assert(warmRoutes.has("/de"));
+  } finally {
+    releaseNavigation();
+    await slowContext.close();
+  }
+  console.log("PASS: delayed locale navigation feedback and prefetch");
   await page.goto(`${base}/en`);
   const modelResponse = await page.request.get(
     `${base}/model/selected-model.json`,
@@ -410,6 +463,14 @@ try {
   );
   const report = {
     schema_version: 1,
+    checked_at: new Date().toISOString(),
+    base_url: base,
+    mode: target.remote ? "remote" : "local",
+    checkout_revision: execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
+    local_build_id: target.remote ? null : readFileSync(".next/BUILD_ID", "utf8").trim(),
+    // The remote source/build cannot be inferred from a matching model hash.
+    deployed_revision: null,
+    remote_build_id: null,
     engine: "Chromium",
     version: browser.version(),
     viewport: [1440, 1000],
@@ -419,13 +480,17 @@ try {
     locales: ["en", "pt-BR", "nl", "es", "de"],
     findings,
     locale_and_view_retention: "PASS",
+    localized_titles_after_navigation_and_reload: "PASS",
+    locale_prefetch_and_delayed_navigation_feedback: "PASS",
+    reduced_motion_loading: "PASS",
     blocked_storage: "PASS",
     blocked_cookie_navigation: "PASS",
     model_loading_network_and_hash_failure: "PASS",
     served_model_sha256: createHash("sha256").update(modelBytes).digest("hex"),
     page_errors: errors,
     network_paths: [...requests].sort(),
-    public_deployment_tested: false,
+    public_deployment_tested: target.remote,
+    physical_device_tested: false,
   };
   if (process.env.PRODUCT_QA_OUTPUT)
     writeFileSync(
@@ -435,6 +500,8 @@ try {
   console.log(
     JSON.stringify({
       engine: report.engine,
+      base_url: base,
+      mode: report.mode,
       version: report.version,
       findings,
       requests: requests.size,
@@ -443,5 +510,5 @@ try {
   );
 } finally {
   if (browser) await browser.close();
-  server.kill();
+  if (server) server.kill();
 }

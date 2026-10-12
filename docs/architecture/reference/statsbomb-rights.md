@@ -1,5 +1,7 @@
 # StatsBomb Open Data rights and release record
 
+**#26 refresh (2026-10-12):** official README/license blob identities still match this record. Incremental remote history and current model/build checks are recorded in [release QA](../../reports/public-release-qa.md). The existing live demo serves the exact reviewed parameter bytes. The official Media Pack still resolves to the public logo collection, but detailed per-asset guidance was not established by its accessible shell; that gate remains open. Wider repository publication is pending.
+
 **Current-status note (2026-10-12):** #8's scoped review and #4's local integrated QA are complete; #24 extends attribution to five locales. #26 refreshes final assets/history as needed and owns publication, live tests and the unresolved detailed per-asset branding-guidance check. Dated source/rights findings below retain their original scope.
 
 **Checked:** 2026-10-11. **Rights/artifact review:** complete for the described scope. **Actual product publication:** gated by #4/#26. This record documents the planned use and its checks; it does not announce publication or legal approval of a different product.

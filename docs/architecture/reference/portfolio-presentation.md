@@ -2,11 +2,15 @@
 
 **Status:** pre-release presentation implemented in #25; actual-domain verification and live links complete with #26.
 
+**#26 observation (2026-10-12):** the existing Railway demo is accessible and README links to it. Live HTML still omits canonical/social-origin links and uses noindex because SITE_URL was absent from its build. Correct settings are staged; a new build and live metadata checks remain required. See [deployment/recovery](railway-deployment.md) and [release QA](../../reports/public-release-qa.md).
+
 ## Responsibilities
 
 `lib/project.ts` holds Leonardo Ferreira's identity and confirmed GitHub, LinkedIn and repository URLs. `app/[locale]/page.tsx` renders a compact author line after the existing introduction; labels come from all five locale dictionaries. No extra client state or tracking is introduced. The existing scene, model and attribution footer are retained.
 
 `lib/portfolio-metadata.ts` supplies localized title/description/preview alt text, author metadata, Open Graph/Twitter cards, canonical and language-alternate links. The layout remains the locale metadata boundary. `app/icon.svg` is an original project icon; it is not a third-party brand asset. `app/robots.ts` and `app/sitemap.ts` expose the Next.js metadata routes.
+
+The #26 review localizes the full tab title, including the displayed product name, and verifies it after client navigation/reload. The browser icon was authored directly for #25 as SVG geometry (rounded background, ball circle and panel strokes). No icon pack, downloaded football logo or Hudl asset is used for that icon; the separately sourced Hudl logo remains attribution in the footer.
 
 ## Origin contract
 

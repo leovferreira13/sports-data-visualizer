@@ -1,0 +1,409 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-12",
+  "issue": 26,
+  "implementation_base": "6dd3c8570661dbeea40eca723b03f0336349dd2b",
+  "worktree_includes_issue_26_changes": true,
+  "release_complete": false,
+  "repository_visibility": "private",
+  "publication_intent": "Public non-commercial portfolio requested on 2026-10-12; dev 26 accepts implementation, not automatic merge or release-readiness transition.",
+  "railway": {
+    "project_name": "adaptable-heart",
+    "service_name": "sports-data-visualizer",
+    "environment": "production",
+    "projectId": "f30a9292-0f9c-4370-bff4-e220a35bb686",
+    "environmentId": "e6b0c741-d3c4-472f-a5ab-f48f7aad7287",
+    "serviceId": "278c42b5-f8dc-44bb-ad47-bb099869c4c1",
+    "deployment_id": "48884b1e-73cc-4ee4-a4d6-3f9f1a703f2e",
+    "deployed_revision": "6dd3c8570661dbeea40eca723b03f0336349dd2b",
+    "region": "europe-west4-drams3a",
+    "builder": "RAILPACK",
+    "observed_railpack_version": "0.40.1",
+    "observed_node_version": "20.20.2",
+    "observed_install_command": "npm install",
+    "observed_start_command": "npm run start",
+    "assigned_port": 8080,
+    "replicas": 1,
+    "volumes": 0,
+    "staged": {
+      "patch_id": "f7ea8f04-a948-4e82-854f-8342ccc1df01",
+      "change_count": 7,
+      "applied": false,
+      "variables": {
+        "SITE_URL": "https://sports-data-visualizer-production.up.railway.app",
+        "RAILPACK_NODE_VERSION": "24",
+        "RAILPACK_INSTALL_CMD": "npm ci --include=dev"
+      },
+      "build_command": "npm run build",
+      "start_command": "npm start",
+      "healthcheck_path": "/en",
+      "healthcheck_timeout_seconds": 60
+    },
+    "metrics": [
+      {
+        "measurement": "CPU_USAGE",
+        "current": 1.9833333333333335e-06,
+        "average": 0.0003790289617486338,
+        "min": 0,
+        "max": 0.008667816666666666,
+        "sampleCount": 61
+      },
+      {
+        "measurement": "MEMORY_USAGE_GB",
+        "current": 0.101408768,
+        "average": 0.07426947777049185,
+        "min": 0,
+        "max": 0.145539072,
+        "sampleCount": 61
+      }
+    ]
+  },
+  "local_checks": {
+    "fresh_npm_ci": "PASS",
+    "git_free_npm_ci": "PASS",
+    "precommit": "PASS: 90 JS/TS tests, 55 synthetic xG Python tests and 3 release-inspection Python tests; lint/types/English Markdown/shell syntax",
+    "build_with_actual_SITE_URL": "PASS",
+    "five_locale_smoke": "PASS",
+    "PORT_and_binding": "PASS: 0.0.0.0:4322 with PORT=4322",
+    "private_training_runtime_required": false
+  },
+  "source_file_sha256": {
+    "app/[locale]/globals.css": "ef751b0c43deb8d40307b73859b1905a7e1f8fbc6e71cde35f5cb1da48cd58a1",
+    "app/[locale]/layout.tsx": "2b7977e2371050c0732811edaee6c204a99cbb95daae6117728968e4d8711078",
+    "app/[locale]/methodology/page.tsx": "2e9d6837192e0322b9837d394488fc0ce7cf888b06343ace5ca223a1a88e5e5b",
+    "app/[locale]/page.tsx": "d2dc7395b2eb7e8e6608e42c8e97bbc4d980ea7c43a63933657965293d04d680",
+    "app/icon.svg": "c66621871f04bcabf979462c22d12aed5c0a896732f97ae231f8257d5a57cfec",
+    "app/robots.ts": "a894371a2b3832bfbaecd80c82283ccb4ac7925f49725917c9704ad5d8b00b8b",
+    "app/sitemap.ts": "fd27a82866481fe1c2ea645f013c236903464b6e5ae9bb9edef1a0c8a7cf5c94",
+    "components/language-switcher.tsx": "c2210964d6f9eef1793736e125899efbb6b0d64e2f0eafcafd5c6f39094b8526",
+    "components/methodology-content.tsx": "e8305b10b0d2be5b2da550a850a81a27c0b4199ca71aa5fc17d5171ba457e8ce",
+    "components/playable-pitch.tsx": "4276abf3985658db0999517d51cc29fc22b85916b3216ff64f4071af8351dfb2",
+    "components/prediction-localization.test.tsx": "90a0f0b5eabff0474ddde26b861061f22f1e3ec5639bf0ea8a3cb6700aa7c985",
+    "components/prediction-panel.tsx": "1018ccc1d34febc53ee8471cf50f9dc10252aa44167d7e28c584a093d4462812",
+    "lib/features.test.ts": "4378b4b8791892c3b5451d8fd3bf7e31788493129570966aea759873af4a0ddb",
+    "lib/features.ts": "a33c7670b49dc46f36a586b80e14b9e8b9cfa42185e08a05dacb5244fb4a83e3",
+    "lib/geometry.test.ts": "48be73a355a1b586c7f6e7e59c1194de45ce04a34c05294a6663ad8fa98bc09f",
+    "lib/geometry.ts": "63d4de9911566616abc096fbdaeca551f58353bd6feb6cfc4234dc46eb58f46c",
+    "lib/i18n/config.ts": "9187e4c734916ad8b84c7e15a5aa595ad3048ccf70feede873c34530c2a9e856",
+    "lib/i18n/dictionaries.ts": "d6856b568a71fd2e8172e3806b8254fee5567441d05be6fea6da40c422f9e85a",
+    "lib/i18n/localization.test.ts": "a8243fca5f2b2c01dc7233e83ef44d87f98a3beb96a7b2877a50bb787ea5c996",
+    "lib/i18n/resolve-locale.ts": "5b98802c28db8c3cdcc35bf0009be75b62eacf8b1f3e994186aeaf4f02443ca2",
+    "lib/insights.ts": "6176d0a9745c7b1592e1a12b9f0387cd5e8bf066b1630f5dcf30dd4187508106",
+    "lib/model-store.ts": "6a779b135019606a99d6a5ef5cceba6f848ea55aa5590bd7b69e1637862b04d6",
+    "lib/model.ts": "ce60a0d4ad0e717ba807a296febc4a58d82e04d2f2338632eace999c063d2174",
+    "lib/playground.test.ts": "a54b60cb32a441fce9d1442d4a1f3d09460e44c03f58ba285ecfddbca2a4f780",
+    "lib/portfolio-metadata.test.ts": "2f70c641ee9381eb6b48fc77f8a48cb52f44fd5fadbcadd1baf7c09334e76e07",
+    "lib/portfolio-metadata.ts": "1fd87ed7a857685795a9fae18661d8d075f644c0c3d3f42ed07fcb2783c7d8e5",
+    "lib/predict.test.ts": "66d4c26214ff3d6556e3423cedce95a11de3a87ae4ef0b23afd74459092f6578",
+    "lib/predict.ts": "d09f8d3768fc5e0564e97375c1cd75092a610b13d6665c9a222d9a547e98be3a",
+    "lib/presets.ts": "8ed89b3dfe4def6f82507cbb08cfe535bfac6d8c16b462527563dd23baffd048",
+    "lib/project.ts": "59a502d2af447a9366d704f71b02f735a9d5895ce2e3a194d5baa068f0c46046",
+    "lib/scenario-session.ts": "df61e402dc12a137ea7922f6c01904ae84b652bd4ac2c170a1c62425e68fee4c",
+    "lib/scenario.ts": "0bf34af666eae6826375f3d8142ad7ddadc6a89181356411b3b31efe1a995d35",
+    "lib/selected-model.ts": "dad81240117fc1d48b24aa09506fd8f8da6d9c35885aff7d014758fa10b22bfe",
+    "lib/training-presets.test.ts": "8492f2b0d4f06141bfdc736f7fb79c5e3e1fa56a221d7125800392fb382e2383",
+    "lib/xg-evidence.ts": "85888b499a05c1d06ead022d5d86701eb89c0a454ac6c0943214d0feb8060b54",
+    "locales/de.json": "fc3afe63f13f26e957c44c98e9a12bf836ae5eb61dbc9070321f4c439bfdc8d7",
+    "locales/en.json": "c0d9390ee050cb551f5f089e128bbea176f473ae6124ab6317a7178da38c9a53",
+    "locales/es.json": "a86684d7082c8e9de9298ce0de756c0617187a791645b3ca32319d84a2a397fe",
+    "locales/nl.json": "635c93f62d982a62a2c9588c0dac836f86c45736d1ddf5051045fea441224fd6",
+    "locales/pt-BR.json": "572f7a7ca4ccfc06507be15650dec02762139b10036c5800f27504f1ef06e8d4",
+    "model/app-evidence.schema.json": "33bc6d998e2fb6ee7ff85f76e8454dd875ec2df8389c74432e9bf59fda9e77fa",
+    "model/evaluation-contract.json": "0dc7d96f5818281d571c1d5fc14b01a9df17d85e0aaa90d374261034f4d5e4bc",
+    "model/evaluation.schema.json": "6c297ddb67575233a0b77cce7f332e6381957c808d19a70045f85dcaf5593467",
+    "model/feature-contract.json": "7997e82634ffb78bac9d40b21c6715c8bb10cd8934e629a7a5fa09aed066bb67",
+    "model/final-evaluation-contract.json": "5456a2ccdf9dd601ac01d9afa7b36c7c8aee0d6cc873c3e977f43557a4136c9d",
+    "model/final-evaluation-protocol.json": "985a7d720e90d0997aca68b189833b5c533ad68e5fbcf404b4c7fd26e1f911e8",
+    "model/final-evaluation.schema.json": "dc6d73f6b3bab2aa40c21acaf0be3d1a193f94f6bb5716083554cbe95ae74d54",
+    "model/inference-contract.json": "ec5436f266af1c2b89a277a8eca4480c3808782ff063473f7e7bf6e5231c19db",
+    "model/model-artifact.schema.json": "350cbac82c8f27745e388115f6cd354b16e19e4c091c7d61a43ce233e1b26a23",
+    "model/selected-model.json": "c0d91256a2c0f83ede48f1f549b8a0cc379e6ef675ccd4ce9ef10e471bb4350d",
+    "model/training-protocol.json": "44ee9322c8f6d454c694922eb75337170a3eabe231935a79dafe6e010bf97b67",
+    "scripts/audit-product-assets.py": "560bae2d2138cc300831f16ba56bb38ae6b471b297e6301f7dbf56861d486fb7",
+    "scripts/check-localization.sh": "d9d20fd719502c40de30e2171ee8b56e2c68a8cb2b47001f704c19fc0e7f9b96",
+    "scripts/check-model.mjs": "e5bd8a0f579bd154e8bdef5fdbe3bbeea0f7666b6b1b47eed1a8e869d6cd76da",
+    "scripts/check-playground-browser.mjs": "1e7bdeaedfb7ffdeabdeafa3e1a2541f9fedb116aa5fa7538bdbf3b575121b03",
+    "scripts/check-precommit.sh": "9ce982619dc131edff16dec16150748b708596c445adea053618748225d63f19",
+    "scripts/check_markdown_language.py": "cd1a3acf5d4dffa510c8a2d7628a1b6837cedd75cd8d53354a158a7da04f61aa",
+    "scripts/check_portfolio_metadata.py": "2a913eb43c56d20acd2d2381ac48920914710e38e75cd5f1630a7d5d8c157fdf",
+    "scripts/check_public_release.py": "db17ddfe98dfbf97d4b3f22236f7a362d1de22f68e6ea4ce55b287e8552dc2ed",
+    "scripts/configure_project.py": "64cc53cac44e43b37dc31c7c09d84e28a0cb3ed06672efe6185f512ffec20a25",
+    "scripts/install-git-hooks.sh": "65ef762756a03d822c225152c89ff6eb3ed1cca908661d5764b0bb0d2f2733ec",
+    "scripts/product-qa-target.mjs": "e48f79cff56768b50fa0e7487c455ce798bfc1f313fb72ef25fb4d86bfda73d1",
+    "scripts/product-qa-target.test.mjs": "3691afd403a2070d03374a216a3c01bf70348d361fb81e6986bea13ff0f1086d",
+    "scripts/test_public_release.py": "dd96f7ca0e5e0736f47c0f746598682a4543cd6c90058f8313c8887d94ef3275",
+    "scripts/xg/browser_inference_runner.mjs": "530886cbe42f63fe993da80d99775e83203b6d454f3b13abaa222f348aceda82",
+    "scripts/xg/check_browser_inference.py": "7a3dde79b527197d4e69e5248cc882e33040f44ed225d30503f12e7e69fd3ee9",
+    "scripts/xg/check_integrated_model.py": "7aa1b4557d3ffa295cc83f987604cf75aea4d02cf2dc5c234e3d0e691e429db9",
+    "scripts/xg/compare_final_runs.py": "02a4e348b953ad10187f073afc315417fd43ac45f047c6dd600e1d2000a21d82",
+    "scripts/xg/compare_runs.py": "5a36d9445dcee932d01f8c843a17f85cc39ac9c0ea69aa73d4a14f2639d6850f",
+    "scripts/xg/compare_training_runs.py": "b51bb9c9e21f211f6be0e0b88ced987d5241c145c21ecc9fbd4cc9e76f27296d",
+    "scripts/xg/evaluate_final.py": "36495c6e9d9d6d4e3e14632080942de9bab5e4bb7c634b1a669685521b90409a",
+    "scripts/xg/evaluation.py": "940c2de9dae787654e6bb96750b9e4bfdd7c9ca0bc1c3a03bd4a370a16773e7d",
+    "scripts/xg/extract_features.py": "c05c78fa790474fb8e8e25d75652aff09d3e213da250f3d4554233a004e00bed",
+    "scripts/xg/features.py": "a51616d3b9377c81f3dd39d42709a509e5757bcd0936d31bfa685b6d8120195b",
+    "scripts/xg/final_inputs.py": "f38703e14ca625fd649dbbfcda51cc5599f0da458e2208b424c9c9da19f015b6",
+    "scripts/xg/final_release.py": "6e8a7213d2b584790facf2845cc3407bde96694f7c010128e99674c85d2ca2ff",
+    "scripts/xg/final_scenes.py": "768f9961f9f74d54a71c17bc597ef72f5eac2e9b63b756f8b7d5f826e2caff74",
+    "scripts/xg/final_statistics.py": "2b36af316fc6cc3f9a3e4a1b7806005f62c0d2e125d6ed4133c7c37ad2872862",
+    "scripts/xg/inference_bridge.ts": "1ddb9ab19bb9bea9778d58f300c35ffc703780700b441fd51ac45f7a65f20ba1",
+    "scripts/xg/ingest_statsbomb.py": "f7e04df773baef31e96559c45d6b1b1a95cc177c8450f6fa4f5d0f0ad55fd7a2",
+    "scripts/xg/integrated_inference_bridge.ts": "fb92a40ccd36d232cea26441c71f513378db1fe14d7eeb806c96964062f8db8e",
+    "scripts/xg/integrated_inference_runner.mjs": "b71ccb6a786c009d16c4deeca197b5ccd684e4ca314b7bdd482f3b65bd3dabb6",
+    "scripts/xg/model_export.py": "4fcec555f22c665eac6590917c9ed886e201a998e005c0d44e290118bbf994fd",
+    "scripts/xg/prepare_training.py": "56742838c7895afc7fb29cf38b5dfe577a7a9e5def2f6c8485a45523d16f4fa1",
+    "scripts/xg/report_final.py": "813b3b9ace4e4d18a1cd80ac741a8e9a9f71128bf0824fd632df4444b7a04f39",
+    "scripts/xg/report_training.py": "fdc78f48ec1df6076e1171d81ed93b7817b45fd475b3bb99ecbaa08efa0d2927",
+    "scripts/xg/requirements.lock": "8d315e6d7d42656acb1d23aeaf93600c88d669b05785e312f14ba56d9d01ece7",
+    "scripts/xg/run_io.py": "22a977cf2d8b304937b735384ec102c67239c249071c0d64b9e772b320d5ef9d",
+    "scripts/xg/scene_evaluation.py": "82f5561f49f3b0f568e8081c9d7cbe4f08bb81b9b07645a1dc0a181a3f7ae8a8",
+    "scripts/xg/tests/feature_parity_runner.py": "301f903b1246f5466f571ce09e52a6b99e8ec11f22dfcfd8939448c704c765a0",
+    "scripts/xg/tests/test_compare_runs.py": "2467b3283ab130289d69125278dfb3fd1cabbe347907aa3cd0b3d5274905b0d8",
+    "scripts/xg/tests/test_features.py": "9601d07d949136be2d5a10eb21cd80a81050cf7d5c920b1c3d4c154ea8160866",
+    "scripts/xg/tests/test_ingest_statsbomb.py": "5d158997645c97e42305f2b17e73a9fd3445b5d69970bc7f1ecb4472306d6571",
+    "scripts/xg/tests/test_prepare_training.py": "f49b6e378ed03f454b14c2e655f2c567bc0e13cb83f742ffa34c7d57651d9807",
+    "scripts/xg/train_models.py": "918abea1e00682fabfdab2207f0abcbf37986cd88740f63cf5af22a2caba8dd6",
+    "scripts/xg/training.py": "53b132511c4473e42ddc7ab8599136bbd95f23081d12b5b62525945a240af46e",
+    "scripts/xg/training_tests/test_browser_inference.py": "254d7ffcf5d8067fbc19475bc790c21ffd05ca15062a6ab4153da06ffe4b0224",
+    "scripts/xg/training_tests/test_comparison_diagnostics.py": "ea89996500c182eb20cfb5c9c2ad3433a877ce02648e61569e55d3eb092eaa23",
+    "scripts/xg/training_tests/test_final_evaluation.py": "c235ed0437d06a7850b98205850b794af33de4deb8ce1cc57d6fe25563bcd1d0",
+    "scripts/xg/training_tests/test_training.py": "66f638ed4b40ec69921b7b5cb035d7d9c8b18b45876b3ef3b93f942f154f2272",
+    "package.json": "a85926dbb50eb6e8313e20e0b27ad88f76b6984744f0fd63a9744d593dda6a95",
+    ".node-version": "68ca3fba3b7e864770cb61aeb306d4bd4354b68ab4dd38450860c5d823e42a53",
+    ".github/workflows/application-checks.yml": "c38e83e06c92d5305d0763ebc6086a69a65bb1ae18736cc765fdc41467648b42"
+  },
+  "local_browser": {
+    "schema_version": 1,
+    "checked_at": "2026-10-12T18:21:58.734Z",
+    "base_url": "http://127.0.0.1:3010",
+    "mode": "local",
+    "checkout_revision": "b80ca38a406dc1bb2654d02b862c9ca874c04b3a",
+    "local_build_id": "z2CxfA5TNBHKA4ox4X4UG",
+    "deployed_revision": null,
+    "remote_build_id": null,
+    "engine": "Chromium",
+    "version": "153.0.8010.0",
+    "viewport": [
+      1440,
+      1000
+    ],
+    "mobile": [
+      390,
+      844
+    ],
+    "narrow_mobile": [
+      320,
+      844
+    ],
+    "narrow_mobile_locales": [
+      "nl",
+      "de"
+    ],
+    "locales": [
+      "en",
+      "pt-BR",
+      "nl",
+      "es",
+      "de"
+    ],
+    "findings": [
+      "en: presets, live eight-feature cards, mouse/keyboard/touch, editing, reload/anchors, mobile sticky xG and evidence/attribution PASS",
+      "br: presets, live eight-feature cards, mouse/keyboard/touch, editing, reload/anchors, mobile sticky xG and evidence/attribution PASS",
+      "nl: presets, live eight-feature cards, mouse/keyboard/touch, editing, reload/anchors, mobile sticky xG and evidence/attribution PASS",
+      "es: presets, live eight-feature cards, mouse/keyboard/touch, editing, reload/anchors, mobile sticky xG and evidence/attribution PASS",
+      "de: presets, live eight-feature cards, mouse/keyboard/touch, editing, reload/anchors, mobile sticky xG and evidence/attribution PASS"
+    ],
+    "locale_and_view_retention": "PASS",
+    "localized_titles_after_navigation_and_reload": "PASS",
+    "locale_prefetch_and_delayed_navigation_feedback": "PASS",
+    "reduced_motion_loading": "PASS",
+    "blocked_storage": "PASS",
+    "blocked_cookie_navigation": "PASS",
+    "model_loading_network_and_hash_failure": "PASS",
+    "served_model_sha256": "c0d91256a2c0f83ede48f1f549b8a0cc379e6ef675ccd4ce9ef10e471bb4350d",
+    "page_errors": [],
+    "network_paths": [
+      "/",
+      "/_next/image",
+      "/_next/static/chunks/00fku1i3li68g.js",
+      "/_next/static/chunks/0y-dctk-kmqss.js",
+      "/_next/static/chunks/196x_tfexoucg.js",
+      "/_next/static/chunks/1mk925oe9r992.css",
+      "/_next/static/chunks/2keh4tflpl3vt.js",
+      "/_next/static/chunks/3ewp08ebnb49j.js",
+      "/_next/static/chunks/3fntmmi971322.js",
+      "/_next/static/chunks/3s6nzrbk-8mnv.js",
+      "/_next/static/chunks/turbopack-0qdq-7c70s5o8.js",
+      "/br",
+      "/br/methodology",
+      "/de",
+      "/de/methodology",
+      "/en",
+      "/en/methodology",
+      "/es",
+      "/es/methodology",
+      "/model/selected-model.json",
+      "/nl",
+      "/nl/methodology"
+    ],
+    "public_deployment_tested": false,
+    "physical_device_tested": false
+  },
+  "local_asset_review": {
+    "schema_version": 1,
+    "build_id": "z2CxfA5TNBHKA4ox4X4UG",
+    "base_revision": "b80ca38a406dc1bb2654d02b862c9ca874c04b3a",
+    "scope": "current tracked paths/JSON and final static/prerendered production assets; prior history reviewed in #8",
+    "tracked_files": 195,
+    "build_assets": 152,
+    "embedded_model": [
+      {
+        "path": "public/model/selected-model.json",
+        "bytes": 96241,
+        "gzip_bytes": 19029,
+        "sha256": "c0d91256a2c0f83ede48f1f549b8a0cc379e6ef675ccd4ce9ef10e471bb4350d"
+      }
+    ],
+    "artifact_id": "758526873b8a3a2681f655c064dee52f8bd33749accd499d015420dbe8e11b9a",
+    "forbidden_paths": [],
+    "source_record_signatures": [],
+    "status": "PASS",
+    "publication_authorized": false
+  },
+  "remote_http": {
+    "schema_version": 1,
+    "checked_at": "2026-10-12T17:43:04.852666+00:00",
+    "origin": "https://sports-data-visualizer-production.up.railway.app",
+    "checkout_revision": "6dd3c8570661dbeea40eca723b03f0336349dd2b",
+    "deployed_revision": "6dd3c8570661dbeea40eca723b03f0336349dd2b",
+    "deployment_id": "48884b1e-73cc-4ee4-a4d6-3f9f1a703f2e",
+    "remote_build_id": null,
+    "authentication_used": false,
+    "checks": [
+      {
+        "name": "route:en",
+        "status": "PASS"
+      },
+      {
+        "name": "route:br",
+        "status": "PASS"
+      },
+      {
+        "name": "route:nl",
+        "status": "PASS"
+      },
+      {
+        "name": "route:es",
+        "status": "PASS"
+      },
+      {
+        "name": "route:de",
+        "status": "PASS"
+      },
+      {
+        "name": "locale-preferences-and-invalid-route",
+        "status": "PASS"
+      },
+      {
+        "name": "reviewed-model",
+        "status": "PASS"
+      },
+      {
+        "name": "portfolio-metadata-image-robots-sitemap",
+        "status": "FAIL",
+        "reason": "AssertionError: /en: expected canonical https://sports-data-visualizer-production.up.railway.app/en, got []"
+      }
+    ],
+    "model": {
+      "bytes": 96241,
+      "sha256": "c0d91256a2c0f83ede48f1f549b8a0cc379e6ef675ccd4ce9ef10e471bb4350d",
+      "content_type": "application/json; charset=UTF-8"
+    },
+    "release_complete": false,
+    "limits": [
+      "HTTP checks do not prove browser interaction, source/build identity, repository visibility, history review or exact branding guidance.",
+      "Run browser QA separately; record deployment identity from Railway."
+    ],
+    "status": "FAIL"
+  },
+  "remote_browser_smoke": {
+    "method": "separate cloud browser",
+    "observed_locales": [
+      "en",
+      "nl",
+      "de"
+    ],
+    "keyboard_and_live_cards": "PASS in English; shooter lateral coordinate 34 -> 34.5; eight inputs and learned xG visible",
+    "edited_scene_preserved": "PASS observed when switching to Dutch and German",
+    "limits": [
+      "Full remote regression did not complete: shell browser transport certificate chain was untrusted; certificate verification was retained. Cloud navigation/wait operations also had tooling timeouts.",
+      "HTTP smoke covers all five routes; comprehensive five-locale touch/mobile/failure checks passed locally, not against the remote deployment.",
+      "No physical-device or third-party social-platform cache check."
+    ]
+  },
+  "history_refresh": {
+    "checked_main": "6dd3c8570661dbeea40eca723b03f0336349dd2b",
+    "prior_reviewed_main": "18036dfa9936bd811056f58813a65d2b4aef6c8d",
+    "remote_heads": 16,
+    "tags": 0,
+    "additional_commits": 10,
+    "additional_unique_trees": 6,
+    "unique_blobs_in_additional_trees": 292,
+    "binary_inventory": [
+      {
+        "path": "assets/hudl-statsbomb-logo.png",
+        "sha": "a4c65f7b2222c83e6539d64d933ef211bbbb81bc"
+      },
+      {
+        "path": "assets/portfolio/playground.png",
+        "sha": "8cba4bc6699e07d0c182dcc50c17a561924fd1ce"
+      },
+      {
+        "path": "public/branding/hudl-statsbomb-logo-reversed.png",
+        "sha": "ac67f03c2531131d6aa0dee8bdfce2f1326b6301"
+      },
+      {
+        "path": "public/portfolio/share.png",
+        "sha": "0475d2c6f3c9d783c289c640136c6ffcbc93617a"
+      }
+    ],
+    "forbidden_paths": [],
+    "source_records": [],
+    "credential_signatures": [],
+    "limitations": [
+      "Bounded path, structured JSON and credential-pattern scan; not a formal privacy or secret guarantee. Prior reachable history relies on the dated #8 review. Branch changes before publication require refresh."
+    ]
+  },
+  "rights_refresh": {
+    "official_readme_blob": "6b55bd017eb520c99948958f56a410f716ca1b40",
+    "official_license_blob": "66c0b4be6bf38b720d347bb140d70b9c47d9a676",
+    "previous_versions_unchanged": true,
+    "exact_logo_guidance": "UNRESOLVED: official Media Pack redirects to the public collection; accessible shell does not establish exact asset guidance."
+  },
+  "remaining_release_gates": [
+    "Review/merge implementation through the normal process.",
+    "Resolve exact current per-asset logo guidance.",
+    "Apply only reviewed Railway patch and build reviewed main with SITE_URL; record new deployment identity and Node/install/build logs.",
+    "Rerun actual-domain metadata/image and full remote interaction/network checks; inspect share preview.",
+    "Make GitHub repository public through administration access and verify unauthenticated README/images.",
+    "Review account billing alert/hard-limit settings; physical-device and social-platform coverage remain separately reported limitations."
+  ],
+  "language_review_follow_up": {
+    "base_pr_revision": "7236c12981f951007b7ee442ef133e4b4cf7b7cb",
+    "implemented": [
+      "Interaction-intent prefetch for other locale routes",
+      "useTransition with immediate target selection, disabled duplicate control and localized pending overlay",
+      "Reduced-motion non-animated progress indicator",
+      "Full localized tab title through existing Next metadata"
+    ],
+    "validation": [
+      "Five-locale production browser regression PASS",
+      "Held German response: prefetch, pending status, chosen target, disabled select, completion and edited-scene preservation PASS",
+      "All locale titles after selection and reload PASS",
+      "Real-origin build and metadata/localization smoke PASS",
+      "Mobile overlay screenshot inspected"
+    ],
+    "deployed": false,
+    "icon_provenance": "Original SVG geometry authored for project in #25; not a downloaded logo or third-party icon asset."
+  }
+}

@@ -83,6 +83,43 @@ button, select { font: inherit; }
   outline-offset: 3px;
 }
 
+.language-switcher label { display: grid; gap: 6px; }
+.language-switcher select:disabled { cursor: progress; }
+.locale-loading {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgb(5 20 14 / 72%);
+}
+.locale-loading-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  max-width: 100%;
+  padding: 20px 24px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 1rem;
+}
+.locale-loading-spinner {
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: locale-loading-spin 800ms linear infinite;
+}
+@keyframes locale-loading-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .locale-loading-spinner { animation: none; }
+}
+
 .playground {
   display: grid;
   grid-template-columns: minmax(250px, 0.68fr) minmax(0, 1.32fr);
