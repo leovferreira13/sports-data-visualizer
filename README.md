@@ -6,7 +6,9 @@ A portfolio project by **Leonardo Ferreira** · [GitHub](https://github.com/leov
 
 ![English Playground with an illustrative central chance and eight live feature cards](assets/portfolio/playground.png)
 
-**Status:** the reviewed-model Playground and Methodology/results are implemented in Portuguese, English, Dutch, Spanish and German. Public hosting and repository access are tracked in [#26](https://github.com/leovferreira13/sports-data-visualizer/issues/26); the live link will be added after deployment. Optional Learn experiments are deferred in #5.
+**[Open the live Playground](https://sports-data-visualizer-production.up.railway.app/en)**
+
+**Status:** the Playground and Methodology/results run in Portuguese, English, Dutch, Spanish and German. The existing Railway demo is accessible; final domain metadata, branding review and public repository access remain tracked in [#26](https://github.com/leovferreira13/sports-data-visualizer/issues/26). See [release QA](docs/reports/public-release-qa.md) for observed results. Optional Learn experiments are deferred in #5.
 
 ## Explore the product
 
@@ -67,7 +69,7 @@ npm run check:localization
 
 The canonical pre-commit check includes lint, TypeScript, unit tests, synthetic Python ingestion/feature checks, English Markdown and shell validation. Builds verify the original model/evidence identity before compiling. `npm ci` installs the Git hook through the prepare script.
 
-For public hosting, set `SITE_URL` to the final HTTPS origin **before building**; no path, credentials or nonstandard port. Without it, local builds omit canonical/share-image URLs and disable indexing. [Presentation and deployment metadata](docs/architecture/reference/portfolio-presentation.md) documents the contract and release handoff.
+For public hosting, set `SITE_URL` to the final HTTPS origin **before building**; no path, credentials or nonstandard port. Without it, local builds omit canonical/share-image URLs and disable indexing. [Presentation metadata](docs/architecture/reference/portfolio-presentation.md) and [Railway deployment/recovery](docs/architecture/reference/railway-deployment.md) document settings and repeatable live checks. `npm start` listens on `0.0.0.0` and reads the platform's PORT.
 
 ## A short reviewer walkthrough
 

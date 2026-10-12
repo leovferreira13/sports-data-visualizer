@@ -2,6 +2,8 @@
 
 **Status:** pre-release presentation implemented in #25; actual-domain verification and live links complete with #26.
 
+**#26 observation (2026-10-12):** the existing Railway demo is accessible and README links to it. Live HTML still omits canonical/social-origin links and uses noindex because SITE_URL was absent from its build. Correct settings are staged; a new build and live metadata checks remain required. See [deployment/recovery](railway-deployment.md) and [release QA](../../reports/public-release-qa.md).
+
 ## Responsibilities
 
 `lib/project.ts` holds Leonardo Ferreira's identity and confirmed GitHub, LinkedIn and repository URLs. `app/[locale]/page.tsx` renders a compact author line after the existing introduction; labels come from all five locale dictionaries. No extra client state or tracking is introduced. The existing scene, model and attribution footer are retained.

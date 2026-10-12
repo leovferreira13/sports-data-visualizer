@@ -2,6 +2,8 @@
 
 **Status:** first public release preparation · **Updated:** 2026-10-12
 
+**#26 progress:** the existing Railway demo is accessible. Repeatable production settings and release checks are prepared; real-origin rebuild, final branding guidance and public repository access remain release gates. See [release QA](reports/public-release-qa.md).
+
 ## Delivery rule
 
 Ship a small, trustworthy educational portfolio with intuitive interaction and reviewer-visible reasoning. The scientific milestone is complete; another optimization cycle, Learn experiments, traffic targets and a fixed feedback quota are not release prerequisites.

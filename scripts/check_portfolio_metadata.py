@@ -48,7 +48,7 @@ def check(base, origin):
     expected = {locale: f"{origin}/{route}" for route, locale in routes.items()}
     expected["x-default"] = f"{origin}/en"
     for route, locale in routes.items():
-        with urlopen(f"{base}/{route}") as response:
+        with urlopen(f"{base}/{route}", timeout=20) as response:
             html = response.read().decode()
         parsed = Head()
         parsed.feed(html)
@@ -64,7 +64,7 @@ def check(base, origin):
         canonical = [link.get("href") for link in parsed.links if link.get("rel") == "canonical"]
         alternates = {link["hreflang"]: link["href"] for link in parsed.links if "hreflang" in link}
         if origin:
-            assert canonical == [f"{origin}/{route}"], route
+            assert canonical == [f"{origin}/{route}"], f"/{route}: expected canonical {origin}/{route}, got {canonical}"
             assert alternates == expected, route
             assert parsed.meta["og:url"] == f"{origin}/{route}", route
             assert parsed.meta["og:image"] == f"{origin}/portfolio/share.png", route
@@ -79,16 +79,16 @@ def check(base, origin):
             assert parsed.meta["robots"] == "noindex, nofollow", route
         icons = [link["href"] for link in parsed.links if link.get("rel") == "icon"]
         assert icons, route
-        with urlopen(base + icons[0]) as response:
+        with urlopen(base + icons[0], timeout=20) as response:
             assert response.status == 200
-    with urlopen(f"{base}/robots.txt") as response:
+    with urlopen(f"{base}/robots.txt", timeout=20) as response:
         robots = response.read().decode()
     assert ("Allow: /" in robots and f"Sitemap: {origin}/sitemap.xml" in robots) if origin else ("Disallow: /" in robots and "Sitemap:" not in robots)
-    with urlopen(f"{base}/sitemap.xml") as response:
+    with urlopen(f"{base}/sitemap.xml", timeout=20) as response:
         sitemap = ET.fromstring(response.read())
     urls = [node.text for node in sitemap.iter("{http://www.sitemaps.org/schemas/sitemap/0.9}loc")]
     assert sorted(urls) == sorted(f"{origin}/{route}" for route in routes) if origin else not urls
-    with urlopen(f"{base}/portfolio/share.png") as response:
+    with urlopen(f"{base}/portfolio/share.png", timeout=20) as response:
         content = response.read()
         assert content[:8] == b"\x89PNG\r\n\x1a\n"
         assert int.from_bytes(content[16:20], "big") == 1200

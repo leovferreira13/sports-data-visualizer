@@ -1,5 +1,7 @@
 # Football, Visualized — architecture overview
 
+**Release preparation (2026-10-12):** an existing Railway Node deployment is publicly accessible. #26 adds explicit public binding, Git-free installation compatibility and remote release/browser QA, with production settings staged on the existing service. Final metadata/branding/public-repository gates remain open. See [Railway deployment](reference/railway-deployment.md) and [release QA](../reports/public-release-qa.md).
+
 **Status:** five-language shell, playable pitch, local ingestion, positional features, offline training and browser-safe inference infrastructure implemented. Locally executed actual-candidate browser-bundle parity passed; final evaluation infrastructure is implemented; actual-corpus scientific review is accepted with limitations; integrated product QA is recorded in #4; exact asset-guidance/public-release checks and guided Learn remain pending.
 
 ## Application and scene

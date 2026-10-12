@@ -24,3 +24,5 @@ The [feature extraction audit](../../reports/xg-feature-audit.md) tracks synthet
 - [Playground and Methodology/results](playground-and-methodology.md): implemented inference integration, deliberate editing, comparisons, navigation and local QA.
 
 - [Portfolio presentation and deployment metadata](portfolio-presentation.md) — confirmed authorship, screenshots, build-time origin and release handoff.
+
+- [Railway deployment and recovery](railway-deployment.md) — existing service, staged production settings, public checks and rollback.
