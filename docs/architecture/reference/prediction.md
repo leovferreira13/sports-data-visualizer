@@ -1,6 +1,6 @@
 # Browser prediction and model loading
 
-**Status:** #12 inference infrastructure is implemented and tested with invented envelopes. Owner-run parity of the frozen candidate and complete local comparison passed; aggregate evidence was reviewed. The public page still displays geometry; #13/#8 gate release and #4 integrates results and methodology.
+**Status:** #12 inference infrastructure is implemented and tested with invented envelopes. Owner-run parity of the frozen candidate and complete local comparison passed; aggregate evidence was reviewed. The app now displays actual reviewed-model estimates and Methodology/results; integrated evidence is linked below and #5 owns authorized public release.
 
 ## Modules and result contract
 
@@ -82,3 +82,9 @@ Replace `--synthetic` with `--training-dir <completed-training-directory>` for t
 Completed verification emits only `parity.json` and `manifest.json`: model/run identity, code/contract hashes, counts, maximum errors, tolerances, engine and command pattern. Share those files plus the comparator result. Detailed cases and actual weights are not emitted. The harness size measures code/schema without real parameters; it is not the final model bundle size.
 
 After #8/#13 review, #4 may load a reviewed parameter-only envelope through `loadModel` and pass the handle to `predictScenario`. Committed JSON, static/downloadable assets and client bundles all distribute parameters and require review. A loader failure leaves predictions unavailable; recover with the correct verified artifact. See [verification status](../../reports/xg-browser-inference.md) and [ADR 007](../adr/007-browser-inference-and-penalty.md).
+
+## Integrated #4 delivery
+
+The reviewed parameter envelope is now integrated into the bilingual Playground, with explicit prediction states, zero-to-three represented defenders, honest comparisons and route-backed Methodology/results. The original fitted feature contract, parameters and aggregate evidence remain unchanged. See [Playground and Methodology/results](playground-and-methodology.md) for actual modules and commands.
+
+Earlier statements that actual weights are local-only or that the UI displays geometry only describe the pre-integration state. #8 is closed; #4 owns the dated integrated QA record and any explicitly unresolved logo/publication checks. Learn and authorized deployment remain #5. See `docs/reports/xg-playground-qa.md`; no public release is implied.

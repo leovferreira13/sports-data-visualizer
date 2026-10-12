@@ -48,6 +48,9 @@ assert_redirect() {
 
 assert_status "/en" "200"
 assert_status "/br" "200"
+assert_status "/en/methodology" "307"
+assert_status "/br/methodology" "307"
+assert_status "/fr/methodology" "404"
 assert_status "/pt-BR" "404"
 assert_status "/fr" "404"
 

@@ -122,7 +122,13 @@ export function extractScenarioFeatures(value: unknown): FeatureResult {
   if (value.shotType === "penalty") return unsupported("penalty_separate_route");
   if (value.shotType !== "open-play") return unsupported("unsupported_shot_type");
   if (!object(value.players) || !Array.isArray(value.extraDefenders)) return unsupported("invalid_scenario");
+  const players = value.players;
+  const removed = value.removedBaseDefenders ?? [];
+  if (!Array.isArray(removed) || removed.some(id => id !== "defender1" && id !== "defender2")
+    || new Set(removed).size !== removed.length) return unsupported("invalid_scenario");
+  // All base coordinates remain required: missing data is not deliberate removal.
+  if (![value.players.defender1, value.players.defender2].every(point)) return unsupported("invalid_defender");
   return extractMetricFeatures({ contract_version: contract.version, shot_type: value.shotType,
     shooter: value.players.shooter, goalkeepers: [value.players.goalkeeper],
-    defenders: [value.players.defender1, value.players.defender2, ...value.extraDefenders], observation: "browser-scene" });
+    defenders: [...["defender1", "defender2"].filter(id => !removed.includes(id)).map(id => players[id]), ...value.extraDefenders], observation: "browser-scene" });
 }

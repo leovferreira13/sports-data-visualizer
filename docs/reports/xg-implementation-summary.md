@@ -62,7 +62,7 @@ The owner reported byte-identical complete training runs (17 files) and complete
 
 ## What #13 now makes possible
 
-The owner can evaluate the original frozen candidate, full logistic and constant on identical held-out rows, with whole-match uncertainty, calibration, fixed supported/sparse slices and training-only synthetic support diagnostics. Completed withheld evidence survives statistical failures. Report, model card and the future bilingual Methodology and results tab share the same aggregate source. No public xG is enabled by this implementation.
+The owner can evaluate the original frozen candidate, full logistic and constant on identical held-out rows, with whole-match uncertainty, calibration, fixed supported/sparse slices and training-only synthetic support diagnostics. Completed withheld evidence survives statistical failures. Report, model card and the implemented bilingual Methodology and results tab share the same aggregate source. No public xG is enabled by this implementation.
 
 The final evaluation protocol was predeclared. Owner-run final evidence now passes the automated gates and complete comparator checks are reported PASS. Both paired score intervals favor the frozen candidate, and no supported calibration bin is flagged. Scientific review accepts the evidence with explicit sparse-slice/preset/transfer limitations; see the [final review](xg-final-evaluation.md). Final model eligibility requires complete reproduction, dated scientific/rights/export review and an explicit disposition of limitations. #4 still owns actual integrated production/attribution QA; finish #8 QA there and close #3 only after every child passes.
 
@@ -80,3 +80,9 @@ The final evaluation protocol was predeclared. Owner-run final evidence now pass
 ## Rights completion handoff
 
 The owner assigned interface-dependent publication QA to #4. The dated #8 rights/artifact/repository completion review is in `docs/reports/statsbomb-rights-completion.md`. After its documentation is merged, #8 and the completed model epic #3 may close. Actual xG/methodology pages, final build/network content and attribution/logo QA remain mandatory in #4 before #5 publishes with owner authorization. No new training cycle or public release is authorized by this handoff.
+
+## Integrated #4 delivery
+
+The reviewed parameter envelope is now integrated into the bilingual Playground, with explicit prediction states, zero-to-three represented defenders, honest comparisons and route-backed Methodology/results. The original fitted feature contract, parameters and aggregate evidence remain unchanged. See [Playground and Methodology/results](../architecture/reference/playground-and-methodology.md) for actual modules and commands.
+
+Earlier statements that actual weights are local-only or that the UI displays geometry only describe the pre-integration state. #8 is closed; #4 owns the dated integrated QA record and any explicitly unresolved logo/publication checks. Learn and authorized deployment remain #5. See `docs/reports/xg-playground-qa.md`; no public release is implied.

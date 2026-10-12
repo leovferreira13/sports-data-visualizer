@@ -33,7 +33,7 @@ If a contextual model is not ready immediately, test the pitch as a prototype wi
 - Presets: penalty, one-on-one, tight angle, long shot, and crowded box; reset to the selected preset.
 - `0.xx xG` (or `0,xx xG` by locale) and equivalent percentage, plus distance, angle, and a simple description of shot-cone occupancy.
 - Free exploration of rare/extreme scenes within valid controls, with proportional support notes and no diagnostic-only blocking.
-- Visible, directly accessible Methodology and results tab beside Playground, with plain-language explanations plus technical evidence/architecture links.
+- Visible, directly accessible Methodology and results section below Playground, with plain-language explanations plus technical evidence/architecture links.
 - “What affects this chance?” panel with current observations; after moving a piece, compare before/after only for factors actually used by the model.
 - Learn mode with 2–3 optional experiments: distance and angle; move a defender out of the way; reposition the goalkeeper. Hide any experiment unsupported by the selected model.
 - Portuguese / English selector; initial language from browser preference, persisted manual choice, and complete translations including methodology notes.
@@ -80,15 +80,15 @@ If a contextual model is not ready immediately, test the pitch as a prototype wi
 
 ### Offline training implementation status (#11)
 
-Training contracts/scripts and synthetic verification are implemented; the first owner-run actual-corpus artifacts passed internal review, with successful complete reproduction confirmed by the owner. See the [local training guide](architecture/reference/xg-training.md) and [status report](reports/xg-training-methodology.md). The Methodology and results tab in #4 consumes the same aggregate evidence as the generated report. Final-test evaluation and release remain gated by #13 and final rights QA in #8.
+Training contracts/scripts and synthetic verification are implemented; the first owner-run actual-corpus artifacts passed internal review, with successful complete reproduction confirmed by the owner. See the [local training guide](architecture/reference/xg-training.md) and [status report](reports/xg-training-methodology.md). The Methodology and results section in #4 consumes the same aggregate evidence as the generated report. Final-test evaluation and release remain gated by #13 and final rights QA in #8.
 
 ### Browser inference implementation status (#12)
 
-Validated artifact loading, logistic/XGBoost inference, explicit unsupported/unavailable results and the separate 0.76 penalty convention are implemented. Invented-fixture parity is automated; the owner's frozen candidate passed 2,886 cases with zero probability difference, and complete repeat-run comparison passed. See the [inference review](reports/xg-browser-inference.md). The [prediction guide](architecture/reference/prediction.md) provides local commands, optional Chromium checks and repeat-run comparison. Actual weights remain local and the public page still displays geometry only.
+Validated artifact loading, logistic/XGBoost inference, explicit unsupported/unavailable results and the separate 0.76 penalty convention are implemented. Invented-fixture parity is automated; the owner's frozen candidate passed 2,886 cases with zero probability difference, and complete repeat-run comparison passed. See the [inference review](reports/xg-browser-inference.md). The [prediction guide](architecture/reference/prediction.md) provides local commands, optional Chromium checks and repeat-run comparison. The reviewed weights are now a hash-checked static asset and the local page displays learned estimates; authorized public deployment remains #5.
 
 ## Final evaluation handoff
 
-Issue #13 provides offline final-test evaluation infrastructure and generated aggregate report/model-card/app views. Owner-run actual-corpus results pass automated gates and complete comparators are reported PASS. Scientific review accepts the evidence with support limitations; distribution/publication decisions remain pending. This does not close #3 or publish xG. #4 must integrate the Methodology and results tab and finish real production QA with #8.
+Issue #13 provides offline final-test evaluation infrastructure and generated aggregate report/model-card/app views. Owner-run actual-corpus results pass automated gates and complete comparators are reported PASS. Scientific review accepts the evidence with support limitations; distribution/publication decisions remain pending. This does not close #3 or publish xG. #4 must integrate the Methodology and results section and finish real production QA with #8.
 
 ## Actual-corpus final review
 
@@ -98,8 +98,18 @@ The owner-run final evidence passes all automated predicates and the owner repor
 
 #4 presents actual model responses, tree plateaus, illustrative presets and layered methodology; #5 provides short optional experiments, a concise interview-ready README/walkthrough and small targeted qualitative review. A fixed 5–8-person feedback cohort, growth/traffic targets and universal scene precision are not release gates. No new training work is required for the educational first release.
 
-#9–#13 are closed and the final-evaluation PR is merged. #3's technical/scientific milestone is complete; #3/#8 remain open for the actual parameter/history/integrated xG/methodology attribution/build/network checks required by their current acceptance criteria. Start #4 from the accepted scientific handoff without requiring epic closure. #4 collects the concrete QA evidence for #8; #5 publishes afterward with owner authorization. This preserves publication checks without a circular development dependency.
+#9–#13 are closed and the final-evaluation PR is merged. #3's technical/scientific milestone is complete; #8 is closed following its scoped rights/artifact/history completion; integrated xG/methodology publication checks were explicitly transferred to #4. Start #4 from the accepted scientific handoff without requiring epic closure. #4 collects the concrete QA evidence for #8; #5 publishes afterward with owner authorization. This preserves publication checks without a circular development dependency.
 
 ## Rights completion handoff
 
 The owner assigned interface-dependent publication QA to #4. The dated #8 rights/artifact/repository completion review is in `docs/reports/statsbomb-rights-completion.md`. After its documentation is merged, #8 and the completed model epic #3 may close. Actual xG/methodology pages, final build/network content and attribution/logo QA remain mandatory in #4 before #5 publishes with owner authorization. No new training cycle or public release is authorized by this handoff.
+
+## Integrated #4 delivery
+
+The reviewed parameter envelope is now integrated into the bilingual Playground, with explicit prediction states, zero-to-three represented defenders, honest comparisons and inline Methodology/results. The original fitted feature contract, parameters and aggregate evidence remain unchanged. See [Playground and Methodology/results](architecture/reference/playground-and-methodology.md) for actual modules and commands.
+
+Earlier statements that actual weights are local-only or that the UI displays geometry only describe the pre-integration state. #8 is closed; #4 owns the dated integrated QA record and any explicitly unresolved logo/publication checks. Learn and authorized deployment remain #5. See `docs/reports/xg-playground-qa.md`; no public release is implied.
+
+## Owner-directed Playground revision (2026-10-11)
+
+The current #4 UI places the pitch left and eight retained-feature cards plus current xG right. Mobile uses a compact sticky xG strip within the Playground, the pitch, then two-column cards. The last-completed-change panel and expanded observations block are removed; support/illustration explanations remain in Methodology. Secondary position controls are collapsible. Methodology is server-rendered below the pitch on the same localized page, with anchor navigation and redirects from former dedicated URLs. The technical-links block is removed from the product; repository references remain available. This revision supersedes earlier references to adjacent tabs or comparison panels and does not change inference, parameters or scientific evidence.

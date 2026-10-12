@@ -20,3 +20,9 @@ Accept the exact reviewed model envelope for the unchanged free, non-commercial 
 #4 must verify: actual model identity/content as integrated; final tracked/build/network outputs without raw/shot records; current exact logo guidance and visible accessible attribution/independent-model wording on /en and /br, Playground and Methodology/results, including mobile; illustrative-scene/partial-visibility/penalty explanations; non-commercial scope; and a dated QA record tied to code/build/deployment. #5 requires those checks and explicit owner publication authorization before release. Refresh repository/content checks if subsequent changes affect publication assets.
 
 No UI, fitting, inference parameters or scientific evaluation protocol was changed. Existing aggregate evidence remains immutable; its original automated pending-review status is supplemented by this dated scoped rights disposition.
+
+## Integrated #4 delivery
+
+The reviewed parameter envelope is now integrated into the bilingual Playground, with explicit prediction states, zero-to-three represented defenders, honest comparisons and route-backed Methodology/results. The original fitted feature contract, parameters and aggregate evidence remain unchanged. See [Playground and Methodology/results](../architecture/reference/playground-and-methodology.md) for actual modules and commands.
+
+Earlier statements that actual weights are local-only or that the UI displays geometry only describe the pre-integration state. #8 is closed; #4 owns the dated integrated QA record and any explicitly unresolved logo/publication checks. Learn and authorized deployment remain #5. See `docs/reports/xg-playground-qa.md`; no public release is implied.

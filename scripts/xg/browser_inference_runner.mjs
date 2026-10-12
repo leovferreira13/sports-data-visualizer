@@ -5,14 +5,14 @@ import { createRequire } from "node:module";
 import { createServer } from "node:http";
 
 const entry = fileURLToPath(new URL("./inference_bridge.ts", import.meta.url));
-export async function bundle() {
-  const result = await build({ entryPoints: [entry], bundle: true, write: false,
+export async function bundle(entryPath = entry) {
+  const result = await build({ entryPoints: [entryPath], bundle: true, write: false,
     platform: "browser", format: "esm", target: "es2022", metafile: true, minify: true });
   if (Object.values(result.metafile.outputs).some(o => o.imports.length)) throw new Error("External client dependency");
   return { code: result.outputFiles[0].text, bytes: result.outputFiles[0].contents.length, esbuildVersion };
 }
-async function run(payload, inBrowser) {
-  const bundled = await bundle();
+export async function run(payload, inBrowser, entryPath = entry) {
+  const bundled = await bundle(entryPath);
   let value, engine;
   if (!inBrowser) {
     const compiled = await import(`data:text/javascript;base64,${Buffer.from(bundled.code).toString("base64")}`);

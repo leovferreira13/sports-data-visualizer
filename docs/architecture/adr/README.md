@@ -14,3 +14,5 @@ Use an ADR for a consequential, structural or difficult-to-reverse choice. An AD
 - [007: Browser inference and separate penalty convention](007-browser-inference-and-penalty.md)
 
 - [008: Frozen final evaluation and publication gate](008-final-evaluation-and-publication-gate.md) — infrastructure implemented; empirical decision pending.
+
+- [009: Integrated Playground and evidence](009-integrated-playground-and-evidence.md): reviewed browser artifact, scene/persistence bounds and methodology routes.

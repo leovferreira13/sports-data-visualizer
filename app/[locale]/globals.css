@@ -244,3 +244,113 @@ h1 {
   .site-footer { align-items: flex-start; flex-direction: column; gap: 12px; }
   .data-source-logo { flex-basis: auto; width: 170px; }
 }
+
+/* Live Playground: pitch left, estimate and all eight inputs right. */
+a { color: var(--accent); text-underline-offset: 4px; }
+button, input, select, summary { min-height: 44px; }
+button:focus-visible, input:focus-visible, select:focus-visible, a:focus-visible, summary:focus-visible, .table-scroll:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 4px;
+}
+.playground { display: block; padding: 32px 0 48px; min-height: auto; }
+.playground-copy { max-width: none; padding-top: 0; margin-bottom: 26px; }
+.playground-copy .eyebrow { margin-bottom: 10px; }
+.playground-copy h1 { max-width: 24ch; font-size: clamp(2.1rem, 4vw, 3.3rem); line-height: 1.1; }
+.playground-copy .lead { max-width: none; margin-top: 12px; font-size: 1rem; }
+.pitch-workspace { display: grid; grid-template-columns: minmax(0,1.5fr) minmax(280px,1fr); gap: 28px; align-items: start; }
+.pitch-editor { min-width: 0; grid-column: 1; grid-row: 1; }
+.playground-insights { min-width: 0; grid-column: 2; grid-row: 1; position: sticky; top: 20px; }
+.prediction-card { padding: 20px; background: var(--surface-soft); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 20px; }
+.estimate-heading { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 14px; margin-bottom: 8px; }
+.prediction-card .eyebrow { font-size: .7rem; letter-spacing: .06em; margin: 0; }
+.model-kind { font-size: .7rem; color: var(--muted); }
+.prediction-value { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; font-variant-numeric: tabular-nums; }
+.prediction-value strong { font-size: clamp(2.6rem,4vw,3.5rem); letter-spacing: -.04em; }
+.prediction-value small { font-size: 1rem; font-weight: 500; color: var(--muted); }
+.prediction-value > span { color: var(--accent); font-size: 1.7rem; }
+.prediction-card [role="status"], .penalty-note { margin-bottom: 0; color: var(--muted); line-height: 1.5; font-size: .8rem; }
+.features-section h2 { margin: 0 0 12px; font-size: .83rem; font-weight: 500; color: var(--muted); }
+.feature-cards { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
+.feature-card { display: flex; flex-direction: column; justify-content: space-between; gap: 8px; min-width: 0; min-height: 88px; padding: 14px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); }
+.feature-name { color: var(--muted); font-size: .8rem; line-height: 1.3; }
+.feature-card strong { display: flex; align-items: baseline; gap: 5px; font-size: 1.6rem; font-weight: 700; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.feature-card small { font-size: .85rem; font-weight: 400; color: var(--muted); }
+.feature-note { color: var(--muted); font-size: .68rem; }
+.support-note { color: var(--muted); font-size: .78rem; line-height: 1.55; margin-top: 12px; }
+dd { margin: 0; font-variant-numeric: tabular-nums; }
+.position-adjustments { margin-top: 14px; border: 1px solid var(--border); border-radius: 12px; padding: 0 14px; }
+summary { cursor: pointer; padding: 12px 0; }
+.position-adjustments > summary { font-size: .82rem; color: var(--muted); }
+.position-controls { margin: 0 0 14px; padding: 0; border: 0; display: flex; flex-wrap: wrap; gap: 12px; }
+.position-controls legend { font-size: .8rem; color: var(--muted); padding: 0 5px; }
+.position-controls label { display: grid; gap: 6px; color: var(--muted); font-size: .75rem; flex: 1 1 110px; }
+.position-controls input, .position-controls select { width: 100%; color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 8px; font: inherit; font-size: .9rem; }
+.position-controls button { color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 10px; width: 100%; }
+button:disabled { opacity: .45; cursor: default; }
+.player-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.player-actions button { flex: 1; min-width: 110px; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; color: var(--text); background: var(--surface); }
+.player-actions .scene-reset { background: #594031; border-color: #a87556; }
+.methodology { padding: 40px 0 64px; border-top: 1px solid var(--border); scroll-margin-top: 24px; }
+.methodology-header > h2 { max-width: 20ch; margin: 0; font-size: clamp(2rem,4vw,3.4rem); line-height: 1.1; letter-spacing: -.04em; }
+.methodology-header .lead { max-width: 65ch; }
+.methodology-layout { display: grid; grid-template-columns: 230px minmax(0,1fr); gap: 48px; margin-top: 36px; }
+.methodology-index { position: sticky; top: 20px; align-self: start; display: grid; gap: 6px; }
+.methodology-index a { padding: 9px 0; font-size: .9rem; text-decoration: none; }
+.methodology-content { min-width: 0; }
+.methodology-content section { margin-bottom: 36px; padding: 24px; border: 1px solid var(--border); border-radius: 16px; background: var(--surface); scroll-margin-top: 20px; }
+.methodology-content h2 { margin: 0 0 16px; font-size: 1.45rem; letter-spacing: -.02em; }
+.methodology-content h3 { margin-top: 28px; font-size: 1rem; }
+.methodology-content p { color: var(--muted); line-height: 1.75; }
+.table-scroll { max-width: 100%; overflow-x: auto; border: 1px solid var(--border); border-radius: 10px; margin: 16px 0; }
+table { width: 100%; border-collapse: collapse; font-size: .82rem; line-height: 1.5; }
+th, td { padding: 12px; text-align: left; border-bottom: 1px solid var(--border); }
+thead { background: var(--surface-soft); }
+tbody th { font-weight: 500; }
+td { font-variant-numeric: tabular-nums; }
+caption { text-align: left; padding: 12px; color: var(--muted); }
+.calibration-figure { margin: 20px 0; }
+.calibration-figure svg { display: block; width: 100%; background: var(--surface-soft); border-radius: 12px; }
+.calibration-figure text { fill: var(--muted); font-size: 11px; }
+.chart-grid { stroke: var(--border); }
+.chart-diagonal { stroke: var(--muted); stroke-dasharray: 4 4; }
+.chart-interval { stroke: var(--accent); stroke-width: 2; }
+.chart-point { fill: var(--accent); stroke: var(--accent); stroke-width: 2; }
+.chart-point--sparse { fill: var(--surface-soft); }
+figcaption { color: var(--muted); font-size: .78rem; line-height: 1.6; margin-top: 12px; }
+.evidence-identity dd { overflow-wrap: anywhere; font-family: monospace; font-size: .8rem; margin-bottom: 14px; }
+.evidence-identity dt { margin-bottom: 6px; color: var(--muted); font-size: .8rem; }
+.model-configuration { font-size: .85rem; line-height: 1.7; }
+@media (max-width: 800px) {
+  .playground { padding-top: 22px; }
+  .playground-copy { margin-bottom: 20px; }
+  .pitch-workspace { grid-template-columns: 1fr; gap: 12px; }
+  .playground-insights, .pitch-editor { display: contents; }
+  .prediction-card { order: 0; position: sticky; top: 8px; z-index: 5; align-self: start; margin: 0; padding: 12px 16px; box-shadow: 0 4px 18px rgba(0,0,0,.25); }
+  .scene-actions { order: 1; margin: 0; }
+  .scene-actions > label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .scene-actions .preset-row { margin: 0; }
+  .pitch-surface { order: 2; scroll-margin-top: 112px; }
+  .features-section { order: 3; }
+  .features-section h2 { margin: 4px 0 8px; }
+  .feature-cards { gap: 8px; }
+  .feature-card { min-height: 68px; padding: 10px 12px; gap: 5px; }
+  .feature-name { font-size: .74rem; }
+  .feature-card strong { font-size: 1.35rem; }
+  .player-actions { order: 4; margin-top: 2px; }
+  .position-adjustments { order: 5; margin-top: 2px; }
+  .support-note { order: 6; }
+  .prediction-card .eyebrow { font-size: .62rem; }
+  .prediction-value strong { font-size: 2.1rem; }
+  .prediction-value > span { font-size: 1.4rem; }
+  .methodology-layout { grid-template-columns: 1fr; gap: 20px; }
+  .methodology-index { position: static; display: flex; flex-wrap: wrap; gap: 6px 16px; }
+  .methodology-content section { padding: 18px; }
+}
+@media (max-width: 600px) {
+  .site-header { flex-direction: row; gap: 14px; align-items: center; padding: 16px 0; }
+  .brand span { max-width: 22ch; font-size: .72rem; }
+  .language-switcher { width: 146px; flex-shrink: 0; }
+  .language-switcher select { padding: 0 6px; width: 100%; font-size: .75rem; }
+  .playground-copy .eyebrow { display: none; }
+  .playground-copy h1 { font-size: 1.8rem; }
+  .playground-copy .lead { font-size: .85rem; line-height: 1.5; margin-top: 8px; }
+}
