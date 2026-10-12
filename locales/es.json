@@ -1,0 +1,187 @@
+{
+  "meta": {
+    "title": "Fútbol, explicado",
+    "description": "Un entorno interactivo para comprender situaciones de remate en el fútbol."
+  },
+  "brand": {
+    "name": "Fútbol, explicado",
+    "tagline": "Mueve a los jugadores. Entiende qué cambia una ocasión de gol."
+  },
+  "language": {
+    "label": "Idioma"
+  },
+  "attribution": {
+    "sourceLink": "Repositorio de origen de StatsBomb Open Data",
+    "logoAlt": "Logotipo de Hudl Statsbomb",
+    "disclaimer": "Proyecto independiente, gratuito y no comercial. Nuestro modelo se entrena con StatsBomb Open Data; no es el xG de Hudl Statsbomb ni implica su respaldo. No se distribuyen registros de origen."
+  },
+  "playground": {
+    "eyebrow": "Explorador",
+    "title": "Construye la ocasión.",
+    "description": "Mueve a los jugadores. Observa cómo las posiciones cambian las variables y la estimación.",
+    "status": "Modelo independiente entrenado con StatsBomb Open Data. Esta escena posicional es ilustrativa, tiene visibilidad parcial y no ofrece la probabilidad exacta de un jugador concreto.",
+    "pitchDescription": "Mitad ofensiva del campo con delanteros, centrales y un portero que puedes mover. Arrastra un jugador o enfócalo y usa las teclas de flecha.",
+    "keyboardHint": "Usa las teclas de flecha para mover este jugador. Mantén pulsada Mayús para dar pasos mayores.",
+    "distance": "Distancia a portería",
+    "angle": "Ángulo de remate",
+    "meters": "m",
+    "presetLabel": "Situación inicial",
+    "reset": "Restablecer escena",
+    "addAttacker": "+ Atacante",
+    "addDefender": "+ Defensor",
+    "defenderName": "Central",
+    "forward": "Hacia la portería",
+    "sideways": "A lo ancho del campo",
+    "players": {
+      "shooter": "Delantero",
+      "goalkeeper": "Portero",
+      "defender1": "Central 1",
+      "defender2": "Central 2"
+    },
+    "playerGlyphs": {
+      "shooter": "DC",
+      "goalkeeper": "POR",
+      "defender1": "DFC",
+      "defender2": "DFC"
+    },
+    "presets": {
+      "centralChance": "Ocasión central",
+      "penalty": "Penalti",
+      "oneOnOne": "Uno contra uno",
+      "tightAngle": "Ángulo cerrado",
+      "longShot": "Remate lejano",
+      "crowdedBox": "Área congestionada"
+    },
+    "results": {
+      "estimate": "Estimación de este modelo",
+      "penalty": "Penalti: convención fija, no una predicción aprendida",
+      "unavailable": "Modelo no disponible. No se muestra ninguna estimación alternativa. Recarga la página para volver a intentarlo.",
+      "unsupported": "No se puede evaluar esta entrada. Ajusta la escena o restablece la situación inicial.",
+      "convention": "Las posiciones no cambian la convención de 0,76 para penaltis.",
+      "remove": "Eliminar jugador seleccionado",
+      "selected": "Jugador seleccionado",
+      "position": "Controles de posición",
+      "migration": "La escena guardada se adaptó al límite de tres defensores, conservando las primeras posiciones.",
+      "features": {
+        "shot_distance_m": "Distancia del remate (m)",
+        "goal_opening_angle_deg": "Ángulo de apertura de la portería (°)",
+        "absolute_lateral_offset_m": "Desplazamiento lateral (m)",
+        "visible_defender_count": "Defensores representados",
+        "defenders_in_cone_count": "Defensores en el cono",
+        "nearest_visible_defender_distance_m": "Defensor más cercano (m)",
+        "goalkeeper_distance_to_goal_m": "Portero a portería (m)",
+        "goalkeeper_distance_to_shot_m": "Portero al remate (m)"
+      },
+      "loading": "Cargando el modelo revisado…",
+      "cardLabels": {
+        "shot_distance_m": "Distancia a portería",
+        "goal_opening_angle_deg": "Ángulo de remate",
+        "absolute_lateral_offset_m": "Desvío lateral",
+        "visible_defender_count": "Defensores",
+        "defenders_in_cone_count": "Dentro del cono",
+        "nearest_visible_defender_distance_m": "Defensor cercano",
+        "goalkeeper_distance_to_goal_m": "Portero a portería",
+        "goalkeeper_distance_to_shot_m": "Portero al remate"
+      },
+      "fixedPenalty": "Penalti · valor fijo",
+      "modelFeatures": "Variables del modelo",
+      "positionFeatures": "Medidas de la escena",
+      "noDefender": "Sin defensores"
+    }
+  },
+  "navigation": {
+    "label": "Secciones del proyecto",
+    "playground": "Explorador",
+    "methodology": "Metodología y resultados"
+  },
+  "methodology": {
+    "eyebrow": "Decisiones, evidencia y límites",
+    "title": "Detrás de la estimación",
+    "intro": "Un entorno para comprender las ocasiones de gol y examinar cómo los datos, las decisiones de modelado y la ingeniería producen el número en pantalla.",
+    "overviewTitle": "Qué significa el número",
+    "overview": "Una estimación de 0,20 xG representa aproximadamente 20 goles en 100 remates comparables según este modelo. No es una probabilidad exacta para un jugador concreto. Aquí, la escena inventada simplifica el contexto real.",
+    "dataTitle": "Fuente y población",
+    "data": "Usamos StatsBomb Open Data con resultados observados de gol y no gol; el xG de la fuente nunca es la variable objetivo. La población consiste en remates con el pie de fútbol masculino en juego abierto. Los cabezazos, penaltis y otras situaciones se excluyen del entrenamiento. Los fotogramas de eventos son la observación principal; disponer de datos 360 opcionales no garantiza que todos los defensores sean visibles. Se excluyen casos sin portero visible y casos singulares en la línea de gol, sin imputación.",
+    "featuresTitle": "Ocho variables posicionales",
+    "featuresIntro": "La geometría describe la ocasión; los recuentos y las distancias describen a los rivales observados. El cono es el triángulo finito entre el remate y los postes. Las posiciones usan metros, independientemente del SVG. Sin defensores, la distancia usa la diagonal del campo como valor centinela junto al recuento explícito. Se omiten otros atacantes, identidad, pie preferido, técnica, velocidad y contexto temporal.",
+    "trainingTitle": "Entrenamiento, selección y congelación",
+    "training": "Los partidos completos se separan en entrenamiento, calibración, selección y prueba, evitando eventos del mismo partido en distintos grupos. La búsqueda acotada usa cinco particiones solo en entrenamiento; el escalado logístico se ajusta dentro de cada partición. Tres regresiones logísticas aíslan geometría, defensores y todas las variables. XGBoost con árboles poco profundos prueba interacciones no lineales. No hay balanceo de clases ni reajuste después de la selección.",
+    "selection": "La regla declarada seleccionó XGBoost usando el rendimiento observado y el límite de deterioro de Brier para favorecer la simplicidad. Los intervalos de selección no establecieron una superioridad concluyente. La calibración sigmoide no cumplió los criterios de adopción. Congelar significa fijar variables, preprocesamiento, árboles y calibración antes de abrir la prueba final; la interfaz solo ejecuta esos parámetros.",
+    "scoresTitle": "Validación y prueba final",
+    "scores": "Log loss penaliza probabilidades incorrectas expresadas con mucha confianza; Brier mide el error cuadrático de probabilidad. Menor es mejor. La selección elige el modelo; la prueba final evalúa el modelo ya fijado y no se usó para reajustarlo. Los intervalos del 95% remuestrean partidos completos, conservando la dependencia entre remates.",
+    "validation": "Selección — no la prueba final",
+    "final": "Prueba final reservada hasta la congelación",
+    "pairedTitle": "Diferencias pareadas en la prueba final",
+    "paired": "XGBoost menos referencia: los valores negativos favorecen a XGBoost. Los intervalos globales favorecen al candidato en esta prueba; esto no garantiza ventaja en cada subgrupo ni transferencia a otras competiciones o escenas.",
+    "calibrationTitle": "Calibración y muestras escasas",
+    "calibration": "La diagonal representa el acuerdo entre la media predicha y la frecuencia observada. Las barras muestran intervalos del 95% de la frecuencia observada basados en partidos; los puntos huecos indican rangos con pocos ejemplos. Ningún rango con datos suficientes fue señalado, pero los rangos de alta probabilidad tienen pocos ejemplos y no permiten afirmar precisión en escenas extremas.",
+    "slicesTitle": "También importa el subgrupo desfavorable",
+    "slices": "Con dos defensores dentro del cono, XGBoost fue peor que la regresión logística completa en esta prueba. Esto se refiere al recuento en el cono, no al total en el campo. Este resultado permanece visible; los promedios globales no borran los fallos locales.",
+    "supportTitle": "Escenas ilustrativas y transferencia",
+    "support": "La referencia descriptiva usa vecinos en variables estandarizadas solo con entrenamiento, con un umbral del 99% y un grupo separado sin defensores. No publicamos filas de referencia, por lo que la interfaz no calcula el respaldo conjunto de los datos para cada edición. Cuatro situaciones iniciales de juego abierto quedan fuera de esta referencia; estar dentro tampoco demuestra realismo. Las escenas raras siguen siendo explorables. Las comparaciones no son efectos causales; la visibilidad parcial, los pocos defensores y otros dominios limitan la interpretación.",
+    "inferenceTitle": "Ejecución y reproducción",
+    "inference": "TypeScript extrae las mismas ocho variables que el proceso de Python. El cargador valida y conserva parámetros inmutables; XGBoost mantiene comparaciones y acumulación float32 con tolerancia de 1e-7. Los árboles pueden mantener el resultado tras pequeños movimientos. Las entradas inválidas o los modelos no disponibles no reciben una heurística alternativa. Los penaltis usan la convención fija de 0,76, separada del modelo aprendido.",
+    "review": "La revisión científica se aceptó con limitaciones y se revisó la distribución del archivo exacto para el uso gratuito y no comercial. El estado automático original sigue siendo «requiere revisión»; la revisión no autoriza la publicación. El entrenamiento privado y la reproducción completa se ejecutaron y reportaron localmente. Se revisaron los agregados y controles sin volver a ejecutar los datos privados.",
+    "model": "Modelo",
+    "shots": "Remates",
+    "goals": "Goles",
+    "mean": "Media predicha",
+    "observed": "Frecuencia observada",
+    "interval": "Intervalo del 95%",
+    "sparse": "Datos escasos",
+    "supported": "Datos suficientes",
+    "bin": "Rango de predicción",
+    "reference": "Referencia",
+    "estimate": "Diferencia",
+    "feature": "Variable",
+    "rationale": "Justificación",
+    "models": {
+      "constant": "Prevalencia constante",
+      "geometry_logistic": "Logística: geometría",
+      "defenders_logistic": "Logística: defensores",
+      "full_logistic": "Logística completa",
+      "full_xgboost": "XGBoost completo"
+    },
+    "featureRationales": {
+      "shot_distance_m": "Distancia al centro de la portería.",
+      "goal_opening_angle_deg": "Apertura entre los postes.",
+      "absolute_lateral_offset_m": "Asimetría lateral sin distinguir izquierda y derecha.",
+      "visible_defender_count": "Número de rivales representados.",
+      "defenders_in_cone_count": "Ocupación del triángulo de remate.",
+      "nearest_visible_defender_distance_m": "Proximidad del rival observado más cercano.",
+      "goalkeeper_distance_to_goal_m": "Posición del portero respecto a la portería.",
+      "goalkeeper_distance_to_shot_m": "Proximidad entre portero y remate."
+    },
+    "identity": "Identidad y revisión",
+    "configuration": "Configuración congelada",
+    "trees": "árboles",
+    "depth": "profundidad",
+    "learningRate": "tasa de aprendizaje",
+    "minChildWeight": "peso mínimo del nodo hijo",
+    "calibrationLabel": "Calibración",
+    "artifact": "Archivo del modelo",
+    "trainingRun": "Ejecución de entrenamiento",
+    "evidence": "Evidencia",
+    "scientificReview": "Revisión científica",
+    "automatedStatus": "Estado automático original",
+    "publicationAuthorization": "Autorización de publicación",
+    "score": "Métrica",
+    "partitionsTitle": "Particiones por partido",
+    "partition": "Partición",
+    "matches": "Partidos",
+    "partitions": {
+      "train": "Entrenamiento",
+      "calibration": "Calibración",
+      "selection": "Selección",
+      "test": "Prueba final"
+    },
+    "unopened": "Sin abrir durante la selección",
+    "displayValues": {
+      "identityCalibration": "Sin recalibración (identidad)",
+      "acceptedWithLimitations": "Aceptada con limitaciones",
+      "needsReview": "Requiere revisión",
+      "yes": "Sí",
+      "no": "No"
+    }
+  }
+}

@@ -348,7 +348,8 @@ figcaption { color: var(--muted); font-size: .78rem; line-height: 1.6; margin-to
 @media (max-width: 600px) {
   .site-header { flex-direction: row; gap: 14px; align-items: center; padding: 16px 0; }
   .brand span { max-width: 22ch; font-size: .72rem; }
-  .language-switcher { width: 146px; flex-shrink: 0; }
+  .brand { min-width: 0; }
+  .language-switcher { width: 176px; flex-shrink: 0; }
   .language-switcher select { padding: 0 6px; width: 100%; font-size: .75rem; }
   .playground-copy .eyebrow { display: none; }
   .playground-copy h1 { font-size: 1.8rem; }

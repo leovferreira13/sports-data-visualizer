@@ -1,8 +1,8 @@
 # Football, Visualized
 
-An interactive, bilingual playground for understanding expected goals (xG). Move the shooter, goalkeeper, and defenders to explore how shot geometry and positioning affect a model's estimate.
+An interactive, five-language playground for understanding expected goals (xG). Move the shooter, goalkeeper, and defenders to explore how shot geometry and positioning affect a model's estimate.
 
-**Status:** bilingual reviewed-model Playground and Methodology/results implemented; optional Learn and authorized public release remain #5.
+**Status:** five-language reviewed-model Playground and Methodology/results implemented. Learn (#5) is deferred; portfolio presentation (#25) and Railway publication (#26) are separate tasks.
 
 ## Local development
 
@@ -13,7 +13,7 @@ npm install
 npm run dev
 ```
 
-Open `http://localhost:3000`. The root route chooses a saved language preference, then browser language, then English. Direct application routes are `/en` and `/br`.
+Open `http://localhost:3000`. The root route chooses a saved language preference, then browser language, then English. Direct application routes are `/en`, `/br`, `/nl`, `/es` and `/de`.
 
 Quality checks:
 
@@ -41,7 +41,7 @@ Work is tracked in GitHub Issues. Choose a starting situation or add players abo
 
 <a href="https://github.com/hudl/open-data"><img src="assets/hudl-statsbomb-logo.png" width="320" alt="Hudl Statsbomb logo" /></a>
 
-The integrated xG model was independently trained using [StatsBomb Open Data](https://github.com/hudl/open-data), subject to the [StatsBomb Public Data User Agreement](https://github.com/hudl/open-data/blob/master/LICENSE.pdf). StatsBomb supplies the training data; it does not create or endorse this project or its model. The pitch fetches the exact reviewed parameter-only static asset, verifies its SHA-256, and executes it locally in the browser. The site footer shows the official logo, source credit and an independent-project disclaimer in both languages. The bilingual Methodology/results view identifies the source, model provenance and accepted limitations. No source event or 360 records or shot-level training examples will be redistributed here.
+The integrated xG model was independently trained using [StatsBomb Open Data](https://github.com/hudl/open-data), subject to the [StatsBomb Public Data User Agreement](https://github.com/hudl/open-data/blob/master/LICENSE.pdf). StatsBomb supplies the training data; it does not create or endorse this project or its model. The pitch fetches the exact reviewed parameter-only static asset, verifies its SHA-256, and executes it locally in the browser. The site footer shows the official logo, source credit and an independent-project disclaimer in all five languages. The localized Methodology/results view identifies the source, model provenance and accepted limitations. No source event or 360 records or shot-level training examples will be redistributed here.
 
 The intended use is a free, non-commercial professional portfolio without ads, paid services, raw-data hosting or resale. Publishing a model artifact requires a separate review to ensure it contains parameters and metadata only. The logo above comes from the [official Hudl Statsbomb Media Pack](https://statsbomb.com/media-pack/). See the [rights and release record](docs/architecture/reference/statsbomb-rights.md) for the source terms, Hudl Support's conditional answer, and the remaining publication checks.
 
@@ -71,6 +71,6 @@ The owner-run final evidence passes all automated predicates and the owner repor
 
 The local app now executes the original reviewed independent XGBoost in the browser. Explore six editable presets, move players with mouse/touch/keyboard or position inputs, add/remove up to three represented defenders, and see the current xG and all eight live input cards. Other attackers are visual only. Penalties use a separately labeled fixed 0.76 convention.
 
-Methodology/results follows the Playground on the same page, directly accessible at `/en#methodology` and `/br#methodology`; old dedicated URLs redirect there. Its tables/chart use the same reviewed aggregate evidence as the reports, with selection and final test clearly separated, sparse calibration bins and the adverse cone-count slice visible.
+Methodology/results follows the Playground on the same page, directly accessible at `/<locale-route>#methodology` in all five languages; old dedicated URLs redirect there. Its tables/chart use the same reviewed aggregate evidence as the reports, with selection and final test clearly separated, sparse calibration bins and the adverse cone-count slice visible.
 
-Run `npm run build` and `npm start`; no private dataset or Python runtime is needed for the application. Model/evidence byte checks run before building. See the [integration reference](docs/architecture/reference/playground-and-methodology.md), [ADR](docs/architecture/adr/009-integrated-playground-and-evidence.md) and [integrated QA](docs/reports/xg-playground-qa.md). Public publication remains owner-authorized in #5.
+Run `npm run build` and `npm start`; no private dataset or Python runtime is needed for the application. Model/evidence byte checks run before building. See the [integration reference](docs/architecture/reference/playground-and-methodology.md), [ADR](docs/architecture/adr/009-integrated-playground-and-evidence.md) and [integrated QA](docs/reports/xg-playground-qa.md). Public deployment is tracked in #26.

@@ -1,0 +1,187 @@
+{
+  "meta": {
+    "title": "Fußball, erklärt",
+    "description": "Eine interaktive Umgebung zum Verständnis von Schusssituationen im Fußball."
+  },
+  "brand": {
+    "name": "Fußball, erklärt",
+    "tagline": "Bewege die Spieler. Verstehe, was eine Torchance verändert."
+  },
+  "language": {
+    "label": "Sprache"
+  },
+  "attribution": {
+    "sourceLink": "Quellrepository von StatsBomb Open Data",
+    "logoAlt": "Hudl Statsbomb-Logo",
+    "disclaimer": "Unabhängiges, kostenloses und nicht kommerzielles Projekt. Unser Modell wurde mit StatsBomb Open Data trainiert; es ist nicht Hudl Statsbomb xG und wird nicht von Hudl Statsbomb unterstützt. Quelldatensätze werden nicht weitergegeben."
+  },
+  "playground": {
+    "eyebrow": "Spielwiese",
+    "title": "Gestalte die Chance.",
+    "description": "Bewege die Spieler. Sieh, wie Positionen die Eingaben und die Schätzung verändern.",
+    "status": "Unabhängiges Modell, trainiert mit StatsBomb Open Data. Diese Positionsszene ist beispielhaft, zeigt nur einen Teil der Spieler und liefert keine exakte Wahrscheinlichkeit für einen bestimmten Spieler.",
+    "pitchDescription": "Angriffshälfte mit beweglichen Stürmern, Innenverteidigern und einem Torwart. Ziehe einen Spieler oder fokussiere ihn und verwende die Pfeiltasten.",
+    "keyboardHint": "Bewege diesen Spieler mit den Pfeiltasten. Halte die Umschalttaste für größere Schritte gedrückt.",
+    "distance": "Abstand zum Tor",
+    "angle": "Schusswinkel",
+    "meters": "m",
+    "presetLabel": "Ausgangssituation",
+    "reset": "Szene zurücksetzen",
+    "addAttacker": "+ Angreifer",
+    "addDefender": "+ Verteidiger",
+    "defenderName": "Innenverteidiger",
+    "forward": "Zum Tor",
+    "sideways": "Quer über das Feld",
+    "players": {
+      "shooter": "Stürmer",
+      "goalkeeper": "Torwart",
+      "defender1": "Innenverteidiger 1",
+      "defender2": "Innenverteidiger 2"
+    },
+    "playerGlyphs": {
+      "shooter": "ST",
+      "goalkeeper": "TW",
+      "defender1": "IV",
+      "defender2": "IV"
+    },
+    "presets": {
+      "centralChance": "Zentrale Chance",
+      "penalty": "Elfmeter",
+      "oneOnOne": "Eins gegen eins",
+      "tightAngle": "Spitzer Winkel",
+      "longShot": "Distanzschuss",
+      "crowdedBox": "Voller Strafraum"
+    },
+    "results": {
+      "estimate": "Schätzung dieses Modells",
+      "penalty": "Elfmeter: feste Konvention, keine erlernte Vorhersage",
+      "unavailable": "Modell nicht verfügbar. Es wird keine Ersatzschätzung angezeigt. Lade die Seite neu, um es erneut zu versuchen.",
+      "unsupported": "Diese Eingabe kann nicht ausgewertet werden. Passe die Szene an oder setze die Ausgangssituation zurück.",
+      "convention": "Positionen verändern den festen Elfmeterwert von 0,76 nicht.",
+      "remove": "Ausgewählten Spieler entfernen",
+      "selected": "Ausgewählter Spieler",
+      "position": "Positionssteuerung",
+      "migration": "Die gespeicherte Szene wurde an die Grenze von drei Verteidigern angepasst; die ersten Positionen wurden beibehalten.",
+      "features": {
+        "shot_distance_m": "Schussdistanz (m)",
+        "goal_opening_angle_deg": "Öffnungswinkel des Tors (°)",
+        "absolute_lateral_offset_m": "Seitlicher Versatz (m)",
+        "visible_defender_count": "Dargestellte Verteidiger",
+        "defenders_in_cone_count": "Verteidiger im Schusskegel",
+        "nearest_visible_defender_distance_m": "Nächster Verteidiger (m)",
+        "goalkeeper_distance_to_goal_m": "Torwart zum Tor (m)",
+        "goalkeeper_distance_to_shot_m": "Torwart zum Schuss (m)"
+      },
+      "loading": "Das geprüfte Modell wird geladen…",
+      "cardLabels": {
+        "shot_distance_m": "Abstand zum Tor",
+        "goal_opening_angle_deg": "Schusswinkel",
+        "absolute_lateral_offset_m": "Seitlicher Versatz",
+        "visible_defender_count": "Verteidiger",
+        "defenders_in_cone_count": "Im Schusskegel",
+        "nearest_visible_defender_distance_m": "Nächster Verteidiger",
+        "goalkeeper_distance_to_goal_m": "Torwart zum Tor",
+        "goalkeeper_distance_to_shot_m": "Torwart zum Schuss"
+      },
+      "fixedPenalty": "Elfmeter · fester Wert",
+      "modelFeatures": "Modelleingaben",
+      "positionFeatures": "Messwerte der Szene",
+      "noDefender": "Keine Verteidiger"
+    }
+  },
+  "navigation": {
+    "label": "Projektbereiche",
+    "playground": "Spielwiese",
+    "methodology": "Methodik und Ergebnisse"
+  },
+  "methodology": {
+    "eyebrow": "Entscheidungen, Evidenz und Grenzen",
+    "title": "Hinter der Schätzung",
+    "intro": "Eine Spielwiese zum Verständnis von Torchancen und zur Untersuchung, wie Daten, Modellentscheidungen und Software die Zahl auf dem Bildschirm ergeben.",
+    "overviewTitle": "Was die Zahl bedeutet",
+    "overview": "Eine Schätzung von 0,20 xG steht laut diesem Modell für ungefähr 20 Tore bei 100 vergleichbaren Schüssen. Sie ist keine exakte Wahrscheinlichkeit für einen bestimmten Spieler. Die erfundene Szene vereinfacht den realen Kontext.",
+    "dataTitle": "Quelle und Population",
+    "data": "Wir verwenden StatsBomb Open Data mit beobachteten Tor- und Nichttor-Ergebnissen; das xG der Quelle ist nie die Zielvariable. Die Population besteht aus Fußschüssen im offenen Spiel im Männerfußball. Kopfbälle, Elfmeter und andere Situationen sind vom Training ausgeschlossen. Event-Frames bilden die primäre Beobachtung; optionale 360-Daten garantieren nicht, dass alle Verteidiger sichtbar sind. Fälle ohne sichtbaren Torwart und singuläre Fälle auf der Torlinie werden ohne Imputation ausgeschlossen.",
+    "featuresTitle": "Acht Positionsmerkmale",
+    "featuresIntro": "Geometrie beschreibt die Chance; Anzahlen und Abstände beschreiben beobachtete Gegner. Der Schusskegel ist das begrenzte Dreieck zwischen Schuss und Pfosten. Positionen werden unabhängig vom SVG in Metern angegeben. Ohne Verteidiger wird die Felddiagonale als besonderer Abstandswert zusammen mit der expliziten Anzahl verwendet. Weitere Angreifer, Identität, bevorzugter Fuß, Technik, Geschwindigkeit und zeitlicher Kontext werden nicht berücksichtigt.",
+    "trainingTitle": "Training, Auswahl und Einfrieren",
+    "training": "Ganze Spiele werden für Training, Kalibrierung, Auswahl und Test getrennt, damit Ereignisse desselben Spiels nicht in verschiedenen Gruppen vorkommen. Die begrenzte Suche nutzt fünf Folds ausschließlich im Training; die Skalierung für logistische Regression wird innerhalb jedes Folds angepasst. Drei logistische Regressionen untersuchen Geometrie, Verteidiger und alle Merkmale getrennt. XGBoost mit flachen Bäumen prüft nichtlineare Interaktionen. Es gibt keinen Klassenausgleich und keine erneute Anpassung nach der Auswahl.",
+    "selection": "Die festgelegte Regel wählte XGBoost anhand der beobachteten Leistung und einer Grenze für Brier-Verschlechterung zugunsten einfacher Modelle. Die Auswahlintervalle belegten keine eindeutige Überlegenheit. Die Sigmoid-Kalibrierung erfüllte die Übernahmekriterien nicht. Einfrieren bedeutet, Eingaben, Vorverarbeitung, Bäume und Kalibrierung vor dem Öffnen des Abschlusstests festzulegen; die Oberfläche führt nur diese Parameter aus.",
+    "scoresTitle": "Validierung und Abschlusstest",
+    "scores": "Log loss bestraft falsche Wahrscheinlichkeiten mit hoher Sicherheit; Brier misst den quadratischen Wahrscheinlichkeitsfehler. Niedriger ist besser. Die Auswahl bestimmt das Modell; der Abschlusstest bewertet das bereits festgelegte Modell und wurde nicht zur Nachoptimierung verwendet. Die 95%-Intervalle werden durch erneutes Ziehen ganzer Spiele berechnet, wodurch die Abhängigkeit zwischen Schüssen erhalten bleibt.",
+    "validation": "Auswahl — nicht der Abschlusstest",
+    "final": "Abschlusstest bis zum Einfrieren zurückgehalten",
+    "pairedTitle": "Gepaarte Unterschiede im Abschlusstest",
+    "paired": "XGBoost minus Referenz: Negative Werte sprechen für XGBoost. Die Gesamtintervalle sprechen in diesem Test für den Kandidaten; dies garantiert keinen Vorteil in jeder Teilgruppe oder die Übertragbarkeit auf andere Wettbewerbe oder Szenen.",
+    "calibrationTitle": "Kalibrierung und kleine Stichproben",
+    "calibration": "Die Diagonale steht für die Übereinstimmung von vorhergesagtem Mittelwert und beobachteter Häufigkeit. Balken zeigen spielbasierte 95%-Intervalle der beobachteten Häufigkeit; hohle Punkte markieren Bereiche mit wenigen Beispielen. Kein Bereich mit ausreichenden Daten wurde markiert, aber Bereiche hoher Wahrscheinlichkeit haben wenige Beispiele und belegen keine Präzision für extreme Szenen.",
+    "slicesTitle": "Auch die ungünstige Teilgruppe zählt",
+    "slices": "Mit zwei Verteidigern im Schusskegel war XGBoost in diesem Test schlechter als die vollständige logistische Regression. Dies betrifft die Anzahl im Kegel, nicht die Gesamtzahl auf dem Feld. Dieses Ergebnis bleibt sichtbar; globale Mittelwerte verdecken lokale Fehler nicht.",
+    "supportTitle": "Beispielszenen und Übertragbarkeit",
+    "support": "Die beschreibende Referenz nutzt Nachbarn in standardisierten Merkmalen ausschließlich aus dem Training, mit einer 99%-Schwelle und einer separaten Gruppe ohne Verteidiger. Wir veröffentlichen keine Referenzzeilen; deshalb berechnet die Oberfläche nicht für jede Änderung die gemeinsame Abdeckung durch Trainingsdaten. Vier Ausgangssituationen im offenen Spiel liegen außerhalb dieser Referenz; auch innerhalb zu liegen beweist keinen Realismus. Seltene Szenen bleiben erkundbar. Vergleiche sind keine kausalen Effekte; teilweise Sichtbarkeit, wenige Verteidiger und andere Domänen begrenzen die Interpretation.",
+    "inferenceTitle": "Ausführung und Reproduktion",
+    "inference": "TypeScript berechnet dieselben acht Eingaben wie die Python-Pipeline. Der Lader validiert und speichert unveränderliche Parameter; XGBoost behält float32-Vergleiche und -Akkumulation innerhalb einer Toleranz von 1e-7 bei. Kleine Bewegungen können das Ergebnis der Bäume unverändert lassen. Ungültige Eingaben oder nicht verfügbare Modelle erhalten keine Ersatzheuristik. Elfmeter verwenden die feste Konvention von 0,76, getrennt vom erlernten Modell.",
+    "review": "Die wissenschaftliche Prüfung wurde mit Einschränkungen akzeptiert; die Verteilung der exakten Modelldatei wurde für den kostenlosen, nicht kommerziellen Rahmen geprüft. Der ursprüngliche automatische Status bleibt „Prüfung erforderlich“; eine Prüfung erlaubt keine Veröffentlichung. Privates Training und vollständige Reproduktion wurden lokal ausgeführt und berichtet. Aggregate und Prüfungen wurden untersucht, ohne die privaten Daten erneut zu verarbeiten.",
+    "model": "Modell",
+    "shots": "Schüsse",
+    "goals": "Tore",
+    "mean": "Vorhergesagter Mittelwert",
+    "observed": "Beobachtete Häufigkeit",
+    "interval": "95%-Intervall",
+    "sparse": "Wenige Daten",
+    "supported": "Ausreichende Daten",
+    "bin": "Vorhersagebereich",
+    "reference": "Referenz",
+    "estimate": "Differenz",
+    "feature": "Merkmal",
+    "rationale": "Begründung",
+    "models": {
+      "constant": "Konstante Torhäufigkeit",
+      "geometry_logistic": "Logistisch: Geometrie",
+      "defenders_logistic": "Logistisch: Verteidiger",
+      "full_logistic": "Vollständige logistische Regression",
+      "full_xgboost": "Vollständiges XGBoost"
+    },
+    "featureRationales": {
+      "shot_distance_m": "Abstand zur Tormitte.",
+      "goal_opening_angle_deg": "Öffnung zwischen den Torpfosten.",
+      "absolute_lateral_offset_m": "Seitliche Asymmetrie ohne Unterscheidung zwischen links und rechts.",
+      "visible_defender_count": "Anzahl der dargestellten Gegner.",
+      "defenders_in_cone_count": "Belegung des Schussdreiecks.",
+      "nearest_visible_defender_distance_m": "Nähe des nächsten beobachteten Gegners.",
+      "goalkeeper_distance_to_goal_m": "Position des Torwarts relativ zum Tor.",
+      "goalkeeper_distance_to_shot_m": "Abstand zwischen Torwart und Schuss."
+    },
+    "identity": "Identität und Prüfung",
+    "configuration": "Eingefrorene Konfiguration",
+    "trees": "Bäume",
+    "depth": "Tiefe",
+    "learningRate": "Lernrate",
+    "minChildWeight": "Mindestgewicht eines Kindknotens",
+    "calibrationLabel": "Kalibrierung",
+    "artifact": "Modelldatei",
+    "trainingRun": "Trainingslauf",
+    "evidence": "Evidenz",
+    "scientificReview": "Wissenschaftliche Prüfung",
+    "automatedStatus": "Ursprünglicher automatischer Status",
+    "publicationAuthorization": "Veröffentlichungserlaubnis",
+    "score": "Metrik",
+    "partitionsTitle": "Aufteilung der Spiele",
+    "partition": "Teilmenge",
+    "matches": "Spiele",
+    "partitions": {
+      "train": "Training",
+      "calibration": "Kalibrierung",
+      "selection": "Auswahl",
+      "test": "Abschlusstest"
+    },
+    "unopened": "Während der Auswahl ungeöffnet",
+    "displayValues": {
+      "identityCalibration": "Keine Neukalibrierung (Identität)",
+      "acceptedWithLimitations": "Mit Einschränkungen akzeptiert",
+      "needsReview": "Prüfung erforderlich",
+      "yes": "Ja",
+      "no": "Nein"
+    }
+  }
+}

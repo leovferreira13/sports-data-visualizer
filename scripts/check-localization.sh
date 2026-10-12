@@ -46,16 +46,34 @@ assert_redirect() {
   fi
 }
 
-assert_status "/en" "200"
-assert_status "/br" "200"
-assert_status "/en/methodology" "307"
-assert_status "/br/methodology" "307"
+for route in en br nl es de; do
+  assert_status "/${route}" "200"
+  assert_status "/${route}/methodology" "307"
+  locale="${route}"
+  [[ "${route}" != "br" ]] || locale="pt-BR"
+  html="$(curl --fail --silent "${BASE_URL}/${route}")"
+  [[ "${html}" == *"<html lang=\"${locale}\""* ]] || { echo "Incorrect document language: ${route}"; exit 1; }
+  location="$(curl --silent --output /dev/null --dump-header - "${BASE_URL}/${route}/methodology" | awk 'BEGIN{IGNORECASE=1} /^location:/ {gsub("\r", ""); print $2}')"
+  [[ "${location}" == "/${route}#methodology" || "${location}" == "${BASE_URL}/${route}#methodology" ]] || { echo "Incorrect methodology redirect: ${route}"; exit 1; }
+  assert_redirect "/${route}" --header "Accept-Language: fr-FR" --header "Cookie: football-visualized-locale=${locale}"
+  # A direct route wins over saved/browser preferences.
+  direct="$(curl --fail --silent --header 'Cookie: football-visualized-locale=en' --header 'Accept-Language: en' "${BASE_URL}/${route}")"
+  [[ "${direct}" == *"<html lang=\"${locale}\""* ]] || exit 1
+done
 assert_status "/fr/methodology" "404"
 assert_status "/pt-BR" "404"
 assert_status "/fr" "404"
 
 assert_redirect "/br" --header "Accept-Language: pt-BR,pt;q=0.9,en;q=0.5"
-assert_redirect "/en" --header "Accept-Language: de-DE,de;q=0.9"
+assert_redirect "/de" --header "Accept-Language: de-DE,de;q=0.9"
+assert_redirect "/nl" --header "Accept-Language: nl-NL,nl;q=0.9"
+assert_redirect "/nl" --header "Accept-Language: nl-BE"
+assert_redirect "/es" --header "Accept-Language: es-MX,es;q=0.9"
+assert_redirect "/es" --header "Accept-Language: de;q=0.3,es;q=0.9"
+assert_redirect "/en" --header "Accept-Language: fr-FR"
+assert_redirect "/en" --header "Accept-Language: *"
+assert_redirect "/en" --header "Accept-Language: not_a_tag"
+assert_redirect "/en" --header "Accept-Language:"
 assert_redirect "/en"   --header "Accept-Language: pt-BR,pt;q=0.9"   --header "Cookie: football-visualized-locale=en"
 assert_redirect "/br"   --header "Accept-Language: en-US,en;q=0.9"   --header "Cookie: football-visualized-locale=pt-BR"
 assert_redirect "/br"   --header "Accept-Language: pt-BR,pt;q=0.9"   --header "Cookie: football-visualized-locale=invalid"

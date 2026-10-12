@@ -5,6 +5,7 @@ import type { ChangeEvent } from "react";
 
 import {
   isLocale,
+  languageOptions,
   localeCookieMaxAge,
   localeCookieName,
   routeFromLocale,
@@ -14,15 +15,11 @@ import {
 type LanguageSwitcherProps = {
   currentLocale: Locale;
   label: string;
-  englishLabel: string;
-  portugueseLabel: string;
 };
 
 export function LanguageSwitcher({
   currentLocale,
   label,
-  englishLabel,
-  portugueseLabel,
 }: LanguageSwitcherProps) {
   const router = useRouter();
 
@@ -53,8 +50,9 @@ export function LanguageSwitcher({
     <label className="language-switcher">
       <span>{label}</span>
       <select value={currentLocale} onChange={changeLocale}>
-        <option value="en">🇺🇸 {englishLabel}</option>
-        <option value="pt-BR">🇧🇷 {portugueseLabel}</option>
+        {languageOptions.map(({ locale, label, flag }) => (
+          <option key={locale} value={locale}>{flag} {label}</option>
+        ))}
       </select>
     </label>
   );

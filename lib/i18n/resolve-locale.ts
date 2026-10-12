@@ -19,5 +19,11 @@ export function resolveLocale(
     headers: { "accept-language": acceptLanguage },
   }).languages();
 
-  return match(languages, [...locales], defaultLocale) as Locale;
+  // Wildcards are valid HTTP preferences but are not BCP 47 language tags.
+  try {
+    return match(languages.filter((language) => language !== "*"), [...locales], defaultLocale) as Locale;
+  } catch (error) {
+    if (error instanceof RangeError) return defaultLocale;
+    throw error;
+  }
 }

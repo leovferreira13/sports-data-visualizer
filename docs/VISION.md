@@ -47,7 +47,7 @@ Learn uses the same rules, calculation, and controls as Playground. Visitors can
 - **Permit illustrative exploration:** rare/extreme but valid scenes are intentional. Support diagnostics inform concise explanations, not automatic blocking. Avoid precision or causal promises and explain that tree predictions can remain unchanged after small movements.
 - **Expose the decisions:** a visible adjacent Methodology and results section shares the report's aggregate evidence, separates validation from test and links architecture/ADRs/reproduction for reviewers.
 - **Ship a small, complete product:** the first release is an xG module, not a scouting portal.
-- **Support both languages from the start:** UI, explanations, and model limitations in `pt-BR` and `en`.
+- **Support all five languages:** UI, explanations, and model limitations in `pt-BR`, `en`, `nl`, `es` and `de`.
 
 ## What success looks like
 
@@ -57,7 +57,7 @@ Use a small targeted qualitative review to check whether a newcomer can interact
 
 ## First-release boundaries
 
-One designated shot taker, one goalkeeper, addable attackers and defenders, six presets, two modes, and two languages. No accounts, database, mandatory backend, teams, live matches, tactical editor, other metrics, or generative AI. Famous goals come **after validation**: recreating one requires a reliable source for positions and shot context, and any approximation must be labeled as an illustrative reconstruction.
+One designated shot taker, one goalkeeper, addable attackers and defenders, six presets, Playground with optional deferred Learn, and five languages. No accounts, database, mandatory backend, teams, live matches, tactical editor, other metrics, or generative AI. Famous goals come **after validation**: recreating one requires a reliable source for positions and shot context, and any approximation must be labeled as an illustrative reconstruction.
 
 ## Possible evolution
 
@@ -65,7 +65,7 @@ If this module works, the brand can hold independent experiments: famous goals, 
 
 ## Current model and delivery handoff
 
-The frozen shallow XGBoost has accepted actual-corpus scientific evidence with support/transfer limitations. Use it for the educational v0.1 instead of requiring another optimization cycle. #4 integrates inference, proportional support explanations and mandatory methodology/results; #5 adds optional Learn and the shareable portfolio release. #4 may start before #3/#8 close. Actual parameter/export, rights/history and integrated product attribution/assets QA must finish before public distribution. The owner controls publication and board/merge state.
+The frozen shallow XGBoost has accepted actual-corpus scientific evidence with support/transfer limitations. Use it for the educational v0.1 instead of requiring another optimization cycle. #4 integrates inference, proportional support explanations and mandatory methodology/results; #5 remains optional deferred Learn; #24 adds localization, #25 prepares portfolio presentation and #26 owns the shareable Railway release. #4 may start before #3/#8 close. Actual parameter/export, rights/history and integrated product attribution/assets QA must finish before public distribution. The owner controls publication and board/merge state.
 
 ## Owner-directed Playground revision (2026-10-11)
 

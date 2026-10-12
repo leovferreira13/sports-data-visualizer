@@ -8,9 +8,7 @@
     "tagline": "Mova os jogadores. Entenda o que muda uma chance de gol."
   },
   "language": {
-    "label": "Idioma",
-    "english": "English",
-    "portuguese": "Português (Brasil)"
+    "label": "Idioma"
   },
   "attribution": {
     "sourceLink": "Repositório de origem dos dados StatsBomb Open Data",
@@ -177,6 +175,13 @@
       "selection": "Seleção",
       "test": "Teste final"
     },
-    "unopened": "Não aberto na seleção"
+    "unopened": "Não aberto na seleção",
+    "displayValues": {
+      "identityCalibration": "Sem recalibração (identidade)",
+      "acceptedWithLimitations": "Aceita com limitações",
+      "needsReview": "Revisão necessária",
+      "yes": "Sim",
+      "no": "Não"
+    }
   }
 }

@@ -17,3 +17,12 @@ A manual selector writes the same non-sensitive, site-wide cookie and replaces o
 ## Consequences
 
 Product-facing URLs stay concise without conflating route names with language identifiers. Server rendering still emits the standards-based `pt-BR` document language, and the saved choice is available before the root redirect. Locale-only navigation may remount route content, so future scenario state introduced by Issue #2 must be stored or bridged independently of translated route content and tested across a language switch.
+
+## Extension — 2026-10-12 (#24)
+
+The same routing decision now covers `/nl`, `/es` and `/de` with semantic locales
+`nl`, `es` and `de`. Regional browser tags negotiate to the supported base language.
+`/br` and existing `pt-BR` cookies remain compatible. Native language names and
+flags are shared selector metadata; dictionaries localize the selector label.
+Invalid BCP 47 headers fall back to English, and HTTP wildcard entries are filtered
+before matching. No translation service or scene-storage migration is introduced.
