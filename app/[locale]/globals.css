@@ -256,7 +256,6 @@ button:focus-visible, input:focus-visible, select:focus-visible, a:focus-visible
 .playground-copy .eyebrow { margin-bottom: 10px; }
 .playground-copy h1 { max-width: 24ch; font-size: clamp(2.1rem, 4vw, 3.3rem); line-height: 1.1; }
 .playground-copy .lead { max-width: none; margin-top: 12px; font-size: 1rem; }
-.methodology-jump { display: inline-block; margin-top: 12px; font-size: .85rem; }
 .pitch-workspace { display: grid; grid-template-columns: minmax(0,1.5fr) minmax(280px,1fr); gap: 28px; align-items: start; }
 .pitch-editor { min-width: 0; grid-column: 1; grid-row: 1; }
 .playground-insights { min-width: 0; grid-column: 2; grid-row: 1; position: sticky; top: 20px; }
@@ -354,5 +353,4 @@ figcaption { color: var(--muted); font-size: .78rem; line-height: 1.6; margin-to
   .playground-copy .eyebrow { display: none; }
   .playground-copy h1 { font-size: 1.8rem; }
   .playground-copy .lead { font-size: .85rem; line-height: 1.5; margin-top: 8px; }
-  .methodology-jump { margin-top: 8px; font-size: .78rem; }
 }

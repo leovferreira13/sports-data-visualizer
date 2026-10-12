@@ -30,9 +30,6 @@ export default async function PlaygroundPage({ params }: PlaygroundPageProps) {
           <p className="eyebrow">{dictionary.playground.eyebrow}</p>
           <h1 id="playground-title">{dictionary.playground.title}</h1>
           <p className="lead">{dictionary.playground.description}</p>
-          <a className="methodology-jump" href="#methodology">
-            {dictionary.navigation.methodology} ↓
-          </a>
         </section>
 
         <PlayablePitch locale={locale} copy={dictionary.playground} />

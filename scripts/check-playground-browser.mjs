@@ -143,24 +143,13 @@ try {
     await page.mouse.up();
     assert.notEqual((await snapshot()).scenario.players.shooter.y, 34);
     const edited = (await snapshot()).scenario;
-    await page
-      .getByRole("link", {
-        name: `${copy.navigation.methodology} ↓`,
-        exact: true,
-      })
-      .click();
+    await page.locator("#methodology").scrollIntoViewIfNeeded();
     await page
       .getByRole("heading", { name: copy.methodology.title, exact: true })
       .waitFor();
-    await page.waitForURL(`${base}/${route}#methodology`);
     assert((await page.locator("#slices").innerText()).includes("815"));
     assert.equal(await page.locator("svg[role=img]").count(), 1);
-    await page
-      .getByRole("link", {
-        name: `${copy.navigation.playground} ↑`,
-        exact: true,
-      })
-      .click();
+    await page.locator("#playground").scrollIntoViewIfNeeded();
     await page.getByTestId("xg").waitFor();
     assert.deepEqual((await snapshot()).scenario, edited);
     await page.reload();
@@ -293,9 +282,7 @@ try {
   await page.waitForURL(`${base}/br`);
   await page.getByTestId("xg").waitFor();
   assert.deepEqual((await snapshot()).scenario, prior);
-  await page
-    .getByRole("link", { name: "Metodologia e resultados ↓", exact: true })
-    .click();
+  await page.goto(`${base}/br#methodology`);
   await page.waitForURL(`${base}/br#methodology`);
   await page.locator(".language-switcher select").selectOption("en");
   await page.waitForURL(`${base}/en#methodology`);

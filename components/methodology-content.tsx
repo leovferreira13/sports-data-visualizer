@@ -85,9 +85,6 @@ export async function MethodologyContent({ locale }: { locale: Locale }) {
       aria-labelledby="methodology-title"
     >
       <header className="methodology-header">
-        <a className="playground-return" href="#playground">
-          {dictionary.navigation.playground} ↑
-        </a>
         <p className="eyebrow">{c.eyebrow}</p>
         <h2 id="methodology-title">{c.title}</h2>
         <p className="lead">{c.intro}</p>

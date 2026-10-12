@@ -44,9 +44,7 @@ export function PredictionPanel({
           <p id="estimate-title" className="eyebrow">
             {copy.estimate}
           </p>
-          <span className="model-kind">
-            {convention ? copy.fixedPenalty : copy.independentModel}
-          </span>
+          {convention && <span className="model-kind">{copy.fixedPenalty}</span>}
         </div>
         {labels ? (
           <div className="prediction-value">

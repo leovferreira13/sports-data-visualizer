@@ -85,7 +85,6 @@
         "goalkeeper_distance_to_goal_m": "Keeper to goal",
         "goalkeeper_distance_to_shot_m": "Keeper to shot"
       },
-      "independentModel": "Independent model",
       "fixedPenalty": "Penalty · fixed value",
       "modelFeatures": "Model inputs",
       "positionFeatures": "Scene measurements",

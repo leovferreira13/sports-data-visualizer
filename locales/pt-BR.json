@@ -85,7 +85,6 @@
         "goalkeeper_distance_to_goal_m": "Goleiro até o gol",
         "goalkeeper_distance_to_shot_m": "Goleiro até o chute"
       },
-      "independentModel": "Modelo independente",
       "fixedPenalty": "Pênalti · valor fixo",
       "modelFeatures": "Entradas do modelo",
       "positionFeatures": "Medidas da cena",
