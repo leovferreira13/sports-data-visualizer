@@ -1,7 +1,7 @@
 # ADR 010 — Separate xG behavior research from published evidence
 
 **Date:** 2026-10-12
-**Status:** Implemented research tooling; empirical disposition pending
+**Status:** Implemented; phase A reviewed as exploratory, current model retained
 **Issue:** [#31](https://github.com/leovferreira13/sports-data-visualizer/issues/31)
 
 ## Context
@@ -46,3 +46,11 @@ replacement follows any score. Private rows, source anchors and traces remain
 local; generated public review artifacts contain aggregate evidence only.
 
 See [execution and review](../reference/xg-behavior.md).
+
+## Phase-A disposition
+
+The original protocol retains the current model. Complete reproduction was
+reported locally and submitted aggregates were independently checked. Detailed
+comparison of current versus monotonic XGBoost is deferred to #34, with isolated
+direction compliance recorded as an important product priority. Phase B and
+public replacement are not prerequisites for closing this scoped investigation.

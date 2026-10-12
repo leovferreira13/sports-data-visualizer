@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-10-12",
+  "review_scope": "submitted aggregate consistency and owner-reported complete local reproduction",
+  "research_run_id": "f2e7b2a0416830a3a07fdf503a86352a6af342d98b0a79b1bdf7744617310964",
+  "evidence_id": "f62228e611a9712acaac4abcbc61b0f3ffc1ec0b0880e111bd0aa447f872dee8",
+  "aggregate_validation": "pass",
+  "local_reproduction": {
+    "verification": "reported by the local operator; private files not independently accessed",
+    "terminal_result": [
+      "PASS: 12 files verified; 0 files differ byte for byte",
+      "PASS: research provenance, decisions, topology and numeric tolerances agree"
+    ]
+  },
+  "decision": "retain_current_under_original_protocol",
+  "publication_authorized": false,
+  "follow_up_issue": 34,
+  "product_priority": "Correct isolated distance/angle directions; evaluate the exact monotonic candidate in more detail later",
+  "phase_b": "deferred; no fresh reservation exists for this phase-A run",
+  "curated_evidence_directory": "Aggregate subset only; its original manifest also lists private files intentionally not committed"
+}

@@ -1,6 +1,6 @@
 # Offline xG behavior evaluation
 
-**Status:** research tooling implemented for #31. Actual-corpus candidate scores and independent replacement evidence have not been produced. The published artifact and five-language product evidence remain unchanged.
+**Status:** #31 phase A has been locally executed and reproduced; submitted aggregate evidence is reviewed as exploratory, with the original retain-current decision preserved. A detailed current-versus-monotonic comparison is deferred to #34 because isolated direction compliance is an important product priority. Phase B is not required for this scoped closure. See the [review](../../reports/xg-behavior-comparison.md). The published artifact and five-language product evidence remain unchanged.
 
 ## Boundary and rationale
 
