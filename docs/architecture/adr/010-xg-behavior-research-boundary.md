@@ -62,6 +62,8 @@ local report shows the full original predeclared gates, including constant
 reference, partial directions, invariants, parity, native export, and the
 jump-reduction gate. Limits are read from `protocol.decision`. The revised
 rule beside it caps selection log-loss increase at `max_log_loss_degradation`.
-This ADR does not record a numeric disposition: that result depends
-on the private local run and is still a placeholder in the repository.
-`recommend_replacement` would not change production selection or deployment.
+The numeric disposition is in `docs/reports/xg-monotonic-comparison.md`,
+copied from the owner's posted `pair-metrics.json`: original status `retain`,
+revised status `recommend_replacement`, and `depends_on_revision` true.
+This ADR does not copy the metric values. `recommend_replacement` does not
+change production selection or deployment.

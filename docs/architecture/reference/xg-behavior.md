@@ -1,6 +1,6 @@
 # Offline xG behavior evaluation
 
-**Status:** #31 phase A has been locally executed and reproduced; submitted aggregate evidence is reviewed as exploratory, with the original retain-current decision preserved. #34 adds a local comparison of the frozen current XGBoost and the already fitted monotonic candidate. The committed [#34 report](../../reports/xg-monotonic-comparison.md) is a placeholder until that private run is posted. Phase B is not required for this scoped closure. See the [review](../../reports/xg-behavior-comparison.md). The published artifact and five-language product evidence remain unchanged.
+**Status:** #31 phase A has been locally executed and reproduced; submitted aggregate evidence is reviewed as exploratory, with the original retain-current decision preserved. #34 adds a local comparison of the frozen current XGBoost and the already fitted monotonic candidate. The committed [#34 report](../../reports/xg-monotonic-comparison.md) records the owner's posted `pair-identity.json` and `pair-metrics.json`. The owner did not provide a `/dev/model-compare` screenshot. Phase B is not required for this scoped closure. See the [review](../../reports/xg-behavior-comparison.md). The published artifact and five-language product evidence remain unchanged.
 
 ## Boundary and rationale
 
@@ -85,7 +85,7 @@ Selection vectors are in the preparation run, so `--prepared-dir` is required. T
   --output-dir data/derived/xg-behavior/issue-34
 ```
 
-The command prints seed 42 and split SHA-256 `64f02e169df4b2d176b54ce47ef72a7afa3840d7990ac45b6841008e94aa71d1` before scoring. It writes `pair-identity.json`, `pair-metrics.json`, and `pair-decision.md` under ignored `data/derived/`. The committed report stays a placeholder until those files exist locally.
+The command prints seed 42 and split SHA-256 `64f02e169df4b2d176b54ce47ef72a7afa3840d7990ac45b6841008e94aa71d1` before scoring. It writes `pair-identity.json`, `pair-metrics.json`, and `pair-decision.md` under ignored `data/derived/`. The committed report copies the posted `pair-identity.json` and `pair-metrics.json`. The owner did not attach `pair-decision.md` or a screenshot.
 
 A dev-only page shows one scene against both envelopes. It is absent unless `XG_COMPARE=1`, and the candidate file is the path in `XG_CANDIDATE_MODEL` (read on the server, never from the URL):
 

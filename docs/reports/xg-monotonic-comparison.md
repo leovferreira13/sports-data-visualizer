@@ -1,12 +1,14 @@
 # Current versus monotonic XGBoost
 
-**Status:** PLACEHOLDER. This commit does not contain measured scores, a decision, or a screenshot. Those values stay empty until the owner runs the comparison locally with the private preparation, training, and phase-A directories, then posts `pair-metrics.json`, `pair-identity.json`, the decision table, and a `/dev/model-compare` screenshot on the pull request.
+**Status:** Recorded from the owner's comment on pull request #44, [comment 6181026583](https://github.com/leovferreira13/sports-data-visualizer/pull/44#issuecomment-6181026583). Every number and decision below is copied from the attached `pair-identity.json` and `pair-metrics.json`. The comment did not include `pair-decision.md`. The `/dev/model-compare` screenshot was not provided by the owner.
 
-The bindings below are identity checks the command enforces. They are not measurements from this workspace.
+`pair-metrics.json` has `decisions` and `summary.decisions`. Those two objects are the same.
 
 ## Bindings
 
-| Check | Required value |
+`pair-identity.json` confirms the bindings the command enforces.
+
+| Check | Value in `pair-identity.json` |
 | --- | --- |
 | Evidence id | `f62228e611a9712acaac4abcbc61b0f3ffc1ec0b0880e111bd0aa447f872dee8` |
 | Seed | 42 |
@@ -28,38 +30,71 @@ Selection vectors live in the preparation run. The training directory alone cann
   --output-dir data/derived/xg-behavior/issue-34
 ```
 
-The command prints seed 42 and the split SHA-256 before scoring. It writes `pair-identity.json`, `pair-metrics.json`, and `pair-decision.md` under the output directory. Those files are local. This report must be updated from them, not from memory of an earlier review.
+The command prints seed 42 and the split SHA-256 before scoring. It writes `pair-identity.json`, `pair-metrics.json`, and `pair-decision.md` under the output directory. Those files stay local. This report uses the two JSON files the owner attached.
 
 ## Decisions
 
 | Rule | Decision | Why |
 | --- | --- | --- |
-| Original predeclared gates, including the jump-reduction gate | PLACEHOLDER | PLACEHOLDER |
-| Revised (log-loss increase at most protocol.decision.max_log_loss_degradation, and isolated directions) | PLACEHOLDER | PLACEHOLDER |
+| Original predeclared gates, including the jump-reduction gate (`jump_reduction_required` 0.25, `includes_jump_reduction_gate` true) | retain | Predeclared gate failed: interactive_improvement |
+| Revised (`includes_jump_reduction_gate` false; log-loss increase limit 0.005, and isolated directions) | recommend_replacement | Log-loss increase is within 0.005 and isolated directions pass |
 
-Decision depends on the revision: **PLACEHOLDER**.
+Decision depends on the revision: **true**.
+
+Original limits from `decisions.original_predeclared.limits`: `max_brier_degradation` 0.001, `max_log_loss_degradation` 0.005, `min_jump_rate_reduction` 0.25, `one_sided_confidence` 0.95.
+
+Original predicates from `decisions.original_predeclared.predicates`:
+
+| Predicate | Value |
+| --- | --- |
+| brier | true |
+| constant_reference | true |
+| interactive_improvement | false |
+| invariants | true |
+| log_loss | true |
+| native_export | true |
+| parity | true |
+| partial_directions | true |
+| primary_segments_available | true |
 
 ## Metrics
 
-| Model | Log loss | Brier | Distance violations | Angle violations | Primary >0.02 jump rate | Primary p95 jump |
-| --- | --- | --- | --- | --- | --- | --- |
-| full_xgboost | PLACEHOLDER | PLACEHOLDER | PLACEHOLDER | PLACEHOLDER | PLACEHOLDER | PLACEHOLDER |
-| full_monotonic_xgboost | PLACEHOLDER | PLACEHOLDER | PLACEHOLDER | PLACEHOLDER | PLACEHOLDER | PLACEHOLDER |
+| Model | log_loss | brier | distance_violations | angle_violations | large_jump_rate | p95_jump | primary_pairs |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| full_xgboost | 0.23520839767656282 | 0.06697391552739276 | 34 | 6 | 0.04462474645030426 | 0.018686586990952492 | 986 |
+| full_monotonic_xgboost | 0.2352457526107877 | 0.06694985410830383 | 0 | 0 | 0.04259634888438134 | 0.014600332826375961 | 986 |
 
-Selection log-loss increase (monotonic minus current): PLACEHOLDER. Limit: the protocol `max_log_loss_degradation` (0.005 in the frozen protocol).
+Selection log-loss increase (monotonic minus current), `summary.log_loss_increase`: 3.735493422488134e-05. Limit, `summary.log_loss_limit`: 0.005. The same 0.005 is `decisions.revised.log_loss_increase_limit` and `decisions.original_predeclared.limits.max_log_loss_degradation`.
 
-Paired one-sided 95% upper bounds versus current: log loss PLACEHOLDER, Brier PLACEHOLDER.
+Paired upper bounds versus current from `summary`: log loss `log_loss_upper` 0.0008807877582937127, Brier `brier_upper` 0.0002560737066460752. The attached files do not include a field named `upper_95`. `one_sided_confidence` in the original limits is 0.95.
 
 ## Pair identity
 
-PLACEHOLDER. Copy the local `pair-identity.json` values here after the command succeeds. Do not invent file hashes.
+Copied from `pair-identity.json`.
+
+| Field | Value |
+| --- | --- |
+| current_artifact_id | `758526873b8a3a2681f655c064dee52f8bd33749accd499d015420dbe8e11b9a` |
+| current_model_file_sha256 | `c0d91256a2c0f83ede48f1f549b8a0cc379e6ef675ccd4ce9ef10e471bb4350d` |
+| evidence_id | `f62228e611a9712acaac4abcbc61b0f3ffc1ec0b0880e111bd0aa447f872dee8` |
+| monotonic_artifact_id | `e19402c5ba622ebc2775df202956aa5b942dd5e841b647cb7eeb531faf2a12ce` |
+| monotonic_model_file_sha256 | `66326f96854c2a17cb8483651b02db82dd5c5de445249690825b3a70b64e1f7c` |
+| published_model_file_sha256 | `c0d91256a2c0f83ede48f1f549b8a0cc379e6ef675ccd4ce9ef10e471bb4350d` |
+| published_model_unchanged | true |
+| seed | 42 |
+| split_sha256 | `64f02e169df4b2d176b54ce47ef72a7afa3840d7990ac45b6841008e94aa71d1` |
+| training_run_id | `222909fe801f4865897fea3541e023fed626f6736dca6ef69ceada1f7c57945a` |
 
 ## Screenshot
 
-PLACEHOLDER. Not captured in this commit.
+Not provided by the owner.
 
-Capture `/dev/model-compare` while `XG_COMPARE=1` and `XG_CANDIDATE_MODEL` points at the phase-A `candidate-model.json`. The current column must show artifact `758526873b8a3a2681f655c064dee52f8bd33749accd499d015420dbe8e11b9a`. The monotonic column must show artifact `e19402c5ba622ebc2775df202956aa5b942dd5e841b647cb7eeb531faf2a12ce`. One scene must feed both estimates, with pointer and keyboard movement still available.
+A later capture of `/dev/model-compare` would need `XG_COMPARE=1` and `XG_CANDIDATE_MODEL` pointing at the phase-A `candidate-model.json`. The current column must show artifact `758526873b8a3a2681f655c064dee52f8bd33749accd499d015420dbe8e11b9a`. The monotonic column must show artifact `e19402c5ba622ebc2775df202956aa5b942dd5e841b647cb7eeb531faf2a12ce`.
+
+## Owner observation
+
+On `/dev/model-compare`, with the striker far from goal and no defenders nearby, xG for both models can rise slightly before it falls. The owner does not think the two models are that different, and leans toward keeping the current model if this comparison follows.
 
 ## Publication
 
-This comparison does not change `model/selected-model.json`, `public/model/selected-model.json`, or deployment configuration. A recommendation, if the local run produces one, needs a separate issue before anything is published. The 0.8–0.9 probability band remains issue #40 and is not a gate here.
+This comparison does not change `model/selected-model.json`, `public/model/selected-model.json`, or deployment configuration. The revised status in the attached metrics file is `recommend_replacement`. That status does not publish the candidate. The owner's comment leans toward keeping the current model. A publish decision needs a separate issue. The 0.8–0.9 probability band remains issue #40 and is not a gate here.
