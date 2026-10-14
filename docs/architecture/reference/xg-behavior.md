@@ -1,6 +1,6 @@
 # Offline xG behavior evaluation
 
-**Status:** #31 phase A has been locally executed and reproduced; submitted aggregate evidence is reviewed as exploratory, with the original retain-current decision preserved. A detailed current-versus-monotonic comparison is deferred to #34 because isolated direction compliance is an important product priority. Phase B is not required for this scoped closure. See the [review](../../reports/xg-behavior-comparison.md). The published artifact and five-language product evidence remain unchanged.
+**Status:** #31 phase A has been locally executed and reproduced; submitted aggregate evidence is reviewed as exploratory, with the original retain-current decision preserved. #34 adds a local comparison of the frozen current XGBoost and the already fitted monotonic candidate. The committed [#34 report](../../reports/xg-monotonic-comparison.md) is a placeholder until that private run is posted. Phase B is not required for this scoped closure. See the [review](../../reports/xg-behavior-comparison.md). The published artifact and five-language product evidence remain unchanged.
 
 ## Boundary and rationale
 
@@ -66,6 +66,34 @@ Each model runs the browser-targeted TypeScript bundle in Node against the share
 - Plateaus use `|delta| <= 1e-7`. The longest plateau is reported in meters/degrees. Jump median/p95/max and >2 percentage-point rates use raw probability values, independently of UI rounding.
 - Primary physical segments have ordinary context, unchanged count inputs and two endpoints within the train-only reference. Outside/insufficient reference, extreme and count transitions are separately reported, never erased. A nearest-neighbor diagnostic cannot prove calibration or realism.
 - Probability scores, calibration residual intervals and sparse/support slices include the adverse cone-count possibilities. Supported review flags remain explicit. Required review does not authorize replacement.
+
+## Issue #34: frozen pair, no new fit
+
+`scripts/xg/compare_monotonic_pair.py` scores the exact current XGBoost and the phase-A monotonic candidate on the same selection rows. It does not call tune or fit, does not score logistic, and does not write the published model or deployment configuration. The revised accuracy rule is a selection log-loss increase, monotonic minus current, of at most **0.005** (mean clipped binary log loss, clip 1e-12). Exactly 0.005 passes. Brier is reported and is not the pass/fail metric. Recomputed log loss must match the phase-A record within 1e-08 or the run fails as an identity mismatch. That check is not the accuracy tolerance.
+
+Intuitive direction is an isolated sweep: the other seven features stay fixed. Distance uses direction -1, so more distance must not raise xG. Opening angle uses direction +1, so a wider angle must not lower xG. A step is a violation when the probability change times that direction is below -1e-7. Features 2–7 stay unconstrained.
+
+Fluidity is the plateau share (`|delta| <= 1e-7`) and the rate of jumps above 0.02 on primary physical pairs. Plateaus may remain. The original predeclared rule still includes the 25% jump-reduction gate and is printed beside the revised rule. The revised rule does not use that gate: unequal identity or primary pairs means insufficient evidence; a log-loss increase above 0.005 means retain; any isolated distance or angle violation means retain; otherwise the status is recommend replacement. `recommend_replacement` does not publish the candidate. `depends_on_revision` is true when the two statuses differ. The 0.8–0.9 band is issue #40 and is not a gate.
+
+Selection vectors are in the preparation run, so `--prepared-dir` is required. The training directory must be run `222909fe801f4865897fea3541e023fed626f6736dca6ef69ceada1f7c57945a`. The research directory must be the complete phase-A directory, including `candidate-model.json` and `current-model.json`. `docs/reports/xg-behavior-first-run/` is an aggregate subset and is not a runnable input.
+
+```bash
+.venv-xg/bin/python scripts/xg/compare_monotonic_pair.py \
+  --prepared-dir <original-preparation-run-directory> \
+  --training-dir <original-training-run-directory> \
+  --research-dir <complete-phase-A-directory> \
+  --output-dir data/derived/xg-behavior/issue-34
+```
+
+The command prints seed 42 and split SHA-256 `64f02e169df4b2d176b54ce47ef72a7afa3840d7990ac45b6841008e94aa71d1` before scoring. It writes `pair-identity.json`, `pair-metrics.json`, and `pair-decision.md` under ignored `data/derived/`. The committed report stays a placeholder until those files exist locally.
+
+A dev-only page shows one scene against both envelopes. It is absent unless `XG_COMPARE=1`, and the candidate file is the path in `XG_CANDIDATE_MODEL` (read on the server, never from the URL):
+
+```bash
+XG_COMPARE=1 XG_CANDIDATE_MODEL=<path-to-candidate-model.json> npm run dev
+```
+
+Open `/dev/model-compare`. The current column is the published artifact `758526873b8a3a2681f655c064dee52f8bd33749accd499d015420dbe8e11b9a`. The other column must be monotonic artifact `e19402c5ba622ebc2775df202956aa5b942dd5e841b647cb7eeb531faf2a12ce`. Pointer drag and arrow keys move the same players for both estimates.
 
 ## Phase B: optional genuinely unused matches
 

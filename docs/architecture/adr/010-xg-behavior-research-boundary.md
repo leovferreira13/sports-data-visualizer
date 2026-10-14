@@ -50,7 +50,16 @@ See [execution and review](../reference/xg-behavior.md).
 ## Phase-A disposition
 
 The original protocol retains the current model. Complete reproduction was
-reported locally and submitted aggregates were independently checked. Detailed
-comparison of current versus monotonic XGBoost is deferred to #34, with isolated
-direction compliance recorded as an important product priority. Phase B and
-public replacement are not prerequisites for closing this scoped investigation.
+reported locally and submitted aggregates were independently checked. Isolated
+direction compliance stays an important product priority. Phase B and public
+replacement are not prerequisites for closing this scoped investigation.
+
+## Issue #34 comparison procedure
+
+#34 scores the frozen current envelope and the already fitted monotonic
+candidate on the recorded selection rows. It does not fit a new model. The
+local report shows the original predeclared rule, including the 25% jump
+gate, beside a revised rule whose accuracy cap is a 0.005 selection log-loss
+increase. This ADR does not record a numeric disposition: that result depends
+on the private local run and is still a placeholder in the repository.
+`recommend_replacement` would not change production selection or deployment.
