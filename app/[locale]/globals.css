@@ -301,6 +301,9 @@ button:focus-visible, input:focus-visible, select:focus-visible, a:focus-visible
 .project-author a:hover { color: var(--text); }
 .project-author a:focus-visible { outline: 2px solid currentColor; outline-offset: 5px; border-radius: 2px; }
 .pitch-workspace { display: grid; grid-template-columns: minmax(0,1.5fr) minmax(280px,1fr); gap: 28px; align-items: start; }
+.compare-readouts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-bottom: 20px; }
+.compare-readouts .prediction-card { margin-bottom: 0; }
+.compare-readouts .model-kind { overflow-wrap: anywhere; margin-top: 12px; }
 .pitch-editor { min-width: 0; grid-column: 1; grid-row: 1; }
 .playground-insights { min-width: 0; grid-column: 2; grid-row: 1; position: sticky; top: 20px; }
 .prediction-card { padding: 20px; background: var(--surface-soft); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 20px; }
@@ -367,8 +370,10 @@ figcaption { color: var(--muted); font-size: .78rem; line-height: 1.6; margin-to
   .playground { padding-top: 22px; }
   .playground-copy { margin-bottom: 20px; }
   .pitch-workspace { grid-template-columns: 1fr; gap: 12px; }
+  .compare-readouts { grid-template-columns: 1fr; }
   .playground-insights, .pitch-editor { display: contents; }
   .prediction-card { order: 0; position: sticky; top: 8px; z-index: 5; align-self: start; margin: 0; padding: 12px 16px; box-shadow: 0 4px 18px rgba(0,0,0,.25); }
+  .compare-readouts .prediction-card { position: static; box-shadow: none; }
   .scene-actions { order: 1; margin: 0; }
   .scene-actions > label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
   .scene-actions .preset-row { margin: 0; }
