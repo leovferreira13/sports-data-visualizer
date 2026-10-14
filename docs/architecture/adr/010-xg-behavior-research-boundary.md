@@ -58,8 +58,10 @@ replacement are not prerequisites for closing this scoped investigation.
 
 #34 scores the frozen current envelope and the already fitted monotonic
 candidate on the recorded selection rows. It does not fit a new model. The
-local report shows the original predeclared rule, including the 25% jump
-gate, beside a revised rule whose accuracy cap is a 0.005 selection log-loss
-increase. This ADR does not record a numeric disposition: that result depends
+local report shows the full original predeclared gates, including constant
+reference, partial directions, invariants, parity, native export, and the
+jump-reduction gate. Limits are read from `protocol.decision`. The revised
+rule beside it caps selection log-loss increase at `max_log_loss_degradation`.
+This ADR does not record a numeric disposition: that result depends
 on the private local run and is still a placeholder in the repository.
 `recommend_replacement` would not change production selection or deployment.

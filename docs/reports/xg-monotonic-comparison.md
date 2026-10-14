@@ -34,8 +34,8 @@ The command prints seed 42 and the split SHA-256 before scoring. It writes `pair
 
 | Rule | Decision | Why |
 | --- | --- | --- |
-| Original predeclared, including the 25% jump-reduction gate | PLACEHOLDER | PLACEHOLDER |
-| Revised (log-loss increase at most 0.005 and isolated directions) | PLACEHOLDER | PLACEHOLDER |
+| Original predeclared gates, including the jump-reduction gate | PLACEHOLDER | PLACEHOLDER |
+| Revised (log-loss increase at most protocol.decision.max_log_loss_degradation, and isolated directions) | PLACEHOLDER | PLACEHOLDER |
 
 Decision depends on the revision: **PLACEHOLDER**.
 
@@ -46,7 +46,7 @@ Decision depends on the revision: **PLACEHOLDER**.
 | full_xgboost | PLACEHOLDER | PLACEHOLDER | PLACEHOLDER | PLACEHOLDER | PLACEHOLDER | PLACEHOLDER |
 | full_monotonic_xgboost | PLACEHOLDER | PLACEHOLDER | PLACEHOLDER | PLACEHOLDER | PLACEHOLDER | PLACEHOLDER |
 
-Selection log-loss increase (monotonic minus current): PLACEHOLDER. Limit: 0.005.
+Selection log-loss increase (monotonic minus current): PLACEHOLDER. Limit: the protocol `max_log_loss_degradation` (0.005 in the frozen protocol).
 
 Paired one-sided 95% upper bounds versus current: log loss PLACEHOLDER, Brier PLACEHOLDER.
 

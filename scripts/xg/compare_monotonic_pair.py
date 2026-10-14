@@ -22,13 +22,20 @@ CURRENT_ARTIFACT = "758526873b8a3a2681f655c064dee52f8bd33749accd499d015420dbe8e1
 MONOTONIC_ARTIFACT = "e19402c5ba622ebc2775df202956aa5b942dd5e841b647cb7eeb531faf2a12ce"
 PUBLISHED_FILE_SHA256 = "c0d91256a2c0f83ede48f1f549b8a0cc379e6ef675ccd4ce9ef10e471bb4350d"
 SEED = 42
-LOG_LOSS_LIMIT = 0.005
-BRIER_LIMIT = 0.001
-JUMP_REDUCTION = 0.25
 DIRECTION_TOLERANCE = 1e-7
 REPRODUCTION_METRIC = 1e-08
 METRIC_CLIP = 1e-12
 CONSTRAINTS = [-1, 1, 0, 0, 0, 0, 0, 0]
+DECISION_LIMITS = (
+    "max_log_loss_degradation", "max_brier_degradation",
+    "min_jump_rate_reduction", "one_sided_confidence",
+)
+# Same predicate set as behavior_statistics.gates. A missing name is not a pass.
+PREDECLARED_GATES = (
+    "log_loss", "brier", "constant_reference", "partial_directions",
+    "primary_segments_available", "interactive_improvement",
+    "invariants", "parity", "native_export",
+)
 PUBLISHED_MODEL = PROJECT / "model" / "selected-model.json"
 
 
@@ -61,64 +68,72 @@ def violation_totals(isolated):
     return distance, angle
 
 
-def jump_gate_passes(candidate, current, min_reduction=JUMP_REDUCTION):
-    """Same primary-path rule as behavior_statistics.gates interactive_improvement."""
-    available = candidate["pairs"] > 0 and candidate["pairs"] == current["pairs"]
-    if not available:
-        return False
-    if current["large_jump_rate"] == 0:
-        return candidate["large_jump_rate"] == 0 and candidate["p95_jump"] < current["p95_jump"]
-    return (candidate["large_jump_rate"] <= current["large_jump_rate"] * (1 - min_reduction)
-            and candidate["p95_jump"] <= current["p95_jump"])
+def require_decision_limits(protocol):
+    """Every numeric gate limit is read from protocol.decision. Nothing is filled in here."""
+    decision = protocol.get("decision") if isinstance(protocol, dict) else None
+    if not isinstance(decision, dict):
+        raise AuditError("Protocol decision limits are missing")
+    limits = {}
+    for key in DECISION_LIMITS:
+        value = decision.get(key)
+        if isinstance(value, bool) or not isinstance(value, (int, float)):
+            raise AuditError("Protocol decision limit is missing: " + key)
+        limits[key] = float(value)
+    return limits
 
 
-def revised_decision(*, identity_ok, pairs_equal, log_loss_increase, distance_violations, angle_violations):
+def revised_decision(*, identity_ok, pairs_equal, log_loss_increase, distance_violations,
+                     angle_violations, limits):
+    cap = limits["max_log_loss_degradation"]
     if not identity_ok or not pairs_equal:
         return "insufficient_evidence", ["Identity, seed, split, or primary pair counts are not comparable"]
-    if log_loss_increase > LOG_LOSS_LIMIT:
-        return "retain", ["Selection log-loss increase is above 0.005"]
+    if log_loss_increase > cap:
+        return "retain", [f"Selection log-loss increase is above {cap}"]
     if distance_violations or angle_violations:
         return "retain", ["Isolated distance or angle direction violation"]
-    return "recommend_replacement", ["Log-loss increase is within 0.005 and isolated directions pass"]
+    return "recommend_replacement", [f"Log-loss increase is within {cap} and isolated directions pass"]
 
 
-def original_decision(*, identity_ok, pairs_equal, primary_available, log_loss_upper, brier_upper,
-                      directions_pass, jump_passes):
-    if (not identity_ok or not pairs_equal or not primary_available
-            or log_loss_upper is None or brier_upper is None or jump_passes is None):
-        return "insufficient_evidence", ["Original gates need identity, equal primary pairs, and paired bounds"]
-    reasons = []
-    if log_loss_upper > LOG_LOSS_LIMIT:
-        reasons.append("Paired log-loss upper bound is above 0.005")
-    if brier_upper > BRIER_LIMIT:
-        reasons.append("Paired Brier upper bound is above 0.001")
-    if not directions_pass:
-        reasons.append("Isolated direction gate failed")
-    if not jump_passes:
-        reasons.append("25% jump-reduction gate failed")
-    if reasons:
-        return "retain", reasons
-    return "recommend_replacement", ["Predeclared quality, direction, and 25% jump-reduction gates passed"]
+def original_decision(gates_result, limits):
+    """Map the full behavior_statistics.gates result. Omitted predicates do not pass."""
+    require_decision_limits({"decision": limits})
+    predicates = gates_result.get("predicates") if isinstance(gates_result, dict) else None
+    if not isinstance(predicates, dict):
+        return "insufficient_evidence", ["Original gates are missing"]
+    missing = [name for name in PREDECLARED_GATES if name not in predicates]
+    if missing:
+        return "insufficient_evidence", ["Original gates omitted " + ", ".join(missing)]
+    failed = [name for name in PREDECLARED_GATES if not predicates[name]]
+    failed.extend(name for name in gates_result.get("failures", []) if name not in failed)
+    if failed:
+        return "retain", [f"Predeclared gate failed: {name}" for name in failed]
+    if gates_result.get("eligible") is not True:
+        return "insufficient_evidence", ["Original gates are not eligible"]
+    return "recommend_replacement", ["Every predeclared gate passed"]
 
 
-def pair_decisions(**kwargs):
-    original_status, original_reasons = original_decision(
-        identity_ok=kwargs["identity_ok"], pairs_equal=kwargs["pairs_equal"],
-        primary_available=kwargs["primary_available"], log_loss_upper=kwargs["log_loss_upper"],
-        brier_upper=kwargs["brier_upper"], directions_pass=kwargs["directions_pass"],
-        jump_passes=kwargs["jump_passes"])
+def pair_decisions(*, identity_ok, pairs_equal, gates_result, limits, log_loss_increase,
+                   distance_violations, angle_violations):
+    if not identity_ok or not pairs_equal:
+        original_status, original_reasons = (
+            "insufficient_evidence",
+            ["Identity, seed, split, or primary pair counts are not comparable"],
+        )
+    else:
+        original_status, original_reasons = original_decision(gates_result, limits)
     revised_status, revised_reasons = revised_decision(
-        identity_ok=kwargs["identity_ok"], pairs_equal=kwargs["pairs_equal"],
-        log_loss_increase=kwargs["log_loss_increase"],
-        distance_violations=kwargs["distance_violations"], angle_violations=kwargs["angle_violations"])
+        identity_ok=identity_ok, pairs_equal=pairs_equal, log_loss_increase=log_loss_increase,
+        distance_violations=distance_violations, angle_violations=angle_violations, limits=limits)
     return {
         "original_predeclared": {
             "status": original_status, "reasons": original_reasons, "includes_jump_reduction_gate": True,
-            "jump_reduction_required": JUMP_REDUCTION,
+            "jump_reduction_required": limits["min_jump_rate_reduction"], "limits": limits,
+            "predicates": None if not isinstance(gates_result, dict) else gates_result.get("predicates"),
         },
         "revised": {
             "status": revised_status, "reasons": revised_reasons,
-            "log_loss_increase_limit": LOG_LOSS_LIMIT, "includes_jump_reduction_gate": False,
+            "log_loss_increase_limit": limits["max_log_loss_degradation"],
+            "includes_jump_reduction_gate": False,
         },
         "depends_on_revision": original_status != revised_status,
     }
@@ -170,13 +185,16 @@ def render_pair_report(summary):
         "# Current versus monotonic XGBoost",
         "",
         "Both columns use the same selection rows, seed 42, and split. "
-        "The original column includes the predeclared 25% jump-reduction gate. "
-        "The revised column does not. A recommendation does not publish either model.",
+        f"The original column is every predeclared gate, including the {original['jump_reduction_required']:.0%} jump-reduction gate, "
+        "constant reference, partial directions, invariants, parity, and native export. "
+        "Limits come from protocol.decision. "
+        "The revised column is the selection log-loss increase and isolated distance and angle violations. "
+        "A recommendation does not publish either model.",
         "",
         "| Rule | Decision | Why |",
         "| --- | --- | --- |",
-        f"| Original predeclared, including the 25% jump-reduction gate | {original['status']} | {'; '.join(original['reasons'])} |",
-        f"| Revised (log-loss increase ≤ 0.005 and isolated directions) | {revised['status']} | {'; '.join(revised['reasons'])} |",
+        f"| Original predeclared gates, including the {original['jump_reduction_required']:.0%} jump-reduction gate | {original['status']} | {'; '.join(original['reasons'])} |",
+        f"| Revised (log-loss increase ≤ {revised['log_loss_increase_limit']} and isolated directions) | {revised['status']} | {'; '.join(revised['reasons'])} |",
         "",
         f"Decision depends on the revision: **{str(decisions['depends_on_revision']).lower()}**.",
         "",
@@ -192,7 +210,7 @@ def render_pair_report(summary):
     lines.extend([
         "",
         f"Selection log-loss increase (monotonic minus current): {summary['log_loss_increase']:.8f}. "
-        f"Limit: {LOG_LOSS_LIMIT}.",
+        f"Limit: {revised['log_loss_increase_limit']}.",
         f"Paired one-sided 95% upper bounds versus current: log loss {summary['log_loss_upper']}, "
         f"Brier {summary['brier_upper']}.",
         "",
@@ -231,9 +249,11 @@ def run_comparison(prepared_dir, training_dir, research_dir, output_dir):
     print(f"seed {SEED}", flush=True)
     print(f"split_sha256 {SPLIT_SHA256}", flush=True)
     from behavior_io import original_inputs
-    from behavior_statistics import quality
+    from behavior_statistics import gates, quality
     from behavior_sweeps import evaluate_sweeps
     from model_export import predict_envelope
+
+    limits = require_decision_limits(evaluation["protocol"])
 
     context = original_inputs(Path(prepared_dir), Path(training_dir), evaluation["protocol"])
     rows = context["rows"]["selection"]
@@ -262,10 +282,17 @@ def run_comparison(prepared_dir, training_dir, research_dir, output_dir):
     behaviors = {}
     for name, envelope in (("full_xgboost", current), ("full_monotonic_xgboost", candidate)):
         behaviors[name] = evaluate_sweeps(envelope, context["rows"]["train"], evaluation["protocol"], final_config)[0]
-    paired = quality(
+    quality_record = quality(
         rows, labels, probabilities["full_monotonic_xgboost"], context["constant"],
         probabilities["full_xgboost"], training_config, final_config, evaluation["protocol"],
-    )["paired_with_current"]
+    )
+    paired = quality_record["paired_with_current"]
+    frozen = evaluation["models"]["full_monotonic_xgboost"]
+    gate_result = gates(
+        {"quality": quality_record, "behavior": behaviors["full_monotonic_xgboost"],
+         "scene_audit": frozen["scene_audit"], "parity": frozen["parity"],
+         "native_export_pass": frozen["native_export_pass"]},
+        behaviors["full_xgboost"], evaluation["protocol"])
     current_primary = behaviors["full_xgboost"]["pooled"]["primary"]
     monotonic_primary = behaviors["full_monotonic_xgboost"]["pooled"]["primary"]
     current_distance, current_angle = violation_totals(behaviors["full_xgboost"]["isolated"])
@@ -274,10 +301,7 @@ def run_comparison(prepared_dir, training_dir, research_dir, output_dir):
     log_loss_increase = mean_log_loss(labels, probabilities["full_monotonic_xgboost"]) - mean_log_loss(
         labels, probabilities["full_xgboost"])
     decisions = pair_decisions(
-        identity_ok=True, pairs_equal=pairs_equal, primary_available=pairs_equal,
-        log_loss_upper=paired["log_loss"]["upper_95"], brier_upper=paired["brier"]["upper_95"],
-        directions_pass=mono_distance == 0 and mono_angle == 0,
-        jump_passes=jump_gate_passes(monotonic_primary, current_primary),
+        identity_ok=True, pairs_equal=pairs_equal, gates_result=gate_result, limits=limits,
         log_loss_increase=log_loss_increase, distance_violations=mono_distance, angle_violations=mono_angle)
     metrics = {}
     for name, probability, distance, angle, primary in (
@@ -293,7 +317,7 @@ def run_comparison(prepared_dir, training_dir, research_dir, output_dir):
         }
     summary = {
         "log_loss_increase": log_loss_increase,
-        "log_loss_limit": LOG_LOSS_LIMIT,
+        "log_loss_limit": limits["max_log_loss_degradation"],
         "log_loss_upper": paired["log_loss"]["upper_95"],
         "brier_upper": paired["brier"]["upper_95"],
         "metrics": metrics, "decisions": decisions,
