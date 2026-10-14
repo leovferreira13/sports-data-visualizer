@@ -11,7 +11,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from compare_monotonic_pair import (CONSTRAINTS, PREDECLARED_GATES, assert_identity, assert_output_allowed,
                                     assert_selection_counts, direction_violation_count, mean_log_loss,
                                     original_decision, pair_decisions, render_pair_report, require_constraints,
-                                    require_decision_limits, revised_decision, write_outputs)
+                                    require_decision_limits, require_probability_inputs, revised_decision,
+                                    selection_probability_path, write_outputs)
 from ingest_statsbomb import AuditError, sha256
 from run_io import PROJECT, read_json
 
@@ -284,6 +285,56 @@ class CompareMonotonicPairTests(unittest.TestCase):
             self.assertTrue((Path(tmp) / "pair-metrics.json").is_file())
             self.assertEqual(sha256((PROJECT / "model" / "selected-model.json").read_bytes()),
                              "c0d91256a2c0f83ede48f1f549b8a0cc379e6ef675ccd4ce9ef10e471bb4350d")
+
+    def test_selection_probability_path_expands_the_scalar_constant(self):
+        load_gates()
+        from unittest.mock import patch
+        import model_export
+        rows = []
+        for match, goal in ((10, 1), (10, 0), (11, 1), (11, 0)):
+            rows.append({
+                "is_goal": goal, "match_id": match, "competition_id": 1, "season_id": 2,
+                "vector": [18.0, 25.0, 2.0, 1, 0, 5.0, 3.0, 12.0],
+            })
+        envelope = {
+            "feature_indices": list(range(8)),
+            "parameters": {"kind": "xgboost", "base_margin": 0.0, "trees": [[{"leaf": -1.0}]]},
+            "calibration": {"method": "identity"},
+        }
+        protocol = json_protocol()
+        final_config = read_json(PROJECT / "model" / "final-evaluation-protocol.json")
+        real = model_export.predict_envelope
+
+        def predict(envelope, vectors, validate=True):
+            return real(envelope, vectors, validate=False)
+
+        with patch.object(model_export, "predict_envelope", predict):
+            labels, probabilities, constant, quality_record = selection_probability_path(
+                rows, {"full_xgboost": envelope, "full_monotonic_xgboost": envelope},
+                0.11, protocol["original_training_protocol"], final_config, protocol)
+        self.assertEqual(labels.shape, (4,))
+        self.assertEqual(labels.dtype, np.int64)
+        self.assertEqual(probabilities["full_xgboost"].shape, (4,))
+        self.assertEqual(probabilities["full_monotonic_xgboost"].ndim, 1)
+        self.assertEqual(constant.shape, (4,))
+        self.assertIn("log_loss", quality_record["metrics"])
+        self.assertTrue(np.isfinite(quality_record["metrics"]["log_loss"]))
+
+    def test_probability_failure_names_the_metric_and_shapes(self):
+        labels = np.array([0, 1, 0, 1])
+        with self.assertRaises(AuditError) as column:
+            require_probability_inputs("predict full_xgboost", labels, np.full((4, 1), 0.2))
+        message = str(column.exception)
+        self.assertIn("predict full_xgboost", message)
+        self.assertIn("shape (4,)", message)
+        self.assertIn("shape (4, 1)", message)
+        self.assertNotIn("0.2", message)
+        with self.assertRaises(AuditError) as scalar:
+            require_probability_inputs("constant reference", labels, 0.11)
+        text = str(scalar.exception)
+        self.assertIn("constant reference", text)
+        self.assertIn("shape ()", text)
+        self.assertNotIn("0.11", text)
 
 
 if __name__ == "__main__":

@@ -44,12 +44,73 @@ def require_constraints(constraints):
         raise AuditError("Unsupported monotonic constraint tuple")
 
 
+def probability_input_detail(metric, y, probabilities):
+    """Shapes and dtypes only. Never include labels or probability values."""
+    y_arr, p_arr = np.asarray(y), np.asarray(probabilities)
+    return (f"{metric}: invalid probability inputs; "
+            f"y ndim {y_arr.ndim} shape {y_arr.shape} dtype {y_arr.dtype}, "
+            f"p ndim {p_arr.ndim} shape {p_arr.shape} dtype {p_arr.dtype}")
+
+
+def require_probability_inputs(metric, y, probabilities):
+    """Same acceptance rules as evaluation.checked, with a named metric."""
+    detail = probability_input_detail(metric, y, probabilities)
+    y_arr, p_arr = np.asarray(y), np.asarray(probabilities)
+    try:
+        y_num = np.asarray(y_arr, dtype=float)
+        p_num = np.asarray(p_arr, dtype=float)
+        ok = (y_arr.ndim == 1 and p_num.shape == y_num.shape and len(y_arr)
+              and np.isin(y_arr, [0, 1]).all() and np.isfinite(p_num).all()
+              and (p_num >= 0).all() and (p_num <= 1).all())
+    except (TypeError, ValueError):
+        ok = False
+    if not ok:
+        raise AuditError(detail)
+    return y_num, p_num
+
+
 def mean_log_loss(y, probabilities):
-    labels = np.asarray(y, dtype=float)
-    clipped = np.clip(np.asarray(probabilities, dtype=float), METRIC_CLIP, 1 - METRIC_CLIP)
-    if labels.shape != clipped.shape or not len(labels) or not np.isin(labels, [0, 1]).all():
-        raise AuditError("Invalid log-loss inputs")
+    labels, values = require_probability_inputs("mean log loss", y, probabilities)
+    clipped = np.clip(values, METRIC_CLIP, 1 - METRIC_CLIP)
     return float((-(labels * np.log(clipped) + (1 - labels) * np.log1p(-clipped))).mean())
+
+
+def selection_probability_path(rows, envelopes, constant, training_config, final_config, protocol):
+    """Build selection inputs the way evaluate_behavior does, then score them.
+
+    context['constant'] is one train prevalence. quality() needs a probability
+    per selection row, so the scalar is repeated with np.full.
+    """
+    from behavior_statistics import quality
+    from model_export import predict_envelope
+    from training import arrays
+
+    vectors, labels = arrays(rows, list(range(8)))
+    if vectors.ndim != 2 or vectors.shape != (len(rows), 8) or labels.shape != (len(rows),):
+        raise AuditError(
+            "selection arrays: invalid inputs; "
+            f"vectors ndim {vectors.ndim} shape {vectors.shape} dtype {vectors.dtype}, "
+            f"labels ndim {labels.ndim} shape {labels.shape} dtype {labels.dtype}")
+    probabilities = {}
+    for name, envelope in envelopes.items():
+        probabilities[name] = predict_envelope(envelope, vectors)
+        require_probability_inputs(f"predict {name}", labels, probabilities[name])
+    # Phase A: constant = np.full(len(y), context['constant']).
+    constant_probabilities = np.full(len(labels), constant)
+    require_probability_inputs("constant reference", labels, constant_probabilities)
+    try:
+        quality_record = quality(
+            rows, labels, probabilities["full_monotonic_xgboost"], constant_probabilities,
+            probabilities["full_xgboost"], training_config, final_config, protocol)
+    except AuditError as exc:
+        if str(exc) != "Invalid probability evaluation inputs":
+            raise
+        detail = "; ".join(probability_input_detail(metric, labels, values) for metric, values in (
+            ("quality monotonic", probabilities["full_monotonic_xgboost"]),
+            ("quality current", probabilities["full_xgboost"]),
+            ("quality constant reference", constant_probabilities)))
+        raise AuditError(detail) from exc
+    return labels, probabilities, constant_probabilities, quality_record
 
 
 def direction_violation_count(probabilities, direction, tolerance=DIRECTION_TOLERANCE):
@@ -249,9 +310,8 @@ def run_comparison(prepared_dir, training_dir, research_dir, output_dir):
     print(f"seed {SEED}", flush=True)
     print(f"split_sha256 {SPLIT_SHA256}", flush=True)
     from behavior_io import original_inputs
-    from behavior_statistics import gates, quality
+    from behavior_statistics import gates
     from behavior_sweeps import evaluate_sweeps
-    from model_export import predict_envelope
 
     limits = require_decision_limits(evaluation["protocol"])
 
@@ -266,26 +326,19 @@ def run_comparison(prepared_dir, training_dir, research_dir, output_dir):
         raise AuditError("Research current envelope is not the published model")
     if candidate["artifact_id"] != MONOTONIC_ARTIFACT:
         raise AuditError("Research candidate artifact id drifted")
-    vectors = np.asarray([row["vector"] for row in rows], dtype=float)
-    labels = np.asarray([row["is_goal"] for row in rows])
-    probabilities = {
-        "full_xgboost": predict_envelope(current, vectors),
-        "full_monotonic_xgboost": predict_envelope(candidate, vectors),
-    }
+    final_config = read_json(PROJECT / "model" / "final-evaluation-protocol.json")
+    training_config = evaluation["protocol"]["original_training_protocol"]
+    labels, probabilities, _constant_probabilities, quality_record = selection_probability_path(
+        rows, {"full_xgboost": current, "full_monotonic_xgboost": candidate},
+        context["constant"], training_config, final_config, evaluation["protocol"])
     for name, values in probabilities.items():
         got = mean_log_loss(labels, values)
         recorded = _recorded_metric(evaluation, name, "log_loss")
         if abs(got - recorded) > REPRODUCTION_METRIC:
             raise AuditError(f"Recomputed {name} log loss does not match the bound evaluation")
-    final_config = read_json(PROJECT / "model" / "final-evaluation-protocol.json")
-    training_config = evaluation["protocol"]["original_training_protocol"]
     behaviors = {}
     for name, envelope in (("full_xgboost", current), ("full_monotonic_xgboost", candidate)):
         behaviors[name] = evaluate_sweeps(envelope, context["rows"]["train"], evaluation["protocol"], final_config)[0]
-    quality_record = quality(
-        rows, labels, probabilities["full_monotonic_xgboost"], context["constant"],
-        probabilities["full_xgboost"], training_config, final_config, evaluation["protocol"],
-    )
     paired = quality_record["paired_with_current"]
     frozen = evaluation["models"]["full_monotonic_xgboost"]
     gate_result = gates(
@@ -308,6 +361,7 @@ def run_comparison(prepared_dir, training_dir, research_dir, output_dir):
             ("full_xgboost", probabilities["full_xgboost"], current_distance, current_angle, current_primary),
             ("full_monotonic_xgboost", probabilities["full_monotonic_xgboost"], mono_distance, mono_angle, monotonic_primary)):
         from evaluation import metrics as score_metrics
+        require_probability_inputs(f"metrics {name}", labels, probability)
         scored = score_metrics(labels, probability, training_config)
         metrics[name] = {
             "log_loss": scored["log_loss"], "brier": scored["brier"],
