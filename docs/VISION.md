@@ -1,6 +1,6 @@
 # Football, Visualized — product vision
 
-**Status:** portfolio-focused first release · **First module:** Expected Goals (xG) · **Updated:** 2026-10-12
+**Status:** public portfolio · **Module:** Expected Goals (xG) · **Updated:** 2026-10-14
 
 ## One-sentence concept
 
@@ -10,13 +10,13 @@ An interactive football pitch where anyone can move the shooter, goalkeeper, and
 
 xG often appears in broadcasts and analysis as a finished number. Fans struggle to see which characteristics of a chance influenced the estimate and why two seemingly similar chances receive different values. Analysts, journalists, and commentators also need to recreate a play and explain it quickly to an audience.
 
-The visitor experience serves a curious football fan without requiring statistical background, an account or preparatory reading. The primary delivery goal is a professional portfolio: recruiters and technical reviewers should be able to explore a complete product and trace its data, ML, browser-inference and product decisions. Broad adoption and maximum predictive accuracy are not first-release goals.
+The visitor experience serves a curious football fan without requiring statistical background, an account or preparatory reading. The primary delivery goal is a professional portfolio: recruiters and technical reviewers should be able to explore a complete product and trace its data, ML, browser-inference and product decisions. Broad adoption and maximum predictive accuracy are not goals of this portfolio.
 
 ## Proposition
 
 **Playground is the default screen.** Visitors find a prepared chance, a prominent xG estimate, and a short prompt: “Drag the players to try another situation.” They can change presets, move pieces, and see which observable factors changed. Inline **Methodology and results** explains the current model below the pitch. Optional Learn experiments are deferred in #5.
 
-Working name: **Football, Visualized**. Product message: **Move the players. Understand what changes a goal-scoring chance.** The name does not require building a broader portal in the first release.
+Working name: **Football, Visualized**. Product message: **Move the players. Understand what changes a goal-scoring chance.** The name does not require a broader portal.
 
 ## Core experience
 
@@ -25,7 +25,7 @@ Working name: **Football, Visualized**. Product message: **Move the players. Und
 3. Drag a player; the pitch, measurements, and estimate respond during or immediately after movement.
 4. Choose and edit a preset: **Penalty, One-on-one, Tight angle, Long shot, Crowded box**.
 5. Scroll to Methodology/results to inspect evidence, support and omitted factors. Learn experiments are a later option.
-6. Copy a scenario link for someone else if sharing fits the first release; at minimum, presets must be reproducible.
+6. Scenario links are future work (#36) and are not part of the current product. Presets are reproducible.
 
 The panel shows **distance**, **shooting angle**, and **opponent/goalkeeper positioning**. Its explanation must distinguish geometric observations (“a defender is inside the shooting cone”) from model effects (“removing this defender raised this model's estimate by 0.04”). Never imply that a movement guarantees a goal.
 
@@ -36,7 +36,7 @@ The panel shows **distance**, **shooting angle**, and **opponent/goalkeeper posi
 | **Playground — default** | Build and demonstrate chances freely | Editable pitch, presets, estimate, measurements, and concise explanations. |
 | **Learn — deferred (#5)** | Understand xG by experimenting | Short optional steps suggest a pitch change, show before/after values, then return free control. |
 
-Planned Learn experiments will reuse the same rules, calculation and controls, retaining the scene when visitors leave. They do not block the first release.
+Planned Learn experiments will reuse the same rules, calculation and controls, retaining the scene when visitors leave. Learn is future work (#5) and is not part of the current product.
 
 ## Product principles
 
@@ -46,26 +46,26 @@ Planned Learn experiments will reuse the same rules, calculation and controls, r
 - **Make demonstrations easy:** quick reading, a generous pitch area, fluid movement, and good presentation on mobile and desktop.
 - **Permit illustrative exploration:** rare/extreme but valid scenes are intentional. Support diagnostics inform concise explanations, not automatic blocking. Avoid precision or causal promises and explain that tree predictions can remain unchanged after small movements.
 - **Expose the decisions:** a visible inline Methodology and results section shares the report's aggregate evidence, separates validation from test; repository documentation links architecture/ADRs/reproduction for reviewers.
-- **Ship a small, complete product:** the first release is an xG module, not a scouting portal.
+- **Ship a small, complete product:** the current product is an xG module, not a scouting portal.
 - **Support all five languages:** UI, explanations, and model limitations in `pt-BR`, `en`, `nl`, `es` and `de`.
 
 ## What success looks like
 
 **Product goal:** someone new to xG can build a chance and explain in their own words why the model evaluated it that way. **Delivery goal:** a public URL and repository usable as a portfolio piece.
 
-Use a small targeted qualitative review to check whether a newcomer can interact without verbal instruction and explain a model response, and whether a technical reader can follow the implementation rationale. Invite a football-interested reader or technical peer if available. Record available feedback and useful follow-ups; a fixed participant quota, traffic target or analytics installation is not a release gate.
+Use a small targeted qualitative review to check whether a newcomer can interact without verbal instruction and explain a model response, and whether a technical reader can follow the implementation rationale. Invite a football-interested reader or technical peer if available. Record available feedback and useful follow-ups. A fixed participant quota, traffic target or analytics installation is not required.
 
-## First-release boundaries
+## Product boundaries
 
-One designated shot taker, one goalkeeper, addable attackers and defenders, six presets, Playground with optional deferred Learn, and five languages. No accounts, database, mandatory backend, teams, live matches, tactical editor, other metrics, or generative AI. Famous goals come **after validation**: recreating one requires a reliable source for positions and shot context, and any approximation must be labeled as an illustrative reconstruction.
+One designated shot taker, one goalkeeper, addable attackers and defenders, six presets, Playground with optional deferred Learn, and five languages. No accounts, database, mandatory backend, teams, live matches, tactical editor, other metrics, or generative AI. Famous goals are not part of the current product. A historical reconstruction requires a reliable source for positions and shot context, and any approximation must be labeled as an illustrative reconstruction.
 
 ## Possible evolution
 
-If this module works, the brand can hold independent experiments: famous goals, xA, xThreat, or other visualizations. Add a module based on use and learning from the first one, not on architecture built prematurely for several products.
+If this module works, the brand can hold independent experiments: famous goals, xA, xThreat, or other visualizations. Add a module based on use and learning from this one, not on architecture built prematurely for several products.
 
-## Current model and delivery handoff
+## Current model and delivery
 
-The frozen shallow XGBoost has accepted actual-corpus scientific evidence with support/transfer limitations. #4 integrates the reviewed exact model and inline methodology; #24 delivers five locales; #25 prepares presentation; #26 owns Railway hosting, public repository access and final live/branding checks. #3/#8 are closed after scoped completion. Publication and merge remain explicit controlled actions; completed local QA does not imply a public release.
+The frozen shallow XGBoost has accepted actual-corpus scientific evidence with support/transfer limitations. #4, #24, #25 and #26 are closed: the reviewed model and inline methodology, five locales, presentation, Railway hosting and a public repository are delivered. #3 and #8 are closed after scoped completion. Later work is tracked in GitHub Projects.
 
 ## Playground layout revision (2026-10-11)
 

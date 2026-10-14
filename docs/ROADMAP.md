@@ -1,21 +1,21 @@
 # Football, Visualized — delivery roadmap
 
-**Status:** first public release preparation · **Updated:** 2026-10-12
+**Status:** milestones 0–4 complete · **Updated:** 2026-10-14
 
-**#26 progress:** the existing Railway demo is accessible. Repeatable production settings and release checks are prepared; real-origin rebuild, final branding guidance and public repository access remain release gates. See [release QA](reports/public-release-qa.md).
+Future delivery is tracked in **GitHub Projects**. This document will no longer be updated per task.
 
 ## Delivery rule
 
-Ship a small, trustworthy educational portfolio with intuitive interaction and reviewer-visible reasoning. The scientific milestone is complete; another optimization cycle, Learn experiments, traffic targets and a fixed feedback quota are not release prerequisites.
+Ship a small, trustworthy educational portfolio with intuitive interaction and reviewer-visible reasoning. Milestones 0–4 are complete. Another optimization cycle, Learn experiments, traffic targets and a fixed feedback quota were not required for that completion.
 
-| Milestone | Delivered or planned result | Exit condition |
+| Milestone | Result | Status |
 | --- | --- | --- |
-| 0. Prepare | Repository, local app and working agreement | Runnable shell and documented scope |
-| 1. Playable pitch | Metric SVG geometry, presets and accessible movement (#2) | Mouse/touch/keyboard controls and geometry checks |
-| 2. Prove the calculation | Pinned source audit, shared features, training, parity and final review (#9–#13) | Accepted scientific evidence with explicit support/transfer limitations |
-| 3. Reviewed-model Playground | Exact browser model asset, eight live cards and inline Methodology/results (#4) | Local product QA recorded; release-specific gaps remain explicit |
-| 4. Portfolio release | Five locales (#24, complete), presentation (#25), Railway hosting/public repository (#26) | Final public URL, metadata and scoped asset/attribution checks pass |
-| 5. Refine from use | Optional Learn (#5), scenario links and observed improvements | Priorities follow actual feedback |
+| 0. Prepare | Repository, local app and working agreement (#1) | Complete |
+| 1. Playable pitch | Metric SVG geometry, presets and accessible movement (#2) | Complete |
+| 2. Prove the calculation | Pinned source audit, shared features, training, parity and final review (#9–#13) | Complete |
+| 3. Reviewed-model Playground | Exact browser model asset, eight live cards and inline Methodology/results (#4) | Complete |
+| 4. Portfolio release | Five locales (#24), presentation (#25), and public Railway hosting (#26) | Complete |
+| 5. Refine from use | Optional Learn (#5), scenario links, historical reconstructions and feedback | Future work, not a commitment |
 
 ## Implemented product
 
@@ -32,17 +32,17 @@ The licensed-artifact-first proposal was superseded by the independent model pip
 
 The actual-corpus final aggregates pass the predeclared gates; complete local comparators were reported PASS. Aggregate identities/provenance and generated-view consistency were independently checked. Sparse/extreme/low-defender support, partial visibility, cohort transfer and an adverse cone-count slice remain accepted limitations. No source rows or shot-level examples are distributed. See the [final review](reports/xg-final-evaluation.md) and [implementation summary](reports/xg-implementation-summary.md).
 
-#3 and #8 are closed after their scoped scientific/rights handoffs. #4 integrates the exact reviewed parameter envelope and records local build/network/attribution QA. #24 extends the product to five locales. These completed checks are dated; #26 refreshes relevant assets/content for the exact release build and resolves the outstanding detailed per-asset logo-guidance review. Local QA does not prove a public deployment.
+#3 and #8 are closed after their scoped scientific/rights handoffs. #4 integrates the exact reviewed parameter envelope and records local build/network/attribution QA. #24 extends the product to five locales. #25 and #26 are closed. The repository is public, and the README links the live Railway Playground. Dated preparation notes stay in the [release QA report](reports/public-release-qa.md) as a historical record, not as an open item in this roadmap.
 
-## Portfolio release sequence
+## Completed portfolio release
 
-1. **#24 — localization:** delivered. [Localization QA](reports/localization-qa.md) records checks and translation-review limits.
-2. **#25 — presentation:** concise README, confirmed author links, screenshots/share image, localized metadata and professional impersonal documentation. [Portfolio QA](reports/portfolio-presentation-qa.md) distinguishes completed local work from live checks.
-3. **#26 — publication:** build/start in the selected Railway account, confirmed HTTPS origin, public repository, refreshed content/history/asset/attribution checks, live smoke tests and rollback instructions.
+1. **#24 — localization:** closed. [Localization QA](reports/localization-qa.md) records checks and translation-review limits.
+2. **#25 — presentation:** closed. The work covers a concise README, confirmed author links, screenshots and a share image, localized metadata, and professional impersonal documentation. [Portfolio QA](reports/portfolio-presentation-qa.md) records that local presentation work.
+3. **#26 — publication:** closed. The repository is public, and the README links the existing Railway Playground.
 
-#25 can be reviewed before deployment. Configure `SITE_URL`, rebuild and add the actual live link when #26 supplies the domain; deployed metadata/share-preview checks finish both tasks without a circular dependency. Publication does not depend on Learn.
+## Completed first-release acceptance
 
-## First-release acceptance
+Milestones 0–4 delivered these outcomes:
 
 1. A new visitor can move the shooter without preparatory reading.
 2. Distances, angles and drawn geometry agree; current cards reflect the retained inputs.
@@ -52,14 +52,21 @@ The actual-corpus final aggregates pass the predeclared gates; complete local co
 6. Mouse/touch and accessible alternatives work at desktop/mobile widths.
 7. Model provenance, omitted factors, calibration/support and adverse findings are visible in Methodology.
 8. A recruiter can identify author/purpose quickly; technical readers can find evidence, architecture and reproduction.
-9. Public app/repository links, share metadata and attribution are checked on the actual release.
+9. The repository is public, and the README links the live Playground. The dated release preparation record is historical and is not an open check in this roadmap.
 
-## Behavior research follow-up
+## Future work (not commitments)
 
-#31 adds predeclared offline comparisons of frozen full logistic, current XGBoost and a monotonic XGBoost candidate. Dense isolated/physical sweeps, quality margins, separate research evidence and optional unused-match confirmation are implemented as tooling. Actual-corpus phase A has been locally executed and reproduced, with submitted aggregate consistency reviewed. Its original disposition is retain-current; no new model or goalkeeper defaults are published. Correcting isolated distance/angle directions is an important product priority; a detailed comparison of exactly current and monotonic XGBoost is deferred to #34. Phase B is not required for this scoped closure. See [the research guide](architecture/reference/xg-behavior.md). This refinement is separate from #30 interaction fixes and does not reopen the first-release dependency chain.
+GitHub Projects tracks the items below. This document will no longer be updated per task.
 
-## Deferred work
+### Milestone 5 — refine from use
 
-Learn (#5) may add two or three optional experiments using the same scene/features; it must preserve free control and does not own publication. Scenario links are a useful next improvement if not included in v0.1. Historical reconstructions require sourced positions/context and clear approximation labels. Famous goals, other metrics, accounts and a broader platform are outside the release dependency chain.
+- Optional Learn experiments (#5) may add two or three steps using the same scene and features. They must preserve free control.
+- Shareable scenario links (#36).
+- Historical reconstructions from a reliable source (#37), with sourced positions and context and clear approximation labels.
+- Qualitative feedback without analytics (#38). Record available feedback and follow-ups. No fixed participant quota or analytics requirement applies.
 
-Use targeted qualitative review when readers are available. Record real feedback and follow-ups; no fixed participant quota or analytics requirement applies.
+These items are not commitments. Famous goals without a reliable source, other metrics, accounts and a broader platform stay outside this record.
+
+### Model-behavior research track
+
+#31 is closed, and [PR #33](https://github.com/leovferreira13/sports-data-visualizer/pull/33) is merged. Phase A was locally executed and reproduced; its disposition is retain-current, and no new model or goalkeeper defaults were published. Phase B was not required for that closure. #34 is a possible follow-up comparison of the current and monotonic XGBoost models and is not a commitment. This track sits outside completed milestones 0–4. See [the research guide](architecture/reference/xg-behavior.md).

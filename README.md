@@ -8,7 +8,7 @@ A portfolio project by **Leonardo Ferreira** · [GitHub](https://github.com/leov
 
 **[Open the live Playground](https://sports-data-visualizer-production.up.railway.app/en)**
 
-**Status:** the Playground and Methodology/results run in Portuguese, English, Dutch, Spanish and German. The existing Railway demo is accessible; final domain metadata, branding review and public repository access remain tracked in [#26](https://github.com/leovferreira13/sports-data-visualizer/issues/26). See [release QA](docs/reports/public-release-qa.md) for observed results. Optional Learn experiments are deferred in #5.
+**Status:** the public Playground and Methodology/results are available in Portuguese, English, Dutch, Spanish and German at the live URL above. Milestones 0–4 of the implementation roadmap are complete. Later work is tracked in GitHub Projects. Optional Learn experiments are future work in #5.
 
 ## Explore the product
 
@@ -81,7 +81,7 @@ For public hosting, set `SITE_URL` to the final HTTPS origin **before building**
 
 ## Technical references
 
-- [Product vision](docs/VISION.md) and [roadmap](docs/ROADMAP.md)
+- [Product vision](docs/VISION.md) and [completed implementation roadmap](docs/ROADMAP.md)
 - [Pinned source ingestion](docs/architecture/reference/statsbomb-ingestion.md) and [aggregate data audit](docs/reports/xg-data-audit.md)
 - [Feature contract and complete-run comparison](docs/architecture/reference/shot-features.md)
 - [Training and reproduction](docs/architecture/reference/xg-training.md), [browser parity](docs/architecture/reference/prediction.md) and [final evaluation](docs/architecture/reference/xg-final-evaluation.md)
@@ -96,6 +96,6 @@ Offline reproduction uses separately obtained pinned source data and local immut
 
 Trained using [StatsBomb Open Data](https://github.com/hudl/open-data), subject to its [Public Data User Agreement](https://github.com/hudl/open-data/blob/master/LICENSE.pdf). StatsBomb provides the source data; it does not create or endorse this project or its independent model. The app retains source credit, the official logo and independent-project wording in all five languages. Source event/360 records and shot-level training examples are not redistributed here.
 
-The intended use is a free, non-commercial professional portfolio without ads, paid services, raw-data hosting or resale. The logo comes from the [official Media Pack](https://statsbomb.com/media-pack/). See the [rights record](docs/architecture/reference/statsbomb-rights.md) for the conditional support response, scoped review and outstanding exact branding-guidance check.
+The intended use is a free, non-commercial professional portfolio without ads, paid services, raw-data hosting or resale. The logo comes from the [official Media Pack](https://statsbomb.com/media-pack/). See the [rights record](docs/architecture/reference/statsbomb-rights.md) for the conditional support response and scoped review.
 
-No code license has been selected. Public visibility alone does not grant a code reuse license; third-party data/logo terms remain separate. Publication and live asset/attribution checks remain #26 work.
+No code license has been selected. Public visibility alone does not grant a code reuse license; third-party data/logo terms remain separate.
