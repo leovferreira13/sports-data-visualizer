@@ -1,6 +1,6 @@
 # Offline xG behavior evaluation
 
-**Status:** #31 phase A has been locally executed and reproduced; submitted aggregate evidence is reviewed as exploratory, with the original retain-current decision preserved. A detailed current-versus-monotonic comparison is deferred to #34 because isolated direction compliance is an important product priority. Phase B is not required for this scoped closure. See the [review](../../reports/xg-behavior-comparison.md). The published artifact and five-language product evidence remain unchanged.
+**Status:** #31 phase A has been locally executed and reproduced; submitted aggregate evidence is reviewed as exploratory, with the original retain-current decision preserved. #34 adds a local comparison of the frozen current XGBoost and the already fitted monotonic candidate. The committed [#34 report](../../reports/xg-monotonic-comparison.md) records the owner's posted `pair-identity.json` and `pair-metrics.json`. AC1 proof is the artifact SHA-256 values plus `pair-identity.json`. A screenshot is not required. Phase B is not required for this scoped closure. See the [review](../../reports/xg-behavior-comparison.md). The published artifact and five-language product evidence remain unchanged.
 
 ## Boundary and rationale
 
@@ -66,6 +66,36 @@ Each model runs the browser-targeted TypeScript bundle in Node against the share
 - Plateaus use `|delta| <= 1e-7`. The longest plateau is reported in meters/degrees. Jump median/p95/max and >2 percentage-point rates use raw probability values, independently of UI rounding.
 - Primary physical segments have ordinary context, unchanged count inputs and two endpoints within the train-only reference. Outside/insufficient reference, extreme and count transitions are separately reported, never erased. A nearest-neighbor diagnostic cannot prove calibration or realism.
 - Probability scores, calibration residual intervals and sparse/support slices include the adverse cone-count possibilities. Supported review flags remain explicit. Required review does not authorize replacement.
+
+## Issue #34: frozen pair, no new fit
+
+`scripts/xg/compare_monotonic_pair.py` scores the exact current XGBoost and the phase-A monotonic candidate on the same selection rows. It does not call tune or fit, does not score logistic, and does not write the published model or deployment configuration. The revised accuracy rule is a selection log-loss increase, monotonic minus current, of at most `protocol.decision.max_log_loss_degradation` (0.005 in the frozen protocol; mean clipped binary log loss, clip 1e-12). Exactly that limit passes. Brier is reported and is not the pass/fail metric for the revised column. Recomputed log loss must match the phase-A record within 1e-08 or the run fails as an identity mismatch. That check is not the accuracy tolerance.
+
+Intuitive direction is an isolated sweep: the other seven features stay fixed. Distance uses direction -1, so more distance must not raise xG. Opening angle uses direction +1, so a wider angle must not lower xG. A step is a violation when the probability change times that direction is below -1e-7. Features 2–7 stay unconstrained.
+
+Fluidity is the plateau share (`|delta| <= 1e-7`) and the rate of jumps above 0.02 on primary physical pairs. Plateaus may remain. The original column is the full predeclared `gates` result: paired log loss, paired Brier, constant reference, partial directions, primary segments, the jump-reduction gate, invariants, parity, and native export. Every numeric limit is read from `protocol.decision` (`max_log_loss_degradation` 0.005, `max_brier_degradation` 0.001, `min_jump_rate_reduction` 0.25 in the frozen protocol). The revised column does not use that gate set. It retains when identity or primary pairs do not match, when the selection log-loss increase is above `max_log_loss_degradation`, or when an isolated distance or angle sweep has a violation; otherwise the status is recommend replacement. `recommend_replacement` does not publish the candidate. `depends_on_revision` is true when the two statuses differ. The 0.8–0.9 band is issue #40 and is not a gate.
+
+Selection vectors are in the preparation run, so `--prepared-dir` is required. The training directory must be run `222909fe801f4865897fea3541e023fed626f6736dca6ef69ceada1f7c57945a`. The research directory must be the complete phase-A directory, including `candidate-model.json` and `current-model.json`. `docs/reports/xg-behavior-first-run/` is an aggregate subset and is not a runnable input.
+
+```bash
+.venv-xg/bin/python scripts/xg/compare_monotonic_pair.py \
+  --prepared-dir <original-preparation-run-directory> \
+  --training-dir <original-training-run-directory> \
+  --research-dir <complete-phase-A-directory> \
+  --output-dir data/derived/xg-behavior/issue-34
+```
+
+The command prints seed 42 and split SHA-256 `64f02e169df4b2d176b54ce47ef72a7afa3840d7990ac45b6841008e94aa71d1` before scoring. It writes `pair-identity.json`, `pair-metrics.json`, and `pair-decision.md` under ignored `data/derived/`. The committed report copies the posted `pair-identity.json` and `pair-metrics.json`. The owner did not attach `pair-decision.md`. AC1 proof is the artifact SHA-256 values plus `pair-identity.json`. A screenshot is not required.
+
+A local comparison page at `/dev/model-compare` showed one scene against both envelopes, with pointer drag and arrow keys. It was used for the evaluation and then removed.
+
+The posted metrics are selection log loss 0.23520839767656282 for the current model and 0.2352457526107877 for the monotonic candidate. The increase is 3.735493422488134e-05, under the 0.005 limit. Paired upper bounds versus current are log loss 0.0008807877582937127 and Brier 0.0002560737066460752. Isolated violation counts are 34 distance and 6 angle for the current model, and 0 and 0 for the monotonic candidate. Primary pairs are 986 for both. The large-jump rate goes from 0.04462474645030426 to 0.04259634888438134, and the p95 jump goes from 0.018686586990952492 to 0.014600332826375961.
+
+Named by content, the full predeclared gates, including the jump-reduction gate, retain the current model because interactive improvement failed. The log-loss increase limit of 0.005 together with the isolated direction checks recommends replacement. `depends_on_revision` is true.
+
+The owner confirmed that a rise far from goal, with no defenders nearby, is a coupled path: the opening angle shrinks as distance grows, so it is not an isolated violation. It appears in both models. The QA reading is that switching has no measurable accuracy cost and gives direction guarantees by construction. The files contain only those violation counts, not sizes or locations, so a user-visible difference is rare and of unknown size, and is not shown to be invisible. An arc drag around the goal is an isolated angle move. The jump rate fell 0.2 percentage points, and the p95 jump went from 0.0187 to 0.0146.
+
+The owner decision is final: keep the current model, and make no replacement. The card's goal was user experience, and the difference is not shown to be perceptible. The monotonic gain is a direction guarantee by construction, without a proven user-visible improvement.
 
 ## Phase B: optional genuinely unused matches
 

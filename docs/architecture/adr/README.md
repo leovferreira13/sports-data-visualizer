@@ -17,4 +17,4 @@ Use an ADR for a consequential, structural or difficult-to-reverse choice. An AD
 
 - [009: Integrated Playground and evidence](009-integrated-playground-and-evidence.md): reviewed browser artifact, scene/persistence bounds and methodology routes.
 
-- [010: Separate xG behavior research](010-xg-behavior-research-boundary.md): research tooling and exploratory phase-A review complete; current model retained, detailed monotonic comparison deferred to #34.
+- [010: Separate xG behavior research](010-xg-behavior-research-boundary.md): research tooling and exploratory phase-A review complete; current model retained. The owner ran the #34 current-versus-monotonic comparison locally and kept the current model.
