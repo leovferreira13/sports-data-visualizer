@@ -1,6 +1,6 @@
 # Current versus monotonic XGBoost
 
-**Status:** Recorded from the owner's comment on pull request #44, [comment 6181026583](https://github.com/leovferreira13/sports-data-visualizer/pull/44#issuecomment-6181026583). Every number and decision below is copied from the attached `pair-identity.json` and `pair-metrics.json`. The comment did not include `pair-decision.md`. AC1 proof is the artifact SHA-256 values plus `pair-identity.json`. A screenshot is not required.
+**Status:** The measured scores and the two rule decisions are copied from `pair-identity.json` and `pair-metrics.json` attached to the owner's comment on pull request #44, [comment 6181026583](https://github.com/leovferreira13/sports-data-visualizer/pull/44#issuecomment-6181026583). That comment did not include `pair-decision.md`. In that comment the owner says he is inclined to keep the current model. The decision to keep the current model, and the confirmation of the coupled path, were stated by the owner in the Engineering Team group chat on 2026-10-14. AC1 proof is the artifact SHA-256 values plus `pair-identity.json`. A screenshot is not required.
 
 `pair-metrics.json` has `decisions` and `summary.decisions`. Those two objects are the same.
 
@@ -93,7 +93,7 @@ Proof is the artifact SHA-256 values plus `pair-identity.json`. A screenshot is 
 
 ## Coupled path
 
-A local comparison page at `/dev/model-compare` was used for the evaluation and then removed. On that page, with the striker far from goal and no defenders nearby, xG for both models can rise slightly before it falls. The owner confirmed that this rise is a coupled path: the opening angle shrinks as distance grows, so it is not an isolated violation. It appears in both models.
+A local comparison page at `/dev/model-compare` was used for the evaluation and then removed. On that page, with the striker far from goal and no defenders nearby, xG for both models can rise slightly before it falls. That observation is in the GitHub comment, where the owner says he is inclined to keep the current model. In the Engineering Team group chat on 2026-10-14, the owner confirmed that this rise is a coupled path: the opening angle shrinks as distance grows, so it is not an isolated violation. It appears in both models.
 
 ## Final QA reading
 
@@ -101,7 +101,7 @@ Switching has no measurable accuracy cost and gives direction guarantees by cons
 
 ## Owner decision
 
-The owner decision is final: keep the current model, and make no replacement. The card's goal was user experience, and the difference is not shown to be perceptible. The monotonic gain is a direction guarantee by construction, without a proven user-visible improvement.
+In the Engineering Team group chat on 2026-10-14, the owner decision is final: keep the current model, and make no replacement. The card's goal was user experience, and the difference is not shown to be perceptible. The monotonic gain is a direction guarantee by construction, without a proven user-visible improvement. The GitHub comment only says he is inclined to keep the current model.
 
 ## Publication
 
