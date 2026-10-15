@@ -36,10 +36,12 @@ The command prints seed 42 and the split SHA-256 before scoring. It writes `pair
 
 | Rule | Decision | Why |
 | --- | --- | --- |
-| Original predeclared gates, including the jump-reduction gate (`jump_reduction_required` 0.25, `includes_jump_reduction_gate` true) | retain | Predeclared gate failed: interactive_improvement |
-| Revised (`includes_jump_reduction_gate` false; log-loss increase limit 0.005, and isolated directions) | recommend_replacement | Log-loss increase is within 0.005 and isolated directions pass |
+| Full predeclared gates, including the jump-reduction gate (`jump_reduction_required` 0.25, `includes_jump_reduction_gate` true) | retain the current model | Predeclared gate failed: interactive_improvement |
+| Log-loss increase limit of 0.005 and isolated direction checks (`includes_jump_reduction_gate` false) | recommend replacement | Log-loss increase is within 0.005 and isolated directions pass |
 
 Decision depends on the revision: **true**.
+
+Named by content: the full predeclared gates, including the jump-reduction gate, retain the current model because interactive improvement failed. The log-loss increase limit of 0.005 together with the isolated direction checks recommends replacement.
 
 Original limits from `decisions.original_predeclared.limits`: `max_brier_degradation` 0.001, `max_log_loss_degradation` 0.005, `min_jump_rate_reduction` 0.25, `one_sided_confidence` 0.95.
 
@@ -89,14 +91,18 @@ Copied from `pair-identity.json`.
 
 Proof is the artifact SHA-256 values plus `pair-identity.json`. A screenshot is not required. The current artifact is `758526873b8a3a2681f655c064dee52f8bd33749accd499d015420dbe8e11b9a`, file SHA-256 `c0d91256a2c0f83ede48f1f549b8a0cc379e6ef675ccd4ce9ef10e471bb4350d`. The monotonic artifact is `e19402c5ba622ebc2775df202956aa5b942dd5e841b647cb7eeb531faf2a12ce`, file SHA-256 `66326f96854c2a17cb8483651b02db82dd5c5de445249690825b3a70b64e1f7c`.
 
-## Owner observation
+## Coupled path
 
-On `/dev/model-compare`, with the striker far from goal and no defenders nearby, xG for both models can rise slightly before it falls. The owner confirmed that this rise is a coupled path: the opening angle shrinks as distance grows, so it is not an isolated violation. It appears in both models. The owner does not think the two models are that different, and leans toward keeping the current model if this comparison follows.
+A local comparison page at `/dev/model-compare` was used for the evaluation and then removed. On that page, with the striker far from goal and no defenders nearby, xG for both models can rise slightly before it falls. The owner confirmed that this rise is a coupled path: the opening angle shrinks as distance grows, so it is not an isolated violation. It appears in both models.
 
 ## Final QA reading
 
-Switching has no measurable accuracy cost and gives direction guarantees by construction. The files contain only violation counts (current 34 distance and 6 angle, monotonic 0 and 0), not sizes or locations, so a user-visible difference is rare and of unknown size, and is not shown to be invisible. An arc drag around the goal is an isolated angle move. The jump rate fell 0.2 percentage points, and the p95 jump went from 0.0187 to 0.0146. Those rounded figures read the `large_jump_rate` and `p95_jump` values in the metrics table. The model decision belongs to the owner.
+Switching has no measurable accuracy cost and gives direction guarantees by construction. The files contain only violation counts (current 34 distance and 6 angle, monotonic 0 and 0), not sizes or locations, so a user-visible difference is rare and of unknown size, and is not shown to be invisible. An arc drag around the goal is an isolated angle move. The jump rate fell 0.2 percentage points, and the p95 jump went from 0.0187 to 0.0146. Those rounded figures read the `large_jump_rate` and `p95_jump` values in the metrics table.
+
+## Owner decision
+
+The owner decision is final: keep the current model, and make no replacement. The card's goal was user experience, and the difference is not shown to be perceptible. The monotonic gain is a direction guarantee by construction, without a proven user-visible improvement.
 
 ## Publication
 
-This comparison does not change `model/selected-model.json`, `public/model/selected-model.json`, or deployment configuration. The revised status in the attached metrics file is `recommend_replacement`. That status does not publish the candidate. The owner's comment leans toward keeping the current model. A publish decision needs a separate issue. The 0.8–0.9 probability band remains issue #40 and is not a gate here.
+This comparison does not change `model/selected-model.json`, `public/model/selected-model.json`, or deployment configuration. The log-loss and isolated-direction rule recommends replacement, and that status does not publish the candidate. The published model stays the current XGBoost. The 0.8–0.9 probability band remains issue #40 and is not a gate here.

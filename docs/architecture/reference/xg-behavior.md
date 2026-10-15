@@ -89,7 +89,13 @@ The command prints seed 42 and split SHA-256 `64f02e169df4b2d176b54ce47ef72a7afa
 
 A local comparison page at `/dev/model-compare` showed one scene against both envelopes, with pointer drag and arrow keys. It was used for the evaluation and then removed.
 
-The owner confirmed that a rise far from goal, with no defenders nearby, is a coupled path: the opening angle shrinks as distance grows, so it is not an isolated violation. It appears in both models. The final QA reading is that switching has no measurable accuracy cost and gives direction guarantees by construction. The posted files contain only violation counts (current 34 distance and 6 angle, monotonic 0 and 0), not sizes or locations, so a user-visible difference is rare and of unknown size, and is not shown to be invisible. An arc drag around the goal is an isolated angle move. The jump rate fell 0.2 percentage points, and the p95 jump went from 0.0187 to 0.0146. The model decision belongs to the owner.
+The posted metrics are selection log loss 0.23520839767656282 for the current model and 0.2352457526107877 for the monotonic candidate. The increase is 3.735493422488134e-05, under the 0.005 limit. Paired upper bounds versus current are log loss 0.0008807877582937127 and Brier 0.0002560737066460752. Isolated violation counts are 34 distance and 6 angle for the current model, and 0 and 0 for the monotonic candidate. Primary pairs are 986 for both. The large-jump rate goes from 0.04462474645030426 to 0.04259634888438134, and the p95 jump goes from 0.018686586990952492 to 0.014600332826375961.
+
+Named by content, the full predeclared gates, including the jump-reduction gate, retain the current model because interactive improvement failed. The log-loss increase limit of 0.005 together with the isolated direction checks recommends replacement. `depends_on_revision` is true.
+
+The owner confirmed that a rise far from goal, with no defenders nearby, is a coupled path: the opening angle shrinks as distance grows, so it is not an isolated violation. It appears in both models. The QA reading is that switching has no measurable accuracy cost and gives direction guarantees by construction. The files contain only those violation counts, not sizes or locations, so a user-visible difference is rare and of unknown size, and is not shown to be invisible. An arc drag around the goal is an isolated angle move. The jump rate fell 0.2 percentage points, and the p95 jump went from 0.0187 to 0.0146.
+
+The owner decision is final: keep the current model, and make no replacement. The card's goal was user experience, and the difference is not shown to be perceptible. The monotonic gain is a direction guarantee by construction, without a proven user-visible improvement.
 
 ## Phase B: optional genuinely unused matches
 
