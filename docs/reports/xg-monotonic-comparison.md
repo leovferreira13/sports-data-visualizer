@@ -1,6 +1,6 @@
 # Current versus monotonic XGBoost
 
-**Status:** Recorded from the owner's comment on pull request #44, [comment 6181026583](https://github.com/leovferreira13/sports-data-visualizer/pull/44#issuecomment-6181026583). Every number and decision below is copied from the attached `pair-identity.json` and `pair-metrics.json`. The comment did not include `pair-decision.md`. The `/dev/model-compare` screenshot was not provided by the owner.
+**Status:** Recorded from the owner's comment on pull request #44, [comment 6181026583](https://github.com/leovferreira13/sports-data-visualizer/pull/44#issuecomment-6181026583). Every number and decision below is copied from the attached `pair-identity.json` and `pair-metrics.json`. The comment did not include `pair-decision.md`. AC1 proof is the artifact SHA-256 values plus `pair-identity.json`. A screenshot is not required.
 
 `pair-metrics.json` has `decisions` and `summary.decisions`. Those two objects are the same.
 
@@ -85,15 +85,17 @@ Copied from `pair-identity.json`.
 | split_sha256 | `64f02e169df4b2d176b54ce47ef72a7afa3840d7990ac45b6841008e94aa71d1` |
 | training_run_id | `222909fe801f4865897fea3541e023fed626f6736dca6ef69ceada1f7c57945a` |
 
-## Screenshot
+## AC1
 
-Not provided by the owner.
-
-A later capture of `/dev/model-compare` would need `XG_COMPARE=1` and `XG_CANDIDATE_MODEL` pointing at the phase-A `candidate-model.json`. The current column must show artifact `758526873b8a3a2681f655c064dee52f8bd33749accd499d015420dbe8e11b9a`. The monotonic column must show artifact `e19402c5ba622ebc2775df202956aa5b942dd5e841b647cb7eeb531faf2a12ce`.
+Proof is the artifact SHA-256 values plus `pair-identity.json`. A screenshot is not required. The current artifact is `758526873b8a3a2681f655c064dee52f8bd33749accd499d015420dbe8e11b9a`, file SHA-256 `c0d91256a2c0f83ede48f1f549b8a0cc379e6ef675ccd4ce9ef10e471bb4350d`. The monotonic artifact is `e19402c5ba622ebc2775df202956aa5b942dd5e841b647cb7eeb531faf2a12ce`, file SHA-256 `66326f96854c2a17cb8483651b02db82dd5c5de445249690825b3a70b64e1f7c`.
 
 ## Owner observation
 
-On `/dev/model-compare`, with the striker far from goal and no defenders nearby, xG for both models can rise slightly before it falls. The owner does not think the two models are that different, and leans toward keeping the current model if this comparison follows.
+On `/dev/model-compare`, with the striker far from goal and no defenders nearby, xG for both models can rise slightly before it falls. The owner confirmed that this rise is a coupled path: the opening angle shrinks as distance grows, so it is not an isolated violation. It appears in both models. The owner does not think the two models are that different, and leans toward keeping the current model if this comparison follows.
+
+## Final QA reading
+
+Switching has no measurable accuracy cost and gives direction guarantees by construction. The files contain only violation counts (current 34 distance and 6 angle, monotonic 0 and 0), not sizes or locations, so a user-visible difference is rare and of unknown size, and is not shown to be invisible. An arc drag around the goal is an isolated angle move. The jump rate fell 0.2 percentage points, and the p95 jump went from 0.0187 to 0.0146. Those rounded figures read the `large_jump_rate` and `p95_jump` values in the metrics table. The model decision belongs to the owner.
 
 ## Publication
 
