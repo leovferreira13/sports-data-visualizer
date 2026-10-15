@@ -87,13 +87,7 @@ Selection vectors are in the preparation run, so `--prepared-dir` is required. T
 
 The command prints seed 42 and split SHA-256 `64f02e169df4b2d176b54ce47ef72a7afa3840d7990ac45b6841008e94aa71d1` before scoring. It writes `pair-identity.json`, `pair-metrics.json`, and `pair-decision.md` under ignored `data/derived/`. The committed report copies the posted `pair-identity.json` and `pair-metrics.json`. The owner did not attach `pair-decision.md`. AC1 proof is the artifact SHA-256 values plus `pair-identity.json`. A screenshot is not required.
 
-A dev-only page shows one scene against both envelopes. It is absent unless `XG_COMPARE=1`, and the candidate file is the path in `XG_CANDIDATE_MODEL` (read on the server, never from the URL):
-
-```bash
-XG_COMPARE=1 XG_CANDIDATE_MODEL=<path-to-candidate-model.json> npm run dev
-```
-
-Open `/dev/model-compare`. The current column is the published artifact `758526873b8a3a2681f655c064dee52f8bd33749accd499d015420dbe8e11b9a`. The other column must be monotonic artifact `e19402c5ba622ebc2775df202956aa5b942dd5e841b647cb7eeb531faf2a12ce`. Pointer drag and arrow keys move the same players for both estimates.
+A local comparison page at `/dev/model-compare` showed one scene against both envelopes, with pointer drag and arrow keys. It was used for the evaluation and then removed.
 
 The owner confirmed that a rise far from goal, with no defenders nearby, is a coupled path: the opening angle shrinks as distance grows, so it is not an isolated violation. It appears in both models. The final QA reading is that switching has no measurable accuracy cost and gives direction guarantees by construction. The posted files contain only violation counts (current 34 distance and 6 angle, monotonic 0 and 0), not sizes or locations, so a user-visible difference is rare and of unknown size, and is not shown to be invisible. An arc drag around the goal is an isolated angle move. The jump rate fell 0.2 percentage points, and the p95 jump went from 0.0187 to 0.0146. The model decision belongs to the owner.
 
