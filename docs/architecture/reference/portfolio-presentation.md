@@ -14,7 +14,7 @@ The #26 review localizes the full tab title, including the displayed product nam
 
 ## Origin contract
 
-Set `SITE_URL` to the final public HTTPS origin at **build time**, for example the confirmed Railway-generated origin. It must contain no credentials, nonstandard port, path beyond `/`, query or fragment. Invalid or blank supplied values fail validation. Localhost, local names and IP literals are rejected. The origin is public configuration, not a secret, and is never inferred from a request header.
+Set `SITE_URL` to the final public HTTPS origin at **build time**, currently `https://sports-data.leoferreira.dev.br`. It must contain no credentials, nonstandard port, path beyond `/`, query or fragment. Invalid or blank supplied values fail validation. Localhost, local names and IP literals are rejected. The origin is public configuration, not a secret, and is never inferred from a request header.
 
 With a configured origin:
 

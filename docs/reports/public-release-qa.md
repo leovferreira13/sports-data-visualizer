@@ -1,5 +1,7 @@
 # Public release preparation QA
 
+Current public app: [sports-data.leoferreira.dev.br](https://sports-data.leoferreira.dev.br/en). This dated report and its JSON companion retain the Railway origin and deployment identity actually inspected at the time; use the [deployment guide](../architecture/reference/railway-deployment.md) for current configuration.
+
 **Date:** 2026-10-12. **Issue:** #26. **Branch:** `agent/26-public-release`. **Base:** `6dd3c8570661dbeea40eca723b03f0336349dd2b`. **Outcome:** implementation prepared and checked; final release remains incomplete.
 
 [Machine-readable evidence](public-release-qa.json) distinguishes the existing live deployment from the local changed worktree. It records source-file hashes, local build/browser identity, provider-confirmed remote source/deployment identity, history scope and staged settings. [Deployment and recovery instructions](../architecture/reference/railway-deployment.md) give the repeatable commands and release sequence.
@@ -28,7 +30,7 @@ Icon provenance was confirmed from source and the #25 record: app/icon.svg is or
 
 ## Existing live deployment
 
-The [Railway demo](https://sports-data-visualizer-production.up.railway.app/en) is accessible without application authentication. Railway confirms source main at the base commit, deployment `48884b1e-73cc-4ee4-a4d6-3f9f1a703f2e`, Railpack 0.40.1, Node 20.20.2 and port 8080. This is the prior #25 application, not a deployed #26 candidate.
+The Railway demo at `https://sports-data-visualizer-production.up.railway.app/en` is accessible without application authentication. Railway confirms source main at the base commit, deployment `48884b1e-73cc-4ee4-a4d6-3f9f1a703f2e`, Railpack 0.40.1, Node 20.20.2 and port 8080. This is the prior #25 application, not a deployed #26 candidate.
 
 HTTP smoke passes /br, /en, /nl, /es and /de, matching document languages, Methodology anchors/redirects, source/optimized-logo markup, root preference/fallback and invalid-locale behavior. The public model response is 96,241 bytes with SHA-256 `c0d91256a2c0f83ede48f1f549b8a0cc379e6ef675ccd4ce9ef10e471bb4350d`, identical to the reviewed envelope.
 

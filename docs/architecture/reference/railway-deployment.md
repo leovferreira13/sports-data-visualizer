@@ -4,7 +4,9 @@
 
 ## Existing service
 
-Reuse project **adaptable-heart**, service **sports-data-visualizer**, environment **production** and the existing [HTTPS origin](https://sports-data-visualizer-production.up.railway.app/en). The connected source is `leovferreira13/sports-data-visualizer`, branch `main`, repository root. No new service, database, volume, inference backend or dataset upload is required.
+Current public origin: `https://sports-data.leoferreira.dev.br`. Configure `SITE_URL` with this origin before a fresh production build. The deployment observations and staged patch below describe the 2026-10-12 release preparation, not the current deployment or pending changes.
+
+Reuse project **sports-data-visualizer**, service **sports-data-visualizer**, environment **production** and the existing [HTTPS origin](https://sports-data.leoferreira.dev.br/en). The connected source is `leovferreira13/sports-data-visualizer`, branch `main`, repository root. No new service, database, volume, inference backend or dataset upload is required.
 
 The inspected deployment `48884b1e-73cc-4ee4-a4d6-3f9f1a703f2e` runs commit `6dd3c8570661dbeea40eca723b03f0336349dd2b`, using Railpack 0.40.1, Node 20.20.2, one replica in `europe-west4-drams3a` and the assigned port 8080. Those are dated observations, not fixed values to copy into a new service. The domain targets 8080; keep the platform's assigned PORT aligned with its target port.
 
@@ -18,7 +20,7 @@ The inspected deployment `48884b1e-73cc-4ee4-a4d6-3f9f1a703f2e` runs commit `6dd
 | Build command | `npm run build` |
 | Start command | `npm start` |
 | Healthcheck | `/en`, timeout 60 seconds |
-| SITE_URL | `https://sports-data-visualizer-production.up.railway.app`, available **before build** |
+| SITE_URL | `https://sports-data.leoferreira.dev.br`, available **before build** |
 | PORT | Railway-managed; no application-specific hardcoded port |
 
 These three variables and four command/health settings are **staged**, not applied. Patch `f7ea8f04-a948-4e82-854f-8342ccc1df01` contains seven reviewed changes to this service and no destructive action. Reinspect the pending patch before applying it because another action may add changes.
@@ -45,11 +47,11 @@ The existing automatic source connection follows main. Recheck whether staged se
 ```bash
 npm ci --include=dev
 npm run check:precommit
-SITE_URL=https://sports-data-visualizer-production.up.railway.app npm run build
-SITE_URL=https://sports-data-visualizer-production.up.railway.app npm run check:localization
+SITE_URL=https://sports-data.leoferreira.dev.br npm run build
+SITE_URL=https://sports-data.leoferreira.dev.br npm run check:localization
 
-SITE_URL=https://sports-data-visualizer-production.up.railway.app npm run check:release -- \
-  --base-url https://sports-data-visualizer-production.up.railway.app \
+SITE_URL=https://sports-data.leoferreira.dev.br npm run check:release -- \
+  --base-url https://sports-data.leoferreira.dev.br \
   --output /tmp/public-release-http.json
 ```
 
@@ -60,7 +62,7 @@ Browser regression uses separately installed Playwright/Chromium, outside the ap
 npm run check:browser
 
 # Remote mode never starts or kills a local server.
-PRODUCT_QA_BASE_URL=https://sports-data-visualizer-production.up.railway.app \
+PRODUCT_QA_BASE_URL=https://sports-data.leoferreira.dev.br \
 PRODUCT_QA_OUTPUT=/tmp/public-release-browser.json npm run check:browser
 ```
 
