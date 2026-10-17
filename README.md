@@ -6,7 +6,7 @@ A portfolio project by **Leonardo Ferreira** · [GitHub](https://github.com/leov
 
 ![English Playground with an illustrative long shot, two defenders in the cone and eight live feature cards](assets/portfolio/playground.png)
 
-**[Open the live Playground](https://sports-data-visualizer-production.up.railway.app/en)**
+**[Open the live Playground](https://sports-data.leoferreira.dev.br/en)**
 
 **Status:** the public Playground and Methodology/results are available in Portuguese, English, Dutch, Spanish and German at the live URL above. Milestones 0–4 of the implementation roadmap are complete. Later work is tracked in GitHub Projects. Optional Learn experiments are future work in #5.
 
