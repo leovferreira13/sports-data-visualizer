@@ -43,7 +43,7 @@ Use the task template: outcome, context, scope, acceptance criteria, validation,
 
 ## Delivery
 
-1. `spec #N`: Eng writes the tech spec when the card is in `pending spec`. The assistant reads the Issue and repository, uses the shared `write-plan.md` prompt and publishes one canonical Implementation Plan comment. Feedback uses `revise-plan.md` and updates that comment. Eng moves the card from `pending spec` onward.
+1. `spec #N`: Eng writes the tech spec when the card is in `pending spec`. The assistant reads the Issue and repository, uses the shared `write-plan.md` prompt and publishes one canonical Implementation Plan comment. Feedback uses `revise-plan.md` and updates that comment. Eng moves the card from `pending spec` through `review/qa`.
 2. After Eng marks the card `ready for dev`, `dev #N` creates `agent/<number>-<short-name>` from `main`, follows `implement-task.md`, implements a bounded slice and checks it.
 3. Open a PR ready for review (not as a draft) linked with `Closes #<number>`, including checks, documentation and remaining limits; move to `review/qa` when the PR exists.
 4. `review PR #N` examines feedback on the same branch, follows `address-review.md` for automated findings, validates fixes and replies with evidence. Human choices remain open. QA validates in `review/qa` and moves the card to `ready to deploy` when the PR is merge-ready. The owner merges; then mark `done`.
