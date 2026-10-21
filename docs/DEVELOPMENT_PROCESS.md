@@ -4,7 +4,7 @@ The Issue is the executable unit. The Project board, when available, displays pr
 
 ## States
 
-`unrefined` → `long-term` / `near-term` → `prioritized` → `pending spec` → `spec ready` → `ready for dev` → `in progress` → `review/qa` → `ready to deploy` → `done`
+`unrefined` → `long-term` / `near-term` → `prioritized` → `pending spec` → `spec in progress` → `ready for dev` → `in progress` → `review/qa` → `ready to deploy` → `done`
 
 `long-term` and `near-term` describe horizon rather than required consecutive steps. Who moves a card is defined under Roles and Status entry rules. `done` means merged and checked.
 
@@ -12,8 +12,8 @@ The Issue is the executable unit. The Project board, when available, displays pr
 
 - The owner decides scope and priority.
 - The PM grooms tasks and moves them up to `pending spec`. The PM does not move a card past `pending spec`.
-- Eng writes the tech spec and moves the task from `pending spec` onward.
-- QA validates while the card is in `review/qa`.
+- Eng writes the tech spec and moves the task from `pending spec` through `review/qa`.
+- QA validates while the card is in `review/qa` and moves the card to `ready to deploy` when the PR is merge-ready.
 
 ## Status entry rules
 
@@ -45,7 +45,7 @@ Use the task template: outcome, context, scope, acceptance criteria, validation,
 
 1. `spec #N`: Eng writes the tech spec when the card is in `pending spec`. The assistant reads the Issue and repository, uses the shared `write-plan.md` prompt and publishes one canonical Implementation Plan comment. Feedback uses `revise-plan.md` and updates that comment. Eng moves the card from `pending spec` onward.
 2. After Eng marks the card `ready for dev`, `dev #N` creates `agent/<number>-<short-name>` from `main`, follows `implement-task.md`, implements a bounded slice and checks it.
-3. Open a draft PR linked with `Closes #<number>`, including checks, documentation and remaining limits; move to `review/qa` when the PR exists.
-4. `review PR #N` examines feedback on the same branch, follows `address-review.md` for automated findings, validates fixes and replies with evidence. Human choices remain open. QA validates in `review/qa`. Eng moves the card onward, including `ready to deploy`. The owner merges; then mark `done`.
+3. Open a PR ready for review (not as a draft) linked with `Closes #<number>`, including checks, documentation and remaining limits; move to `review/qa` when the PR exists.
+4. `review PR #N` examines feedback on the same branch, follows `address-review.md` for automated findings, validates fixes and replies with evidence. Human choices remain open. QA validates in `review/qa` and moves the card to `ready to deploy` when the PR is merge-ready. The owner merges; then mark `done`.
 
 These are chat-invoked workflows, not scheduled GitHub Actions. See [commands and learning protocol](COMMANDS.md). The prompts and output schemas live in `.github/codex/`. Project configuration is a separate manual Action.
