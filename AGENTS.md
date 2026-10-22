@@ -12,7 +12,7 @@ Ship a small, useful xG playground quickly. Playground is the default; Learn is 
 | Planned milestones and acceptance | `docs/ROADMAP.md` and the current Issue |
 | Planned technical direction and module references | `docs/architecture/overview.md` and `docs/architecture/reference/` |
 | Structural decisions | `docs/architecture/adr/` |
-| Task status and priority | GitHub Project #3 |
+| Task status and priority | the linked Project |
 | Implementation and verification | Code, tests, and PR |
 
 Architecture is a proposal until implemented. Update it as actual boundaries become clear.
